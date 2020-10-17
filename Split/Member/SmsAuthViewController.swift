@@ -17,12 +17,19 @@ class SmsAuthViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var sendSMSButton: UIButton!
     @IBOutlet weak var authNumberTextField: UITextField!
     @IBOutlet weak var authTimerLabel: UILabel!
+    @IBOutlet weak var authCheckLabel: UILabel!
     @IBOutlet weak var nextButton: UIButton!
-    var authNumber = 0
+    var phoneNumber = ""
+    var authNumber = 135792468
     var memberId = 0
     var timer: Timer?
     var timeLeft = 300
-    //var baseURL = "http://203.245.28.184:8000"
+    var baseURL = "http://203.245.28.184:8000"
+    
+    struct Auth : Decodable {
+        let authNumber : Int
+        let id : Int
+    }
     
     //MARK: 타이머 함수
     @objc func onTimerUpdate() {
@@ -71,8 +78,7 @@ class SmsAuthViewController: UIViewController,UITextFieldDelegate {
         buttonDisableStyle(button: nextButton)
         authTimerLabel.isHidden = true
         authNumberTextField.isHidden = true
-        
-        
+        authCheckLabel.isHidden = true
     }
 
     //MARK: 입력값 유효성 검사
@@ -112,6 +118,7 @@ class SmsAuthViewController: UIViewController,UITextFieldDelegate {
     //MARK:- 전송버튼 누른 후
     @IBAction func sendSMSButtonClick(_ sender: UIButton) {
         //프로퍼티 상태 변경
+        phoneNumber = phoneTextField.text!
         sendSMSButton.setTitle("재전송", for: .normal)
         authNumberTextField.isHidden = false
         nextButton.isHidden = false
@@ -125,21 +132,37 @@ class SmsAuthViewController: UIViewController,UITextFieldDelegate {
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(onTimerUpdate), userInfo: nil, repeats: true)
         
         //url보내기
+        let URL = baseURL+"/member/sms-auth/"+phoneNumber
+        let alamo = AF.request(URL, method: .get).validate(statusCode: 200..<300)
         
-        //get방식으로 http 요청 보내기 phone번호 보내기
-        
-        //response 받기
-        //authnumber와 id 셋팅
-        
+        alamo.responseDecodable(of: Auth.self) { (response) in
+            guard let auth = response.value else { return }
+            self.authNumber = auth.authNumber
+            self.memberId = auth.id
+            print(self.authNumber)
+        }
     }
     
     //MARK:- 확인 버튼 눌렀을 때
     @IBAction func nextButtonClick(_ sender: UIButton) {
         if authNumberTextField.text == String(authNumber) {
             if memberId == 0 {
-                //회원가입 화면으로 이동
+                //회원이 아니므로 회원가입 페이지로 이동
+                MemberVO.shared.phone = phoneNumber
+                self.dismiss(animated: false, completion: nil)
+                let nextView = self.storyboard?.instantiateViewController(withIdentifier: "joinViewController")
+                nextView?.modalTransitionStyle = UIModalTransitionStyle.coverVertical
+                self.present(nextView!, animated: false, completion: nil)
             } else {
-                //id정보를 가지고 get방식으로 회원정보 가져오기
+                //회원이므로 id정보를 가지고 get방식으로 회원정보 가져오기
+                let URL = baseURL+"/member/"+String(memberId)
+                let alamo = AF.request(URL, method: .get).validate(statusCode: 200..<300)
+                
+                alamo.responseDecodable(of: Auth.self) { (response) in
+                    guard let member = response.value else { return }
+//                    MemberVO.shared.id = member.id
+//                    MemberVO.shared.nickname = member.nick
+                }
                 //model에 회원정보 셋팅하기
                 //홈화면으로 이동하기
                 //자동로그인 구현
@@ -147,7 +170,7 @@ class SmsAuthViewController: UIViewController,UITextFieldDelegate {
                 //로그아웃 : UserDefaults.standard.removeObject(self.id, forKey: "id")
             }
         } else {
-            //인증번호가 틀렸다고 경고창 나타내기
+            authCheckLabel.isHidden = false
         }
     }
     

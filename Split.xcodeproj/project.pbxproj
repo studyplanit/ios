@@ -18,7 +18,8 @@
 		8D0E588D252F735D0011C102 /* SplitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0E588C252F735D0011C102 /* SplitUITests.swift */; };
 		944F2576C8D14D316B8D3BFC /* Pods_SplitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADF8E8FDFDBFC03A70A25450 /* Pods_SplitTests.framework */; };
 		FD0125D22537090B00AD92E8 /* SmsAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0125D12537090B00AD92E8 /* SmsAuthViewController.swift */; };
-		FD0125DA2537093A00AD92E8 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0125D92537093A00AD92E8 /* Member.swift */; };
+		FD0125DA2537093A00AD92E8 /* MemberVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0125D92537093A00AD92E8 /* MemberVO.swift */; };
+		FD2F4D222538CCE1000A3944 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2F4D212538CCE1000A3944 /* HomeViewController.swift */; };
 		FD80D3D125371239002D73B3 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD80D3D025371239002D73B3 /* JoinViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -63,7 +64,8 @@
 		D628684719F720C3E9C97BC5 /* Pods_Split_SplitUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Split_SplitUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E967FB26588472FCBA164AF2 /* Pods-Split.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Split.release.xcconfig"; path = "Target Support Files/Pods-Split/Pods-Split.release.xcconfig"; sourceTree = "<group>"; };
 		FD0125D12537090B00AD92E8 /* SmsAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmsAuthViewController.swift; sourceTree = "<group>"; };
-		FD0125D92537093A00AD92E8 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
+		FD0125D92537093A00AD92E8 /* MemberVO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberVO.swift; sourceTree = "<group>"; };
+		FD2F4D212538CCE1000A3944 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		FD80D3D025371239002D73B3 /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -144,12 +146,13 @@
 			isa = PBXGroup;
 			children = (
 				FD0125C12537087200AD92E8 /* Member */,
+				8D0E5875252F735D0011C102 /* LaunchScreen.storyboard */,
+				8D0E5870252F735B0011C102 /* Main.storyboard */,
+				FD2F4D212538CCE1000A3944 /* HomeViewController.swift */,
+				8D0E5873252F735D0011C102 /* Assets.xcassets */,
 				8D0E586C252F735B0011C102 /* SceneDelegate.swift */,
 				8D0E586A252F735B0011C102 /* AppDelegate.swift */,
-				8D0E5873252F735D0011C102 /* Assets.xcassets */,
 				8D0E5878252F735D0011C102 /* Info.plist */,
-				8D0E5870252F735B0011C102 /* Main.storyboard */,
-				8D0E5875252F735D0011C102 /* LaunchScreen.storyboard */,
 			);
 			path = Split;
 			sourceTree = "<group>";
@@ -185,7 +188,7 @@
 		FD0125D0253708CB00AD92E8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				FD0125D92537093A00AD92E8 /* Member.swift */,
+				FD0125D92537093A00AD92E8 /* MemberVO.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -432,7 +435,8 @@
 				FD0125D22537090B00AD92E8 /* SmsAuthViewController.swift in Sources */,
 				8D0E586D252F735B0011C102 /* SceneDelegate.swift in Sources */,
 				FD80D3D125371239002D73B3 /* JoinViewController.swift in Sources */,
-				FD0125DA2537093A00AD92E8 /* Member.swift in Sources */,
+				FD0125DA2537093A00AD92E8 /* MemberVO.swift in Sources */,
+				FD2F4D222538CCE1000A3944 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
