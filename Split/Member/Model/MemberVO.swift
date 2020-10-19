@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MemberVO {
+class MemberVO : Decodable {
     static let shared = MemberVO()
     
     var id: Int?
@@ -16,4 +16,3 @@ class MemberVO {
     var mail: String?
     var point: Int?
 }
-

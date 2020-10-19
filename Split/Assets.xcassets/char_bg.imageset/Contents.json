@@ -1,12 +1,12 @@
 {
   "images" : [
     {
-      "filename" : "split_char_bg.png",
+      "filename" : "char_bg.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "split_char_bg@2x.png",
+      "filename" : "char_bg@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

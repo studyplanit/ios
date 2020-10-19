@@ -15,6 +15,7 @@ class HomeViewController: UIViewController {
         let image = UIImageView(image: UIImage(named: "nav_split"))
         image.contentMode = UIView.ContentMode.scaleAspectFit
         navigationItem.titleView = image
+        
     }
 
 }
