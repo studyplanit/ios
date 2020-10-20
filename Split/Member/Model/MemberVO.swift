@@ -16,3 +16,6 @@ class MemberVO : Decodable {
     var mail: String?
     var point: Int?
 }
+
+
+

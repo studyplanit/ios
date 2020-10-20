@@ -7,6 +7,7 @@ target 'Split' do
   
   # Pods for Split
   pod 'Alamofire', '~> 5.1'
+  pod 'NMapsMap'
   
   target 'SplitTests' do
     inherit! :search_paths
@@ -18,3 +19,4 @@ target 'Split' do
   end
 
 end
+

@@ -20,6 +20,7 @@
 		FD0125D22537090B00AD92E8 /* SmsAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0125D12537090B00AD92E8 /* SmsAuthViewController.swift */; };
 		FD0125DA2537093A00AD92E8 /* MemberVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0125D92537093A00AD92E8 /* MemberVO.swift */; };
 		FD2F4D222538CCE1000A3944 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2F4D212538CCE1000A3944 /* HomeViewController.swift */; };
+		FD2F4D34253DDE8D000A3944 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2F4D33253DDE8D000A3944 /* MapViewController.swift */; };
 		FD80D3D125371239002D73B3 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD80D3D025371239002D73B3 /* JoinViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +67,7 @@
 		FD0125D12537090B00AD92E8 /* SmsAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmsAuthViewController.swift; sourceTree = "<group>"; };
 		FD0125D92537093A00AD92E8 /* MemberVO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberVO.swift; sourceTree = "<group>"; };
 		FD2F4D212538CCE1000A3944 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		FD2F4D33253DDE8D000A3944 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		FD80D3D025371239002D73B3 /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -145,6 +147,7 @@
 		8D0E5869252F735B0011C102 /* Split */ = {
 			isa = PBXGroup;
 			children = (
+				FD2F4D32253DDE69000A3944 /* Map */,
 				FD0125C12537087200AD92E8 /* Member */,
 				8D0E5875252F735D0011C102 /* LaunchScreen.storyboard */,
 				8D0E5870252F735B0011C102 /* Main.storyboard */,
@@ -178,9 +181,8 @@
 		FD0125C12537087200AD92E8 /* Member */ = {
 			isa = PBXGroup;
 			children = (
+				FD2F4D4A253DF58A000A3944 /* Controller */,
 				FD0125D0253708CB00AD92E8 /* Model */,
-				FD0125D12537090B00AD92E8 /* SmsAuthViewController.swift */,
-				FD80D3D025371239002D73B3 /* JoinViewController.swift */,
 			);
 			path = Member;
 			sourceTree = "<group>";
@@ -191,6 +193,23 @@
 				FD0125D92537093A00AD92E8 /* MemberVO.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		FD2F4D32253DDE69000A3944 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				FD2F4D33253DDE8D000A3944 /* MapViewController.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		FD2F4D4A253DF58A000A3944 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				FD0125D12537090B00AD92E8 /* SmsAuthViewController.swift */,
+				FD80D3D025371239002D73B3 /* JoinViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -437,6 +456,7 @@
 				FD80D3D125371239002D73B3 /* JoinViewController.swift in Sources */,
 				FD0125DA2537093A00AD92E8 /* MemberVO.swift in Sources */,
 				FD2F4D222538CCE1000A3944 /* HomeViewController.swift in Sources */,
+				FD2F4D34253DDE8D000A3944 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
