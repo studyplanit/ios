@@ -18,6 +18,7 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var authNumberTextField: UITextField!
     @IBOutlet weak var authCheckLabel: UILabel!
     @IBOutlet weak var nextButton: UIButton!
+    
     var phoneNumber = ""
     var authNumber = 135792468
     var authCount = 0
@@ -69,6 +70,7 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
     //MARK: 초기화
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         //자동로그인 구현
         if UserDefaults.standard.string(forKey: "id") != nil {
             //메인페이지로 이동
@@ -85,12 +87,17 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
         authNumberTextField.isHidden = true
         authCheckLabel.isHidden = true
     }
-
+    
+    //MARK: 정보제공동의 모달
+    @IBAction func tabView(_ sender: UIGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+    
     //MARK: 입력값 유효성 검사
     func textFieldDidChangeSelection(_ textField: UITextField) {
         //핸드폰번호길이 유효성 검사
         if authCount < 5 {
-            if phoneTextField.text?.count ?? 0 > 8 {
+            if phoneTextField.text?.count ?? 0 > 10 {
                 buttonEnableStyle(button: sendSMSButton)
             } else {
                 buttonDisableStyle(button: sendSMSButton)

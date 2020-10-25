@@ -48,7 +48,7 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         //핸드폰번호길이 유효성 검사
         if nickTextField.text!.count > 8 || nickTextField.text!.count < 2 {
-            nickCheckLabel.text = "사용하실 닉네임을 2~6자로 설정해주세요"
+            nickCheckLabel.text = "사용하실 닉네임을 2~8자로 설정해주세요"
             nickCheck = false
             buttonDisableStyle(button: nextButton)
         }else {
@@ -84,7 +84,7 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
         let isBackSpace = strcmp(utf8Char, "\\b")
         
         do{
-            let regex = try NSRegularExpression(pattern: "[a-zA-z가-힣ㄱ-ㅎㅏ-ㅣ0-9]", options: .caseInsensitive)
+            let regex = try NSRegularExpression(pattern: "[a-zA-Z가-힣ㄱ-ㅎㅏ-ㅣ0-9]", options: .caseInsensitive)
             if let _ = regex.firstMatch(in: string, options: NSRegularExpression.MatchingOptions.reportCompletion, range: NSMakeRange(0, string.count)){
                 return true
             }
@@ -108,6 +108,10 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
             var nickname: String
             var phone: String
         }
+        //닉네임 중복검사하기
+        
+//        var self.nickTextField.text
+        
         let member = Member(id: 0, nickname: self.nickTextField.text!, phone: MemberVO.shared.phone!)
         let URL = self.baseURL+"/member/"
         let alamo = AF.request(URL, method: .post, parameters: member, encoder: JSONParameterEncoder.default).validate(statusCode: 200..<300)
