@@ -1,91 +1,98 @@
 //
-//  MapViewController.swift
+//  NaverMapViewController.swift
 //  Split
 //
-//  Created by najin on 2020/10/19.
+//  Created by najin on 2020/10/26.
 //
 
 import UIKit
 import NMapsMap
 
-class MapViewController: UIViewController,CLLocationManagerDelegate {
+class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationManagerDelegate {
 
-//    var locationManager: CLLocationManager!
-//    var latitude = 37.45210429999999
-//    var longitude = 126.6572889
-    
-    let DEFAULT_CAMERA_POSITION = NMFCameraPosition(NMGLatLng(lat: 37.45210429999999, lng: 126.6572889), zoom: 17, tilt: 0, heading: 0)
-    let primaryColor = UIColor(red: 25.0/255.0, green: 192.0/255.0, blue: 46.0/255.0, alpha: 1)
-    
+    @IBOutlet weak var splitMapView: NMFNaverMapView!
+    @IBOutlet weak var locationView: NMFLocationButton!
+    @IBOutlet weak var splitInfoView: UIView!
+    @IBOutlet weak var splitInfoMenuButton: UIButton!
+    @IBOutlet weak var splitInfoSplitButton: UIButton!
+    var locationManager: CLLocationManager!
+    let DEFAULT_CAMERA_POSITION = NMFCameraPosition(NMGLatLng(lat: 37.450605, lng: 126.659339), zoom: 15, tilt: 0, heading: 0)
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        splitMapView.mapView.touchDelegate = self
         
-        //사용자의 현재 위치(위도,경도) 불러오기
-//        locationManager = CLLocationManager()
-//        locationManager.delegate = self
-//        locationManager.requestWhenInUseAuthorization()
-//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-//        locationManager.startUpdatingLocation()
-//
-//        let coor = locationManager.location?.coordinate
-//        latitude = coor!.latitude
-//        longitude = coor!.longitude
-        
-        //네이버 지도 활성화
-        let mapView = NMFMapView(frame: view.frame)
-        mapView.moveCamera(NMFCameraUpdate(position: DEFAULT_CAMERA_POSITION))
-        
-//        let cameraPosition = mapView.cameraPosition
-//        mapView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 200, right: 0)
-//        let projection = mapView.projection
-//        mapView.showLocationButton = true
-        
-        
-//        let point = projection.point(from: NMGLatLng(lat: 37.4500221, lng: 126.653488)
-//        mapView.positionMode = .compass
-//
-        let locationOverlay = mapView.locationOverlay
-        locationOverlay.hidden = true
-        locationOverlay.location = NMGLatLng(lat: 37.4500221, lng: 126.653488)
-        locationOverlay.heading = 90
-        locationOverlay.circleRadius = 50
+        //하위 뷰 셋팅하기
+        self.view.bringSubviewToFront(locationView)
+        self.view.bringSubviewToFront(splitInfoView)
+        splitInfoView.isHidden = true
+        splitMapView.mapView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        splitInfoMenuButton.backgroundColor = UIColor(displayP3Red: 171/255, green: 90/255, blue: 234/255, alpha: 1)
+        splitInfoSplitButton.backgroundColor = UIColor(displayP3Red: 171/255, green: 90/255, blue: 234/255, alpha: 1)
+        splitInfoMenuButton.layer.cornerRadius = 12
+        splitInfoSplitButton.layer.cornerRadius = 12
 
+        //사용자의 현재 위치(위도,경도) 불러오기
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
+
+        //네이버지도 초기화
+        splitMapView.mapView.moveCamera(NMFCameraUpdate(position: DEFAULT_CAMERA_POSITION))
+        splitMapView.showLocationButton = false
+        splitMapView.showScaleBar = false
+        splitMapView.showZoomControls = false
+        locationView.mapView = splitMapView.mapView;
+        splitMapView.mapView.positionMode = .direction
+
+        
+        //스플릿존 마커 표시하기
         let marker = NMFMarker()
         marker.position = NMGLatLng(lat: 37.451819, lng: 126.654972)
-        marker.iconImage = NMFOverlayImage(name: "zone")
-        marker.width = 25
-        marker.height = 40
+        marker.iconImage = NMFOverlayImage(name: "map_marker_purple")
+        marker.width = 45
+        marker.height = 50
         marker.iconPerspectiveEnabled = true
-        marker.captionAligns = [NMFAlignType.top]
-        marker.captionText = "스플릿존"
-        marker.subCaptionText = "100명"
-        marker.mapView = mapView
+        marker.captionAligns = [NMFAlignType.center]
+        marker.captionText = "\nS"
+        marker.captionColor = .white
+        marker.captionHaloColor = UIColor(displayP3Red: 171/255, green: 90/255, blue: 234/255, alpha: 1)
+        marker.captionTextSize = 18
+        marker.subCaptionText = "\n스플릿존"
+        marker.mapView = splitMapView.mapView
+        //마커 클릭했을때 실행
+        marker.touchHandler = { (overlay: NMFOverlay) -> Bool in
+            self.splitInfoView.isHidden = false
+            self.splitMapView.mapView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 150, right: 0)
+            return true
+        }
         
-        view.addSubview(mapView)
+        let marker2 = NMFMarker()
+        marker2.position = NMGLatLng(lat: 37.451955, lng: 126.655995)
+        marker2.iconImage = NMFOverlayImage(name: "map_marker_purple")
+        marker2.width = 45
+        marker2.height = 50
+        marker2.iconPerspectiveEnabled = true
+        marker2.captionAligns = [NMFAlignType.center]
+        marker2.captionText = "\n10"
+        marker2.captionColor = .white
+        marker2.captionHaloColor = UIColor(displayP3Red: 171/255, green: 90/255, blue: 234/255, alpha: 1)
+        marker2.captionTextSize = 18
+        marker2.subCaptionText = "\n스플릿존2"
+        marker2.mapView = splitMapView.mapView
+        marker2.touchHandler = { (overlay: NMFOverlay) -> Bool in
+            self.splitInfoView.isHidden = false
+            self.splitMapView.mapView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 150, right: 0)
+            return true
+        }
     }
     
-    
+    //지도 탭했을 때 실행
+    func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
+        self.splitInfoView.isHidden = true
+        self.splitMapView.mapView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
 }
 
-
-
-//class MapViewController: UIViewController {
-//    @IBOutlet weak var naverMapView: NMFNaverMapView!
-//    var mapView: NMFMapView {
-//        return naverMapView.mapView
-//    }
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//        navigationController?.navigationBar.barTintColor = UIColor(red: 0, green: 211/255, blue: 83/255, alpha: 1.0)
-//        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-//        mapView.moveCamera(NMFCameraUpdate(position: DEFAULT_CAMERA_POSITION))
-//    }
-// }
-//
-//extension NMGLatLng {
-//    func positionString() -> String {
-//        return String(format: "(%.5f, %.5f)", lat, lng)
-//    }
-//}

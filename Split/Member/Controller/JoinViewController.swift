@@ -84,8 +84,6 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
                 nickCheckLabel.text = "한글,영문,숫자만 입력해주세요"
                 self.buttonDisableStyle(button: self.nextButton)
             }
-            
-//
         }
     }
 

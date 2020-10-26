@@ -40,7 +40,7 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
         if timeLeft == 0 {
             timer?.invalidate()
         }
-        if timeLeft == 295 {
+        if timeLeft == 297 {
             //팝업 없애기
             UIView.animate(withDuration: 0.5) {
                 self.popUpView.transform = CGAffineTransform(translationX: 0, y: -100)
