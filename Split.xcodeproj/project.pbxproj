@@ -163,8 +163,6 @@
 				8DBF800A2548A33F00989AD0 /* Font */,
 				FD2F4D32253DDE69000A3944 /* Map */,
 				FD0125C12537087200AD92E8 /* Member */,
-				8D0E5875252F735D0011C102 /* LaunchScreen.storyboard */,
-				8D0E5870252F735B0011C102 /* Main.storyboard */,
 				FD2F4D212538CCE1000A3944 /* HomeViewController.swift */,
 				8D0E5873252F735D0011C102 /* Assets.xcassets */,
 				8D0E586C252F735B0011C102 /* SceneDelegate.swift */,
@@ -204,6 +202,8 @@
 		8DBF80182548A52800989AD0 /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
+				8D0E5875252F735D0011C102 /* LaunchScreen.storyboard */,
+				8D0E5870252F735B0011C102 /* Main.storyboard */,
 				8D320E192548A7A80041D193 /* Study.storyboard */,
 				8D320E142548A77A0041D193 /* Calendar.storyboard */,
 				8D320E0C2548A74B0041D193 /* Plan.storyboard */,
