@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		1364CA18885B2863997927C6 /* Pods_Split_SplitUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D628684719F720C3E9C97BC5 /* Pods_Split_SplitUITests.framework */; };
 		834FEE07FB5DF86C157A3E1B /* Pods_Split.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86072891731C70E6C81065FA /* Pods_Split.framework */; };
-		8D07CF902548ADE900AAB6E7 /* KoPubDotumBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8D07CF8F2548ADE900AAB6E7 /* KoPubDotumBold.ttf */; };
-		8D07CF952548ADF200AAB6E7 /* GmarketSansMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8D07CF942548ADF200AAB6E7 /* GmarketSansMedium.otf */; };
 		8D0E586B252F735B0011C102 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0E586A252F735B0011C102 /* AppDelegate.swift */; };
 		8D0E586D252F735B0011C102 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0E586C252F735B0011C102 /* SceneDelegate.swift */; };
 		8D0E5872252F735B0011C102 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D0E5870252F735B0011C102 /* Main.storyboard */; };
@@ -18,6 +16,8 @@
 		8D0E5877252F735D0011C102 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D0E5875252F735D0011C102 /* LaunchScreen.storyboard */; };
 		8D0E5882252F735D0011C102 /* SplitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0E5881252F735D0011C102 /* SplitTests.swift */; };
 		8D0E588D252F735D0011C102 /* SplitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0E588C252F735D0011C102 /* SplitUITests.swift */; };
+		8D1A4B7E2548AEA6007366D7 /* KoPubDotumBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8D1A4B7D2548AEA6007366D7 /* KoPubDotumBold.ttf */; };
+		8D1A4B832548AEB4007366D7 /* GmarketSansMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8D1A4B822548AEB4007366D7 /* GmarketSansMedium.otf */; };
 		8D320E0D2548A74B0041D193 /* Plan.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D320E0C2548A74B0041D193 /* Plan.storyboard */; };
 		8D320E152548A77A0041D193 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D320E142548A77A0041D193 /* Calendar.storyboard */; };
 		8D320E1A2548A7A80041D193 /* Study.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D320E192548A7A80041D193 /* Study.storyboard */; };
@@ -53,8 +53,6 @@
 /* Begin PBXFileReference section */
 		5AE2064D4F3DD0F9A2B7C4B3 /* Pods-SplitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SplitTests.release.xcconfig"; path = "Target Support Files/Pods-SplitTests/Pods-SplitTests.release.xcconfig"; sourceTree = "<group>"; };
 		86072891731C70E6C81065FA /* Pods_Split.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Split.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8D07CF8F2548ADE900AAB6E7 /* KoPubDotumBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KoPubDotumBold.ttf; sourceTree = "<group>"; };
-		8D07CF942548ADF200AAB6E7 /* GmarketSansMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansMedium.otf; sourceTree = "<group>"; };
 		8D0E5867252F735B0011C102 /* Split.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Split.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D0E586A252F735B0011C102 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D0E586C252F735B0011C102 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,6 +66,8 @@
 		8D0E5888252F735D0011C102 /* SplitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SplitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D0E588C252F735D0011C102 /* SplitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitUITests.swift; sourceTree = "<group>"; };
 		8D0E588E252F735D0011C102 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D1A4B7D2548AEA6007366D7 /* KoPubDotumBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KoPubDotumBold.ttf; sourceTree = "<group>"; };
+		8D1A4B822548AEB4007366D7 /* GmarketSansMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansMedium.otf; sourceTree = "<group>"; };
 		8D320E0C2548A74B0041D193 /* Plan.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Plan.storyboard; sourceTree = "<group>"; };
 		8D320E142548A77A0041D193 /* Calendar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		8D320E192548A7A80041D193 /* Study.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Study.storyboard; sourceTree = "<group>"; };
@@ -250,8 +250,8 @@
 		8DBF800A2548A33F00989AD0 /* Font */ = {
 			isa = PBXGroup;
 			children = (
-				8D07CF942548ADF200AAB6E7 /* GmarketSansMedium.otf */,
-				8D07CF8F2548ADE900AAB6E7 /* KoPubDotumBold.ttf */,
+				8D1A4B822548AEB4007366D7 /* GmarketSansMedium.otf */,
+				8D1A4B7D2548AEA6007366D7 /* KoPubDotumBold.ttf */,
 			);
 			path = Font;
 			sourceTree = "<group>";
@@ -414,9 +414,9 @@
 				8D320E1A2548A7A80041D193 /* Study.storyboard in Resources */,
 				8D0E5877252F735D0011C102 /* LaunchScreen.storyboard in Resources */,
 				8D0E5874252F735D0011C102 /* Assets.xcassets in Resources */,
-				8D07CF902548ADE900AAB6E7 /* KoPubDotumBold.ttf in Resources */,
+				8D1A4B7E2548AEA6007366D7 /* KoPubDotumBold.ttf in Resources */,
 				8D320E0D2548A74B0041D193 /* Plan.storyboard in Resources */,
-				8D07CF952548ADF200AAB6E7 /* GmarketSansMedium.otf in Resources */,
+				8D1A4B832548AEB4007366D7 /* GmarketSansMedium.otf in Resources */,
 				8D0E5872252F735B0011C102 /* Main.storyboard in Resources */,
 				8D320E152548A77A0041D193 /* Calendar.storyboard in Resources */,
 			);
