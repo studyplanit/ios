@@ -159,15 +159,15 @@
 		8D0E5869252F735B0011C102 /* Split */ = {
 			isa = PBXGroup;
 			children = (
-				8DBF80182548A52800989AD0 /* Storyboard */,
-				8DBF800A2548A33F00989AD0 /* Font */,
-				FD2F4D32253DDE69000A3944 /* Map */,
-				FD0125C12537087200AD92E8 /* Member */,
-				FD2F4D212538CCE1000A3944 /* HomeViewController.swift */,
-				8D0E5873252F735D0011C102 /* Assets.xcassets */,
-				8D0E586C252F735B0011C102 /* SceneDelegate.swift */,
-				8D0E586A252F735B0011C102 /* AppDelegate.swift */,
 				8D0E5878252F735D0011C102 /* Info.plist */,
+				8D258C762548AA3800C915BA /* Support */,
+				8D258C712548A9E400C915BA /* Home */,
+				8D258C752548AA1B00C915BA /* Study */,
+				8D258C732548AA0B00C915BA /* Calendar */,
+				8D258C742548AA1600C915BA /* Plan */,
+				FD0125C12537087200AD92E8 /* Member */,
+				8DBF80182548A52800989AD0 /* Storyboard */,
+				FD2F4D32253DDE69000A3944 /* Map */,
 			);
 			path = Split;
 			sourceTree = "<group>";
@@ -188,6 +188,54 @@
 				8D0E588E252F735D0011C102 /* Info.plist */,
 			);
 			path = SplitUITests;
+			sourceTree = "<group>";
+		};
+		8D258C712548A9E400C915BA /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				8D258C722548A9FE00C915BA /* Controller */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		8D258C722548A9FE00C915BA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				FD2F4D212538CCE1000A3944 /* HomeViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8D258C732548AA0B00C915BA /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		8D258C742548AA1600C915BA /* Plan */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Plan;
+			sourceTree = "<group>";
+		};
+		8D258C752548AA1B00C915BA /* Study */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Study;
+			sourceTree = "<group>";
+		};
+		8D258C762548AA3800C915BA /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				8D0E586C252F735B0011C102 /* SceneDelegate.swift */,
+				8D0E586A252F735B0011C102 /* AppDelegate.swift */,
+				8D0E5873252F735D0011C102 /* Assets.xcassets */,
+				8DBF800A2548A33F00989AD0 /* Font */,
+			);
+			path = Support;
 			sourceTree = "<group>";
 		};
 		8DBF800A2548A33F00989AD0 /* Font */ = {
