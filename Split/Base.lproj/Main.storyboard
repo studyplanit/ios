@@ -130,6 +130,7 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="hQJ-Cy-YGd">
+                        <barButtonItem key="backBarButtonItem" title=" " id="esg-2W-Pv9"/>
                         <barButtonItem key="leftBarButtonItem" title="Item" image="nav_qr" id="6W4-uJ-fzD">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
@@ -173,7 +174,7 @@
                                         <rect key="frame" x="15" y="0.0" width="250" height="150"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="스플릿존 이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g3m-L6-1NO">
-                                                <rect key="frame" x="8" y="15" width="234" height="20"/>
+                                                <rect key="frame" x="8" y="15" width="234" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="seL-0h-UXx"/>
                                                 </constraints>
@@ -182,7 +183,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="인천광역시 미추홀구 용현동 187-13" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r4a-DJ-OnH">
-                                                <rect key="frame" x="8" y="35" width="234" height="25"/>
+                                                <rect key="frame" x="8" y="50" width="234" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="LOX-qx-3GZ"/>
                                                 </constraints>
@@ -191,7 +192,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11:00 ~ 21:00, 일요일 정기휴무" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UsV-Su-dqn">
-                                                <rect key="frame" x="8" y="60" width="234" height="25"/>
+                                                <rect key="frame" x="8" y="75" width="234" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="8Ll-31-Ihn"/>
                                                 </constraints>
@@ -200,10 +201,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="zO7-Tv-al7">
-                                                <rect key="frame" x="8" y="85" width="234" height="50"/>
+                                                <rect key="frame" x="8" y="100" width="234" height="35"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8em-FO-Lx0">
-                                                        <rect key="frame" x="0.0" y="5" width="140" height="40"/>
+                                                        <rect key="frame" x="0.0" y="5" width="140" height="25"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="140" id="HMm-Vl-ejG"/>
                                                         </constraints>
@@ -212,7 +213,7 @@
                                                         </state>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jrv-aO-wZF">
-                                                        <rect key="frame" x="152" y="5" width="82" height="40"/>
+                                                        <rect key="frame" x="152" y="5" width="82" height="25"/>
                                                         <state key="normal" title="행성 AB01">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
