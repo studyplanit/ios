@@ -18,13 +18,15 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var authNumberTextField: UITextField!
     @IBOutlet weak var authCheckLabel: UILabel!
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var popUpView: UIView!
+    
     var phoneNumber = ""
     var authNumber = 135792468
     var authCount = 0
     var memberId = 0
     var timer: Timer?
     var timeLeft = 300
-    var baseURL = "http://203.245.28.184"
+    let baseURL = "http://203.245.28.184"
     
     struct Auth : Decodable {
         let authNumber : Int
@@ -37,6 +39,12 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
         
         if timeLeft == 0 {
             timer?.invalidate()
+        }
+        if timeLeft == 297 {
+            //팝업 없애기
+            UIView.animate(withDuration: 0.5) {
+                self.popUpView.transform = CGAffineTransform(translationX: 0, y: -100)
+            }
         }
         
         let minutes = (timeLeft % 3600) / 60
@@ -52,7 +60,7 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: 버튼 활성화 함수
     func buttonEnableStyle(button: UIButton){
-        button.backgroundColor = .purple
+        button.backgroundColor = UIColor(displayP3Red: 171/255, green: 90/255, blue: 234/255, alpha: 1)
         button.setTitleColor(.white, for: .normal)
         button.isEnabled = true
         button.layer.cornerRadius = 5
@@ -69,6 +77,7 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
     //MARK: 초기화
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         //자동로그인 구현
         if UserDefaults.standard.string(forKey: "id") != nil {
             //메인페이지로 이동
@@ -84,13 +93,19 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
         nextButton.isHidden = true
         authNumberTextField.isHidden = true
         authCheckLabel.isHidden = true
+        popUpView.backgroundColor = UIColor(displayP3Red: 0/255, green: 0/255, blue: 0/255, alpha: 0.9)
     }
-
+    
+    //MARK: 키보드 없애기
+    @IBAction func tabView(_ sender: UIGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+    
     //MARK: 입력값 유효성 검사
     func textFieldDidChangeSelection(_ textField: UITextField) {
         //핸드폰번호길이 유효성 검사
         if authCount < 5 {
-            if phoneTextField.text?.count ?? 0 > 8 {
+            if phoneTextField.text?.count ?? 0 > 10 {
                 buttonEnableStyle(button: sendSMSButton)
             } else {
                 buttonDisableStyle(button: sendSMSButton)
@@ -131,7 +146,10 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
         nextButton.isHidden = false
         authNumberTextField.text = ""
         authCheckLabel.isHidden = true
-        
+        //팝업 띄우기
+        UIView.animate(withDuration: 0.5) {
+            self.popUpView.transform = CGAffineTransform(translationX: 0, y: 100)
+        }
         //타이머 시작
         timeLeft = 300
         timer?.invalidate()
@@ -139,8 +157,13 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(onTimerUpdate), userInfo: nil, repeats: true)
         
         //sms인증 get url보내기
-        let URL = baseURL+"/member/sms-auth/"+phoneNumber
-        let alamo = AF.request(URL, method: .get).validate(statusCode: 200..<300)
+        struct Phone: Encodable {
+            var phone: String
+            var accessCode: String
+        }
+        let phone = Phone(phone: phoneNumber,accessCode:"C2A4D50CB9BF00320030003200300021")
+        let URL = baseURL+"/member/sms-auth"
+        let alamo = AF.request(URL, method: .post, parameters: phone, encoder: JSONParameterEncoder.default).validate(statusCode: 200..<300)
         
         alamo.responseDecodable(of: Auth.self) { (response) in
             guard let auth = response.value else { return }
