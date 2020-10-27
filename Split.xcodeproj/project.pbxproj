@@ -16,8 +16,11 @@
 		8D0E5877252F735D0011C102 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D0E5875252F735D0011C102 /* LaunchScreen.storyboard */; };
 		8D0E5882252F735D0011C102 /* SplitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0E5881252F735D0011C102 /* SplitTests.swift */; };
 		8D0E588D252F735D0011C102 /* SplitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0E588C252F735D0011C102 /* SplitUITests.swift */; };
-		8D44191825489C21009249A3 /* KoPubDotumBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8D44191725489C21009249A3 /* KoPubDotumBold.ttf */; };
-		8D44191D25489C3D009249A3 /* GmarketSansMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8D44191C25489C3D009249A3 /* GmarketSansMedium.otf */; };
+		8D320E0D2548A74B0041D193 /* Plan.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D320E0C2548A74B0041D193 /* Plan.storyboard */; };
+		8D320E152548A77A0041D193 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D320E142548A77A0041D193 /* Calendar.storyboard */; };
+		8D320E1A2548A7A80041D193 /* Study.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D320E192548A7A80041D193 /* Study.storyboard */; };
+		8DBF800C2548A35500989AD0 /* KoPubDotumBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8DBF800B2548A35500989AD0 /* KoPubDotumBold.ttf */; };
+		8DBF80112548A36400989AD0 /* GmarketSansMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8DBF80102548A36400989AD0 /* GmarketSansMedium.otf */; };
 		944F2576C8D14D316B8D3BFC /* Pods_SplitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADF8E8FDFDBFC03A70A25450 /* Pods_SplitTests.framework */; };
 		FD0125D22537090B00AD92E8 /* SmsAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0125D12537090B00AD92E8 /* SmsAuthViewController.swift */; };
 		FD0125DA2537093A00AD92E8 /* MemberVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0125D92537093A00AD92E8 /* MemberVO.swift */; };
@@ -60,8 +63,11 @@
 		8D0E5888252F735D0011C102 /* SplitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SplitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D0E588C252F735D0011C102 /* SplitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitUITests.swift; sourceTree = "<group>"; };
 		8D0E588E252F735D0011C102 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8D44191725489C21009249A3 /* KoPubDotumBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KoPubDotumBold.ttf; sourceTree = "<group>"; };
-		8D44191C25489C3D009249A3 /* GmarketSansMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansMedium.otf; sourceTree = "<group>"; };
+		8D320E0C2548A74B0041D193 /* Plan.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Plan.storyboard; sourceTree = "<group>"; };
+		8D320E142548A77A0041D193 /* Calendar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
+		8D320E192548A7A80041D193 /* Study.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Study.storyboard; sourceTree = "<group>"; };
+		8DBF800B2548A35500989AD0 /* KoPubDotumBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KoPubDotumBold.ttf; sourceTree = "<group>"; };
+		8DBF80102548A36400989AD0 /* GmarketSansMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansMedium.otf; sourceTree = "<group>"; };
 		9110BD0AAC60AF661B0888BE /* Pods-Split.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Split.debug.xcconfig"; path = "Target Support Files/Pods-Split/Pods-Split.debug.xcconfig"; sourceTree = "<group>"; };
 		9504611609E9A212EDA5038E /* Pods-Split-SplitUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Split-SplitUITests.release.xcconfig"; path = "Target Support Files/Pods-Split-SplitUITests/Pods-Split-SplitUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A559BC3A56C94F2C69628592 /* Pods-SplitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SplitTests.debug.xcconfig"; path = "Target Support Files/Pods-SplitTests/Pods-SplitTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -153,7 +159,8 @@
 		8D0E5869252F735B0011C102 /* Split */ = {
 			isa = PBXGroup;
 			children = (
-				8DF6F1D5254896A6001EF141 /* Font */,
+				8DBF80182548A52800989AD0 /* Storyboard */,
+				8DBF800A2548A33F00989AD0 /* Font */,
 				FD2F4D32253DDE69000A3944 /* Map */,
 				FD0125C12537087200AD92E8 /* Member */,
 				8D0E5875252F735D0011C102 /* LaunchScreen.storyboard */,
@@ -185,13 +192,23 @@
 			path = SplitUITests;
 			sourceTree = "<group>";
 		};
-		8DF6F1D5254896A6001EF141 /* Font */ = {
+		8DBF800A2548A33F00989AD0 /* Font */ = {
 			isa = PBXGroup;
 			children = (
-				8D44191725489C21009249A3 /* KoPubDotumBold.ttf */,
-				8D44191C25489C3D009249A3 /* GmarketSansMedium.otf */,
+				8DBF80102548A36400989AD0 /* GmarketSansMedium.otf */,
+				8DBF800B2548A35500989AD0 /* KoPubDotumBold.ttf */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		8DBF80182548A52800989AD0 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				8D320E192548A7A80041D193 /* Study.storyboard */,
+				8D320E142548A77A0041D193 /* Calendar.storyboard */,
+				8D320E0C2548A74B0041D193 /* Plan.storyboard */,
+			);
+			path = Storyboard;
 			sourceTree = "<group>";
 		};
 		FD0125C12537087200AD92E8 /* Member */ = {
@@ -337,11 +354,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D320E1A2548A7A80041D193 /* Study.storyboard in Resources */,
 				8D0E5877252F735D0011C102 /* LaunchScreen.storyboard in Resources */,
-				8D44191825489C21009249A3 /* KoPubDotumBold.ttf in Resources */,
+				8DBF800C2548A35500989AD0 /* KoPubDotumBold.ttf in Resources */,
 				8D0E5874252F735D0011C102 /* Assets.xcassets in Resources */,
+				8D320E0D2548A74B0041D193 /* Plan.storyboard in Resources */,
 				8D0E5872252F735B0011C102 /* Main.storyboard in Resources */,
-				8D44191D25489C3D009249A3 /* GmarketSansMedium.otf in Resources */,
+				8DBF80112548A36400989AD0 /* GmarketSansMedium.otf in Resources */,
+				8D320E152548A77A0041D193 /* Calendar.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
