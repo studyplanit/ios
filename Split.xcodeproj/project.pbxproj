@@ -16,6 +16,8 @@
 		8D0E5877252F735D0011C102 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D0E5875252F735D0011C102 /* LaunchScreen.storyboard */; };
 		8D0E5882252F735D0011C102 /* SplitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0E5881252F735D0011C102 /* SplitTests.swift */; };
 		8D0E588D252F735D0011C102 /* SplitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0E588C252F735D0011C102 /* SplitUITests.swift */; };
+		8D44191825489C21009249A3 /* KoPubDotumBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8D44191725489C21009249A3 /* KoPubDotumBold.ttf */; };
+		8D44191D25489C3D009249A3 /* GmarketSansMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8D44191C25489C3D009249A3 /* GmarketSansMedium.otf */; };
 		944F2576C8D14D316B8D3BFC /* Pods_SplitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADF8E8FDFDBFC03A70A25450 /* Pods_SplitTests.framework */; };
 		FD0125D22537090B00AD92E8 /* SmsAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0125D12537090B00AD92E8 /* SmsAuthViewController.swift */; };
 		FD0125DA2537093A00AD92E8 /* MemberVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0125D92537093A00AD92E8 /* MemberVO.swift */; };
@@ -58,8 +60,8 @@
 		8D0E5888252F735D0011C102 /* SplitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SplitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D0E588C252F735D0011C102 /* SplitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitUITests.swift; sourceTree = "<group>"; };
 		8D0E588E252F735D0011C102 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8DF6F1D6254896BE001EF141 /* KoPubDotumBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = KoPubDotumBold.ttf; path = ../../../../../../../../Downloads/KoPubDotumBold.ttf; sourceTree = "<group>"; };
-		8DF6F1D7254896D6001EF141 /* GmarketSansMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = GmarketSansMedium.otf; path = ../../../../../../../../Downloads/GmarketSansOTF/GmarketSansMedium.otf; sourceTree = "<group>"; };
+		8D44191725489C21009249A3 /* KoPubDotumBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KoPubDotumBold.ttf; sourceTree = "<group>"; };
+		8D44191C25489C3D009249A3 /* GmarketSansMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansMedium.otf; sourceTree = "<group>"; };
 		9110BD0AAC60AF661B0888BE /* Pods-Split.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Split.debug.xcconfig"; path = "Target Support Files/Pods-Split/Pods-Split.debug.xcconfig"; sourceTree = "<group>"; };
 		9504611609E9A212EDA5038E /* Pods-Split-SplitUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Split-SplitUITests.release.xcconfig"; path = "Target Support Files/Pods-Split-SplitUITests/Pods-Split-SplitUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A559BC3A56C94F2C69628592 /* Pods-SplitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SplitTests.debug.xcconfig"; path = "Target Support Files/Pods-SplitTests/Pods-SplitTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -186,8 +188,8 @@
 		8DF6F1D5254896A6001EF141 /* Font */ = {
 			isa = PBXGroup;
 			children = (
-				8DF6F1D7254896D6001EF141 /* GmarketSansMedium.otf */,
-				8DF6F1D6254896BE001EF141 /* KoPubDotumBold.ttf */,
+				8D44191725489C21009249A3 /* KoPubDotumBold.ttf */,
+				8D44191C25489C3D009249A3 /* GmarketSansMedium.otf */,
 			);
 			path = Font;
 			sourceTree = "<group>";
@@ -336,8 +338,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D0E5877252F735D0011C102 /* LaunchScreen.storyboard in Resources */,
+				8D44191825489C21009249A3 /* KoPubDotumBold.ttf in Resources */,
 				8D0E5874252F735D0011C102 /* Assets.xcassets in Resources */,
 				8D0E5872252F735B0011C102 /* Main.storyboard in Resources */,
+				8D44191D25489C3D009249A3 /* GmarketSansMedium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
