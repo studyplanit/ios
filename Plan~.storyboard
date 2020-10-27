@@ -283,9 +283,6 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </navigationBar>
-                    <connections>
-                        <segue destination="YNg-uY-B5l" kind="relationship" relationship="rootViewController" id="wNL-Sy-J8h"/>
-                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jXc-1S-lMf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -301,9 +298,6 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </navigationBar>
-                    <connections>
-                        <segue destination="KFz-LA-etr" kind="relationship" relationship="rootViewController" id="tve-XX-AbF"/>
-                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fwo-SA-kDa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -320,12 +314,28 @@
                         <color key="barTintColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="7qv-PF-oGO" kind="relationship" relationship="rootViewController" id="pAj-JT-Hj2"/>
+                        <segue destination="4rd-Fe-Tez" kind="relationship" relationship="rootViewController" id="wuQ-sB-NRy"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="482-z9-4wj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1457" y="770"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="BkR-vu-Z3G">
+            <objects>
+                <viewController id="4rd-Fe-Tez" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CcU-JN-h6r">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="641"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="3Zc-dV-eOc"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="9Ck-8e-lZv"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u8x-1x-P4f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2335" y="770"/>
         </scene>
         <!--마이플릿-->
         <scene sceneID="N8z-qh-5tF">
@@ -764,36 +774,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QYg-vo-9c4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1990" y="41"/>
-        </scene>
-        <!--Plan-->
-        <scene sceneID="AQd-6e-HAm">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="planView" storyboardName="Plan" id="7qv-PF-oGO" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="Xjg-ud-tRd"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6bv-dg-ipP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2335" y="770"/>
-        </scene>
-        <!--Calendar-->
-        <scene sceneID="uav-e3-HMT">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="calendarView" storyboardName="Calendar" id="KFz-LA-etr" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="0tg-WL-MtE"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="O6I-vu-Xct" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2358" y="40"/>
-        </scene>
-        <!--Study-->
-        <scene sceneID="otf-7C-Ffw">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="studyView" storyboardName="Study" id="YNg-uY-B5l" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="d4j-cu-IC4"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Oh9-vb-11B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2254" y="-686"/>
         </scene>
     </scenes>
     <resources>
