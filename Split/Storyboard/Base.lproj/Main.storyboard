@@ -78,9 +78,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="641"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_bg" translatesAutoresizingMaskIntoConstraints="NO" id="hy9-ob-S5H">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="592"/>
-                            </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="edk-eA-p2A">
                                 <rect key="frame" x="50" y="121" width="275" height="405"/>
                                 <subviews>
@@ -116,14 +113,10 @@
                         <viewLayoutGuide key="safeArea" id="yKA-wj-1Bj"/>
                         <color key="backgroundColor" red="0.049478150899999997" green="0.048923835159999998" blue="0.2000129521" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="yKA-wj-1Bj" firstAttribute="trailing" secondItem="hy9-ob-S5H" secondAttribute="trailing" id="2ZU-rD-bj8"/>
                             <constraint firstItem="edk-eA-p2A" firstAttribute="centerX" secondItem="7WO-2P-2q6" secondAttribute="centerX" id="5bh-v0-lrU"/>
                             <constraint firstItem="yKA-wj-1Bj" firstAttribute="trailing" secondItem="edk-eA-p2A" secondAttribute="trailing" constant="50" id="DnQ-bN-CoR"/>
                             <constraint firstItem="edk-eA-p2A" firstAttribute="centerX" secondItem="7WO-2P-2q6" secondAttribute="centerX" id="GEY-OI-alZ"/>
-                            <constraint firstItem="hy9-ob-S5H" firstAttribute="top" secondItem="yKA-wj-1Bj" secondAttribute="top" id="JBH-cX-6gG"/>
                             <constraint firstItem="edk-eA-p2A" firstAttribute="leading" secondItem="yKA-wj-1Bj" secondAttribute="leading" constant="50" id="YIw-bh-T5j"/>
-                            <constraint firstItem="hy9-ob-S5H" firstAttribute="leading" secondItem="yKA-wj-1Bj" secondAttribute="leading" id="acS-Pp-aMm"/>
-                            <constraint firstItem="yKA-wj-1Bj" firstAttribute="bottom" secondItem="hy9-ob-S5H" secondAttribute="bottom" id="ckR-gd-Jvu"/>
                             <constraint firstItem="edk-eA-p2A" firstAttribute="centerY" secondItem="7WO-2P-2q6" secondAttribute="centerY" constant="3" id="wkh-bq-RFq"/>
                             <constraint firstItem="edk-eA-p2A" firstAttribute="centerY" secondItem="7WO-2P-2q6" secondAttribute="centerY" constant="3" id="zum-Z2-75R"/>
                         </constraints>
@@ -359,9 +352,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="641"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_bg" translatesAutoresizingMaskIntoConstraints="NO" id="yMe-Hn-u2J">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="641"/>
-                            </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hpe-lX-Vig">
                                 <rect key="frame" x="40" y="170.33333333333334" width="295" height="300.33333333333326"/>
                                 <subviews>
@@ -421,11 +411,7 @@
                             <constraint firstItem="hpe-lX-Vig" firstAttribute="leading" secondItem="glr-re-Myp" secondAttribute="leading" constant="40" id="3LT-V6-zLR"/>
                             <constraint firstItem="glr-re-Myp" firstAttribute="trailing" secondItem="hpe-lX-Vig" secondAttribute="trailing" constant="40" id="3Xo-Vs-nNa"/>
                             <constraint firstItem="hpe-lX-Vig" firstAttribute="centerY" secondItem="sBq-Mx-ctW" secondAttribute="centerY" id="4iK-sk-gsA"/>
-                            <constraint firstItem="glr-re-Myp" firstAttribute="trailing" secondItem="yMe-Hn-u2J" secondAttribute="trailing" id="AhV-J0-E6m"/>
-                            <constraint firstItem="yMe-Hn-u2J" firstAttribute="top" secondItem="glr-re-Myp" secondAttribute="top" id="GnA-uq-mRy"/>
                             <constraint firstItem="hpe-lX-Vig" firstAttribute="centerX" secondItem="sBq-Mx-ctW" secondAttribute="centerX" id="Haa-WJ-X9k"/>
-                            <constraint firstItem="glr-re-Myp" firstAttribute="bottom" secondItem="yMe-Hn-u2J" secondAttribute="bottom" id="c9D-oJ-6hb"/>
-                            <constraint firstItem="yMe-Hn-u2J" firstAttribute="leading" secondItem="glr-re-Myp" secondAttribute="leading" id="hit-NX-dYF"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="My" id="Bfm-Fw-SLl">
@@ -802,7 +788,6 @@
         <image name="char_bg" width="682.66668701171875" height="682.66668701171875"/>
         <image name="chevron.backward" catalog="system" width="96" height="128"/>
         <image name="gearshape.fill" catalog="system" width="128" height="121"/>
-        <image name="home_bg" width="152.66667175292969" height="276"/>
         <image name="logo_purple" width="596.66668701171875" height="233.33332824707031"/>
         <image name="nav_map" width="25.666666030883789" height="24.333333969116211"/>
         <image name="nav_qr" width="23.333333969116211" height="23.333333969116211"/>
