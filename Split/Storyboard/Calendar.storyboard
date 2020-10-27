@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Calendar View Controller-->
         <scene sceneID="olQ-LT-4CY">
             <objects>
-                <viewController id="o7w-hg-eFE" sceneMemberID="viewController">
+                <viewController id="o7w-hg-eFE" customClass="CalendarViewController" customModule="Split" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" restorationIdentifier="calendarView" id="jhm-RZ-OU4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
