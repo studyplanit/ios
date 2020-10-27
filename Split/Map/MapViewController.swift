@@ -39,7 +39,7 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()
 
-        //네이버지도 초기화
+        //네이버지도 초기화하기
         splitMapView.mapView.moveCamera(NMFCameraUpdate(position: DEFAULT_CAMERA_POSITION))
         splitMapView.showLocationButton = false
         splitMapView.showScaleBar = false
