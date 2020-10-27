@@ -23,8 +23,6 @@
 		FD2F4D34253DDE8D000A3944 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2F4D33253DDE8D000A3944 /* MapViewController.swift */; };
 		FD2F4D60253F9823000A3944 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2F4D5F253F9823000A3944 /* SettingViewController.swift */; };
 		FD80D3D125371239002D73B3 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD80D3D025371239002D73B3 /* JoinViewController.swift */; };
-		FDF812BF2544AD1800FD18CA /* GmarketSansMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD71DAD825449778001645A0 /* GmarketSansMedium.otf */; };
-		FDF812C32544AD1B00FD18CA /* KoPubDotumBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD71DAD42544864A001645A0 /* KoPubDotumBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +58,8 @@
 		8D0E5888252F735D0011C102 /* SplitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SplitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D0E588C252F735D0011C102 /* SplitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitUITests.swift; sourceTree = "<group>"; };
 		8D0E588E252F735D0011C102 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8DE4F76D25488E14008DDF94 /* GmarketSansMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = GmarketSansMedium.otf; path = ../../../../../../Downloads/GmarketSansOTF/GmarketSansMedium.otf; sourceTree = "<group>"; };
+		8DE4F76E25488E30008DDF94 /* KoPubDotumBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = KoPubDotumBold.ttf; path = ../../../../../../Downloads/KoPubDotumBold.ttf; sourceTree = "<group>"; };
 		9110BD0AAC60AF661B0888BE /* Pods-Split.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Split.debug.xcconfig"; path = "Target Support Files/Pods-Split/Pods-Split.debug.xcconfig"; sourceTree = "<group>"; };
 		9504611609E9A212EDA5038E /* Pods-Split-SplitUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Split-SplitUITests.release.xcconfig"; path = "Target Support Files/Pods-Split-SplitUITests/Pods-Split-SplitUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A559BC3A56C94F2C69628592 /* Pods-SplitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SplitTests.debug.xcconfig"; path = "Target Support Files/Pods-SplitTests/Pods-SplitTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -72,8 +72,6 @@
 		FD2F4D212538CCE1000A3944 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		FD2F4D33253DDE8D000A3944 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		FD2F4D5F253F9823000A3944 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
-		FD71DAD42544864A001645A0 /* KoPubDotumBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = KoPubDotumBold.ttf; path = ../../../../../Downloads/KoPubDotumBold.ttf; sourceTree = "<group>"; };
-		FD71DAD825449778001645A0 /* GmarketSansMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = GmarketSansMedium.otf; path = ../../../../../Downloads/GmarketSansOTF/GmarketSansMedium.otf; sourceTree = "<group>"; };
 		FD80D3D025371239002D73B3 /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -153,7 +151,7 @@
 		8D0E5869252F735B0011C102 /* Split */ = {
 			isa = PBXGroup;
 			children = (
-				FD71DAD325448637001645A0 /* Font */,
+				8DE4F76C25488D75008DDF94 /* Font */,
 				FD2F4D32253DDE69000A3944 /* Map */,
 				FD0125C12537087200AD92E8 /* Member */,
 				8D0E5875252F735D0011C102 /* LaunchScreen.storyboard */,
@@ -183,6 +181,16 @@
 				8D0E588E252F735D0011C102 /* Info.plist */,
 			);
 			path = SplitUITests;
+			sourceTree = "<group>";
+		};
+		8DE4F76C25488D75008DDF94 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				8DE4F76D25488E14008DDF94 /* GmarketSansMedium.otf */,
+				8DE4F76E25488E30008DDF94 /* KoPubDotumBold.ttf */,
+			);
+			name = Font;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		FD0125C12537087200AD92E8 /* Member */ = {
@@ -218,15 +226,6 @@
 				FD2F4D5F253F9823000A3944 /* SettingViewController.swift */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		FD71DAD325448637001645A0 /* Font */ = {
-			isa = PBXGroup;
-			children = (
-				FD71DAD825449778001645A0 /* GmarketSansMedium.otf */,
-				FD71DAD42544864A001645A0 /* KoPubDotumBold.ttf */,
-			);
-			path = Font;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -338,10 +337,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D0E5877252F735D0011C102 /* LaunchScreen.storyboard in Resources */,
-				FDF812BF2544AD1800FD18CA /* GmarketSansMedium.otf in Resources */,
 				8D0E5874252F735D0011C102 /* Assets.xcassets in Resources */,
 				8D0E5872252F735B0011C102 /* Main.storyboard in Resources */,
-				FDF812C32544AD1B00FD18CA /* KoPubDotumBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
