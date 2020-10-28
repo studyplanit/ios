@@ -8,6 +8,8 @@
 import UIKit
 
 class EventContentTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var planTitleLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

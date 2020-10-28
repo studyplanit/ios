@@ -96,7 +96,7 @@ extension ChallengeViewController: UITableViewDelegate {
         let screenWidth = UIScreen.main.bounds.size.width
         switch indexPath.section {
         case 0:
-            return screenWidth * 3/4
+            return screenWidth * 1/2
         case 1:
             return 100
         default:
