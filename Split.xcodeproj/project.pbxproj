@@ -172,8 +172,8 @@
 				8D258C732548AA0B00C915BA /* Calendar */,
 				8D258C742548AA1600C915BA /* Plan */,
 				FD0125C12537087200AD92E8 /* Member */,
-				8DBF80182548A52800989AD0 /* Storyboard */,
 				FD2F4D32253DDE69000A3944 /* Map */,
+				8DBF80182548A52800989AD0 /* Storyboard */,
 			);
 			path = Split;
 			sourceTree = "<group>";
@@ -215,7 +215,7 @@
 		8D258C732548AA0B00C915BA /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
-				8DE705CA2548AC4200768ACB /* CalendarViewController.swift */,
+				8DB587D925497F470039F3C3 /* Controller */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -223,7 +223,7 @@
 		8D258C742548AA1600C915BA /* Plan */ = {
 			isa = PBXGroup;
 			children = (
-				8DE705CF2548AC5200768ACB /* PlanViewController.swift */,
+				8DB587DB25497F660039F3C3 /* Controller */,
 			);
 			path = Plan;
 			sourceTree = "<group>";
@@ -231,7 +231,7 @@
 		8D258C752548AA1B00C915BA /* Study */ = {
 			isa = PBXGroup;
 			children = (
-				8DE705C52548AC3200768ACB /* StudyViewController.swift */,
+				8DB587DA25497F590039F3C3 /* Controller */,
 			);
 			path = Study;
 			sourceTree = "<group>";
@@ -245,6 +245,30 @@
 				8DBF800A2548A33F00989AD0 /* Font */,
 			);
 			path = Support;
+			sourceTree = "<group>";
+		};
+		8DB587D925497F470039F3C3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8DE705CA2548AC4200768ACB /* CalendarViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8DB587DA25497F590039F3C3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8DE705C52548AC3200768ACB /* StudyViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8DB587DB25497F660039F3C3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8DE705CF2548AC5200768ACB /* PlanViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		8DBF800A2548A33F00989AD0 /* Font */ = {
