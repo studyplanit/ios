@@ -31,6 +31,7 @@
 		8D3AC5862549BDB00059F950 /* EventBannerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D3AC5842549BDB00059F950 /* EventBannerTableViewCell.xib */; };
 		8D3AC58C2549BDBF0059F950 /* EventContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3AC58A2549BDBF0059F950 /* EventContentTableViewCell.swift */; };
 		8D3AC58D2549BDBF0059F950 /* EventContentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D3AC58B2549BDBF0059F950 /* EventContentTableViewCell.xib */; };
+		8D3AC5922549C3BF0059F950 /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3AC5912549C3BF0059F950 /* SubscriptionViewController.swift */; };
 		8DE705C62548AC3200768ACB /* StudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE705C52548AC3200768ACB /* StudyViewController.swift */; };
 		8DE705CB2548AC4200768ACB /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE705CA2548AC4200768ACB /* CalendarViewController.swift */; };
 		8DE705D02548AC5200768ACB /* PlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE705CF2548AC5200768ACB /* PlanViewController.swift */; };
@@ -91,6 +92,7 @@
 		8D3AC5842549BDB00059F950 /* EventBannerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventBannerTableViewCell.xib; sourceTree = "<group>"; };
 		8D3AC58A2549BDBF0059F950 /* EventContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventContentTableViewCell.swift; sourceTree = "<group>"; };
 		8D3AC58B2549BDBF0059F950 /* EventContentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventContentTableViewCell.xib; sourceTree = "<group>"; };
+		8D3AC5912549C3BF0059F950 /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
 		8DE705C52548AC3200768ACB /* StudyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyViewController.swift; sourceTree = "<group>"; };
 		8DE705CA2548AC4200768ACB /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		8DE705CF2548AC5200768ACB /* PlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanViewController.swift; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 				8DE705CF2548AC5200768ACB /* PlanViewController.swift */,
 				8D3AC56225499F680059F950 /* ChallengeViewController.swift */,
 				8D3AC56725499F730059F950 /* EventViewController.swift */,
+				8D3AC5912549C3BF0059F950 /* SubscriptionViewController.swift */,
 				8D3AC56C2549A66E0059F950 /* Cell */,
 			);
 			path = Controller;
@@ -628,6 +631,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D3AC5922549C3BF0059F950 /* SubscriptionViewController.swift in Sources */,
 				8DE705CB2548AC4200768ACB /* CalendarViewController.swift in Sources */,
 				8D0E586B252F735B0011C102 /* AppDelegate.swift in Sources */,
 				8D3AC56825499F730059F950 /* EventViewController.swift in Sources */,

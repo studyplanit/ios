@@ -37,6 +37,7 @@ extension ChallengeViewController {
     
 }
 
+// MARK:- Table View DataSource
 extension ChallengeViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -90,6 +91,7 @@ extension ChallengeViewController: UITableViewDataSource {
     
 }
 
+// MARK:- Table View Delegate
 extension ChallengeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -102,6 +104,13 @@ extension ChallengeViewController: UITableViewDelegate {
         default:
             return UITableView.automaticDimension
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let subscriptionViewController = storyboard?.instantiateViewController(withIdentifier: "subscriptionViewController") as? SubscriptionViewController else {
+            return
+        }
+        navigationController?.pushViewController(subscriptionViewController, animated: true)
     }
     
 }

@@ -54,6 +54,94 @@
             </objects>
             <point key="canvasLocation" x="2334.7826086956525" y="769.41964285714278"/>
         </scene>
+        <!--Subscription View Controller-->
+        <scene sceneID="Vf3-Pe-fHB">
+            <objects>
+                <viewController storyboardIdentifier="subscriptionViewController" id="XPX-Co-p2V" customClass="SubscriptionViewController" customModule="Split" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sUa-37-qGW">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="플랜 신청" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sm6-xO-sZa">
+                                <rect key="frame" x="100" y="64" width="214" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="VY4-g6-npb">
+                                <rect key="frame" x="0.0" y="316" width="414" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="sey-Ar-OLG"/>
+                                </constraints>
+                                <locale key="locale" localeIdentifier="ko"/>
+                            </datePicker>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="시작 날짜" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ncp-oW-xmP">
+                                <rect key="frame" x="20" y="275" width="64" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="종료 날짜" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IGN-IM-sjZ">
+                                <rect key="frame" x="20" y="406" width="64" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text=" 2020. 11. 25." borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tgu-Li-lQc">
+                                <rect key="frame" x="0.0" y="447" width="414" height="40"/>
+                                <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="l0e-89-dbN"/>
+                                </constraints>
+                                <color key="textColor" systemColor="linkColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="시간" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="smN-yo-tsz">
+                                <rect key="frame" x="20" y="144" width="30" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="NyN-EB-x8X">
+                                <rect key="frame" x="0.0" y="185" width="414" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="u8B-o7-kVV"/>
+                                </constraints>
+                            </datePicker>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="KC1-4a-GoX"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Tgu-Li-lQc" firstAttribute="leading" secondItem="KC1-4a-GoX" secondAttribute="leading" id="8GV-U5-Cz9"/>
+                            <constraint firstItem="VY4-g6-npb" firstAttribute="top" secondItem="Ncp-oW-xmP" secondAttribute="bottom" constant="20" id="ENj-zU-CNt"/>
+                            <constraint firstItem="smN-yo-tsz" firstAttribute="top" secondItem="KC1-4a-GoX" secondAttribute="top" constant="100" id="Mts-gA-W3Q"/>
+                            <constraint firstItem="KC1-4a-GoX" firstAttribute="trailing" secondItem="Sm6-xO-sZa" secondAttribute="trailing" constant="100" id="PXl-5O-0gx"/>
+                            <constraint firstItem="Sm6-xO-sZa" firstAttribute="leading" secondItem="KC1-4a-GoX" secondAttribute="leading" constant="100" id="RHh-gC-Oq2"/>
+                            <constraint firstItem="Sm6-xO-sZa" firstAttribute="top" secondItem="KC1-4a-GoX" secondAttribute="top" constant="20" id="VBt-H4-luc"/>
+                            <constraint firstItem="VY4-g6-npb" firstAttribute="leading" secondItem="KC1-4a-GoX" secondAttribute="leading" id="VkK-u9-zC8"/>
+                            <constraint firstItem="VY4-g6-npb" firstAttribute="trailing" secondItem="KC1-4a-GoX" secondAttribute="trailing" id="WGw-gP-K4C"/>
+                            <constraint firstItem="NyN-EB-x8X" firstAttribute="leading" secondItem="KC1-4a-GoX" secondAttribute="leading" id="a15-dy-wSo"/>
+                            <constraint firstItem="IGN-IM-sjZ" firstAttribute="leading" secondItem="KC1-4a-GoX" secondAttribute="leading" constant="20" id="aBw-Ue-X6q"/>
+                            <constraint firstItem="Ncp-oW-xmP" firstAttribute="leading" secondItem="KC1-4a-GoX" secondAttribute="leading" constant="20" id="eNb-OX-wyS"/>
+                            <constraint firstItem="IGN-IM-sjZ" firstAttribute="top" secondItem="VY4-g6-npb" secondAttribute="bottom" constant="50" id="fep-WN-NJX"/>
+                            <constraint firstItem="smN-yo-tsz" firstAttribute="leading" secondItem="KC1-4a-GoX" secondAttribute="leading" constant="20" id="hFK-Gw-o37"/>
+                            <constraint firstItem="NyN-EB-x8X" firstAttribute="trailing" secondItem="KC1-4a-GoX" secondAttribute="trailing" id="hvh-Dm-b0G"/>
+                            <constraint firstItem="Tgu-Li-lQc" firstAttribute="trailing" secondItem="KC1-4a-GoX" secondAttribute="trailing" id="kkM-Xu-W6q"/>
+                            <constraint firstItem="Tgu-Li-lQc" firstAttribute="top" secondItem="IGN-IM-sjZ" secondAttribute="bottom" constant="20" id="tnq-Gu-2vV"/>
+                            <constraint firstItem="Ncp-oW-xmP" firstAttribute="top" secondItem="NyN-EB-x8X" secondAttribute="bottom" constant="50" id="xzq-Ge-BJm"/>
+                            <constraint firstItem="NyN-EB-x8X" firstAttribute="top" secondItem="smN-yo-tsz" secondAttribute="bottom" constant="20" id="zuY-cq-vmJ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="datePicker" destination="VY4-g6-npb" id="sfo-be-Qoy"/>
+                        <outlet property="planTitleLabel" destination="Sm6-xO-sZa" id="uxB-1I-9v8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s0v-pL-Huv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3211.594202898551" y="768.75"/>
+        </scene>
         <!--Challenge View Controller-->
         <scene sceneID="QlY-ev-58a">
             <objects>
@@ -116,6 +204,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

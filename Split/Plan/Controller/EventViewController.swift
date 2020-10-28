@@ -37,11 +37,6 @@ extension EventViewController {
     
 }
 
-// MARK:- Methods
-extension EventViewController {
-    
-}
-
 // MARK:- Table View DataSource
 extension EventViewController: UITableViewDataSource {
     
@@ -108,6 +103,13 @@ extension EventViewController: UITableViewDelegate {
         default:
             return UITableView.automaticDimension
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let subscriptionViewController = storyboard?.instantiateViewController(withIdentifier: "subscriptionViewController") as? SubscriptionViewController else {
+            return
+        }
+        navigationController?.pushViewController(subscriptionViewController, animated: true)
     }
     
 }
