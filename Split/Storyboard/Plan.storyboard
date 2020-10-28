@@ -74,6 +74,51 @@
             </objects>
             <point key="canvasLocation" x="2334.7826086956525" y="769.41964285714278"/>
         </scene>
+        <!--Challenge View Controller-->
+        <scene sceneID="QlY-ev-58a">
+            <objects>
+                <viewController id="mmt-kg-eAF" customClass="ChallengeViewController" customModule="Split" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ejf-kb-One">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qrn-R9-olp">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6xA-5L-yRI"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6xA-5L-yRI" firstAttribute="bottom" secondItem="Qrn-R9-olp" secondAttribute="bottom" id="Joc-tl-n45"/>
+                            <constraint firstItem="Qrn-R9-olp" firstAttribute="leading" secondItem="6xA-5L-yRI" secondAttribute="leading" id="Ttg-kN-iSf"/>
+                            <constraint firstItem="Qrn-R9-olp" firstAttribute="top" secondItem="6xA-5L-yRI" secondAttribute="top" id="WNR-Ix-eRD"/>
+                            <constraint firstItem="6xA-5L-yRI" firstAttribute="trailing" secondItem="Qrn-R9-olp" secondAttribute="trailing" id="j1v-su-DRS"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="Qrn-R9-olp" id="Fec-Hi-cTY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FvF-GJ-u1z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2335" y="1507"/>
+        </scene>
+        <!--Event View Controller-->
+        <scene sceneID="Syp-Vx-Osy">
+            <objects>
+                <viewController id="QmP-qf-UN9" customClass="EventViewController" customModule="Split" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GwX-yO-V4d">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="piF-8d-w6R"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u6p-5b-gDD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3212" y="1507"/>
+        </scene>
     </scenes>
     <resources>
         <systemColor name="systemBackgroundColor">
