@@ -11,63 +11,43 @@
         <!--Plan View Controller-->
         <scene sceneID="76S-kR-H9c">
             <objects>
-                <viewController id="OeC-10-FgO" customClass="PlanViewController" customModule="Split" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="planViewController" id="OeC-10-FgO" customClass="PlanViewController" customModule="Split" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xuq-j7-0iL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vDk-on-NK9">
-                                <rect key="frame" x="0.0" y="44" width="414" height="40"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8vt-0d-D1d">
-                                        <rect key="frame" x="0.0" y="0.0" width="207" height="40"/>
-                                        <color key="backgroundColor" red="0.17254901960784313" green="0.17254901960784313" blue="0.17254901960784313" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="Challenge">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ii-V4-Xf9">
-                                        <rect key="frame" x="207" y="0.0" width="207" height="40"/>
-                                        <color key="backgroundColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="Event">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="8vt-0d-D1d" secondAttribute="bottom" id="Bmz-a8-GRD"/>
-                                    <constraint firstAttribute="trailing" secondItem="3Ii-V4-Xf9" secondAttribute="trailing" id="DvX-P8-ugW"/>
-                                    <constraint firstAttribute="height" constant="40" id="HYq-wF-aaK"/>
-                                    <constraint firstItem="3Ii-V4-Xf9" firstAttribute="leading" secondItem="8vt-0d-D1d" secondAttribute="trailing" id="Kp5-SP-keC"/>
-                                    <constraint firstItem="8vt-0d-D1d" firstAttribute="top" secondItem="vDk-on-NK9" secondAttribute="top" id="OQH-xl-KgJ"/>
-                                    <constraint firstAttribute="bottom" secondItem="3Ii-V4-Xf9" secondAttribute="bottom" id="X2F-CN-nhC"/>
-                                    <constraint firstItem="8vt-0d-D1d" firstAttribute="leading" secondItem="vDk-on-NK9" secondAttribute="leading" id="nw7-aH-hsh"/>
-                                    <constraint firstItem="3Ii-V4-Xf9" firstAttribute="top" secondItem="vDk-on-NK9" secondAttribute="top" id="pmX-Mw-XAF"/>
-                                </constraints>
-                            </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s1V-pw-s4q">
                                 <rect key="frame" x="0.0" y="84" width="414" height="778"/>
                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                             </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="lEw-23-gHZ">
+                                <rect key="frame" x="0.0" y="44" width="414" height="41"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="7ZL-tS-rzG"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="yWR-js-U2z"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="s1V-pw-s4q" firstAttribute="top" secondItem="vDk-on-NK9" secondAttribute="bottom" id="3Gq-az-det"/>
                             <constraint firstItem="yWR-js-U2z" firstAttribute="trailing" secondItem="s1V-pw-s4q" secondAttribute="trailing" id="3bf-i9-dzv"/>
-                            <constraint firstItem="8vt-0d-D1d" firstAttribute="width" secondItem="Xuq-j7-0iL" secondAttribute="width" multiplier="0.5" id="7go-Kj-hxy"/>
-                            <constraint firstItem="yWR-js-U2z" firstAttribute="trailing" secondItem="vDk-on-NK9" secondAttribute="trailing" id="C61-Er-08p"/>
-                            <constraint firstItem="vDk-on-NK9" firstAttribute="leading" secondItem="yWR-js-U2z" secondAttribute="leading" id="NrZ-Dp-sss"/>
+                            <constraint firstItem="lEw-23-gHZ" firstAttribute="leading" secondItem="yWR-js-U2z" secondAttribute="leading" id="59b-Ep-Fev"/>
+                            <constraint firstItem="lEw-23-gHZ" firstAttribute="top" secondItem="yWR-js-U2z" secondAttribute="top" id="5Rf-be-vMv"/>
+                            <constraint firstItem="yWR-js-U2z" firstAttribute="trailing" secondItem="lEw-23-gHZ" secondAttribute="trailing" id="Hzq-vC-cu4"/>
                             <constraint firstItem="yWR-js-U2z" firstAttribute="bottom" secondItem="s1V-pw-s4q" secondAttribute="bottom" id="YZt-Wh-D1Y"/>
-                            <constraint firstItem="vDk-on-NK9" firstAttribute="top" secondItem="yWR-js-U2z" secondAttribute="top" id="n7N-H5-JvN"/>
+                            <constraint firstItem="s1V-pw-s4q" firstAttribute="top" secondItem="lEw-23-gHZ" secondAttribute="bottom" id="w9d-aP-SAn"/>
                             <constraint firstItem="s1V-pw-s4q" firstAttribute="leading" secondItem="yWR-js-U2z" secondAttribute="leading" id="xkh-mW-1bh"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="V8C-sH-NU3"/>
                     <connections>
-                        <outlet property="chellengeButton" destination="8vt-0d-D1d" id="Hdi-WW-Qcl"/>
                         <outlet property="contentView" destination="s1V-pw-s4q" id="BDr-zV-34x"/>
-                        <outlet property="eventButton" destination="3Ii-V4-Xf9" id="fdg-lD-wD5"/>
+                        <outlet property="segmentedControl" destination="lEw-23-gHZ" id="xDO-bq-jEe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kNs-gN-T1k" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -77,7 +57,7 @@
         <!--Challenge View Controller-->
         <scene sceneID="QlY-ev-58a">
             <objects>
-                <viewController id="mmt-kg-eAF" customClass="ChallengeViewController" customModule="Split" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="challengeViewController" id="mmt-kg-eAF" customClass="ChallengeViewController" customModule="Split" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ejf-kb-One">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -107,12 +87,12 @@
         <!--Event View Controller-->
         <scene sceneID="Syp-Vx-Osy">
             <objects>
-                <viewController id="QmP-qf-UN9" customClass="EventViewController" customModule="Split" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="eventViewController" id="QmP-qf-UN9" customClass="EventViewController" customModule="Split" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GwX-yO-V4d">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="piF-8d-w6R"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemIndigoColor"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u6p-5b-gDD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -126,6 +106,9 @@
         </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
