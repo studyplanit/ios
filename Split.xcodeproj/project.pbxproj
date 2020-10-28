@@ -27,6 +27,10 @@
 		8D3AC5702549A6940059F950 /* ChallengeBannerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D3AC56E2549A6940059F950 /* ChallengeBannerTableViewCell.xib */; };
 		8D3AC5792549A6AD0059F950 /* ChallengeContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3AC5772549A6AD0059F950 /* ChallengeContentTableViewCell.swift */; };
 		8D3AC57A2549A6AD0059F950 /* ChallengeContentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D3AC5782549A6AD0059F950 /* ChallengeContentTableViewCell.xib */; };
+		8D3AC5852549BDB00059F950 /* EventBannerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3AC5832549BDB00059F950 /* EventBannerTableViewCell.swift */; };
+		8D3AC5862549BDB00059F950 /* EventBannerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D3AC5842549BDB00059F950 /* EventBannerTableViewCell.xib */; };
+		8D3AC58C2549BDBF0059F950 /* EventContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3AC58A2549BDBF0059F950 /* EventContentTableViewCell.swift */; };
+		8D3AC58D2549BDBF0059F950 /* EventContentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D3AC58B2549BDBF0059F950 /* EventContentTableViewCell.xib */; };
 		8DE705C62548AC3200768ACB /* StudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE705C52548AC3200768ACB /* StudyViewController.swift */; };
 		8DE705CB2548AC4200768ACB /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE705CA2548AC4200768ACB /* CalendarViewController.swift */; };
 		8DE705D02548AC5200768ACB /* PlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE705CF2548AC5200768ACB /* PlanViewController.swift */; };
@@ -83,6 +87,10 @@
 		8D3AC56E2549A6940059F950 /* ChallengeBannerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChallengeBannerTableViewCell.xib; sourceTree = "<group>"; };
 		8D3AC5772549A6AD0059F950 /* ChallengeContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeContentTableViewCell.swift; sourceTree = "<group>"; };
 		8D3AC5782549A6AD0059F950 /* ChallengeContentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChallengeContentTableViewCell.xib; sourceTree = "<group>"; };
+		8D3AC5832549BDB00059F950 /* EventBannerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventBannerTableViewCell.swift; sourceTree = "<group>"; };
+		8D3AC5842549BDB00059F950 /* EventBannerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventBannerTableViewCell.xib; sourceTree = "<group>"; };
+		8D3AC58A2549BDBF0059F950 /* EventContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventContentTableViewCell.swift; sourceTree = "<group>"; };
+		8D3AC58B2549BDBF0059F950 /* EventContentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventContentTableViewCell.xib; sourceTree = "<group>"; };
 		8DE705C52548AC3200768ACB /* StudyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyViewController.swift; sourceTree = "<group>"; };
 		8DE705CA2548AC4200768ACB /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		8DE705CF2548AC5200768ACB /* PlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanViewController.swift; sourceTree = "<group>"; };
@@ -262,12 +270,32 @@
 		8D3AC56C2549A66E0059F950 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				8D3AC57E2549BD730059F950 /* Challenge */,
+				8D3AC57F2549BD810059F950 /* Event */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		8D3AC57E2549BD730059F950 /* Challenge */ = {
+			isa = PBXGroup;
+			children = (
 				8D3AC56D2549A6940059F950 /* ChallengeBannerTableViewCell.swift */,
 				8D3AC56E2549A6940059F950 /* ChallengeBannerTableViewCell.xib */,
 				8D3AC5772549A6AD0059F950 /* ChallengeContentTableViewCell.swift */,
 				8D3AC5782549A6AD0059F950 /* ChallengeContentTableViewCell.xib */,
 			);
-			path = Cell;
+			path = Challenge;
+			sourceTree = "<group>";
+		};
+		8D3AC57F2549BD810059F950 /* Event */ = {
+			isa = PBXGroup;
+			children = (
+				8D3AC5832549BDB00059F950 /* EventBannerTableViewCell.swift */,
+				8D3AC5842549BDB00059F950 /* EventBannerTableViewCell.xib */,
+				8D3AC58A2549BDBF0059F950 /* EventContentTableViewCell.swift */,
+				8D3AC58B2549BDBF0059F950 /* EventContentTableViewCell.xib */,
+			);
+			path = Event;
 			sourceTree = "<group>";
 		};
 		8DB587D925497F470039F3C3 /* Controller */ = {
@@ -467,8 +495,10 @@
 				8D1A4B7E2548AEA6007366D7 /* KoPubDotumBold.ttf in Resources */,
 				8D3AC5702549A6940059F950 /* ChallengeBannerTableViewCell.xib in Resources */,
 				8D3AC57A2549A6AD0059F950 /* ChallengeContentTableViewCell.xib in Resources */,
+				8D3AC58D2549BDBF0059F950 /* EventContentTableViewCell.xib in Resources */,
 				8D320E0D2548A74B0041D193 /* Plan.storyboard in Resources */,
 				8D1A4B832548AEB4007366D7 /* GmarketSansMedium.otf in Resources */,
+				8D3AC5862549BDB00059F950 /* EventBannerTableViewCell.xib in Resources */,
 				8D0E5872252F735B0011C102 /* Main.storyboard in Resources */,
 				8D320E152548A77A0041D193 /* Calendar.storyboard in Resources */,
 			);
@@ -602,6 +632,8 @@
 				8D0E586B252F735B0011C102 /* AppDelegate.swift in Sources */,
 				8D3AC56825499F730059F950 /* EventViewController.swift in Sources */,
 				FD0125D22537090B00AD92E8 /* SmsAuthViewController.swift in Sources */,
+				8D3AC58C2549BDBF0059F950 /* EventContentTableViewCell.swift in Sources */,
+				8D3AC5852549BDB00059F950 /* EventBannerTableViewCell.swift in Sources */,
 				8D0E586D252F735B0011C102 /* SceneDelegate.swift in Sources */,
 				FD2F4D60253F9823000A3944 /* SettingViewController.swift in Sources */,
 				8DE705C62548AC3200768ACB /* StudyViewController.swift in Sources */,
