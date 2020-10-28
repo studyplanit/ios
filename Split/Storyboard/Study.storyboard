@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,30 +15,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="스터디" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ab7-8i-MPL">
-                                <rect key="frame" x="184.5" y="437.5" width="45" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="서비스 준비 중입니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uWg-pn-vLS">
+                                <rect key="frame" x="101" y="433" width="212" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="FeE-8T-a8R"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.038901315725075367" green="0.053644323271558471" blue="0.22745209932327271" alpha="0.84705882352941175" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="ab7-8i-MPL" firstAttribute="centerY" secondItem="3Nk-fo-0ob" secondAttribute="centerY" id="S4h-SB-nHn"/>
-                            <constraint firstItem="ab7-8i-MPL" firstAttribute="centerX" secondItem="3Nk-fo-0ob" secondAttribute="centerX" id="t4A-Cj-QSd"/>
+                            <constraint firstItem="uWg-pn-vLS" firstAttribute="centerY" secondItem="3Nk-fo-0ob" secondAttribute="centerY" id="MJp-q9-S2A"/>
+                            <constraint firstItem="uWg-pn-vLS" firstAttribute="centerX" secondItem="3Nk-fo-0ob" secondAttribute="centerX" id="uPw-oh-uDB"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="wMx-d9-aNb"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GUa-3F-8fH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2254" y="-686"/>
+            <point key="canvasLocation" x="2253.6231884057975" y="-686.38392857142856"/>
         </scene>
     </scenes>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>
