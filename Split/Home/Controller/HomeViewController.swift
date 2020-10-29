@@ -55,6 +55,7 @@ extension HomeViewController {
     }
 }
 
+// MARK:- QR Code Reader View Controller Delegate
 extension HomeViewController: QRCodeReaderViewControllerDelegate {
     // QR코드 리더가 성공했을 때 동작 정의
     func reader(_ reader: QRCodeReaderViewController, didScanResult result: QRCodeReaderResult) {
