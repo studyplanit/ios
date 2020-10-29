@@ -12,24 +12,32 @@ class SubscriptionViewController: UIViewController {
     // MARK:- Properties
     @IBOutlet weak var planTitleLabel: UILabel!
     @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var endDateTextField: UITextField!
     let dateFormatter: DateFormatter = {
         let formatter: DateFormatter = DateFormatter()
         formatter.dateStyle = .medium
-        formatter.dateFormat = "yyyy/MM/dd"
+        formatter.dateFormat = "  yyyy. MM. dd"
         return formatter
     }()
+    
+    var plan: PlanModel.Plan?
 
     // MARK:- View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureNavigationBar()
+        configureUI()
     }
 
 }
 
 // MARK:- Configure
 extension SubscriptionViewController {
+    
+    func configureUI() {
+        planTitleLabel.text = plan?.plnaTitle
+    }
     
     func configureNavigationBar() {
         let button = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(touchUpCompleteButton))
@@ -41,6 +49,11 @@ extension SubscriptionViewController {
 
 // MARK:- Methods
 extension SubscriptionViewController {
+    
+    @IBAction func changeDatePicker(_ sender: UIDatePicker) {
+        let date = sender.date + (86400 * (plan?.planPeriod)!)
+        endDateTextField.text = dateFormatter.string(from: date)
+    }
     
     @objc func touchUpCompleteButton() {
         let alert = UIAlertController(

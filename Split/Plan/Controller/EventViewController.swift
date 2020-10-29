@@ -12,6 +12,8 @@ class EventViewController: UIViewController {
     // MARK:- Properties
     @IBOutlet weak var tableView: UITableView!
     
+    var eventPlans: [PlanModel.Plan] = PlanModel.eventPlans
+    
     // MARK:- View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +51,7 @@ extension EventViewController: UITableViewDataSource {
         case 0:
             return 1
         case 1:
-            return 4
+            return eventPlans.count
         default:
             return 0
         }
@@ -68,22 +70,8 @@ extension EventViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(
                     withIdentifier: "eventContentTableViewCell",
                     for: indexPath) as? EventContentTableViewCell else { return UITableViewCell() }
-            switch indexPath.row {
-            case 0:
-                cell.planTitleLabel.text = "중간고사 출석 플랜"
-                return cell
-            case 1:
-                cell.planTitleLabel.text = "기말고사 출석 플랜"
-                return cell
-            case 2:
-                cell.planTitleLabel.text = "여름방학 출석 플랜"
-                return cell
-            case 3:
-                cell.planTitleLabel.text = "겨울방학 출석 플랜"
-                return cell
-            default:
-                return UITableViewCell()
-            }
+            cell.planTitleLabel.text = eventPlans[indexPath.row].plnaTitle
+            return cell
         default:
             return UITableViewCell()
         }
@@ -109,6 +97,7 @@ extension EventViewController: UITableViewDelegate {
         guard let subscriptionViewController = storyboard?.instantiateViewController(withIdentifier: "subscriptionViewController") as? SubscriptionViewController else {
             return
         }
+        subscriptionViewController.plan = eventPlans[indexPath.row]
         navigationController?.pushViewController(subscriptionViewController, animated: true)
     }
     
