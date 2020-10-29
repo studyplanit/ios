@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import QRCodeReader
 
 class QRCodeScannerViewController: UIViewController {
     

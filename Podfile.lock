@@ -2,23 +2,27 @@ PODS:
   - Alamofire (5.2.2)
   - FSCalendar (2.8.1)
   - NMapsMap (3.10.0)
+  - QRCodeReader.swift (10.1.0)
 
 DEPENDENCIES:
   - Alamofire (~> 5.1)
   - FSCalendar
   - NMapsMap
+  - QRCodeReader.swift (~> 10.1.0)
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - FSCalendar
     - NMapsMap
+    - QRCodeReader.swift
 
 SPEC CHECKSUMS:
   Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
   FSCalendar: 5245140456fcbcac5824c203b98bd8068bdfee1a
   NMapsMap: 17caab4af9a3fc5c25b79858de18bdeab1eaff87
+  QRCodeReader.swift: 373a389fe9a22d513c879a32a6f647c58f4ef572
 
-PODFILE CHECKSUM: 0b97d4529ccdf2c331bbebdfaa5b02dc2ff3e12d
+PODFILE CHECKSUM: 899dafd2f449d328d637061b08a12999db405a27
 
 COCOAPODS: 1.9.3

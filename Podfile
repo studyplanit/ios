@@ -9,6 +9,7 @@ target 'Split' do
   pod 'Alamofire', '~> 5.1'
   pod 'NMapsMap'
   pod 'FSCalendar'
+  pod 'QRCodeReader.swift', '~> 10.1.0'
   
   target 'SplitTests' do
     inherit! :search_paths
