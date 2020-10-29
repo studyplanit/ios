@@ -11,19 +11,16 @@ class StudyViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureTapBar()
+    }
 
-        // Do any additional setup after loading the view.
+}
+// MARK:- Configure
+extension StudyViewController {
+    
+    func configureTapBar() {
+        navigationItem.title = "스터디"
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
