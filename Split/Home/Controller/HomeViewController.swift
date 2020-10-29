@@ -40,12 +40,7 @@ extension HomeViewController {
     
     @IBAction func showScanner() {
         print("MainViewController - showScanner() called ")
-        // Retrieve the QRCode content
-        // By using the delegate pattern
-        // 델리게이트 메서드 혹은 클로저패턴으로 qr코드 인식 이후를 정의한다.
         readerVC.delegate = self
-
-        // Or by using the closure pattern
         readerVC.completionBlock = { (result: QRCodeReaderResult?) in
             print("QRCodeScanner succeded in closure")
             guard let result = result else { return }
@@ -55,11 +50,7 @@ extension HomeViewController {
 //            guard let scannedUrl = URL(string: scannedUrlString) else { return }
 //            self.webView.load(URLRequest(url: scannedUrl))
         }
-
-        // Presents the readerVC as modal form sheet
         readerVC.modalPresentationStyle = .formSheet
-        
-        // 설정된 QR코드 뷰 컨트롤러를 화면에 보여준다.
         present(readerVC, animated: true, completion: nil)
     }
 }
