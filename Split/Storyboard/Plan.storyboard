@@ -74,6 +74,9 @@
                                     <constraint firstAttribute="height" constant="40" id="sey-Ar-OLG"/>
                                 </constraints>
                                 <locale key="locale" localeIdentifier="ko"/>
+                                <connections>
+                                    <action selector="changeDatePicker:" destination="XPX-Co-p2V" eventType="valueChanged" id="Fue-nC-Dx0"/>
+                                </connections>
                             </datePicker>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="시작 날짜" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ncp-oW-xmP">
                                 <rect key="frame" x="20" y="275" width="64" height="21"/>
@@ -87,7 +90,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text=" 2020. 11. 25." borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tgu-Li-lQc">
+                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tgu-Li-lQc">
                                 <rect key="frame" x="0.0" y="447" width="414" height="40"/>
                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                 <constraints>
@@ -103,11 +106,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="NyN-EB-x8X">
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NyN-EB-x8X">
                                 <rect key="frame" x="0.0" y="185" width="414" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="u8B-o7-kVV"/>
                                 </constraints>
+                                <date key="date" timeIntervalSinceReferenceDate="625622400.45581806">
+                                    <!--2020-10-29 00:00:00 +0000-->
+                                </date>
                             </datePicker>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="KC1-4a-GoX"/>
@@ -135,6 +141,7 @@
                     </view>
                     <connections>
                         <outlet property="datePicker" destination="VY4-g6-npb" id="sfo-be-Qoy"/>
+                        <outlet property="endDateTextField" destination="Tgu-Li-lQc" id="1J1-9Z-Dyi"/>
                         <outlet property="planTitleLabel" destination="Sm6-xO-sZa" id="uxB-1I-9v8"/>
                     </connections>
                 </viewController>

@@ -12,6 +12,8 @@ class ChallengeViewController: UIViewController {
     // MARK:- Properties
     @IBOutlet weak var tableView: UITableView!
     
+    var chalengePlans: [PlanModel.Plan] = PlanModel.challengePlans
+    
     // MARK:- View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +51,7 @@ extension ChallengeViewController: UITableViewDataSource {
         case 0:
             return 1
         case 1:
-            return 4
+            return chalengePlans.count
         default:
             return 0
         }
@@ -67,23 +69,11 @@ extension ChallengeViewController: UITableViewDataSource {
         case 1:
             guard let cell = tableView.dequeueReusableCell(
                     withIdentifier: "challengeContentTableViewCell",
-                    for: indexPath) as? ChallengeContentTableViewCell else { return UITableViewCell() }
-            switch indexPath.row {
-            case 0:
-                cell.planTitleLabel.text = "출석 챌린지 플랜 1일"
-                return cell
-            case 1:
-                cell.planTitleLabel.text = "출석 챌린지 플랜 7일"
-                return cell
-            case 2:
-                cell.planTitleLabel.text = "출석 챌린지 플랜 15일"
-                return cell
-            case 3:
-                cell.planTitleLabel.text = "출석 챌린지 플랜 30일"
-                return cell
-            default:
+                    for: indexPath) as? ChallengeContentTableViewCell else {
                 return UITableViewCell()
             }
+            cell.planTitleLabel.text = chalengePlans[indexPath.row].plnaTitle
+            return cell
         default:
             return UITableViewCell()
         }
@@ -110,6 +100,7 @@ extension ChallengeViewController: UITableViewDelegate {
         guard let subscriptionViewController = storyboard?.instantiateViewController(withIdentifier: "subscriptionViewController") as? SubscriptionViewController else {
             return
         }
+        subscriptionViewController.plan = chalengePlans[indexPath.row]
         navigationController?.pushViewController(subscriptionViewController, animated: true)
     }
     

@@ -8,6 +8,7 @@ target 'Split' do
   # Pods for Split
   pod 'Alamofire', '~> 5.1'
   pod 'NMapsMap'
+  pod 'FSCalendar'
   
   target 'SplitTests' do
     inherit! :search_paths
