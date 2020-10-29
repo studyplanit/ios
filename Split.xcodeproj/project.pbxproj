@@ -33,6 +33,7 @@
 		8D3AC58D2549BDBF0059F950 /* EventContentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D3AC58B2549BDBF0059F950 /* EventContentTableViewCell.xib */; };
 		8D3AC5922549C3BF0059F950 /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3AC5912549C3BF0059F950 /* SubscriptionViewController.swift */; };
 		8D4D6AD4254B0F460082DD07 /* AttendanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4D6AD3254B0F460082DD07 /* AttendanceViewController.swift */; };
+		8D4D6AE9254B26620082DD07 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D4D6AEB254B26620082DD07 /* InfoPlist.strings */; };
 		8D5D7042254A911C00618A27 /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5D7040254A911C00618A27 /* CalendarTableViewCell.swift */; };
 		8D5D7043254A911C00618A27 /* CalendarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D5D7041254A911C00618A27 /* CalendarTableViewCell.xib */; };
 		8DC74973254B0DF5000E9329 /* Attendance.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DC74972254B0DF5000E9329 /* Attendance.storyboard */; };
@@ -100,6 +101,10 @@
 		8D3AC58B2549BDBF0059F950 /* EventContentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventContentTableViewCell.xib; sourceTree = "<group>"; };
 		8D3AC5912549C3BF0059F950 /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
 		8D4D6AD3254B0F460082DD07 /* AttendanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceViewController.swift; sourceTree = "<group>"; };
+		8D4D6ADF254B253D0082DD07 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		8D4D6AE0254B253D0082DD07 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
+		8D4D6AEA254B26620082DD07 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8D4D6AEF254B26640082DD07 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8D5D7040254A911C00618A27 /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
 		8D5D7041254A911C00618A27 /* CalendarTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarTableViewCell.xib; sourceTree = "<group>"; };
 		8DC74972254B0DF5000E9329 /* Attendance.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Attendance.storyboard; sourceTree = "<group>"; };
@@ -200,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				8D0E5878252F735D0011C102 /* Info.plist */,
+				8D4D6AEB254B26620082DD07 /* InfoPlist.strings */,
 				8D258C762548AA3800C915BA /* Support */,
 				8D258C712548A9E400C915BA /* Home */,
 				FD2F4D32253DDE69000A3944 /* Map */,
@@ -516,6 +522,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = 8D0E585E252F735B0011C102;
 			productRefGroup = 8D0E5868252F735B0011C102 /* Products */;
@@ -538,6 +545,7 @@
 				8D0E5877252F735D0011C102 /* LaunchScreen.storyboard in Resources */,
 				8D0E5874252F735D0011C102 /* Assets.xcassets in Resources */,
 				8D1A4B7E2548AEA6007366D7 /* KoPubDotumBold.ttf in Resources */,
+				8D4D6AE9254B26620082DD07 /* InfoPlist.strings in Resources */,
 				8D3AC5702549A6940059F950 /* ChallengeBannerTableViewCell.xib in Resources */,
 				8DC74973254B0DF5000E9329 /* Attendance.storyboard in Resources */,
 				8D3AC57A2549A6AD0059F950 /* ChallengeContentTableViewCell.xib in Resources */,
@@ -736,6 +744,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				8D0E5871252F735B0011C102 /* Base */,
+				8D4D6AE0254B253D0082DD07 /* ko */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -744,8 +753,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				8D0E5876252F735D0011C102 /* Base */,
+				8D4D6ADF254B253D0082DD07 /* ko */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		8D4D6AEB254B26620082DD07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8D4D6AEA254B26620082DD07 /* en */,
+				8D4D6AEF254B26640082DD07 /* ko */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -755,6 +774,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -816,6 +836,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
