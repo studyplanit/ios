@@ -16,22 +16,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="캘린더" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qds-I0-fd9">
-                                <rect key="frame" x="186" y="395" width="45" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mso-OB-a6Q" customClass="FSCalendar">
+                                <rect key="frame" x="0.0" y="44" width="414" height="358.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Q0Y-BF-XpH">
+                                <rect key="frame" x="0.0" y="402.5" width="414" height="459.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fmi-8m-aQn"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Q0Y-BF-XpH" firstAttribute="top" secondItem="Mso-OB-a6Q" secondAttribute="bottom" id="9WX-cH-Pe3"/>
+                            <constraint firstItem="fmi-8m-aQn" firstAttribute="trailing" secondItem="Mso-OB-a6Q" secondAttribute="trailing" id="E8J-9x-H9J"/>
+                            <constraint firstItem="Mso-OB-a6Q" firstAttribute="top" secondItem="fmi-8m-aQn" secondAttribute="top" id="Gq5-6b-3bT"/>
+                            <constraint firstItem="fmi-8m-aQn" firstAttribute="trailing" secondItem="Q0Y-BF-XpH" secondAttribute="trailing" id="Ujn-g1-Sba"/>
+                            <constraint firstItem="Q0Y-BF-XpH" firstAttribute="leading" secondItem="fmi-8m-aQn" secondAttribute="leading" id="VjA-7a-spX"/>
+                            <constraint firstItem="Mso-OB-a6Q" firstAttribute="leading" secondItem="fmi-8m-aQn" secondAttribute="leading" id="b0G-Wf-FUm"/>
+                            <constraint firstItem="Mso-OB-a6Q" firstAttribute="height" secondItem="jhm-RZ-OU4" secondAttribute="height" multiplier="0.4" id="hRm-yH-WMy"/>
+                            <constraint firstItem="fmi-8m-aQn" firstAttribute="bottom" secondItem="Q0Y-BF-XpH" secondAttribute="bottom" id="xPi-qG-ppg"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="1pY-AT-J9k"/>
+                    <connections>
+                        <outlet property="calendar" destination="Mso-OB-a6Q" id="DUb-eX-aGC"/>
+                        <outlet property="tableView" destination="Q0Y-BF-XpH" id="mh0-Ee-7lB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="duc-Vd-iLQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2358" y="40"/>
+            <point key="canvasLocation" x="2357.971014492754" y="39.508928571428569"/>
         </scene>
     </scenes>
     <resources>
