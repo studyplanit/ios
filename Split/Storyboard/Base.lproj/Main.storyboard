@@ -142,6 +142,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="mainImageView" destination="Sos-4g-7Ng" id="nQj-Wq-F14"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NWL-Aw-2Se" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

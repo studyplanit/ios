@@ -12,6 +12,7 @@ import QRCodeReader
 class HomeViewController: UIViewController {
     
     // MARK:- Properties
+    @IBOutlet weak var mainImageView: UIImageView!
     lazy var readerVC: QRCodeReaderViewController = {
         let builder = QRCodeReaderViewControllerBuilder {
             $0.reader = QRCodeReader(metadataObjectTypes: [.qr], captureDevicePosition: .back)
@@ -31,12 +32,30 @@ class HomeViewController: UIViewController {
         let image = UIImageView(image: UIImage(named: "nav_split"))
         image.contentMode = UIView.ContentMode.scaleAspectFit
         navigationItem.titleView = image
+        
+        configureImageTapGesture()
+    }
+    
+}
+
+// MARK:- Configure
+extension HomeViewController {
+    
+    func configureImageTapGesture() {
+        let imageViewTapGestureRecognizer = UITapGestureRecognizer()
+        mainImageView.isUserInteractionEnabled = true
+        mainImageView.addGestureRecognizer(imageViewTapGestureRecognizer)
+        imageViewTapGestureRecognizer.addTarget(self, action: #selector(tapImageView))
     }
     
 }
 
 // MARK:- Methods
 extension HomeViewController {
+
+    @objc func tapImageView() {
+        showScanner()
+    }
     
     @IBAction func showScanner() {
         print("MainViewController - showScanner() called ")
@@ -64,6 +83,7 @@ extension HomeViewController: QRCodeReaderViewControllerDelegate {
         dismiss(animated: true, completion: nil)
         let storyboard = UIStoryboard(name: "Attendance", bundle: Bundle.main)
         guard let attendanceViewController = storyboard.instantiateViewController(withIdentifier: "attendanceViewController") as? AttendanceViewController else { return }
+        attendanceViewController.url = result.value
         navigationController?.pushViewController(attendanceViewController, animated: true)
     }
     
