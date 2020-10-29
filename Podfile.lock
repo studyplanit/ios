@@ -1,20 +1,24 @@
 PODS:
   - Alamofire (5.2.2)
+  - FSCalendar (2.8.1)
   - NMapsMap (3.10.0)
 
 DEPENDENCIES:
   - Alamofire (~> 5.1)
+  - FSCalendar
   - NMapsMap
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - FSCalendar
     - NMapsMap
 
 SPEC CHECKSUMS:
   Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
+  FSCalendar: 5245140456fcbcac5824c203b98bd8068bdfee1a
   NMapsMap: 17caab4af9a3fc5c25b79858de18bdeab1eaff87
 
-PODFILE CHECKSUM: be06f6573807b70d256c5b1006046ee8ef4ee9ee
+PODFILE CHECKSUM: 0b97d4529ccdf2c331bbebdfaa5b02dc2ff3e12d
 
 COCOAPODS: 1.9.3
