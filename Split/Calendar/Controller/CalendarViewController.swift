@@ -24,7 +24,9 @@ class CalendarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureTapBar()
         configureCalendar()
+        configureTableView()
     }
 
 }
@@ -32,23 +34,17 @@ class CalendarViewController: UIViewController {
 // MARK:- Configure
 extension CalendarViewController {
     
+    func configureTapBar() {
+        navigationItem.title = "캘린더"
+    }
+    
     func configureCalendar() {
         calendar.dataSource = self
         calendar.delegate = self
         
-        // 여러날짜를 동시에 선택할 수 있도록
-//        calendar.allowsMultipleSelection = true
-        
-        // 스와이프
         calendar.swipeToChooseGesture.isEnabled = true
-        
-        // 달력 구분 선 제거
         calendar.clipsToBounds = true
-        
-        // 헤더 포맷 커스터마이징
         calendar.appearance.headerDateFormat = "yyyy.MM"
-        
-        // 한글
         calendar.locale = Locale(identifier: "ko")
         
         calendar.appearance.weekdayTextColor = .black
@@ -56,11 +52,30 @@ extension CalendarViewController {
         calendar.appearance.selectionColor = .lightGray
     }
     
+    func configureTableView() {
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(
+            UINib(nibName: "CalendarTableViewCell", bundle: nil),
+            forCellReuseIdentifier: "calendarTableViewCell")
+    }
+    
 }
 
 // MARK:- Methods
 extension CalendarViewController {
     
+    func deletePlan() {
+        let alert = UIAlertController(
+            title: "",
+            message: "플랜을 삭제하시겠습니까?",
+            preferredStyle: .alert)
+        let okAction = UIAlertAction(
+            title: "확인",
+            style: .default)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
 }
 
 // MARK:- FS Calendar DataSource
@@ -73,7 +88,7 @@ extension CalendarViewController: FSCalendarDataSource {
         if date.compare(eventDate) == .orderedSame {
             return 2
         }
-        
+
         return 0
     }
     
@@ -86,6 +101,8 @@ extension CalendarViewController: FSCalendarDelegate {
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         print("날짜 선택")
         print(dateFormatter.string(from: date))
+        SelectedDate.shared.date = dateFormatter.string(from: date)
+        tableView.reloadData()
     }
     
     // 날짜 선택 해제
@@ -123,6 +140,48 @@ extension CalendarViewController: FSCalendarDelegateAppearance {
             return .red
         } else {
             return nil
+        }
+    }
+    
+}
+
+// MARK:- Table View DataSource
+extension CalendarViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "calendarTableViewCell", for: indexPath) as? CalendarTableViewCell else { return UITableViewCell() }
+        cell.dateLabel.text = SelectedDate.shared.date
+        return cell
+    }
+    
+    // 편집모드로 들어가 테이블뷰 행을 삭제 가능하도록 하는 메서드
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    // 테이블뷰가 편집모드일때 동작을 정의하는 메서드
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            print("셀 삭제")
+            deletePlan()
+        }
+    }
+    
+}
+
+// MARK:- Table View Delegate
+extension CalendarViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.section {
+        case 0:
+            return 100
+        default:
+            return UITableView.automaticDimension
         }
     }
     
