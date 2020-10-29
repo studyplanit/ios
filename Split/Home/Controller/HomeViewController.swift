@@ -61,8 +61,10 @@ extension HomeViewController: QRCodeReaderViewControllerDelegate {
     func reader(_ reader: QRCodeReaderViewController, didScanResult result: QRCodeReaderResult) {
         print("QRCodeScanner succeded in delegate")
         reader.stopScanning()
-
         dismiss(animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Attendance", bundle: Bundle.main)
+        guard let attendanceViewController = storyboard.instantiateViewController(withIdentifier: "attendanceViewController") as? AttendanceViewController else { return }
+        navigationController?.pushViewController(attendanceViewController, animated: true)
     }
     
     // QR코드 리더가 취소 됬을때 정의
