@@ -1,0 +1,120 @@
+
+/* Class = "UILabel"; text = "개인정보취급동의등등등"; ObjectID = "2ge-Tn-pup"; */
+"2ge-Tn-pup.text" = "개인정보취급동의등등등";
+
+/* Class = "UINavigationItem"; title = "Store"; ObjectID = "2no-2i-u5t"; */
+"2no-2i-u5t.title" = "Store";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "51M-jc-6Yk"; */
+"51M-jc-6Yk.title" = "Item";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "6W4-uJ-fzD"; */
+"6W4-uJ-fzD.title" = "Item";
+
+/* Class = "UIButton"; normalTitle = "메뉴판 이미지로 보기"; ObjectID = "8em-FO-Lx0"; */
+"8em-FO-Lx0.normalTitle" = "메뉴판 이미지로 보기";
+
+/* Class = "UITextField"; placeholder = "인증번호"; ObjectID = "9u8-Jo-J7c"; */
+"9u8-Jo-J7c.placeholder" = "인증번호";
+
+/* Class = "UINavigationItem"; title = "Map"; ObjectID = "AJE-e0-Bj9"; */
+"AJE-e0-Bj9.title" = "Map";
+
+/* Class = "UITabBarItem"; title = "플랜"; ObjectID = "BTd-0y-1If"; */
+"BTd-0y-1If.title" = "플랜";
+
+/* Class = "UINavigationItem"; title = "My"; ObjectID = "Bfm-Fw-SLl"; */
+"Bfm-Fw-SLl.title" = "My";
+
+/* Class = "UITextField"; placeholder = "핸드폰번호"; ObjectID = "CJ3-zR-zTZ"; */
+"CJ3-zR-zTZ.placeholder" = "핸드폰번호";
+
+/* Class = "UITabBarItem"; title = "캘린더"; ObjectID = "Fjv-Os-xdv"; */
+"Fjv-Os-xdv.title" = "캘린더";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "K9J-2J-zgD"; */
+"K9J-2J-zgD.text" = "0";
+
+/* Class = "UILabel"; text = "인증번호가 틀렸습니다."; ObjectID = "MZ6-yZ-Keg"; */
+"MZ6-yZ-Keg.text" = "인증번호가 틀렸습니다.";
+
+/* Class = "UILabel"; text = "닉네임"; ObjectID = "OVE-mR-dNd"; */
+"OVE-mR-dNd.text" = "닉네임";
+
+/* Class = "UILabel"; text = "함께 공부하고 있어요"; ObjectID = "QGu-EA-Mfd"; */
+"QGu-EA-Mfd.text" = "함께 공부하고 있어요";
+
+/* Class = "UITextField"; placeholder = "닉네임"; ObjectID = "RNm-ha-1D7"; */
+"RNm-ha-1D7.placeholder" = "닉네임";
+
+/* Class = "UILabel"; text = "상점"; ObjectID = "Rvl-NX-S3X"; */
+"Rvl-NX-S3X.text" = "상점";
+
+/* Class = "UILabel"; text = "로그인/가입"; ObjectID = "TGf-pO-Yft"; */
+"TGf-pO-Yft.text" = "로그인/가입";
+
+/* Class = "UILabel"; text = "11:00 ~ 21:00, 일요일 정기휴무"; ObjectID = "UsV-Su-dqn"; */
+"UsV-Su-dqn.text" = "11:00 ~ 21:00, 일요일 정기휴무";
+
+/* Class = "UILabel"; text = "닉네임 : 마티마티"; ObjectID = "VwD-GU-bSD"; */
+"VwD-GU-bSD.text" = "닉네임 : 마티마티";
+
+/* Class = "UILabel"; text = "인증번호가 문자로 전송됐습니다. (최대 20초 소요)"; ObjectID = "Vz6-Ec-PxJ"; */
+"Vz6-Ec-PxJ.text" = "인증번호가 문자로 전송됐습니다. (최대 20초 소요)";
+
+/* Class = "UILabel"; text = "사용하실 닉네임을 2~8자로 설정해주세요"; ObjectID = "XCG-fp-wav"; */
+"XCG-fp-wav.text" = "사용하실 닉네임을 2~8자로 설정해주세요";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "cX6-Xq-p5B"; */
+"cX6-Xq-p5B.title" = "Item";
+
+/* Class = "UIButton"; normalTitle = "인증번호받기"; ObjectID = "clL-tb-y85"; */
+"clL-tb-y85.normalTitle" = "인증번호받기";
+
+/* Class = "UITabBarItem"; title = "홈"; ObjectID = "dfZ-yR-LiT"; */
+"dfZ-yR-LiT.title" = "홈";
+
+/* Class = "UIButton"; normalTitle = "로그아웃"; ObjectID = "drA-qJ-5RK"; */
+"drA-qJ-5RK.normalTitle" = "로그아웃";
+
+/* Class = "UIButton"; normalTitle = "완료"; ObjectID = "eZO-7B-vVI"; */
+"eZO-7B-vVI.normalTitle" = "완료";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "esg-2W-Pv9"; */
+"esg-2W-Pv9.title" = " ";
+
+/* Class = "UIButton"; normalTitle = "확인"; ObjectID = "fEa-1W-1DD"; */
+"fEa-1W-1DD.normalTitle" = "확인";
+
+/* Class = "UILabel"; text = "오늘도 100명이"; ObjectID = "fn7-7h-STr"; */
+"fn7-7h-STr.text" = "오늘도 100명이";
+
+/* Class = "UILabel"; text = "스플릿존 이름"; ObjectID = "g3m-L6-1NO"; */
+"g3m-L6-1NO.text" = "스플릿존 이름";
+
+/* Class = "UIButton"; normalTitle = "행성 AB01"; ObjectID = "jrv-aO-wZF"; */
+"jrv-aO-wZF.normalTitle" = "행성 AB01";
+
+/* Class = "UITabBarItem"; title = "마이플릿"; ObjectID = "oBi-D5-BwJ"; */
+"oBi-D5-BwJ.title" = "마이플릿";
+
+/* Class = "UIButton"; normalTitle = "이용약관 및 개인정보취급방침"; ObjectID = "onj-Wl-afq"; */
+"onj-Wl-afq.normalTitle" = "이용약관 및 개인정보취급방침";
+
+/* Class = "UILabel"; text = "인천광역시 미추홀구 용현동 187-13"; ObjectID = "r4a-DJ-OnH"; */
+"r4a-DJ-OnH.text" = "인천광역시 미추홀구 용현동 187-13";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "rVh-fr-JOw"; */
+"rVh-fr-JOw.title" = "Item";
+
+/* Class = "UILabel"; text = "5"; ObjectID = "rvq-if-zBL"; */
+"rvq-if-zBL.text" = "5";
+
+/* Class = "UIButton"; normalTitle = "탈퇴"; ObjectID = "spY-nW-DvY"; */
+"spY-nW-DvY.normalTitle" = "탈퇴";
+
+/* Class = "UITabBarItem"; title = "스터디"; ObjectID = "ulZ-oV-eyz"; */
+"ulZ-oV-eyz.title" = "스터디";
+
+/* Class = "UILabel"; text = "3"; ObjectID = "xmb-Sk-09W"; */
+"xmb-Sk-09W.text" = "3";

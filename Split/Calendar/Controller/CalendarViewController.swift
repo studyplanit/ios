@@ -72,6 +72,24 @@ extension CalendarViewController {
             preferredStyle: .alert)
         let okAction = UIAlertAction(
             title: "확인",
+            style: .default) { (action : UIAlertAction) in
+            self.completeAlert()
+        }
+        let cancelAction = UIAlertAction(
+            title: "취소",
+            style: .cancel)
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func completeAlert() {
+        let alert = UIAlertController(
+            title: "",
+            message: "플랜이 삭제되었습니다.",
+            preferredStyle: .alert)
+        let okAction = UIAlertAction(
+            title: "확인",
             style: .default)
         alert.addAction(okAction)
         present(alert, animated: true, completion: nil)

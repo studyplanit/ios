@@ -92,12 +92,12 @@
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tgu-Li-lQc">
                                 <rect key="frame" x="0.0" y="447" width="414" height="40"/>
-                                <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                <color key="backgroundColor" red="0.93714088200000001" green="0.9372404218" blue="0.94122511149999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="l0e-89-dbN"/>
+                                    <constraint firstAttribute="height" constant="40" id="J8t-6d-Pgf"/>
                                 </constraints>
                                 <color key="textColor" systemColor="linkColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="시간" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="smN-yo-tsz">
@@ -119,7 +119,8 @@
                         <viewLayoutGuide key="safeArea" id="KC1-4a-GoX"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Tgu-Li-lQc" firstAttribute="leading" secondItem="KC1-4a-GoX" secondAttribute="leading" id="8GV-U5-Cz9"/>
+                            <constraint firstItem="Tgu-Li-lQc" firstAttribute="leading" secondItem="KC1-4a-GoX" secondAttribute="leading" id="1fw-bO-CPk"/>
+                            <constraint firstItem="Tgu-Li-lQc" firstAttribute="top" secondItem="IGN-IM-sjZ" secondAttribute="bottom" constant="20" id="D0r-QK-F50"/>
                             <constraint firstItem="VY4-g6-npb" firstAttribute="top" secondItem="Ncp-oW-xmP" secondAttribute="bottom" constant="20" id="ENj-zU-CNt"/>
                             <constraint firstItem="smN-yo-tsz" firstAttribute="top" secondItem="KC1-4a-GoX" secondAttribute="top" constant="100" id="Mts-gA-W3Q"/>
                             <constraint firstItem="KC1-4a-GoX" firstAttribute="trailing" secondItem="Sm6-xO-sZa" secondAttribute="trailing" constant="100" id="PXl-5O-0gx"/>
@@ -133,8 +134,7 @@
                             <constraint firstItem="IGN-IM-sjZ" firstAttribute="top" secondItem="VY4-g6-npb" secondAttribute="bottom" constant="50" id="fep-WN-NJX"/>
                             <constraint firstItem="smN-yo-tsz" firstAttribute="leading" secondItem="KC1-4a-GoX" secondAttribute="leading" constant="20" id="hFK-Gw-o37"/>
                             <constraint firstItem="NyN-EB-x8X" firstAttribute="trailing" secondItem="KC1-4a-GoX" secondAttribute="trailing" id="hvh-Dm-b0G"/>
-                            <constraint firstItem="Tgu-Li-lQc" firstAttribute="trailing" secondItem="KC1-4a-GoX" secondAttribute="trailing" id="kkM-Xu-W6q"/>
-                            <constraint firstItem="Tgu-Li-lQc" firstAttribute="top" secondItem="IGN-IM-sjZ" secondAttribute="bottom" constant="20" id="tnq-Gu-2vV"/>
+                            <constraint firstItem="Tgu-Li-lQc" firstAttribute="trailing" secondItem="KC1-4a-GoX" secondAttribute="trailing" id="jl4-2o-Q9K"/>
                             <constraint firstItem="Ncp-oW-xmP" firstAttribute="top" secondItem="NyN-EB-x8X" secondAttribute="bottom" constant="50" id="xzq-Ge-BJm"/>
                             <constraint firstItem="NyN-EB-x8X" firstAttribute="top" secondItem="smN-yo-tsz" secondAttribute="bottom" constant="20" id="zuY-cq-vmJ"/>
                         </constraints>

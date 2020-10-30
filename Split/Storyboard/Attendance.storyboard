@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Attendance View Controller-->
+        <scene sceneID="dh2-eA-9oN">
+            <objects>
+                <viewController storyboardIdentifier="attendanceViewController" id="1jC-ll-3bP" customClass="AttendanceViewController" customModule="Split" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sYr-tg-KXq">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="97W-ky-wN0">
+                                <rect key="frame" x="50" y="94" width="314" height="58.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="스플릿존 이름" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tEP-G8-WgD">
+                                        <rect key="frame" x="89.5" y="0.0" width="135.5" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="08A-mi-hiH">
+                                        <rect key="frame" x="138" y="38" width="38" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="sC3-js-NGt">
+                                <rect key="frame" x="50" y="202.5" width="314" height="71"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="플랜명" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nzq-su-Yuc">
+                                        <rect key="frame" x="131" y="0.0" width="52" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="플랜시간" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d7d-IS-oxu">
+                                        <rect key="frame" x="114" y="41" width="86.5" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="인증되었습니다." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eQQ-Ty-FDz">
+                                <rect key="frame" x="50" y="323.5" width="314" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uvl-u4-47t">
+                                <rect key="frame" x="50" y="762" width="314" height="50"/>
+                                <color key="backgroundColor" systemColor="systemIndigoColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="yx2-VZ-Y0p"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="완료">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="url" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N3j-Jt-zbX">
+                                <rect key="frame" x="50" y="394" width="314" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="fy5-bL-C1c"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="fy5-bL-C1c" firstAttribute="trailing" secondItem="sC3-js-NGt" secondAttribute="trailing" constant="50" id="0qo-Po-2kE"/>
+                            <constraint firstItem="fy5-bL-C1c" firstAttribute="trailing" secondItem="uvl-u4-47t" secondAttribute="trailing" constant="50" id="11T-H9-1F3"/>
+                            <constraint firstItem="eQQ-Ty-FDz" firstAttribute="top" secondItem="sC3-js-NGt" secondAttribute="bottom" constant="50" id="1Uk-WH-TGO"/>
+                            <constraint firstItem="97W-ky-wN0" firstAttribute="leading" secondItem="fy5-bL-C1c" secondAttribute="leading" constant="50" id="IJG-Cc-7r3"/>
+                            <constraint firstItem="N3j-Jt-zbX" firstAttribute="leading" secondItem="fy5-bL-C1c" secondAttribute="leading" constant="50" id="J3b-Og-kdK"/>
+                            <constraint firstItem="fy5-bL-C1c" firstAttribute="trailing" secondItem="97W-ky-wN0" secondAttribute="trailing" constant="50" id="OgR-0Z-S6C"/>
+                            <constraint firstItem="fy5-bL-C1c" firstAttribute="trailing" secondItem="eQQ-Ty-FDz" secondAttribute="trailing" constant="50" id="Rqx-o0-Kpt"/>
+                            <constraint firstItem="sC3-js-NGt" firstAttribute="leading" secondItem="fy5-bL-C1c" secondAttribute="leading" constant="50" id="U1Z-eZ-KH7"/>
+                            <constraint firstItem="97W-ky-wN0" firstAttribute="top" secondItem="fy5-bL-C1c" secondAttribute="top" constant="50" id="XBH-xB-U4H"/>
+                            <constraint firstItem="fy5-bL-C1c" firstAttribute="trailing" secondItem="N3j-Jt-zbX" secondAttribute="trailing" constant="50" id="fOT-de-Gyh"/>
+                            <constraint firstItem="fy5-bL-C1c" firstAttribute="bottom" secondItem="uvl-u4-47t" secondAttribute="bottom" constant="50" id="iMO-YC-Sds"/>
+                            <constraint firstItem="N3j-Jt-zbX" firstAttribute="top" secondItem="eQQ-Ty-FDz" secondAttribute="bottom" constant="50" id="kfv-rb-Ern"/>
+                            <constraint firstItem="sC3-js-NGt" firstAttribute="top" secondItem="97W-ky-wN0" secondAttribute="bottom" constant="50" id="lqH-N3-232"/>
+                            <constraint firstItem="uvl-u4-47t" firstAttribute="leading" secondItem="fy5-bL-C1c" secondAttribute="leading" constant="50" id="oJb-sh-VBg"/>
+                            <constraint firstItem="eQQ-Ty-FDz" firstAttribute="leading" secondItem="fy5-bL-C1c" secondAttribute="leading" constant="50" id="rfM-Yp-A4O"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="completionButton" destination="uvl-u4-47t" id="gLN-n6-X57"/>
+                        <outlet property="urlLabel" destination="N3j-Jt-zbX" id="GML-0C-xhE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a6x-rz-jf1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3117.3913043478265" y="-2075.2232142857142"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

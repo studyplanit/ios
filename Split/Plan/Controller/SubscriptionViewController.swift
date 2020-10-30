@@ -16,7 +16,7 @@ class SubscriptionViewController: UIViewController {
     let dateFormatter: DateFormatter = {
         let formatter: DateFormatter = DateFormatter()
         formatter.dateStyle = .medium
-        formatter.dateFormat = "  yyyy. MM. dd"
+        formatter.dateFormat = " yyyy. MM. dd."
         return formatter
     }()
     
@@ -37,6 +37,7 @@ extension SubscriptionViewController {
     
     func configureUI() {
         planTitleLabel.text = plan?.plnaTitle
+        endDateTextField.text = dateFormatter.string(from: Date() + (86400 * (plan?.planPeriod)!))
     }
     
     func configureNavigationBar() {
@@ -56,6 +57,24 @@ extension SubscriptionViewController {
     }
     
     @objc func touchUpCompleteButton() {
+        let alert = UIAlertController(
+            title: "",
+            message: "해당 시간과 날짜로 플랜을 신청하시겠습니까?",
+            preferredStyle: .alert)
+        let okAction = UIAlertAction(
+            title: "확인",
+            style: .default){ (action : UIAlertAction) in
+            self.completeAlert()
+        }
+        let cancelAction = UIAlertAction(
+            title: "취소",
+            style: .cancel)
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func completeAlert() {
         let alert = UIAlertController(
             title: "",
             message: "플랜 신청이 완료되었습니다.",

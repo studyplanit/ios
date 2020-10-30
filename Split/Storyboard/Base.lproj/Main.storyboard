@@ -126,6 +126,9 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="esg-2W-Pv9"/>
                         <barButtonItem key="leftBarButtonItem" title="Item" image="nav_qr" id="6W4-uJ-fzD">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="showScanner" destination="5MP-sQ-B5O" id="bGU-kD-DcK"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="nav_map" id="51M-jc-6Yk">
                             <inset key="largeContentSizeImageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="1"/>
@@ -139,6 +142,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="mainImageView" destination="Sos-4g-7Ng" id="nQj-Wq-F14"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NWL-Aw-2Se" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
