@@ -73,6 +73,9 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="sey-Ar-OLG"/>
                                 </constraints>
+                                <date key="minimumDate" timeIntervalSinceReferenceDate="623242800">
+                                    <!--2020-10-01 11:00:00 +0000-->
+                                </date>
                                 <locale key="locale" localeIdentifier="ko"/>
                                 <connections>
                                     <action selector="changeDatePicker:" destination="XPX-Co-p2V" eventType="valueChanged" id="Fue-nC-Dx0"/>
