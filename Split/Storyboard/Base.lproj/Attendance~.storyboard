@@ -70,6 +70,22 @@
             </objects>
             <point key="canvasLocation" x="1454" y="-1383"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="JLO-xe-VNW">
+            <objects>
+                <viewController id="jb5-Zs-uuO" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fgw-qT-zox">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="641"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="QOY-GD-rJo"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="cWO-qV-7UO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cLG-zJ-3hc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3118" y="-2096"/>
+        </scene>
         <!--Home View Controller-->
         <scene sceneID="NOs-Yi-9nb">
             <objects>
@@ -128,7 +144,7 @@
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="showScanner" destination="5MP-sQ-B5O" id="bGU-kD-DcK"/>
-                                <segue destination="bgm-EY-ayk" kind="show" id="b81-D9-NAF"/>
+                                <segue destination="jb5-Zs-uuO" kind="show" id="b81-D9-NAF"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="nav_map" id="51M-jc-6Yk">
@@ -144,7 +160,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="mainImageView" destination="Sos-4g-7Ng" id="5L6-VN-54C"/>
+                        <outlet property="mainImageView" destination="Sos-4g-7Ng" id="nQj-Wq-F14"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NWL-Aw-2Se" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -675,7 +691,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Jq4-v6-k9i">
-                                <rect key="frame" x="40" y="314" width="295" height="180.33333333333337"/>
+                                <rect key="frame" x="40" y="314" width="295" height="181.33333333333337"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="닉네임" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OVE-mR-dNd">
                                         <rect key="frame" x="0.0" y="0.0" width="295" height="50"/>
@@ -695,13 +711,13 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="사용하실 닉네임을 2~8자로 설정해주세요" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XCG-fp-wav">
-                                        <rect key="frame" x="0.0" y="114" width="295" height="14.333333333333343"/>
+                                        <rect key="frame" x="0.0" y="114" width="295" height="15.333333333333343"/>
                                         <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="13"/>
                                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eZO-7B-vVI">
-                                        <rect key="frame" x="0.0" y="140.33333333333331" width="295" height="40"/>
+                                        <rect key="frame" x="0.0" y="141.33333333333331" width="295" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="pjC-op-KyM"/>
                                         </constraints>
@@ -787,16 +803,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oh9-vb-11B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2254" y="-686"/>
-        </scene>
-        <!--Attendance-->
-        <scene sceneID="N6y-wP-lFM">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="attendanceView" storyboardName="Attendance" id="bgm-EY-ayk" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="dmV-Se-aVg"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cW7-Hh-pn7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3118" y="-2096"/>
         </scene>
     </scenes>
     <resources>
