@@ -50,6 +50,7 @@
 		FD2F4D60253F9823000A3944 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2F4D5F253F9823000A3944 /* SettingViewController.swift */; };
 		FD80D3D125371239002D73B3 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD80D3D025371239002D73B3 /* JoinViewController.swift */; };
 		FDE91C95254D1B9C00BAB8B0 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE91C94254D1B9C00BAB8B0 /* Common.swift */; };
+		FDE91CDF254D62CA00BAB8B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDE91CDE254D62CA00BAB8B0 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +129,7 @@
 		FD2F4D5F253F9823000A3944 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		FD80D3D025371239002D73B3 /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
 		FDE91C94254D1B9C00BAB8B0 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		FDE91CDE254D62CA00BAB8B0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,6 +288,7 @@
 			children = (
 				8D0E586C252F735B0011C102 /* SceneDelegate.swift */,
 				8D0E586A252F735B0011C102 /* AppDelegate.swift */,
+				FDE91CDE254D62CA00BAB8B0 /* Assets.xcassets */,
 				FDE91C94254D1B9C00BAB8B0 /* Common.swift */,
 				8DBF800A2548A33F00989AD0 /* Font */,
 			);
@@ -548,6 +551,7 @@
 				8D0E5877252F735D0011C102 /* LaunchScreen.storyboard in Resources */,
 				8D5F7897254C77B8001773B7 /* Attendance.storyboard in Resources */,
 				8D1A4B7E2548AEA6007366D7 /* KoPubDotumBold.ttf in Resources */,
+				FDE91CDF254D62CA00BAB8B0 /* Assets.xcassets in Resources */,
 				8D4D6AE9254B26620082DD07 /* InfoPlist.strings in Resources */,
 				8D3AC5702549A6940059F950 /* ChallengeBannerTableViewCell.xib in Resources */,
 				8D3AC57A2549A6AD0059F950 /* ChallengeContentTableViewCell.xib in Resources */,

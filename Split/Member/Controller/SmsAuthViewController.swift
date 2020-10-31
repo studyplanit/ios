@@ -17,6 +17,7 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var sendSMSButton: UIButton!
     @IBOutlet weak var authNumberTextField: UITextField!
     @IBOutlet weak var authCheckLabel: UILabel!
+    @IBOutlet weak var agreementButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var popUpView: UIView!
     
@@ -92,6 +93,7 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
         nextButton.isHidden = true
         authNumberTextField.isHidden = true
         authCheckLabel.isHidden = true
+        agreementButton.tintColor = Common().lightGray
         popUpView.backgroundColor = UIColor(displayP3Red: 0/255, green: 0/255, blue: 0/255, alpha: 0.9)
     }
     
