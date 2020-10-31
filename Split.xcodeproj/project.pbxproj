@@ -12,7 +12,6 @@
 		8D0E586B252F735B0011C102 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0E586A252F735B0011C102 /* AppDelegate.swift */; };
 		8D0E586D252F735B0011C102 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0E586C252F735B0011C102 /* SceneDelegate.swift */; };
 		8D0E5872252F735B0011C102 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D0E5870252F735B0011C102 /* Main.storyboard */; };
-		8D0E5874252F735D0011C102 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D0E5873252F735D0011C102 /* Assets.xcassets */; };
 		8D0E5877252F735D0011C102 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D0E5875252F735D0011C102 /* LaunchScreen.storyboard */; };
 		8D0E5882252F735D0011C102 /* SplitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0E5881252F735D0011C102 /* SplitTests.swift */; };
 		8D0E588D252F735D0011C102 /* SplitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0E588C252F735D0011C102 /* SplitUITests.swift */; };
@@ -50,6 +49,7 @@
 		FD2F4D34253DDE8D000A3944 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2F4D33253DDE8D000A3944 /* MapViewController.swift */; };
 		FD2F4D60253F9823000A3944 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2F4D5F253F9823000A3944 /* SettingViewController.swift */; };
 		FD80D3D125371239002D73B3 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD80D3D025371239002D73B3 /* JoinViewController.swift */; };
+		FDE91C95254D1B9C00BAB8B0 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE91C94254D1B9C00BAB8B0 /* Common.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,7 +76,6 @@
 		8D0E586A252F735B0011C102 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D0E586C252F735B0011C102 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8D0E5871252F735B0011C102 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		8D0E5873252F735D0011C102 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8D0E5876252F735D0011C102 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8D0E5878252F735D0011C102 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D0E587D252F735D0011C102 /* SplitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SplitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -128,6 +127,7 @@
 		FD2F4D33253DDE8D000A3944 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		FD2F4D5F253F9823000A3944 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		FD80D3D025371239002D73B3 /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
+		FDE91C94254D1B9C00BAB8B0 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,7 +286,7 @@
 			children = (
 				8D0E586C252F735B0011C102 /* SceneDelegate.swift */,
 				8D0E586A252F735B0011C102 /* AppDelegate.swift */,
-				8D0E5873252F735D0011C102 /* Assets.xcassets */,
+				FDE91C94254D1B9C00BAB8B0 /* Common.swift */,
 				8DBF800A2548A33F00989AD0 /* Font */,
 			);
 			path = Support;
@@ -547,7 +547,6 @@
 				8D320E1A2548A7A80041D193 /* Study.storyboard in Resources */,
 				8D0E5877252F735D0011C102 /* LaunchScreen.storyboard in Resources */,
 				8D5F7897254C77B8001773B7 /* Attendance.storyboard in Resources */,
-				8D0E5874252F735D0011C102 /* Assets.xcassets in Resources */,
 				8D1A4B7E2548AEA6007366D7 /* KoPubDotumBold.ttf in Resources */,
 				8D4D6AE9254B26620082DD07 /* InfoPlist.strings in Resources */,
 				8D3AC5702549A6940059F950 /* ChallengeBannerTableViewCell.xib in Resources */,
@@ -702,6 +701,7 @@
 				FD2F4D60253F9823000A3944 /* SettingViewController.swift in Sources */,
 				8DE705C62548AC3200768ACB /* StudyViewController.swift in Sources */,
 				8D3AC5792549A6AD0059F950 /* ChallengeContentTableViewCell.swift in Sources */,
+				FDE91C95254D1B9C00BAB8B0 /* Common.swift in Sources */,
 				8D3AC56F2549A6940059F950 /* ChallengeBannerTableViewCell.swift in Sources */,
 				FD80D3D125371239002D73B3 /* JoinViewController.swift in Sources */,
 				8DE705D02548AC5200768ACB /* PlanViewController.swift in Sources */,
@@ -926,15 +926,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K8BMPHTXSP;
+				DEVELOPMENT_TEAM = 7JCB3TJ6U7;
 				INFOPLIST_FILE = Split/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.younoah.StudtPlanIt;
+				PRODUCT_BUNDLE_IDENTIFIER = com.younoah.split;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -969,6 +971,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7JCB3TJ6U7;
 				INFOPLIST_FILE = SplitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1010,6 +1013,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7JCB3TJ6U7;
 				INFOPLIST_FILE = SplitUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -26,7 +26,6 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
     var memberId = 0
     var timer: Timer?
     var timeLeft = 300
-    let baseURL = "http://203.245.28.184"
     
     struct Auth : Decodable {
         let authNumber : Int
@@ -60,7 +59,7 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: 버튼 활성화 함수
     func buttonEnableStyle(button: UIButton){
-        button.backgroundColor = UIColor(displayP3Red: 171/255, green: 90/255, blue: 234/255, alpha: 1)
+        button.backgroundColor = Common().purple
         button.setTitleColor(.white, for: .normal)
         button.isEnabled = true
         button.layer.cornerRadius = 5
@@ -162,7 +161,7 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
             var accessCode: String
         }
         let phone = Phone(phone: phoneNumber,accessCode:"C2A4D50CB9BF00320030003200300021")
-        let URL = baseURL+"/member/sms-auth"
+        let URL = Common().baseURL+"/member/sms-auth"
         let alamo = AF.request(URL, method: .post, parameters: phone, encoder: JSONParameterEncoder.default).validate(statusCode: 200..<300)
         
         alamo.responseDecodable(of: Auth.self) { (response) in
@@ -186,7 +185,7 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
                 self.navigationController?.pushViewController(nextView!, animated: false)
             } else {
                 //회원이므로 id정보를 가지고 get방식으로 회원정보 가져오기
-                let URL = baseURL+"/member/"+String(memberId)
+                let URL = Common().baseURL+"/member/"+String(memberId)
                 let alamo = AF.request(URL, method: .get).validate(statusCode: 200..<300)
                 
                 alamo.responseDecodable(of: MemberVO.self) { (response) in

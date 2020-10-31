@@ -27,8 +27,8 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
         self.view.bringSubviewToFront(splitInfoView)
         splitInfoView.isHidden = true
         splitMapView.mapView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        splitInfoMenuButton.backgroundColor = UIColor(displayP3Red: 171/255, green: 90/255, blue: 234/255, alpha: 1)
-        splitInfoSplitButton.backgroundColor = UIColor(displayP3Red: 171/255, green: 90/255, blue: 234/255, alpha: 1)
+        splitInfoMenuButton.backgroundColor = Common().purple
+        splitInfoSplitButton.backgroundColor = Common().purple
         splitInfoMenuButton.layer.cornerRadius = 12
         splitInfoSplitButton.layer.cornerRadius = 12
 
@@ -47,7 +47,6 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
         locationView.mapView = splitMapView.mapView;
         splitMapView.mapView.positionMode = .direction
 
-        
         //스플릿존 마커 표시하기
         let marker = NMFMarker()
         marker.position = NMGLatLng(lat: 37.451819, lng: 126.654972)
@@ -58,7 +57,7 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
         marker.captionAligns = [NMFAlignType.center]
         marker.captionText = "\nS"
         marker.captionColor = .white
-        marker.captionHaloColor = UIColor(displayP3Red: 171/255, green: 90/255, blue: 234/255, alpha: 1)
+        marker.captionHaloColor = Common().purple
         marker.captionTextSize = 18
         marker.subCaptionText = "\n스플릿존"
         marker.mapView = splitMapView.mapView
@@ -78,7 +77,7 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
         marker2.captionAligns = [NMFAlignType.center]
         marker2.captionText = "\n10"
         marker2.captionColor = .white
-        marker2.captionHaloColor = UIColor(displayP3Red: 171/255, green: 90/255, blue: 234/255, alpha: 1)
+        marker2.captionHaloColor = Common().purple
         marker2.captionTextSize = 18
         marker2.subCaptionText = "\n스플릿존2"
         marker2.mapView = splitMapView.mapView
