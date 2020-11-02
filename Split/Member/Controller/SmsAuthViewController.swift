@@ -17,7 +17,7 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var sendSMSButton: UIButton!
     @IBOutlet weak var authNumberTextField: UITextField!
     @IBOutlet weak var authCheckLabel: UILabel!
-    @IBOutlet weak var agreementButton: UIButton!
+    @IBOutlet weak var agreementLabel: UILabel!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var popUpView: UIView!
     
@@ -93,8 +93,59 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
         nextButton.isHidden = true
         authNumberTextField.isHidden = true
         authCheckLabel.isHidden = true
-        agreementButton.tintColor = Common().lightGray
         popUpView.backgroundColor = UIColor(displayP3Red: 0/255, green: 0/255, blue: 0/255, alpha: 0.9)
+        
+        //이용약관 및 개인정보 동의 label
+//        let underlineAttriString = NSMutableAttributedString(string: agreementLabel.text!)
+//        let range1 = (agreementLabel.text! as NSString).range(of: "이용약관")
+//        underlineAttriString.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: range1)
+//        let range2 = (agreementLabel.text! as NSString).range(of: "개인정보동의")
+//        underlineAttriString.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: range2)
+//        agreementLabel.attributedText = underlineAttriString
+    }
+    
+    func didTapAttributedTextInLabel(label: UILabel, inRange targetRange: NSRange) -> Bool {
+        // Create instances of NSLayoutManager, NSTextContainer and NSTextStorage
+        let layoutManager = NSLayoutManager()
+        let textContainer = NSTextContainer(size: CGSize.zero)
+        let textStorage = NSTextStorage(attributedString: label.attributedText!)
+
+        // Configure layoutManager and textStorage
+        layoutManager.addTextContainer(textContainer)
+        textStorage.addLayoutManager(layoutManager)
+
+        // Configure textContainer
+        textContainer.lineFragmentPadding = 0.0
+        textContainer.lineBreakMode = label.lineBreakMode
+        textContainer.maximumNumberOfLines = label.numberOfLines
+        let labelSize = label.bounds.size
+        textContainer.size = labelSize
+
+        // Find the tapped character location and compare it to the specified range
+        let locationOfTouchInLabel = CGPoint(x: label.intrinsicContentSize.width, y:label.intrinsicContentSize.height)
+        let textBoundingBox = layoutManager.usedRect(for: textContainer)
+        let textContainerOffset = CGPoint(x: (labelSize.width - textBoundingBox.size.width) * 0.5 - textBoundingBox.origin.x,
+                                          y: (labelSize.height - textBoundingBox.size.height) * 0.5 - textBoundingBox.origin.y);
+        let locationOfTouchInTextContainer = CGPoint(x: locationOfTouchInLabel.x - textContainerOffset.x,
+                                                     y: locationOfTouchInLabel.y - textContainerOffset.y);
+        let indexOfCharacter = layoutManager.characterIndex(for: locationOfTouchInTextContainer, in: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
+
+        return NSLocationInRange(indexOfCharacter, targetRange)
+    }
+    
+    @IBAction func tapLabel(gesture: UITapGestureRecognizer) {
+        print("aaa")
+        let text = (agreementLabel.text)!
+        let termsRange = (text as NSString).range(of: "Terms & Conditions")
+        let privacyRange = (text as NSString).range(of: "Privacy Policy")
+
+        if didTapAttributedTextInLabel(label: agreementLabel, inRange: termsRange) {
+            print("이용약관")
+        } else if didTapAttributedTextInLabel(label: agreementLabel, inRange: privacyRange) {
+            print("개인정보동의")
+        } else {
+            print("??")
+        }
     }
     
     //MARK: 키보드 없애기

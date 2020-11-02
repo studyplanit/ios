@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lEE-SU-y3V">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JMl-EG-aLD">
     <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
@@ -9,9 +9,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="GmarketSansMedium.otf">
-            <string>GmarketSansMedium</string>
-        </array>
         <array key="KoPubDotumBold.ttf">
             <string>KoPubDotumBold</string>
         </array>
@@ -82,30 +79,26 @@
                                 <rect key="frame" x="0.0" y="0.0" width="428" height="706"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="68" translatesAutoresizingMaskIntoConstraints="NO" id="edk-eA-p2A">
-                                <rect key="frame" x="50" y="143.33333333333334" width="328" height="474.33333333333326"/>
+                                <rect key="frame" x="50" y="137.66666666666663" width="328" height="486"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Fdb-ZE-deE">
-                                        <rect key="frame" x="0.0" y="0.0" width="328" height="78.333333333333329"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="오늘도 100명이" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fn7-7h-STr">
-                                                <rect key="frame" x="0.0" y="0.0" width="328" height="50"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="Q16-Pd-cIY"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="GmarketSansMedium" family="Gmarket Sans" pointSize="28"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="함께 공부하고 있어요" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QGu-EA-Mfd">
-                                                <rect key="frame" x="0.0" y="49.999999999999979" width="328" height="28.333333333333336"/>
-                                                <fontDescription key="fontDescription" name="GmarketSansMedium" family="Gmarket Sans" pointSize="28"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fn7-7h-STr">
+                                        <rect key="frame" x="0.0" y="0.0" width="328" height="90"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="90" id="Q16-Pd-cIY"/>
+                                        </constraints>
+                                        <attributedString key="attributedText">
+                                            <fragment content="오늘도 100명이 함께 공부하고있어요">
+                                                <attributes>
+                                                    <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <font key="NSFont" metaFont="system" size="17"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="zone" translatesAutoresizingMaskIntoConstraints="NO" id="Sos-4g-7Ng">
-                                        <rect key="frame" x="0.0" y="146.33333333333337" width="328" height="328"/>
+                                        <rect key="frame" x="0.0" y="158" width="328" height="328"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Sos-4g-7Ng" secondAttribute="height" multiplier="1:1" id="nWO-Tm-Gf3"/>
                                         </constraints>
@@ -152,6 +145,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="mainImageView" destination="Sos-4g-7Ng" id="5L6-VN-54C"/>
+                        <outlet property="todaySplitLabel" destination="fn7-7h-STr" id="Dk6-dM-BNY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NWL-Aw-2Se" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -186,16 +180,58 @@
                                                     <constraint firstAttribute="height" constant="35" id="seL-0h-UXx"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="18"/>
-                                                <color key="textColor" systemColor="systemBlueColor"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="인천광역시 미추홀구 용현동 187-13" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r4a-DJ-OnH">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r4a-DJ-OnH">
                                                 <rect key="frame" x="8" y="50" width="234" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="LOX-qx-3GZ"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="15"/>
-                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="인천광역시">
+                                                        <attributes>
+                                                            <color key="NSColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <font key="NSFont" size="17" name=".AppleSDGothicNeoI-Regular"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content=" ">
+                                                        <attributes>
+                                                            <color key="NSColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <font key="NSFont" metaFont="system" size="17"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content="미추홀구">
+                                                        <attributes>
+                                                            <color key="NSColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <font key="NSFont" size="17" name=".AppleSDGothicNeoI-Regular"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content=" ">
+                                                        <attributes>
+                                                            <color key="NSColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <font key="NSFont" metaFont="system" size="17"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content="용현동">
+                                                        <attributes>
+                                                            <color key="NSColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <font key="NSFont" size="17" name=".AppleSDGothicNeoI-Regular"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content=" 187-13">
+                                                        <attributes>
+                                                            <color key="NSColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <font key="NSFont" metaFont="system" size="17"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11:00 ~ 21:00, 일요일 정기휴무" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UsV-Su-dqn">
@@ -203,8 +239,8 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="8Ll-31-Ihn"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="16"/>
-                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="13"/>
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="zO7-Tv-al7">
@@ -517,7 +553,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="asy-Pq-adF">
-                                <rect key="frame" x="40" y="173.99999999999997" width="348" height="321.33333333333326"/>
+                                <rect key="frame" x="40" y="174" width="348" height="317"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="로그인/가입" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGf-pO-Yft">
                                         <rect key="frame" x="0.0" y="0.0" width="348" height="50"/>
@@ -544,7 +580,7 @@
                                         <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="16"/>
                                         <state key="normal" title="인증번호받기"/>
                                         <connections>
-                                            <action selector="sendSMSButtonClick:" destination="JMl-EG-aLD" eventType="touchUpInside" id="TZK-IH-KDM"/>
+                                            <action selector="sendSMSButtonClick:" destination="JMl-EG-aLD" eventType="touchUpInside" id="lCt-tP-tWP"/>
                                         </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="인증번호" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9u8-Jo-J7c">
@@ -561,28 +597,25 @@
                                         <color key="textColor" systemColor="systemPinkColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="onj-Wl-afq">
-                                        <rect key="frame" x="0.0" y="248.33333333333331" width="348" height="20"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="1eI-DU-zV9"/>
-                                        </constraints>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이용약관 및 개인정보동의" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kck-u8-AOs">
+                                        <rect key="frame" x="0.0" y="248.33333333333329" width="348" height="15.666666666666657"/>
+                                        <gestureRecognizers/>
                                         <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="14"/>
-                                        <state key="normal" title="이용약관 및 개인정보취급방침">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
                                         <connections>
-                                            <segue destination="SJ9-gp-8AK" kind="presentation" id="dz0-oS-Fu7"/>
+                                            <outletCollection property="gestureRecognizers" destination="s6e-mN-Td8" appends="YES" id="MRt-9Z-mvn"/>
                                         </connections>
-                                    </button>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fEa-1W-1DD">
-                                        <rect key="frame" x="0.0" y="281.33333333333331" width="348" height="40"/>
+                                        <rect key="frame" x="0.0" y="277" width="348" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="iRo-IU-Wqh"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="16"/>
                                         <state key="normal" title="확인"/>
                                         <connections>
-                                            <action selector="nextButtonClick:" destination="JMl-EG-aLD" eventType="touchUpInside" id="os0-gd-yhg"/>
+                                            <action selector="nextButtonClick:" destination="JMl-EG-aLD" eventType="touchUpInside" id="epe-5Z-6R8"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -632,7 +665,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Plu-CD-qvb"/>
                     <connections>
-                        <outlet property="agreementButton" destination="onj-Wl-afq" id="owb-zm-R6o"/>
+                        <outlet property="agreementLabel" destination="kck-u8-AOs" id="46v-oq-wBg"/>
                         <outlet property="authCheckLabel" destination="MZ6-yZ-Keg" id="mep-hd-rpP"/>
                         <outlet property="authNumberTextField" destination="9u8-Jo-J7c" id="D9i-B1-DAH"/>
                         <outlet property="nextButton" destination="fEa-1W-1DD" id="IJL-c4-PsG"/>
@@ -644,7 +677,12 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yeg-jg-QTA" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="5xA-LB-0Ej">
                     <connections>
-                        <action selector="tabView:" destination="JMl-EG-aLD" id="Nb4-vw-yof"/>
+                        <action selector="tabView:" destination="JMl-EG-aLD" id="sg4-Tp-Wcu"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="s6e-mN-Td8">
+                    <connections>
+                        <action selector="tapLabelWithGesture:" destination="JMl-EG-aLD" id="ILp-Sp-9gV"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -655,7 +693,7 @@
             <objects>
                 <viewController id="SJ9-gp-8AK" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SQn-iK-6WA">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="개인정보취급동의등등등" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ge-Tn-pup">
@@ -672,7 +710,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7HP-Ae-AVo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-365" y="-686"/>
+            <point key="canvasLocation" x="-1137" y="-686"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="ija-dg-dRx">
+            <objects>
+                <viewController id="rT3-pK-q6K" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oQZ-Js-Npp">
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="mqR-aR-otc"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CmT-8T-fgj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-364" y="-686"/>
         </scene>
         <!--Join View Controller-->
         <scene sceneID="MnT-Hw-TKC">
@@ -717,7 +770,6 @@
                                         <state key="normal" title="완료"/>
                                         <connections>
                                             <action selector="nextButtonClick:" destination="SsV-H0-DOx" eventType="touchUpInside" id="QTZ-mx-dNR"/>
-                                            <action selector="sendSMSButtonClick:" destination="JMl-EG-aLD" eventType="touchUpInside" id="C5r-m3-oAD"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -813,10 +865,10 @@
         <image name="char_bg" width="682.66668701171875" height="682.66668701171875"/>
         <image name="chevron.backward" catalog="system" width="96" height="128"/>
         <image name="gearshape.fill" catalog="system" width="128" height="121"/>
-        <image name="home_bg" width="138" height="298.66665649414062"/>
+        <image name="home_bg" width="278.33334350585938" height="603.66668701171875"/>
         <image name="logo_purple" width="596.66668701171875" height="233.33332824707031"/>
-        <image name="nav_map" width="25.666666030883789" height="24.333333969116211"/>
-        <image name="nav_qr" width="23.333333969116211" height="23.333333969116211"/>
+        <image name="nav_map" width="28.666666030883789" height="30"/>
+        <image name="nav_qr" width="28.333333969116211" height="27.666666030883789"/>
         <image name="sun.min.fill" catalog="system" width="128" height="121"/>
         <image name="tab_home" width="24.333333969116211" height="24.333333969116211"/>
         <image name="tab_my" width="24.666666030883789" height="23.666666030883789"/>
@@ -829,9 +881,6 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

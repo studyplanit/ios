@@ -42,8 +42,8 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
         //네이버지도 초기화하기
         splitMapView.mapView.moveCamera(NMFCameraUpdate(position: DEFAULT_CAMERA_POSITION))
         splitMapView.showLocationButton = false
-        splitMapView.showScaleBar = false
-        splitMapView.showZoomControls = false
+        splitMapView.showScaleBar = true
+        splitMapView.showZoomControls = true
         locationView.mapView = splitMapView.mapView;
         splitMapView.mapView.positionMode = .direction
 
