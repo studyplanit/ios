@@ -13,6 +13,7 @@ class CalendarViewController: UIViewController {
     // MARK:- Properties
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var backgoroundView: UIView!
     
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -27,12 +28,28 @@ class CalendarViewController: UIViewController {
         configureTapBar()
         configureCalendar()
         configureTableView()
+//        configureBackgoroundView()
     }
 
 }
 
 // MARK:- Configure
 extension CalendarViewController {
+    
+//    func configureBackgoroundView() {
+//
+//        backgroundView.backgroundColor = #colorLiteral(red: 0.1725490196, green: 0.1725490196, blue: 0.1725490196, alpha: 1)
+//        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+//        view.addSubview(backgroundView)
+//        backgroundView.leadingAnchor.constraint(
+//            equalTo: view.leadingAnchor,
+//            constant: 0).isActive = true
+//        backgroundView.trailingAnchor.constraint(
+//            equalTo: view.trailingAnchor,
+//            constant: 0).isActive = true
+//        backgroundView.heightAnchor.constraint(equalTo: calendar.heightAnchor, multiplier: 0.2).isActive = true
+//
+//    }
     
     func configureTapBar() {
         navigationItem.title = "캘린더"
