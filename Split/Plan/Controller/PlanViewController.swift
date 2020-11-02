@@ -40,6 +40,8 @@ extension PlanViewController {
     
     func configureTapBar() {
         navigationItem.title = "플랜"
+//        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "BM DoHyeon OTF", size: 12)!]
+
     }
     
     func configureSegementedControl() {

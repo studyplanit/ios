@@ -12,6 +12,12 @@ import QRCodeReader
 class AttendanceViewController: UIViewController {
     
     // MARK:- Properties
+    @IBOutlet weak var planView1: UIView!
+    @IBOutlet weak var planView2: UIView!
+    @IBOutlet weak var planView3: UIView!
+    
+    
+    // MARK:- Properties
     lazy var readerVC: QRCodeReaderViewController = {
         let builder = QRCodeReaderViewControllerBuilder {
             $0.reader = QRCodeReader(metadataObjectTypes: [.qr], captureDevicePosition: .back)
@@ -26,7 +32,9 @@ class AttendanceViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        configureUI()
+        configureTapGesture()
     }
     
 }
@@ -34,13 +42,24 @@ class AttendanceViewController: UIViewController {
 // MARK:- Configure
 extension AttendanceViewController {
     
+    func configureUI() {
+        planView1.layer.cornerRadius = 5
+        planView2.layer.cornerRadius = 5
+        planView3.layer.cornerRadius = 5
+    }
+    
+    func configureTapGesture() {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(showScanner))
+        planView1.addGestureRecognizer(gesture)
+        planView1.isUserInteractionEnabled = true
+    }
     
 }
 
 // MARK:- Methods
 extension AttendanceViewController {
     
-    @IBAction func showScanner() {
+    @objc func showScanner() {
         print("MainViewController - showScanner() called ")
         readerVC.delegate = self
         readerVC.completionBlock = { (result: QRCodeReaderResult?) in
@@ -55,6 +74,7 @@ extension AttendanceViewController {
         readerVC.modalPresentationStyle = .formSheet
         present(readerVC, animated: true, completion: nil)
     }
+
 }
 
 // MARK:- QR Code Reader View Controller Delegate
@@ -66,9 +86,9 @@ extension AttendanceViewController: QRCodeReaderViewControllerDelegate {
         reader.stopScanning()
         dismiss(animated: true, completion: nil)
         let storyboard = UIStoryboard(name: "Attendance", bundle: Bundle.main)
-        guard let attendanceViewController = storyboard.instantiateViewController(withIdentifier: "attendanceViewController") as? AttendanceCompletionViewController else { return }
-        attendanceViewController.url = result.value
-        navigationController?.pushViewController(attendanceViewController, animated: true)
+        guard let attendanceCompletionViewController = storyboard.instantiateViewController(withIdentifier: "attendanceCompletionViewController") as? AttendanceCompletionViewController else { return }
+        attendanceCompletionViewController.url = result.value
+        navigationController?.pushViewController(attendanceCompletionViewController, animated: true)
     }
     
     // QR코드 리더가 취소 됬을때 정의

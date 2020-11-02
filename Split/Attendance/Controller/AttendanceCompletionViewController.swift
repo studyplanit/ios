@@ -20,6 +20,7 @@ class AttendanceCompletionViewController: UIViewController {
         super.viewDidLoad()
         
         configureUI()
+        print(url)
     }
 
 }
@@ -39,9 +40,23 @@ extension AttendanceCompletionViewController {
 //MARK:- Configure
 extension AttendanceCompletionViewController {
     
-    @objc func completeButton() {
-        navigationController?.popToRootViewController(animated: true)
-    }
-    
 }
 
+//MARK:- Methods
+extension AttendanceCompletionViewController {
+    
+    @objc func completeButton() {
+        let alert = UIAlertController(
+            title: "",
+            message: "Complete Attendance",
+            preferredStyle: .alert)
+        let okAction = UIAlertAction(
+            title: "확인",
+            style: .default){ (action : UIAlertAction) in
+            self.navigationController?.popToRootViewController(animated: true)
+        }
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
+
+}
