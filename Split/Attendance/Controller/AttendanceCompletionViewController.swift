@@ -20,6 +20,7 @@ class AttendanceCompletionViewController: UIViewController {
         super.viewDidLoad()
         
         configureUI()
+        print(url)
     }
 
 }

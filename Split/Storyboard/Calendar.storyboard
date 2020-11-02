@@ -17,11 +17,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mso-OB-a6Q" customClass="FSCalendar">
-                                <rect key="frame" x="0.0" y="44" width="414" height="358.5"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="537.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Q0Y-BF-XpH">
-                                <rect key="frame" x="0.0" y="402.5" width="414" height="459.5"/>
+                                <rect key="frame" x="0.0" y="581.5" width="414" height="280.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
@@ -34,7 +34,7 @@
                             <constraint firstItem="fmi-8m-aQn" firstAttribute="trailing" secondItem="Q0Y-BF-XpH" secondAttribute="trailing" id="Ujn-g1-Sba"/>
                             <constraint firstItem="Q0Y-BF-XpH" firstAttribute="leading" secondItem="fmi-8m-aQn" secondAttribute="leading" id="VjA-7a-spX"/>
                             <constraint firstItem="Mso-OB-a6Q" firstAttribute="leading" secondItem="fmi-8m-aQn" secondAttribute="leading" id="b0G-Wf-FUm"/>
-                            <constraint firstItem="Mso-OB-a6Q" firstAttribute="height" secondItem="jhm-RZ-OU4" secondAttribute="height" multiplier="0.4" id="hRm-yH-WMy"/>
+                            <constraint firstItem="Mso-OB-a6Q" firstAttribute="height" secondItem="jhm-RZ-OU4" secondAttribute="height" multiplier="0.6" id="hRm-yH-WMy"/>
                             <constraint firstItem="fmi-8m-aQn" firstAttribute="bottom" secondItem="Q0Y-BF-XpH" secondAttribute="bottom" id="xPi-qG-ppg"/>
                         </constraints>
                     </view>

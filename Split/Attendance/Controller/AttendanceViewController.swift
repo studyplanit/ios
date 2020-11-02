@@ -86,9 +86,9 @@ extension AttendanceViewController: QRCodeReaderViewControllerDelegate {
         reader.stopScanning()
         dismiss(animated: true, completion: nil)
         let storyboard = UIStoryboard(name: "Attendance", bundle: Bundle.main)
-        guard let attendanceViewController = storyboard.instantiateViewController(withIdentifier: "attendanceViewController") as? AttendanceCompletionViewController else { return }
-        attendanceViewController.url = result.value
-        navigationController?.pushViewController(attendanceViewController, animated: true)
+        guard let attendanceCompletionViewController = storyboard.instantiateViewController(withIdentifier: "attendanceCompletionViewController") as? AttendanceCompletionViewController else { return }
+        attendanceCompletionViewController.url = result.value
+        navigationController?.pushViewController(attendanceCompletionViewController, animated: true)
     }
     
     // QR코드 리더가 취소 됬을때 정의
