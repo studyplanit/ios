@@ -167,7 +167,7 @@ extension SubscriptionViewController: FSCalendarDelegateAppearance {
     
     // 특정 날짜 색 바꾸기
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
-        guard let eventDate = dateFormatter.date(from: "2020-10-29") else { return nil }
+        guard let eventDate = dateFormatter.date(from: "2020-11-25") else { return nil }
         
         if date.compare(eventDate) == .orderedSame {
             return .red
