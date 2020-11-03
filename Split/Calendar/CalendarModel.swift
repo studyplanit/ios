@@ -11,6 +11,6 @@ class SelectedDate {
     
     static let shared = SelectedDate()
     
-    var date = ""
+    var date = "플랜 시간"
     
 }

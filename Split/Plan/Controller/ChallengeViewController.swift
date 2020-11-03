@@ -90,7 +90,7 @@ extension ChallengeViewController: UITableViewDelegate {
         case 0:
             return screenWidth * 1/2
         case 1:
-            return 100
+            return UITableView.automaticDimension
         default:
             return UITableView.automaticDimension
         }

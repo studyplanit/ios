@@ -51,7 +51,7 @@ extension SubscriptionViewController {
         planTitleLabel.text = plan?.plnaTitle
         planTitleLabel.textColor = .white
         planTitleView.backgroundColor = #colorLiteral(red: 0.8666666667, green: 0.6431372549, blue: 0.1647058824, alpha: 1)
-        planTitleView.layer.cornerRadius = 25
+        planTitleView.layer.cornerRadius = 0.5 * planTitleView.bounds.size.height
     }
     
     func configureCalendar() {

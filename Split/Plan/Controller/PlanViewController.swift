@@ -40,16 +40,19 @@ extension PlanViewController {
     
     func configureTapBar() {
         navigationItem.title = "플랜"
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "KoPubDotumBold", size: 20)!]
+
 //        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "BM DoHyeon OTF", size: 12)!]
 
     }
     
     func configureSegementedControl() {
         segmentedControl.removeAllSegments()
-        segmentedControl.insertSegment(withTitle: "Challenge", at: 0, animated: false)
-        segmentedControl.insertSegment(withTitle: "Event", at: 1, animated: false)
+        segmentedControl.insertSegment(withTitle: "챌린지", at: 0, animated: false)
+        segmentedControl.insertSegment(withTitle: "이벤트", at: 1, animated: false)
         segmentedControl.addTarget(self, action: #selector(selectionDidChange(_:)), for: .valueChanged)
         segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "KoPubDotumBold", size: 16)!], for: .normal)
     }
     
     func configureContentView() {

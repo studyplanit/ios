@@ -63,6 +63,7 @@ extension CalendarViewController {
     
     func configureTapBar() {
         navigationItem.title = "캘린더"
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "KoPubDotumBold", size: 20)!]
     }
     
     func configureCalendar() {
@@ -74,8 +75,11 @@ extension CalendarViewController {
         calendar.appearance.headerDateFormat = "yyyy.MM"
         calendar.locale = Locale(identifier: "ko")
         
+        calendar.appearance.headerMinimumDissolvedAlpha = 0
+        calendar.calendarHeaderView.backgroundColor = #colorLiteral(red: 0.2156862745, green: 0.2784313725, blue: 0.3098039216, alpha: 1)
+        calendar.appearance.headerTitleColor = .white
+        calendar.appearance.headerTitleFont = UIFont(name: "KoPubDotumBold", size: 20)
         calendar.appearance.weekdayTextColor = .black
-        calendar.appearance.headerTitleColor = .black
         calendar.appearance.selectionColor = .lightGray
     }
     
@@ -256,7 +260,7 @@ extension CalendarViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
-            return 100
+            return UITableView.automaticDimension
         default:
             return UITableView.automaticDimension
         }
