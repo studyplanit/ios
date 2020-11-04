@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MemberVO : Decodable, Encodable {
+class MemberVO: Decodable, Encodable {
     static let shared = MemberVO()
     
     var id: Int?

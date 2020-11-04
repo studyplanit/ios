@@ -8,25 +8,25 @@
 import UIKit
 import AVFoundation
 import QRCodeReader
+import Alamofire
 
 class HomeViewController: UIViewController {
     
     @IBOutlet weak var mainImageView: UIImageView!
     @IBOutlet weak var todaySplitLabel: UILabel!
-    let phoneWidth = UIScreen.main.bounds.size.width
+    
+    var allUsersToday = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        print(phoneWidth)
-        
         //타이틀 이미지넣기
         let image = UIImageView(image: UIImage(named: "nav_split"))
         image.contentMode = UIView.ContentMode.scaleAspectFit
         navigationItem.titleView = image
         
         //오늘 다녀간 회원 반응형 텍스트
-        todaySplitLabel.font = UIFont(name: "GmarketSansMedium", size: phoneWidth * 0.07)
+        todaySplitLabel.font = Common().GmarketSansMedium22
         
         // main image tap gesture
         let imageViewTapGestureRecognizer = UITapGestureRecognizer()
@@ -37,7 +37,23 @@ class HomeViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        todaySplitLabel.text = "오늘도 100명이\n함께 공부하고있어요"
+        let URL = Common().baseURL+"/home/today/get.home"
+        let alamo = AF.request(URL, method: .get).validate(statusCode: 200..<300)
+        struct Home: Decodable {
+            var allUsersToday: Int
+            var allUsersAtMoment: Int
+            var authUsersAtMoment: Int
+        }
+        
+        alamo.responseDecodable(of: Home.self) { (response) in
+            guard let home = response.value else { return }
+            self.allUsersToday = home.allUsersToday
+        }
+        if allUsersToday == 0 {
+            todaySplitLabel.text = "0명일때 멘트?!!"
+        } else {
+            todaySplitLabel.text = "오늘도 \(allUsersToday)명이\n함께 공부하고있어요"
+        }
     }
     
     // main image tap gesture
