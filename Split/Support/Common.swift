@@ -15,8 +15,12 @@ class Common {
     let lightpurple = UIColor(displayP3Red: 122/255, green: 113/255, blue: 230/255, alpha: 1)
     let purple = UIColor(displayP3Red: 171/255, green: 90/255, blue: 234/255, alpha: 1)
     let lightGray = UIColor(displayP3Red: 178/255, green: 178/255, blue: 178/255, alpha: 1)
+    let coralBlue = UIColor(displayP3Red: 79/255, green: 162/255, blue: 220/255, alpha: 1)
     
     //koPubDotumBole 반응형 폰트 지정
+    let koPubDotumBold22 = UIFont(name:"KoPubDotumBold", size: UIScreen.main.bounds.size.width * 0.075)!
+    let koPubDotumBold20 = UIFont(name:"KoPubDotumBold", size: UIScreen.main.bounds.size.width * 0.065)!
+    let koPubDotumBold18 = UIFont(name:"KoPubDotumBold", size: UIScreen.main.bounds.size.width * 0.055)!
     let koPubDotumBold16 = UIFont(name:"KoPubDotumBold", size: UIScreen.main.bounds.size.width * 0.045)!
     let koPubDotumBold14 = UIFont(name:"KoPubDotumBold", size: UIScreen.main.bounds.size.width * 0.035)!
     let koPubDotumBold12 = UIFont(name:"KoPubDotumBold", size: UIScreen.main.bounds.size.width * 0.025)!

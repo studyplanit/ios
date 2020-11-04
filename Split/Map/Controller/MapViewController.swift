@@ -15,10 +15,13 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
     @IBOutlet weak var locationView: NMFLocationButton!
     @IBOutlet weak var splitInfoView: UIView!
     @IBOutlet weak var planetNameLabel: UILabel!
-    @IBOutlet weak var planetAdressLabel: UILabel!
+    @IBOutlet weak var planetAddressLabel: UILabel!
     @IBOutlet weak var planetTimeLabel: UILabel!
-    @IBOutlet weak var splitInfoMenuButton: UIButton!
-    @IBOutlet weak var splitInfoSplitButton: UIButton!
+    @IBOutlet weak var planetMenuButton: UIButton!
+    @IBOutlet weak var planetReviewButton: UIButton!
+    @IBOutlet weak var planetRatingLabel: UILabel!
+    @IBOutlet weak var planetCodeButton: UIButton!
+    @IBOutlet weak var planetTotalVisitButton: UIButton!
     
     var maps: [MapVO] = []
     var locationManager: CLLocationManager!
@@ -33,11 +36,23 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
         self.view.bringSubviewToFront(splitInfoView)
         splitInfoView.isHidden = true
         splitMapView.mapView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        splitInfoMenuButton.backgroundColor = Common().purple
-        splitInfoSplitButton.backgroundColor = Common().purple
-        splitInfoMenuButton.layer.cornerRadius = 12
-        splitInfoSplitButton.layer.cornerRadius = 12
-
+        planetNameLabel.font = Common().koPubDotumBold18
+        planetAddressLabel.font = Common().koPubDotumBold14
+        planetTimeLabel.font = Common().koPubDotumBold14
+        planetMenuButton.titleLabel!.font = Common().koPubDotumBold14
+        planetMenuButton.backgroundColor = Common().purple
+        planetMenuButton.layer.cornerRadius = 12
+        planetReviewButton.titleLabel!.font = Common().koPubDotumBold14
+        planetReviewButton.backgroundColor = Common().purple
+        planetReviewButton.layer.cornerRadius = 12
+        planetRatingLabel.font = Common().koPubDotumBold14
+        planetCodeButton.titleLabel!.font = Common().koPubDotumBold14
+        planetCodeButton.layer.cornerRadius = 12
+        planetCodeButton.backgroundColor = Common().coralBlue
+        planetTotalVisitButton.titleLabel!.font = Common().koPubDotumBold14
+        planetTotalVisitButton.layer.cornerRadius = 12
+        planetTotalVisitButton.backgroundColor = Common().coralBlue
+        
         //사용자의 현재 위치(위도,경도) 불러오기
         locationManager = CLLocationManager()
         locationManager.delegate = self
@@ -93,8 +108,10 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
                             marker.iconImage = NMFOverlayImage(name: "map_marker_active")
                             marker.captionColor = Common().purple
                             marker.captionHaloColor = .white
+                            self.planetCodeButton.setTitle("   행성 \(map.planetCode)   ", for: .normal)
+                            self.planetTotalVisitButton.setTitle("   누적방문자 \(map.allVisit)명   ", for: .normal)
                             self.planetNameLabel.text = map.planetName
-                            self.planetAdressLabel.text = map.address
+                            self.planetAddressLabel.text = map.address
                             self.planetTimeLabel.text = "\(map.startTime) ~ \(map.endTime) \(map.holiday) 정기휴무"
                             self.splitInfoView.isHidden = false
                             self.splitMapView.mapView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 170, right: 0)
