@@ -103,19 +103,14 @@ extension CalendarViewController {
         let headers: HTTPHeaders = [
             "memberId": "1",
         ]
-        // HTTP Request
         AF.request(CalendarAPIConstant.userPlanURL, headers: headers).responseJSON { (response) in
             switch response.result {
                 // 성공
             case .success(let res):
                 do {
-                    // 반환값을 Data 타입으로 변환
                     let jsonData = try JSONSerialization.data(withJSONObject: res, options: .prettyPrinted)
-                    // Data를 [Contact] 타입으로 디코딩
                     let json = try JSONDecoder().decode([UserPlan].self, from: jsonData)
-                    // dataSource에 변환한 값을 대입
                     self.userPlans = json
-                    // 메인 큐를 이용하여 tableView 리로딩
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                     }

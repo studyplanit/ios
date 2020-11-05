@@ -55,27 +55,28 @@
                             </label>
                         </subviews>
                     </stackView>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="799-dg-cMA">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HGJ-By-Ws4">
                         <rect key="frame" x="20" y="52.5" width="360" height="20"/>
                         <color key="backgroundColor" red="0.6705882353" green="0.35294117650000001" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="20" id="0TT-T1-b1y"/>
+                            <constraint firstAttribute="height" constant="20" id="joR-1y-bNH"/>
                         </constraints>
-                    </imageView>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="Gsg-SA-KLy" secondAttribute="trailing" constant="10" id="BLB-Kj-oHG"/>
-                    <constraint firstItem="Gsg-SA-KLy" firstAttribute="top" secondItem="799-dg-cMA" secondAttribute="bottom" constant="10" id="LF9-Qk-xnL"/>
+                    <constraint firstItem="HGJ-By-Ws4" firstAttribute="top" secondItem="Xsw-si-TYJ" secondAttribute="bottom" constant="5" id="NBp-E8-Tnu"/>
                     <constraint firstItem="Xsw-si-TYJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Nye-BD-1NP"/>
                     <constraint firstAttribute="bottomMargin" secondItem="Gsg-SA-KLy" secondAttribute="bottom" constant="5" id="R2i-Xb-xnf"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="799-dg-cMA" secondAttribute="trailing" id="SSf-V5-O6l"/>
+                    <constraint firstItem="Gsg-SA-KLy" firstAttribute="top" secondItem="HGJ-By-Ws4" secondAttribute="bottom" constant="10" id="VfC-H4-rpQ"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="HGJ-By-Ws4" secondAttribute="trailing" id="XbQ-TE-8MZ"/>
                     <constraint firstItem="Xsw-si-TYJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="fmv-n2-8Rl"/>
-                    <constraint firstItem="799-dg-cMA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="pRr-SW-dF1"/>
-                    <constraint firstItem="799-dg-cMA" firstAttribute="top" secondItem="Xsw-si-TYJ" secondAttribute="bottom" constant="5" id="xXV-K9-qMd"/>
+                    <constraint firstItem="HGJ-By-Ws4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="uN6-rk-XoY"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="barView" destination="HGJ-By-Ws4" id="erU-Ke-wBn"/>
                 <outlet property="planTitleLabel" destination="1lf-eL-6US" id="PKj-UP-uce"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="101.78571428571428"/>

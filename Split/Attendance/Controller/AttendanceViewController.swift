@@ -8,13 +8,15 @@
 import UIKit
 import AVFoundation
 import QRCodeReader
+import Alamofire
 
 class AttendanceViewController: UIViewController {
     
     // MARK:- Properties
-    @IBOutlet weak var planView1: UIView!
-    @IBOutlet weak var planView2: UIView!
-    @IBOutlet weak var planView3: UIView!
+    @IBOutlet var planViews: [UIView]!
+    @IBOutlet var planNameLabels: [UILabel]!
+    @IBOutlet var planTimeLabels: [UILabel]!
+    var userPlans: [UserPlan] = []
     
     
     // MARK:- Properties
@@ -36,6 +38,7 @@ class AttendanceViewController: UIViewController {
         configureTapBar()
         configureUI()
         configureTapGesture()
+        getUserPlan()
     }
     
 }
@@ -49,21 +52,55 @@ extension AttendanceViewController {
     }
     
     func configureUI() {
-        planView1.layer.cornerRadius = 10
-        planView2.layer.cornerRadius = 10
-        planView3.layer.cornerRadius = 10
+        planViews[0].layer.cornerRadius = 10
+        planViews[1].layer.cornerRadius = 10
+        planViews[2].layer.cornerRadius = 10
     }
     
     func configureTapGesture() {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(showScanner))
-        planView1.addGestureRecognizer(gesture)
-        planView1.isUserInteractionEnabled = true
+        planViews[0].addGestureRecognizer(gesture)
+        planViews[0].isUserInteractionEnabled = true
     }
     
 }
 
 // MARK:- Methods
 extension AttendanceViewController {
+    
+    private func getUserPlan() {
+        let headers: HTTPHeaders = [
+            "memberId": "1",
+        ]
+        AF.request(CalendarAPIConstant.userPlanURL, headers: headers).responseJSON { (response) in
+            switch response.result {
+                // 성공
+            case .success(let res):
+                do {
+                    let jsonData = try JSONSerialization.data(withJSONObject: res, options: .prettyPrinted)
+                    let json = try JSONDecoder().decode([UserPlan].self, from: jsonData)
+                    self.userPlans = json
+                    DispatchQueue.main.async {
+                        self.setPlanView()
+                    }
+                } catch(let err) {
+                    print(err.localizedDescription)
+                }
+                // 실패
+            case .failure(let err):
+                print(err.localizedDescription)
+            }
+        }
+    }
+    
+    func setPlanView() {
+        // 서버측에서 유저 보유플랜이 3개 이상인경우에 3으로 리턴하여 연산한자.
+        let count = userPlans.count <= 3 ? userPlans.count : 3
+        for i in 0 ..< count {
+            planNameLabels[i].text = userPlans[i].planName
+            planTimeLabels[i].text = userPlans[i].setTime
+        }
+    }
     
     @objc func showScanner() {
         print("MainViewController - showScanner() called ")

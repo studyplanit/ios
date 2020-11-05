@@ -151,9 +151,15 @@
                     </view>
                     <navigationItem key="navigationItem" id="cWO-qV-7UO"/>
                     <connections>
-                        <outlet property="planView1" destination="Ucq-pV-pB2" id="0GJ-mN-1M4"/>
-                        <outlet property="planView2" destination="duu-J7-7S8" id="uUM-q4-1Gg"/>
-                        <outlet property="planView3" destination="mMe-Ah-7Fh" id="c9M-G7-v4u"/>
+                        <outletCollection property="planViews" destination="Ucq-pV-pB2" collectionClass="NSMutableArray" id="0g8-Kt-syz"/>
+                        <outletCollection property="planViews" destination="duu-J7-7S8" collectionClass="NSMutableArray" id="DUf-Kg-uNH"/>
+                        <outletCollection property="planViews" destination="mMe-Ah-7Fh" collectionClass="NSMutableArray" id="ruV-GV-0ls"/>
+                        <outletCollection property="planNameLabels" destination="fiQ-nB-3eA" collectionClass="NSMutableArray" id="yVA-ZD-QKu"/>
+                        <outletCollection property="planNameLabels" destination="DD0-Zd-vcf" collectionClass="NSMutableArray" id="fi7-bN-bMH"/>
+                        <outletCollection property="planNameLabels" destination="g4b-Fs-v2k" collectionClass="NSMutableArray" id="ljY-sH-3Xx"/>
+                        <outletCollection property="planTimeLabels" destination="rd7-4F-bWu" collectionClass="NSMutableArray" id="eXN-er-FES"/>
+                        <outletCollection property="planTimeLabels" destination="Cgg-Ys-pra" collectionClass="NSMutableArray" id="gSN-Vd-ZJV"/>
+                        <outletCollection property="planTimeLabels" destination="hwF-76-U56" collectionClass="NSMutableArray" id="VxC-Pd-c30"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cLG-zJ-3hc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
