@@ -7,6 +7,7 @@
 
 import UIKit
 import FSCalendar
+import Alamofire
 
 class CalendarViewController: UIViewController {
     
@@ -14,12 +15,23 @@ class CalendarViewController: UIViewController {
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var backgoroundView: UIView!
+    var userPlans: [UserPlan] = []
     
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd"
+        formatter.dateFormat = "yyyy-MM-dd"
         return formatter
     }()
+    var arrayOfEvent1 : [String] = [
+        "2020-11-14",
+        "2020-11-15",
+        "2020-11-16",
+        "2020-11-17",
+        "2020-11-18",
+        "2020-11-19",
+        "2020-11-20"
+    ]
+    var arrayOfEvent2 : [String] = ["2020-11-14", "2020-11-16", "2020-11-17"]
     
     // MARK:- View Life Cycle
     override func viewDidLoad() {
@@ -28,6 +40,7 @@ class CalendarViewController: UIViewController {
         configureTapBar()
         configureCalendar()
         configureTableView()
+        getUserPlan()
 //        configureBackgoroundView()
     }
 
@@ -53,6 +66,7 @@ extension CalendarViewController {
     
     func configureTapBar() {
         navigationItem.title = "캘린더"
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "KoPubDotumBold", size: 20)!]
     }
     
     func configureCalendar() {
@@ -64,9 +78,13 @@ extension CalendarViewController {
         calendar.appearance.headerDateFormat = "yyyy.MM"
         calendar.locale = Locale(identifier: "ko")
         
+        calendar.appearance.headerMinimumDissolvedAlpha = 0
+        calendar.calendarHeaderView.backgroundColor = #colorLiteral(red: 0.2156862745, green: 0.2784313725, blue: 0.3098039216, alpha: 1)
+        calendar.appearance.headerTitleColor = .white
+        calendar.appearance.headerTitleFont = UIFont(name: "KoPubDotumBold", size: 20)
         calendar.appearance.weekdayTextColor = .black
-        calendar.appearance.headerTitleColor = .black
-        calendar.appearance.selectionColor = .lightGray
+        calendar.appearance.todayColor = .lightGray
+        calendar.appearance.selectionColor = #colorLiteral(red: 0.8666666667, green: 0.6431372549, blue: 0.1647058824, alpha: 1)
     }
     
     func configureTableView() {
@@ -81,6 +99,44 @@ extension CalendarViewController {
 
 // MARK:- Methods
 extension CalendarViewController {
+    
+    private func getUserPlan() {
+        let headers: HTTPHeaders = [
+            "memberId": "1",
+        ]
+        AF.request(CalendarAPIConstant.userPlanURL, headers: headers).responseJSON { (response) in
+            switch response.result {
+                // 성공
+            case .success(let res):
+                do {
+                    let jsonData = try JSONSerialization.data(withJSONObject: res, options: .prettyPrinted)
+                    let json = try JSONDecoder().decode([UserPlan].self, from: jsonData)
+                    self.userPlans = json
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                } catch(let err) {
+                    print(err.localizedDescription)
+                }
+                // 실패
+            case .failure(let err):
+                print(err.localizedDescription)
+            }
+        }
+    }
+    
+    func checkPlanProgress(status: String) -> String {
+        switch status {
+        case "SUCCESS":
+            return "성공"
+        case "FAIL":
+            return "실패"
+        case "ONGOING":
+            return "진행"
+        default:
+            return "진행"
+        }
+    }
     
     func deletePlan() {
         let alert = UIAlertController(
@@ -116,14 +172,17 @@ extension CalendarViewController {
 // MARK:- FS Calendar DataSource
 extension CalendarViewController: FSCalendarDataSource {
     
-    // 특정 날짜 점 표시
+    /// 특정 날짜 점 표시
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-        guard let eventDate = dateFormatter.date(from: "2020-10-29") else { return 0 }
-        
-        if date.compare(eventDate) == .orderedSame {
-            return 2
-        }
-
+//        guard let eventDate = dateFormatter.date(from: "2020-10-29") else { return 0 }
+        let strDate = dateFormatter.string(from:date)
+        if arrayOfEvent1.contains(strDate) && arrayOfEvent2.contains(strDate) {
+             return 2
+        } else if arrayOfEvent1.contains(strDate) {
+             return 1
+        } else if arrayOfEvent2.contains(strDate) {
+             return 1
+         }
         return 0
     }
     
@@ -178,18 +237,51 @@ extension CalendarViewController: FSCalendarDelegateAppearance {
         }
     }
     
+    // 점 기본 색상
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventDefaultColorsFor date: Date) -> [UIColor]? {
+        
+        let strDate = dateFormatter.string(from: date)
+
+        if arrayOfEvent1.contains(strDate) && arrayOfEvent2.contains(strDate) {
+            return [UIColor.red ,UIColor.blue]
+        } else if arrayOfEvent1.contains(strDate) {
+            return [UIColor.red]
+        } else if arrayOfEvent2.contains(strDate) {
+            return [UIColor.blue]
+        }
+        return [UIColor.clear]
+    }
+    
+    // 점 선택 색상
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventSelectionColorsFor date: Date) -> [UIColor]? {
+        let strDate = dateFormatter.string(from: date)
+
+        if arrayOfEvent1.contains(strDate) && arrayOfEvent2.contains(strDate) {
+            return [UIColor.red ,UIColor.blue]
+        } else if arrayOfEvent1.contains(strDate) {
+            return [UIColor.red]
+        } else if arrayOfEvent2.contains(strDate) {
+            return [UIColor.blue]
+        }
+        return [UIColor.clear]
+    }
+    
 }
 
 // MARK:- Table View DataSource
 extension CalendarViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return userPlans.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "calendarTableViewCell", for: indexPath) as? CalendarTableViewCell else { return UITableViewCell() }
-        cell.dateLabel.text = SelectedDate.shared.date
+        cell.planTitleLabel.text = userPlans[indexPath.row].planName
+        cell.timeLabel.text = userPlans[indexPath.row].setTime
+        cell.dayLabel.text = "\(userPlans[indexPath.row].nowAuthNum) 일째"
+        let status = checkPlanProgress(status: userPlans[indexPath.row].planProgress)
+        cell.successLabel.text = status
         return cell
     }
     
@@ -214,7 +306,7 @@ extension CalendarViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
-            return 100
+            return UITableView.automaticDimension
         default:
             return UITableView.automaticDimension
         }

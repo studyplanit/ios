@@ -21,6 +21,7 @@ extension StudyViewController {
     
     func configureTapBar() {
         navigationItem.title = "스터디"
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "KoPubDotumBold", size: 20)!]
     }
     
 }
