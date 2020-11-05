@@ -7,6 +7,7 @@
 
 import UIKit
 import FSCalendar
+import Alamofire
 
 class CalendarViewController: UIViewController {
     
@@ -14,6 +15,7 @@ class CalendarViewController: UIViewController {
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var backgoroundView: UIView!
+    var userPlans: [UserPlan] = []
     
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -38,6 +40,7 @@ class CalendarViewController: UIViewController {
         configureTapBar()
         configureCalendar()
         configureTableView()
+        getUserPlan()
 //        configureBackgoroundView()
     }
 
@@ -80,7 +83,8 @@ extension CalendarViewController {
         calendar.appearance.headerTitleColor = .white
         calendar.appearance.headerTitleFont = UIFont(name: "KoPubDotumBold", size: 20)
         calendar.appearance.weekdayTextColor = .black
-        calendar.appearance.selectionColor = .lightGray
+        calendar.appearance.todayColor = .lightGray
+        calendar.appearance.selectionColor = #colorLiteral(red: 0.8666666667, green: 0.6431372549, blue: 0.1647058824, alpha: 1)
     }
     
     func configureTableView() {
@@ -95,6 +99,44 @@ extension CalendarViewController {
 
 // MARK:- Methods
 extension CalendarViewController {
+    
+    private func getUserPlan() {
+        let headers: HTTPHeaders = [
+            "memberId": "1",
+        ]
+        AF.request(CalendarAPIConstant.userPlanURL, headers: headers).responseJSON { (response) in
+            switch response.result {
+                // 성공
+            case .success(let res):
+                do {
+                    let jsonData = try JSONSerialization.data(withJSONObject: res, options: .prettyPrinted)
+                    let json = try JSONDecoder().decode([UserPlan].self, from: jsonData)
+                    self.userPlans = json
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                } catch(let err) {
+                    print(err.localizedDescription)
+                }
+                // 실패
+            case .failure(let err):
+                print(err.localizedDescription)
+            }
+        }
+    }
+    
+    func checkPlanProgress(status: String) -> String {
+        switch status {
+        case "SUCCESS":
+            return "성공"
+        case "FAIL":
+            return "실패"
+        case "ONGOING":
+            return "진행"
+        default:
+            return "진행"
+        }
+    }
     
     func deletePlan() {
         let alert = UIAlertController(
@@ -230,12 +272,16 @@ extension CalendarViewController: FSCalendarDelegateAppearance {
 extension CalendarViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return userPlans.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "calendarTableViewCell", for: indexPath) as? CalendarTableViewCell else { return UITableViewCell() }
-        cell.dateLabel.text = SelectedDate.shared.date
+        cell.planTitleLabel.text = userPlans[indexPath.row].planName
+        cell.timeLabel.text = userPlans[indexPath.row].setTime
+        cell.dayLabel.text = "\(userPlans[indexPath.row].nowAuthNum) 일째"
+        let status = checkPlanProgress(status: userPlans[indexPath.row].planProgress)
+        cell.successLabel.text = status
         return cell
     }
     

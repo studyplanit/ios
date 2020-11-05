@@ -11,8 +11,10 @@ class CalendarTableViewCell: UITableViewCell {
     
     // MARK:- Properties
     @IBOutlet weak var planTitleLabel: UILabel!
-    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var dayLabelView: UIView!
+    @IBOutlet weak var successLabel: UILabel!
     @IBOutlet weak var successLabelView: UIView!
 
     // MARK:- View Life Cycle

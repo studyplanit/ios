@@ -7,6 +7,7 @@
 
 import UIKit
 import FSCalendar
+import Alamofire
 
 class SubscriptionViewController: UIViewController {
     
@@ -14,7 +15,8 @@ class SubscriptionViewController: UIViewController {
     @IBOutlet weak var planTitleLabel: UILabel!
     @IBOutlet weak var planTitleView: UIView!
     @IBOutlet weak var calendar: FSCalendar!
-    var plan: PlanModel.Plan?
+    @IBOutlet weak var timePicker: UIDatePicker!
+    var plan: PlanList?
     let dateFormatter: DateFormatter = {
         let formatter: DateFormatter = DateFormatter()
         formatter.dateStyle = .medium
@@ -48,7 +50,7 @@ class SubscriptionViewController: UIViewController {
 extension SubscriptionViewController {
     
     func configureUI() {
-        planTitleLabel.text = plan?.plnaTitle
+        planTitleLabel.text = plan?.name
         planTitleLabel.textColor = .white
         planTitleView.backgroundColor = #colorLiteral(red: 0.8666666667, green: 0.6431372549, blue: 0.1647058824, alpha: 1)
         planTitleView.layer.cornerRadius = 0.5 * planTitleView.bounds.size.height
@@ -58,11 +60,13 @@ extension SubscriptionViewController {
         calendar.dataSource = self
         calendar.delegate = self
         calendar.allowsMultipleSelection = true
+        calendar.locale = Locale(identifier: "ko")
         calendar.appearance.headerDateFormat = "yyyy.MM"
         calendar.appearance.headerMinimumDissolvedAlpha = 0
-        calendar.locale = Locale(identifier: "ko")
+        calendar.calendarHeaderView.backgroundColor = #colorLiteral(red: 0.2156862745, green: 0.2784313725, blue: 0.3098039216, alpha: 1)
+        calendar.appearance.headerTitleColor = .white
+        calendar.appearance.headerTitleFont = UIFont(name: "KoPubDotumBold", size: 20)
         calendar.appearance.weekdayTextColor = .black
-        calendar.appearance.headerTitleColor = .black
         calendar.appearance.todayColor = .lightGray
         calendar.appearance.selectionColor = #colorLiteral(red: 0.8666666667, green: 0.6431372549, blue: 0.1647058824, alpha: 1)
         
@@ -111,6 +115,32 @@ extension SubscriptionViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    private func postPlan(userID: String,
+                          planID: String,
+                          startDate: Date,
+                          endDate: Date,
+                          setTime: Date) {
+
+        let headers: HTTPHeaders = [
+            "member_id": userID,
+            "plan_id": planID,
+            "startDate": "\(startDate)",
+            "endDate": "\(endDate)",
+            "setTime": "\(setTime)"
+        ]
+        
+        AF.request(PlanAPIConstant.planInsertURL, method: .post, headers: headers).responseJSON { (response) in
+            switch response.result {
+                // 성공
+            case .success(let res):
+                print(res)
+                // 실패
+            case .failure(let err):
+                print(err.localizedDescription)
+            }
+        }
+    }
+    
 }
 
 // MARK:- FSCalendar DataSource
@@ -142,9 +172,11 @@ extension SubscriptionViewController: FSCalendarDelegate {
                 calendar.deselect(calendar.selectedDates[0])
             }
         }
+        guard let plan = plan else { return }
+        let planDay: Double = Double(plan.need)
         var startTemp: Date!
         startTemp = calendar.selectedDates[0]
-        let endTemp = startTemp + (((plan?.planPeriod)!-1) * 86400)
+        let endTemp = startTemp + ((planDay-1) * 86400)
         while startTemp < endTemp {
             startTemp += 86400
             calendar.select(startTemp)
