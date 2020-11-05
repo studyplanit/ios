@@ -17,6 +17,7 @@ class SubscriptionViewController: UIViewController {
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var timePicker: UIDatePicker!
     var plan: PlanList?
+    let userID = UserDefaults.standard.string(forKey: "id")
     let dateFormatter: DateFormatter = {
         let formatter: DateFormatter = DateFormatter()
         formatter.dateStyle = .medium
@@ -42,6 +43,7 @@ class SubscriptionViewController: UIViewController {
         configureUI()
         configureNavigationBar()
         configureCalendar()
+        print(userID!)
     }
 
 }

@@ -15,8 +15,11 @@ class CalendarViewController: UIViewController {
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var backgoroundView: UIView!
-    var userPlans: [UserPlan] = []
     
+    let userID = UserDefaults.standard.string(forKey: "id")
+    var userPlans: [UserPlan] = []
+    var PlanDates: [[String]] = []
+    let aDay = 86400
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -42,27 +45,13 @@ class CalendarViewController: UIViewController {
         configureTableView()
         getUserPlan()
 //        configureBackgoroundView()
+        print(userID!)
     }
 
 }
 
 // MARK:- Configure
 extension CalendarViewController {
-    
-//    func configureBackgoroundView() {
-//
-//        backgroundView.backgroundColor = #colorLiteral(red: 0.1725490196, green: 0.1725490196, blue: 0.1725490196, alpha: 1)
-//        backgroundView.translatesAutoresizingMaskIntoConstraints = false
-//        view.addSubview(backgroundView)
-//        backgroundView.leadingAnchor.constraint(
-//            equalTo: view.leadingAnchor,
-//            constant: 0).isActive = true
-//        backgroundView.trailingAnchor.constraint(
-//            equalTo: view.trailingAnchor,
-//            constant: 0).isActive = true
-//        backgroundView.heightAnchor.constraint(equalTo: calendar.heightAnchor, multiplier: 0.2).isActive = true
-//
-//    }
     
     func configureTapBar() {
         navigationItem.title = "캘린더"
@@ -195,6 +184,21 @@ extension CalendarViewController {
             return UIColor.lightGray
         }
     }
+    
+//    // 플랜 날짜 리스트 만들기
+//    func setPlanDates() {
+//        for i in 0 ..< userPlans.count {
+//            let startDateString = userPlans[i].startDate
+//            let startDate = dateFormatter.date(from: startDateString)
+//            let term = userPlans[i].needAuthNum
+//            for j in 1...term {
+//                let temp = j
+//                let date = startDate! + (86400 * temp)
+//                PlanDates[i] += []
+//            }
+//        }
+//    }
+    
 }
 
 // MARK:- FS Calendar DataSource
