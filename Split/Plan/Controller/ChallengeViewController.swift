@@ -6,19 +6,20 @@
 //
 
 import UIKit
+import Alamofire
 
 class ChallengeViewController: UIViewController {
     
     // MARK:- Properties
     @IBOutlet weak var tableView: UITableView!
-    
-    var chalengePlans: [PlanModel.Plan] = PlanModel.challengePlans
+    var plans: [PlanList] = []
     
     // MARK:- View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureTableView()
+        getPlanList()
     }
     
 }
@@ -39,6 +40,38 @@ extension ChallengeViewController {
     
 }
 
+// MARK:- Methods
+extension ChallengeViewController {
+    
+    private func getPlanList() {
+        // HTTP Request
+        AF.request(PlanAPIConstant.planListURL).responseJSON { (response) in
+            switch response.result {
+                // 성공
+            case .success(let res):
+                do {
+                    // 반환값을 Data 타입으로 변환
+                    let jsonData = try JSONSerialization.data(withJSONObject: res, options: .prettyPrinted)
+                    // Data를 [Contact] 타입으로 디코딩
+                    let json = try JSONDecoder().decode([PlanList].self, from: jsonData)
+                    // dataSource에 변환한 값을 대입
+                    self.plans = json
+                    // 메인 큐를 이용하여 tableView 리로딩
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                } catch(let err) {
+                    print(err.localizedDescription)
+                }
+                // 실패
+            case .failure(let err):
+                print(err.localizedDescription)
+            }
+        }
+    }
+    
+}
+
 // MARK:- Table View DataSource
 extension ChallengeViewController: UITableViewDataSource {
     
@@ -51,7 +84,7 @@ extension ChallengeViewController: UITableViewDataSource {
         case 0:
             return 1
         case 1:
-            return chalengePlans.count
+            return plans.count
         default:
             return 0
         }
@@ -72,7 +105,7 @@ extension ChallengeViewController: UITableViewDataSource {
                     for: indexPath) as? ChallengeContentTableViewCell else {
                 return UITableViewCell()
             }
-            cell.planTitleLabel.text = chalengePlans[indexPath.row].plnaTitle
+            cell.planTitleLabel.text = plans[indexPath.row].name
             return cell
         default:
             return UITableViewCell()
@@ -100,7 +133,7 @@ extension ChallengeViewController: UITableViewDelegate {
         guard let subscriptionViewController = storyboard?.instantiateViewController(withIdentifier: "subscriptionViewController") as? SubscriptionViewController else {
             return
         }
-        subscriptionViewController.plan = chalengePlans[indexPath.row]
+        subscriptionViewController.plan = plans[indexPath.row]
         navigationController?.pushViewController(subscriptionViewController, animated: true)
     }
     

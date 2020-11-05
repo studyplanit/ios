@@ -14,7 +14,7 @@ class SubscriptionViewController: UIViewController {
     @IBOutlet weak var planTitleLabel: UILabel!
     @IBOutlet weak var planTitleView: UIView!
     @IBOutlet weak var calendar: FSCalendar!
-    var plan: PlanModel.Plan?
+    var plan: PlanList?
     let dateFormatter: DateFormatter = {
         let formatter: DateFormatter = DateFormatter()
         formatter.dateStyle = .medium
@@ -40,6 +40,7 @@ class SubscriptionViewController: UIViewController {
         configureUI()
         configureNavigationBar()
         configureCalendar()
+        print(type(of: plan!.need))
     }
 
 }
@@ -48,7 +49,7 @@ class SubscriptionViewController: UIViewController {
 extension SubscriptionViewController {
     
     func configureUI() {
-        planTitleLabel.text = plan?.plnaTitle
+        planTitleLabel.text = plan?.name
         planTitleLabel.textColor = .white
         planTitleView.backgroundColor = #colorLiteral(red: 0.8666666667, green: 0.6431372549, blue: 0.1647058824, alpha: 1)
         planTitleView.layer.cornerRadius = 0.5 * planTitleView.bounds.size.height
@@ -142,9 +143,11 @@ extension SubscriptionViewController: FSCalendarDelegate {
                 calendar.deselect(calendar.selectedDates[0])
             }
         }
+        guard let plan = plan else { return }
+        let planDay: Double = Double(plan.need)
         var startTemp: Date!
         startTemp = calendar.selectedDates[0]
-        let endTemp = startTemp + (((plan?.planPeriod)!-1) * 86400)
+        let endTemp = startTemp + ((planDay-1) * 86400)
         while startTemp < endTemp {
             startTemp += 86400
             calendar.select(startTemp)
