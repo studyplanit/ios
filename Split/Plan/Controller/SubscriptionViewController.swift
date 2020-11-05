@@ -7,6 +7,7 @@
 
 import UIKit
 import FSCalendar
+import Alamofire
 
 class SubscriptionViewController: UIViewController {
     
@@ -110,6 +111,32 @@ extension SubscriptionViewController {
         }
         alert.addAction(okAction)
         present(alert, animated: true, completion: nil)
+    }
+    
+    private func postPlan(userID: String,
+                          planID: String,
+                          startDate: Date,
+                          endDate: Date,
+                          setTime: Date) {
+
+        let headers: HTTPHeaders = [
+            "member_id": userID,
+            "plan_id": planID,
+            "startDate": "\(startDate)",
+            "endDate": "\(endDate)",
+            "setTime": "\(setTime)"
+        ]
+        
+        AF.request(PlanAPIConstant.planInsertURL, method: .post, headers: headers).responseJSON { (response) in
+            switch response.result {
+                // 성공
+            case .success(let res):
+                print(res)
+                // 실패
+            case .failure(let err):
+                print(err.localizedDescription)
+            }
+        }
     }
     
 }
