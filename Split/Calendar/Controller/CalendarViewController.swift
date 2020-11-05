@@ -17,9 +17,19 @@ class CalendarViewController: UIViewController {
     
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd"
+        formatter.dateFormat = "yyyy-MM-dd"
         return formatter
     }()
+    var arrayOfEvent1 : [String] = [
+        "2020-11-14",
+        "2020-11-15",
+        "2020-11-16",
+        "2020-11-17",
+        "2020-11-18",
+        "2020-11-19",
+        "2020-11-20"
+    ]
+    var arrayOfEvent2 : [String] = ["2020-11-14", "2020-11-16", "2020-11-17"]
     
     // MARK:- View Life Cycle
     override func viewDidLoad() {
@@ -53,6 +63,7 @@ extension CalendarViewController {
     
     func configureTapBar() {
         navigationItem.title = "캘린더"
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "KoPubDotumBold", size: 20)!]
     }
     
     func configureCalendar() {
@@ -64,8 +75,11 @@ extension CalendarViewController {
         calendar.appearance.headerDateFormat = "yyyy.MM"
         calendar.locale = Locale(identifier: "ko")
         
+        calendar.appearance.headerMinimumDissolvedAlpha = 0
+        calendar.calendarHeaderView.backgroundColor = #colorLiteral(red: 0.2156862745, green: 0.2784313725, blue: 0.3098039216, alpha: 1)
+        calendar.appearance.headerTitleColor = .white
+        calendar.appearance.headerTitleFont = UIFont(name: "KoPubDotumBold", size: 20)
         calendar.appearance.weekdayTextColor = .black
-        calendar.appearance.headerTitleColor = .black
         calendar.appearance.selectionColor = .lightGray
     }
     
@@ -116,14 +130,17 @@ extension CalendarViewController {
 // MARK:- FS Calendar DataSource
 extension CalendarViewController: FSCalendarDataSource {
     
-    // 특정 날짜 점 표시
+    /// 특정 날짜 점 표시
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-        guard let eventDate = dateFormatter.date(from: "2020-10-29") else { return 0 }
-        
-        if date.compare(eventDate) == .orderedSame {
-            return 2
-        }
-
+//        guard let eventDate = dateFormatter.date(from: "2020-10-29") else { return 0 }
+        let strDate = dateFormatter.string(from:date)
+        if arrayOfEvent1.contains(strDate) && arrayOfEvent2.contains(strDate) {
+             return 2
+        } else if arrayOfEvent1.contains(strDate) {
+             return 1
+        } else if arrayOfEvent2.contains(strDate) {
+             return 1
+         }
         return 0
     }
     
@@ -178,6 +195,35 @@ extension CalendarViewController: FSCalendarDelegateAppearance {
         }
     }
     
+    // 점 기본 색상
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventDefaultColorsFor date: Date) -> [UIColor]? {
+        
+        let strDate = dateFormatter.string(from: date)
+
+        if arrayOfEvent1.contains(strDate) && arrayOfEvent2.contains(strDate) {
+            return [UIColor.red ,UIColor.blue]
+        } else if arrayOfEvent1.contains(strDate) {
+            return [UIColor.red]
+        } else if arrayOfEvent2.contains(strDate) {
+            return [UIColor.blue]
+        }
+        return [UIColor.clear]
+    }
+    
+    // 점 선택 색상
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventSelectionColorsFor date: Date) -> [UIColor]? {
+        let strDate = dateFormatter.string(from: date)
+
+        if arrayOfEvent1.contains(strDate) && arrayOfEvent2.contains(strDate) {
+            return [UIColor.red ,UIColor.blue]
+        } else if arrayOfEvent1.contains(strDate) {
+            return [UIColor.red]
+        } else if arrayOfEvent2.contains(strDate) {
+            return [UIColor.blue]
+        }
+        return [UIColor.clear]
+    }
+    
 }
 
 // MARK:- Table View DataSource
@@ -214,7 +260,7 @@ extension CalendarViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
-            return 100
+            return UITableView.automaticDimension
         default:
             return UITableView.automaticDimension
         }

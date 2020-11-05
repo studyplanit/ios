@@ -10,6 +10,8 @@ import UIKit
 class AttendanceCompletionViewController: UIViewController {
     
     //MARK:- Properties
+    @IBOutlet weak var planView: UIView!
+    @IBOutlet weak var sayingLabelView: UIView!
     @IBOutlet weak var completionButton: UIButton!
     @IBOutlet weak var urlLabel: UILabel!
     
@@ -20,6 +22,8 @@ class AttendanceCompletionViewController: UIViewController {
         super.viewDidLoad()
         
         configureUI()
+        configureNavigationBar()
+        configureButton()
         print(url)
     }
 
@@ -29,9 +33,20 @@ class AttendanceCompletionViewController: UIViewController {
 extension AttendanceCompletionViewController {
     
     func configureUI() {
-        urlLabel.text = url
-        navigationItem.hidesBackButton = true
-        navigationItem.title = "출석"
+        planView.layer.cornerRadius = 10
+        sayingLabelView.layer.cornerRadius = 10
+        sayingLabelView.layer.borderWidth = 3
+        completionButton.layer.cornerRadius = 0.5 * completionButton.bounds.size.height
+
+    }
+    
+    func configureNavigationBar() {
+//        urlLabel.text = url
+        navigationItem.title = "QR"
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "KoPubDotumBold", size: 20)!]
+    }
+    
+    func configureButton() {
         completionButton.addTarget(self, action: #selector(completeButton), for: .touchUpInside)
     }
     

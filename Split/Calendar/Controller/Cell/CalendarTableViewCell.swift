@@ -12,17 +12,30 @@ class CalendarTableViewCell: UITableViewCell {
     // MARK:- Properties
     @IBOutlet weak var planTitleLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var dayLabelView: UIView!
+    @IBOutlet weak var successLabelView: UIView!
 
     // MARK:- View Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        configureUI()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+}
+
+// MARK:- Configure
+extension CalendarTableViewCell {
+    
+    func configureUI() {
+        dayLabelView.layer.cornerRadius = 0.5 * dayLabelView.bounds.size.height
+        successLabelView.layer.cornerRadius = 0.5 * successLabelView.bounds.size.height
     }
     
 }

@@ -33,6 +33,7 @@ class AttendanceViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureTapBar()
         configureUI()
         configureTapGesture()
     }
@@ -42,10 +43,15 @@ class AttendanceViewController: UIViewController {
 // MARK:- Configure
 extension AttendanceViewController {
     
+    func configureTapBar() {
+        navigationItem.title = "QR"
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "KoPubDotumBold", size: 20)!]
+    }
+    
     func configureUI() {
-        planView1.layer.cornerRadius = 5
-        planView2.layer.cornerRadius = 5
-        planView3.layer.cornerRadius = 5
+        planView1.layer.cornerRadius = 10
+        planView2.layer.cornerRadius = 10
+        planView3.layer.cornerRadius = 10
     }
     
     func configureTapGesture() {

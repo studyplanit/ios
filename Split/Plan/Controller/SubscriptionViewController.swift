@@ -51,7 +51,7 @@ extension SubscriptionViewController {
         planTitleLabel.text = plan?.plnaTitle
         planTitleLabel.textColor = .white
         planTitleView.backgroundColor = #colorLiteral(red: 0.8666666667, green: 0.6431372549, blue: 0.1647058824, alpha: 1)
-        planTitleView.layer.cornerRadius = 25
+        planTitleView.layer.cornerRadius = 0.5 * planTitleView.bounds.size.height
     }
     
     func configureCalendar() {
@@ -167,7 +167,7 @@ extension SubscriptionViewController: FSCalendarDelegateAppearance {
     
     // 특정 날짜 색 바꾸기
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
-        guard let eventDate = dateFormatter.date(from: "2020-10-29") else { return nil }
+        guard let eventDate = dateFormatter.date(from: "2020-11-25") else { return nil }
         
         if date.compare(eventDate) == .orderedSame {
             return .red
