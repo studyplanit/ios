@@ -104,10 +104,12 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" red="0.21568627450980393" green="0.27843137254901962" blue="0.30980392156862746" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
-                <outlet property="dateLabel" destination="Sch-cB-RIa" id="p7k-UE-z3p"/>
+                <outlet property="dayLabel" destination="nT7-sk-37z" id="AOR-U9-yzd"/>
                 <outlet property="dayLabelView" destination="DRN-M5-Wdd" id="IOO-1e-Zqd"/>
                 <outlet property="planTitleLabel" destination="sMz-El-eCQ" id="CTK-YH-SL7"/>
+                <outlet property="successLabel" destination="vsv-4i-wjL" id="JJM-tn-eq0"/>
                 <outlet property="successLabelView" destination="3cJ-X4-GGk" id="H8Q-xP-JnT"/>
+                <outlet property="timeLabel" destination="Sch-cB-RIa" id="p7k-UE-z3p"/>
             </connections>
             <point key="canvasLocation" x="0.0" y="75"/>
         </tableViewCell>
