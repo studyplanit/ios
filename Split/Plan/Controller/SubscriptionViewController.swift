@@ -15,6 +15,7 @@ class SubscriptionViewController: UIViewController {
     @IBOutlet weak var planTitleLabel: UILabel!
     @IBOutlet weak var planTitleView: UIView!
     @IBOutlet weak var calendar: FSCalendar!
+    @IBOutlet weak var timePicker: UIDatePicker!
     var plan: PlanList?
     let dateFormatter: DateFormatter = {
         let formatter: DateFormatter = DateFormatter()
@@ -41,7 +42,6 @@ class SubscriptionViewController: UIViewController {
         configureUI()
         configureNavigationBar()
         configureCalendar()
-        print(type(of: plan!.need))
     }
 
 }
@@ -60,11 +60,13 @@ extension SubscriptionViewController {
         calendar.dataSource = self
         calendar.delegate = self
         calendar.allowsMultipleSelection = true
+        calendar.locale = Locale(identifier: "ko")
         calendar.appearance.headerDateFormat = "yyyy.MM"
         calendar.appearance.headerMinimumDissolvedAlpha = 0
-        calendar.locale = Locale(identifier: "ko")
+        calendar.calendarHeaderView.backgroundColor = #colorLiteral(red: 0.2156862745, green: 0.2784313725, blue: 0.3098039216, alpha: 1)
+        calendar.appearance.headerTitleColor = .white
+        calendar.appearance.headerTitleFont = UIFont(name: "KoPubDotumBold", size: 20)
         calendar.appearance.weekdayTextColor = .black
-        calendar.appearance.headerTitleColor = .black
         calendar.appearance.todayColor = .lightGray
         calendar.appearance.selectionColor = #colorLiteral(red: 0.8666666667, green: 0.6431372549, blue: 0.1647058824, alpha: 1)
         

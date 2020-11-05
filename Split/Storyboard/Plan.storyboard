@@ -72,20 +72,25 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="57I-ww-MdZ">
-                                <rect key="frame" x="109.5" y="591.5" width="195.5" height="45"/>
+                                <rect key="frame" x="78" y="591.5" width="258" height="89.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clock.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="YW0-Si-RNf">
-                                        <rect key="frame" x="0.0" y="0.5" width="20" height="44"/>
+                                        <rect key="frame" x="0.0" y="0.5" width="20" height="88.5"/>
                                         <color key="tintColor" red="0.2156862745" green="0.2784313725" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Am-u7-pPc">
-                                        <rect key="frame" x="36" y="0.0" width="40" height="45"/>
+                                        <rect key="frame" x="36" y="0.0" width="40" height="89.5"/>
                                         <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="HWX-nV-9qi">
-                                        <rect key="frame" x="92" y="0.0" width="103.5" height="45"/>
+                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="30" style="wheels" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HWX-nV-9qi">
+                                        <rect key="frame" x="92" y="0.0" width="166" height="89.5"/>
+                                        <color key="tintColor" red="0.2156862745" green="0.2784313725" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <date key="date" timeIntervalSinceReferenceDate="626270400.05710995">
+                                            <!--2020-11-05 12:00:00 +0000-->
+                                        </date>
+                                        <locale key="locale" localeIdentifier="ko"/>
                                     </datePicker>
                                 </subviews>
                                 <constraints>
@@ -93,7 +98,7 @@
                                 </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dzP-q7-hJD">
-                                <rect key="frame" x="176.5" y="744.5" width="61.5" height="38"/>
+                                <rect key="frame" x="176.5" y="789" width="61.5" height="38"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b9i-m2-Bsr">
                                         <rect key="frame" x="10" y="9.5" width="41" height="19"/>
@@ -111,13 +116,13 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="시간과 날짜를 선택하세요" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v69-ZX-OCq">
-                                <rect key="frame" x="120.5" y="666.5" width="173" height="19"/>
+                                <rect key="frame" x="120.5" y="711" width="173" height="19"/>
                                 <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="출석 인증은 2시간당 1개의 인증만 가능합니다" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Efl-0u-Rjn">
-                                <rect key="frame" x="51.5" y="705.5" width="311" height="19"/>
+                                <rect key="frame" x="51.5" y="750" width="311" height="19"/>
                                 <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -128,8 +133,8 @@
                         <constraints>
                             <constraint firstItem="Tvx-gs-qTg" firstAttribute="height" secondItem="sUa-37-qGW" secondAttribute="height" multiplier="0.6" id="46D-6C-L1L"/>
                             <constraint firstItem="v69-ZX-OCq" firstAttribute="top" secondItem="57I-ww-MdZ" secondAttribute="bottom" constant="30" id="6N3-M0-Tzz"/>
-                            <constraint firstItem="HWX-nV-9qi" firstAttribute="width" secondItem="sUa-37-qGW" secondAttribute="width" multiplier="0.25" id="BtO-Ap-nfJ"/>
-                            <constraint firstItem="HWX-nV-9qi" firstAttribute="height" secondItem="sUa-37-qGW" secondAttribute="height" multiplier="0.05" id="PIx-6Q-Rae"/>
+                            <constraint firstItem="HWX-nV-9qi" firstAttribute="width" secondItem="sUa-37-qGW" secondAttribute="width" multiplier="0.4" id="BtO-Ap-nfJ"/>
+                            <constraint firstItem="HWX-nV-9qi" firstAttribute="height" secondItem="sUa-37-qGW" secondAttribute="height" multiplier="0.1" id="PIx-6Q-Rae"/>
                             <constraint firstItem="57I-ww-MdZ" firstAttribute="centerX" secondItem="sUa-37-qGW" secondAttribute="centerX" id="PYH-TW-wsc"/>
                             <constraint firstItem="Efl-0u-Rjn" firstAttribute="top" secondItem="v69-ZX-OCq" secondAttribute="bottom" constant="20" id="QWv-Ee-xUL"/>
                             <constraint firstItem="Tvx-gs-qTg" firstAttribute="top" secondItem="KC1-4a-GoX" secondAttribute="top" id="Tkc-dP-SSd"/>
@@ -146,6 +151,7 @@
                         <outlet property="calendar" destination="Tvx-gs-qTg" id="HTz-l0-uVi"/>
                         <outlet property="planTitleLabel" destination="b9i-m2-Bsr" id="eKX-Al-Ml4"/>
                         <outlet property="planTitleView" destination="dzP-q7-hJD" id="buk-gI-luQ"/>
+                        <outlet property="timePicker" destination="HWX-nV-9qi" id="iYd-Ad-2TD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s0v-pL-Huv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

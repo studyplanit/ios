@@ -83,7 +83,8 @@ extension CalendarViewController {
         calendar.appearance.headerTitleColor = .white
         calendar.appearance.headerTitleFont = UIFont(name: "KoPubDotumBold", size: 20)
         calendar.appearance.weekdayTextColor = .black
-        calendar.appearance.selectionColor = .lightGray
+        calendar.appearance.todayColor = .lightGray
+        calendar.appearance.selectionColor = #colorLiteral(red: 0.8666666667, green: 0.6431372549, blue: 0.1647058824, alpha: 1)
     }
     
     func configureTableView() {
