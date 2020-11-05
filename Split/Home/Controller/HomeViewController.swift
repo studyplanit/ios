@@ -50,7 +50,7 @@ class HomeViewController: UIViewController {
             self.allUsersToday = home.allUsersToday
         }
         if allUsersToday == 0 {
-            todaySplitLabel.text = "0명일때 멘트?!!"
+            todaySplitLabel.text = "오늘의 첫번째\n출첵커가 되어보세요"
         } else {
             todaySplitLabel.text = "오늘도 \(allUsersToday)명이\n함께 공부하고있어요"
         }

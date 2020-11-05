@@ -26,10 +26,13 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
     var maps: [MapVO] = []
     var locationManager: CLLocationManager!
     let DEFAULT_CAMERA_POSITION = NMFCameraPosition(NMGLatLng(lat: 37.450605, lng: 126.659339), zoom: 15, tilt: 0, heading: 0)
+    var beforeMarker: NMFMarker?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         splitMapView.mapView.touchDelegate = self
+        planetMenuButton.setTitle("   메뉴판 이미지로 보기   ", for: .normal)
+        planetReviewButton.setTitle("   리뷰 준비중   ", for: .normal)
         
         //하위 뷰 셋팅하기
         self.view.bringSubviewToFront(locationView)
@@ -73,15 +76,6 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
         let URL = Common().baseURL+"/split/get.do"
         let alamo = AF.request(URL, method: .get).validate(statusCode: 200..<300)
         
-        let today = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm"
-        let timeString = dateFormatter.string(from: today)
-        dateFormatter.dateFormat = "eeee"
-        let holidayString = dateFormatter.string(from: today)
-        print(timeString)
-        print(holidayString)
-        
         alamo.response { response in
             switch response.result {
             case .success(let value):
@@ -89,9 +83,29 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
                 do {
                     self.maps = try jsonDecoder.decode([MapVO].self, from: value!)
                     for map in self.maps {
+                        //현재시간
+//                        let nowTimeString:String = Date
+//                        let nowTimeFormatter = DateFormatter()
+//                        nowTimeFormatter.dateFormat = "HH:mm"
+//                        nowTimeFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
+//                        let nowTime = nowTimeFormatter.date(from: nowTimeString)!
+//                        //플래닛 시작시간
+//                        let startTimeString:String = map.startTime
+//                        let startTimeFormatter = DateFormatter()
+//                        startTimeFormatter.dateFormat = "HH:mm"
+//                        startTimeFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
+//                        let startTime = startTimeFormatter.date(from: startTimeString)!
+//                        //플래닛 마감시간
+//                        let endTimeString:String = map.endTime
+//                        let endTimeFormatter = DateFormatter()
+//                        endTimeFormatter.dateFormat = "HH:mm"
+//                        endTimeFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
+//                        let endTime = endTimeFormatter.date(from: endTimeString)!
+//                        print(startTime)
                         //스플릿존 마커 표시하기
                         let marker = NMFMarker()
                         marker.position = NMGLatLng(lat: map.lat, lng: map.lng)
+                        
                         marker.iconImage = NMFOverlayImage(name: "map_marker_purple")
                         marker.width = 45
                         marker.height = 50
@@ -106,6 +120,12 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
                         //마커 클릭했을때 실행
                         marker.touchHandler = { (overlay: NMFOverlay) -> Bool in
                             marker.iconImage = NMFOverlayImage(name: "map_marker_active")
+                            if self.beforeMarker != nil && self.beforeMarker != marker {
+                                self.beforeMarker?.iconImage = NMFOverlayImage(name: "map_marker_purple")
+                                self.beforeMarker?.captionHaloColor = Common().purple
+                                self.beforeMarker?.captionColor = .white
+                            }
+                            self.beforeMarker = marker
                             marker.captionColor = Common().purple
                             marker.captionHaloColor = .white
                             self.planetCodeButton.setTitle("   행성 \(map.planetCode)   ", for: .normal)
@@ -130,6 +150,12 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
     
     //지도 탭했을 때 실행
     func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
+        if self.beforeMarker != nil {
+            self.beforeMarker?.iconImage = NMFOverlayImage(name: "map_marker_purple")
+            self.beforeMarker?.captionHaloColor = Common().purple
+            self.beforeMarker?.captionColor = .white
+            self.beforeMarker = nil
+        }
         self.splitInfoView.isHidden = true
         self.splitMapView.mapView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
