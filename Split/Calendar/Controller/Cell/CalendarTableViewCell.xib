@@ -106,6 +106,7 @@
             <connections>
                 <outlet property="dayLabel" destination="nT7-sk-37z" id="AOR-U9-yzd"/>
                 <outlet property="dayLabelView" destination="DRN-M5-Wdd" id="IOO-1e-Zqd"/>
+                <outlet property="planColorBarView" destination="tPX-2A-1DL" id="ocZ-jV-dpA"/>
                 <outlet property="planTitleLabel" destination="sMz-El-eCQ" id="CTK-YH-SL7"/>
                 <outlet property="successLabel" destination="vsv-4i-wjL" id="JJM-tn-eq0"/>
                 <outlet property="successLabelView" destination="3cJ-X4-GGk" id="H8Q-xP-JnT"/>

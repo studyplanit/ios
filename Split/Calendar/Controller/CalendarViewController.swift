@@ -167,6 +167,34 @@ extension CalendarViewController {
         alert.addAction(okAction)
         present(alert, animated: true, completion: nil)
     }
+    
+    func checkPlanColor(type: Int) -> String {
+        switch type {
+        case 1:
+            return "Color_1day"
+        case 7:
+            return "Color_7days"
+        case 15:
+            return "Color_15days"
+        case 30:
+            return "Color_30days"
+        default:
+            return "Color_1days"
+        }
+    }
+    
+    func checkSuccessColor(status: String) -> UIColor {
+        switch status {
+        case "ONGOING":
+            return UIColor.lightGray
+        case "SUCCESS":
+            return UIColor.systemBlue
+        case "FAIL":
+            return UIColor.red
+        default:
+            return UIColor.lightGray
+        }
+    }
 }
 
 // MARK:- FS Calendar DataSource
@@ -282,6 +310,11 @@ extension CalendarViewController: UITableViewDataSource {
         cell.dayLabel.text = "\(userPlans[indexPath.row].nowAuthNum) 일째"
         let status = checkPlanProgress(status: userPlans[indexPath.row].planProgress)
         cell.successLabel.text = status
+        let statusColor = checkSuccessColor(status: userPlans[indexPath.row].planProgress)
+        cell.successLabelView.backgroundColor = statusColor
+        let planColor = checkPlanColor(type: userPlans[indexPath.row].needAuthNum)
+        cell.planColorBarView.backgroundColor = UIColor(named: planColor)
+        cell.dayLabelView.backgroundColor = UIColor(named: planColor)
         return cell
     }
     
