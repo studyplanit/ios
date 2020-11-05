@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "nav_map.png",
+      "filename" : "map_marker_gray.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "nav_map@2x.png",
+      "filename" : "map_marker_gray@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "nav_map@3x.png",
+      "filename" : "map_marker_gray@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

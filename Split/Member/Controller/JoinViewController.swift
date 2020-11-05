@@ -12,23 +12,17 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
 
     //MARK:- 선언 및 초기화
     //MARK: 프로퍼티 선언
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var nickTextField: UITextField!
     @IBOutlet weak var nickCheckLabel: UILabel!
     @IBOutlet weak var nextButton: UIButton!
-    var baseURL = "http://203.245.28.184"
     var nickCheck = false
     var phone = ""
-    
-    struct Nick: Encodable {
-        let nick: String
-    }
-    struct CheckNick : Decodable {
-        let isMember : Int
-    }
+    var isMemberCheck = ""
     
     //MARK: 버튼 활성화 함수
     func buttonEnableStyle(button: UIButton){
-        button.backgroundColor = UIColor(displayP3Red: 171/255, green: 90/255, blue: 234/255, alpha: 1)
+        button.backgroundColor = Common().lightpurple
         button.setTitleColor(.white, for: .normal)
         button.isEnabled = true
         button.layer.cornerRadius = 5
@@ -48,6 +42,11 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
         nickTextField.delegate = self
         
         buttonDisableStyle(button: nextButton)
+        //반응형 폰트
+        titleLabel.font = Common().koPubDotumBold16
+        nickTextField.font = Common().koPubDotumBold16
+        nickCheckLabel.font = Common().koPubDotumBold14
+        nextButton.titleLabel!.font = Common().koPubDotumBold16
     }
     
     //MARK: status bar 색상 지정하기
@@ -63,21 +62,25 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
             nickCheck = false
             buttonDisableStyle(button: nextButton)
         }else {
-            let nickname = Nick(nick: self.nickTextField.text!)
             if self.nickTextField.text!.range(of: "^[a-zA-Z가-힣0-9]*$", options: .regularExpression) != nil {
-                let URL = self.baseURL+"/member/check-nick"
-                let alamo = AF.request(URL, method: .post, parameters: nickname, encoder: JSONParameterEncoder.default).validate(statusCode: 200..<300)
+                let URL = Common().baseURL+"/member/check.nick"
+                let headers: HTTPHeaders = ["nick": self.nickTextField.text!]
+                let alamo = AF.request(URL, method: .post, headers: headers).validate(statusCode: 200..<300)
     
-                alamo.responseDecodable(of: CheckNick.self) { (response) in
-                    guard let isMemberCheck = response.value else { return }
-                    if isMemberCheck.isMember == 0 {
-                        self.nickCheckLabel.text = "사용가능한 닉네임입니다"
-                        self.nickCheck = true
-                        self.buttonEnableStyle(button: self.nextButton)
-                    } else {
-                        self.nickCheckLabel.text = "중복된 닉네임입니다"
-                        self.nickCheck = false
-                        self.buttonDisableStyle(button: self.nextButton)
+                alamo.responseString { response in
+                    switch response.result {
+                    case .success(let value):
+                        if value == "false" {
+                            self.nickCheckLabel.text = "사용가능한 닉네임입니다"
+                            self.nickCheck = true
+                            self.buttonEnableStyle(button: self.nextButton)
+                        } else {
+                            self.nickCheckLabel.text = "중복된 닉네임입니다"
+                            self.nickCheck = false
+                            self.buttonDisableStyle(button: self.nextButton)
+                        }
+                    case .failure(let error):
+                        print(error)
                     }
                 }
             } else {
@@ -89,24 +92,30 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
 
     //MARK:- 완료버튼 누른 후
     @IBAction func nextButtonClick(_ sender: UIButton) {
+        
+        let URL = Common().baseURL+"/member/insert.do"
+        let headers: HTTPHeaders = ["pNum": MemberVO.shared.phone!, "nick": self.nickTextField.text!]
+        let alamo = AF.request(URL, method: .post, headers: headers).validate(statusCode: 200..<300)
 
-        //회원정보 입력 post url
-        struct Member: Encodable {
-            var id: Int
-            var nickname: String
-            var phone: String
+        struct Join : Decodable {
+            let mId : Int
+            let message : String
         }
         
-        let member = Member(id: 0, nickname: self.nickTextField.text!, phone: MemberVO.shared.phone!)
-        let URL = self.baseURL+"/member/"
-        let alamo = AF.request(URL, method: .post, parameters: member, encoder: JSONParameterEncoder.default).validate(statusCode: 200..<300)
-
-        alamo.responseDecodable(of: MemberVO.self) { (response) in
-            guard let member = response.value else { return }
-            UserDefaults.standard.set(member.id, forKey: "id")
+        alamo.responseDecodable(of: Join.self) { (response) in
+            guard let join = response.value else { return }
+            UserDefaults.standard.set(join.mId, forKey: "id")
             //메인페이지로 이동
             let nextView = self.storyboard?.instantiateViewController(withIdentifier: "tabBarController")
             self.navigationController?.pushViewController(nextView!, animated: false)
         }
+        
+//        alamo.responseDecodable(of: MemberVO.self) { (response) in
+//            guard let member = response.value else { return }
+//            UserDefaults.standard.set(member.id, forKey: "id")
+//            //메인페이지로 이동
+//            let nextView = self.storyboard?.instantiateViewController(withIdentifier: "tabBarController")
+//            self.navigationController?.pushViewController(nextView!, animated: false)
+//        }
     }
 }

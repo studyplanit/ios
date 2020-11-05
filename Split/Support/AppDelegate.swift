@@ -17,8 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UINavigationBar.appearance().barStyle = .black
         UINavigationBar.appearance().tintColor = .white
-        UITabBar.appearance().tintColor = UIColor(displayP3Red: 171/255, green: 90/255, blue: 234/255, alpha: 1)
-       
+        UITabBar.appearance().unselectedItemTintColor = . white
+        UITabBar.appearance().tintColor = Common().purple
         return true
     }
 

@@ -13,23 +13,25 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
     
     //MARK:- 선언 및 초기화
     //MARK: 프로퍼티 선언
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var sendSMSButton: UIButton!
     @IBOutlet weak var authNumberTextField: UITextField!
     @IBOutlet weak var authCheckLabel: UILabel!
+    @IBOutlet weak var agreementLabel: UILabel!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var popUpView: UIView!
     
+    let tapLabelGestureRecognizer = UITapGestureRecognizer()
     var phoneNumber = ""
     var authNumber = 135792468
     var authCount = 0
     var memberId = 0
     var timer: Timer?
     var timeLeft = 300
-    let baseURL = "http://203.245.28.184"
     
     struct Auth : Decodable {
-        let authNumber : Int
+        let authNumber : String
         let id : Int
     }
     
@@ -60,7 +62,7 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: 버튼 활성화 함수
     func buttonEnableStyle(button: UIButton){
-        button.backgroundColor = UIColor(displayP3Red: 171/255, green: 90/255, blue: 234/255, alpha: 1)
+        button.backgroundColor = Common().lightpurple
         button.setTitleColor(.white, for: .normal)
         button.isEnabled = true
         button.layer.cornerRadius = 5
@@ -77,6 +79,7 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
     //MARK: 초기화
     override func viewDidLoad() {
         super.viewDidLoad()
+        agreementLabel.isHidden = true
         
         //자동로그인 구현
         if UserDefaults.standard.string(forKey: "id") != nil {
@@ -94,8 +97,44 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
         authNumberTextField.isHidden = true
         authCheckLabel.isHidden = true
         popUpView.backgroundColor = UIColor(displayP3Red: 0/255, green: 0/255, blue: 0/255, alpha: 0.9)
+        
+        //반응형 폰트
+        titleLabel.font = Common().koPubDotumBold16
+        phoneTextField.font = Common().koPubDotumBold16
+        authNumberTextField.font = Common().koPubDotumBold16
+        sendSMSButton.titleLabel!.font = Common().koPubDotumBold16
+        nextButton.titleLabel!.font = Common().koPubDotumBold16
+        agreementLabel.font = Common().koPubDotumBold14
+        authCheckLabel.font = Common().koPubDotumBold12
+        
+        //이용약관 및 개인정보 동의 label
+        let underlineAttriString = NSMutableAttributedString(string: agreementLabel.text!)
+        let range1 = (agreementLabel.text! as NSString).range(of: "이용약관")
+        underlineAttriString.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: range1)
+        let range2 = (agreementLabel.text! as NSString).range(of: "개인정보동의")
+        underlineAttriString.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: range2)
+        agreementLabel.attributedText = underlineAttriString
+        
+        // 라벨에 탭 제스쳐 추가
+        agreementLabel.isUserInteractionEnabled = true
+        agreementLabel.addGestureRecognizer(tapLabelGestureRecognizer)
+        tapLabelGestureRecognizer.addTarget(self, action: #selector(tapLabel))
     }
     
+    @objc func tapLabel() {
+        let text = (agreementLabel.text)!
+        let termsRange = (text as NSString).range(of: "이용약관")
+        let privacyRange = (text as NSString).range(of: "개인정보동의")
+
+        if tapLabelGestureRecognizer.didTapAttributedTextInLabel(label: agreementLabel, inRange: termsRange) {
+            let vc = self.storyboard!.instantiateViewController(withIdentifier: "termsAndUseView")
+            self.present(vc, animated: true, completion: nil)
+        } else if tapLabelGestureRecognizer.didTapAttributedTextInLabel(label: agreementLabel, inRange: privacyRange) {
+            let vc = self.storyboard!.instantiateViewController(withIdentifier: "privacyView")
+            self.present(vc, animated: true, completion: nil)
+        }
+    }
+
     //MARK: 키보드 없애기
     @IBAction func tabView(_ sender: UIGestureRecognizer) {
         self.view.endEditing(true)
@@ -157,19 +196,14 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(onTimerUpdate), userInfo: nil, repeats: true)
         
         //sms인증 get url보내기
-        struct Phone: Encodable {
-            var phone: String
-            var accessCode: String
-        }
-        let phone = Phone(phone: phoneNumber,accessCode:"C2A4D50CB9BF00320030003200300021")
-        let URL = baseURL+"/member/sms-auth"
-        let alamo = AF.request(URL, method: .post, parameters: phone, encoder: JSONParameterEncoder.default).validate(statusCode: 200..<300)
+        let headers: HTTPHeaders = ["pNum": phoneNumber]
+        let URL = Common().baseURL+"/sms/receive.do"
+        let alamo = AF.request(URL, method: .post, headers: headers).validate(statusCode: 200..<300)
         
         alamo.responseDecodable(of: Auth.self) { (response) in
             guard let auth = response.value else { return }
-            self.authNumber = auth.authNumber
+            self.authNumber = Int(auth.authNumber)!
             self.memberId = auth.id
-            print(self.authNumber)
         }
     }
     
@@ -179,23 +213,17 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
             if timeLeft == 0 {
                 authCheckLabel.isHidden = false
                 authCheckLabel.text = "인증번호 입력시간이 초과되었습니다."
-            } else if memberId == 0 {
+            } else if memberId == -1 {
                 //회원이 아니므로 회원가입 페이지로 이동
                 MemberVO.shared.phone = phoneNumber
                 let nextView = self.storyboard?.instantiateViewController(withIdentifier: "joinViewController")
                 self.navigationController?.pushViewController(nextView!, animated: false)
             } else {
                 //회원이므로 id정보를 가지고 get방식으로 회원정보 가져오기
-                let URL = baseURL+"/member/"+String(memberId)
-                let alamo = AF.request(URL, method: .get).validate(statusCode: 200..<300)
-                
-                alamo.responseDecodable(of: MemberVO.self) { (response) in
-                    guard let member = response.value else { return }
-                    UserDefaults.standard.set(member.id, forKey: "id")
-                    //메인페이지로 이동
-                    let nextView = self.storyboard?.instantiateViewController(withIdentifier: "tabBarController")
-                    self.navigationController?.pushViewController(nextView!, animated: false)
-                }
+                UserDefaults.standard.set(memberId, forKey: "id")
+                //메인페이지로 이동
+                let nextView = self.storyboard?.instantiateViewController(withIdentifier: "tabBarController")
+                self.navigationController?.pushViewController(nextView!, animated: false)
             }
         } else {
             //인증번호 입력횟수
@@ -213,4 +241,39 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
+}
+
+extension UITapGestureRecognizer {
+
+    func didTapAttributedTextInLabel(label: UILabel, inRange targetRange: NSRange) -> Bool {
+        // Create instances of NSLayoutManager, NSTextContainer and NSTextStorage
+        let layoutManager = NSLayoutManager()
+        let textContainer = NSTextContainer(size: CGSize.zero)
+        let textStorage = NSTextStorage(attributedString: label.attributedText!)
+
+        // Configure layoutManager and textStorage
+        layoutManager.addTextContainer(textContainer)
+        textStorage.addLayoutManager(layoutManager)
+
+        // Configure textContainer
+        textContainer.lineFragmentPadding = 0.0
+        textContainer.lineBreakMode = label.lineBreakMode
+        textContainer.maximumNumberOfLines = label.numberOfLines
+        let labelSize = label.bounds.size
+        textContainer.size = labelSize
+
+        // Find the tapped character location and compare it to the specified range
+        let locationOfTouchInLabel = self.location(in: label)
+        let textBoundingBox = layoutManager.usedRect(for: textContainer)
+        //let textContainerOffset = CGPointMake((labelSize.width - textBoundingBox.size.width) * 0.5 - textBoundingBox.origin.x,
+                                              //(labelSize.height - textBoundingBox.size.height) * 0.5 - textBoundingBox.origin.y);
+        let textContainerOffset = CGPoint(x: (labelSize.width - textBoundingBox.size.width) * 0.5 - textBoundingBox.origin.x, y: (labelSize.height - textBoundingBox.size.height) * 0.5 - textBoundingBox.origin.y)
+
+        //let locationOfTouchInTextContainer = CGPointMake(locationOfTouchInLabel.x - textContainerOffset.x,
+                                                        // locationOfTouchInLabel.y - textContainerOffset.y);
+        let locationOfTouchInTextContainer = CGPoint(x: locationOfTouchInLabel.x - textContainerOffset.x, y: locationOfTouchInLabel.y - textContainerOffset.y)
+        let indexOfCharacter = layoutManager.characterIndex(for: locationOfTouchInTextContainer, in: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
+        return NSLocationInRange(indexOfCharacter, targetRange)
+    }
+
 }
