@@ -162,11 +162,6 @@ extension SubscriptionViewController: FSCalendarDataSource {
         return 0
     }
     
-    // 선택 활성화 날짜는 내일부터
-    func minimumDate(for calendar: FSCalendar) -> Date {
-       return Date() + 86400
-    }
-    
 }
 
 // MARK:- FSCalendar Delegate
@@ -199,16 +194,17 @@ extension SubscriptionViewController: FSCalendarDelegate {
         }
     }
     
-//    // 특정 날짜를 선택되지 않게 하기
-//    func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
-//        guard let excludeDate = dateFormatter.date(from: "2020-11-25") else { return true }
-//
-//        if date.compare(excludeDate) == .orderedSame {
-//            return false
-//        } else {
-//            return true
-//        }
-//    }
+    // 오늘 포함 이전 날짜 선택 불가
+    func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
+        
+        let curDate = Date()
+        
+        if date < curDate {
+            return false
+        } else {
+            return true
+        }
+    }
     
 }
 
