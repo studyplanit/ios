@@ -37,7 +37,6 @@ class AttendanceViewController: UIViewController {
         
         configureTapBar()
         configureUI()
-        configureTapGesture()
         getUserPlan()
     }
     
@@ -52,15 +51,21 @@ extension AttendanceViewController {
     }
     
     func configureUI() {
-        planViews[0].layer.cornerRadius = 10
-        planViews[1].layer.cornerRadius = 10
-        planViews[2].layer.cornerRadius = 10
+        for i in 0 ... 2 {
+            planViews[i].layer.cornerRadius = 10
+            planViews[i].layer.masksToBounds = false
+            planViews[i].layer.shadowColor = UIColor.black.cgColor
+            planViews[i].layer.shadowOffset = CGSize(width: 0, height: 10)
+            planViews[i].layer.shadowRadius = 10
+            planViews[i].layer.shadowOpacity = 0.5
+        }
+        
     }
     
-    func configureTapGesture() {
+    func configureTapGesture(number: Int) {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(showScanner))
-        planViews[0].addGestureRecognizer(gesture)
-        planViews[0].isUserInteractionEnabled = true
+        planViews[number].addGestureRecognizer(gesture)
+        planViews[number].isUserInteractionEnabled = true
     }
     
 }
@@ -94,13 +99,30 @@ extension AttendanceViewController {
     }
     
     func setPlanView() {
-        // 서버측에서 유저 보유플랜이 3개 이상인경우에 3으로 리턴하여 연산한자.
+        // 서버측에서 유저 보유플랜이 3개 이상인경우에 3으로 리턴하여 연산
         let count = userPlans.count <= 3 ? userPlans.count : 3
         for i in 0 ..< count {
+            planViews[i].backgroundColor = UIColor(named: checkPlanColor(type: userPlans[i].needAuthNum))
             planNameLabels[i].text = userPlans[i].planName
             let timeString = userPlans[i].setTime
             let endIdx: String.Index = timeString.index(timeString.startIndex, offsetBy: 4)
             planTimeLabels[i].text = String(timeString[...endIdx])
+            configureTapGesture(number: i)
+        }
+    }
+    
+    func checkPlanColor(type: Int) -> String {
+        switch type {
+        case 1:
+            return "Color_1day"
+        case 7:
+            return "Color_7days"
+        case 15:
+            return "Color_15days"
+        case 30:
+            return "Color_30days"
+        default:
+            return "Color_1days"
         }
     }
     
