@@ -24,3 +24,14 @@ struct PlanRegistration: Codable {
         case message
     }
 }
+
+class SubscriptionPlan {
+    
+    static let shared = SubscriptionPlan()
+    
+    var member_id: String?
+    var plan_id: String?
+    var startDate: String?
+    var endDate: String?
+    var setTime: String?
+}

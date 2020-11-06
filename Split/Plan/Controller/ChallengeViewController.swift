@@ -38,6 +38,21 @@ extension ChallengeViewController {
             forCellReuseIdentifier: "challengeContentTableViewCell")
     }
     
+    func setMedalImage(type: Int) -> String {
+        switch type {
+        case 1:
+            return "noneMedal"
+        case 7:
+            return "icon_medalBronze"
+        case 15:
+            return "icon_medalSilver"
+        case 30:
+            return "icon_medalGold"
+        default:
+            return "noneMedal"
+        }
+    }
+    
 }
 
 // MARK:- Methods
@@ -102,6 +117,8 @@ extension ChallengeViewController: UITableViewDataSource {
                 return UITableViewCell()
             }
             cell.planTitleLabel.text = plans[indexPath.row].name
+            let medalName = setMedalImage(type: plans[indexPath.row].need)
+            cell.medalImageView.image = UIImage(named: medalName)
             return cell
         default:
             return UITableViewCell()
@@ -117,7 +134,7 @@ extension ChallengeViewController: UITableViewDelegate {
         let screenWidth = UIScreen.main.bounds.size.width
         switch indexPath.section {
         case 0:
-            return screenWidth * 1/2
+            return screenWidth * 1/4
         case 1:
             return UITableView.automaticDimension
         default:
