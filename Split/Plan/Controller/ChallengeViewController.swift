@@ -13,6 +13,11 @@ class ChallengeViewController: UIViewController {
     // MARK:- Properties
     @IBOutlet weak var tableView: UITableView!
     var plans: [PlanList] = []
+    let numberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        return formatter
+    }()
     
     // MARK:- View Life Cycle
     override func viewDidLoad() {
@@ -119,6 +124,7 @@ extension ChallengeViewController: UITableViewDataSource {
             cell.planTitleLabel.text = plans[indexPath.row].name
             let medalName = setMedalImage(type: plans[indexPath.row].need)
             cell.medalImageView.image = UIImage(named: medalName)
+            cell.userNumberLabel.text = numberFormatter.string(from: NSNumber(value: plans[indexPath.row].need))! + " 명"
             return cell
         default:
             return UITableViewCell()
@@ -143,11 +149,19 @@ extension ChallengeViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let subscriptionViewController = storyboard?.instantiateViewController(withIdentifier: "subscriptionViewController") as? SubscriptionViewController else {
+        switch indexPath.section {
+        case 0:
+            return
+        case 1:
+            guard let subscriptionViewController = storyboard?.instantiateViewController(withIdentifier: "subscriptionViewController") as? SubscriptionViewController else {
+                return
+            }
+            subscriptionViewController.plan = plans[indexPath.row]
+            navigationController?.pushViewController(subscriptionViewController, animated: true)
+        default:
             return
         }
-        subscriptionViewController.plan = plans[indexPath.row]
-        navigationController?.pushViewController(subscriptionViewController, animated: true)
+        
     }
     
 }

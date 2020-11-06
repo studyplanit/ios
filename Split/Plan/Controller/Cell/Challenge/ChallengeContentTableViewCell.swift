@@ -13,6 +13,7 @@ class ChallengeContentTableViewCell: UITableViewCell {
     @IBOutlet weak var planTitleLabel: UILabel!
     @IBOutlet weak var barView: UIView!
     @IBOutlet weak var medalImageView: UIImageView!
+    @IBOutlet weak var userNumberLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
