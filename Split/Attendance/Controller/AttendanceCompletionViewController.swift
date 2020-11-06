@@ -112,7 +112,7 @@ extension AttendanceCompletionViewController {
         let okAction = UIAlertAction(
             title: "확인",
             style: .default){ (action : UIAlertAction) in
-            
+            self.navigationController?.popViewController(animated: true)
         }
         alert.addAction(okAction)
         present(alert, animated: true, completion: nil)
