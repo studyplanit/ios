@@ -17,7 +17,7 @@ class AttendanceViewController: UIViewController {
     @IBOutlet var planNameLabels: [UILabel]!
     @IBOutlet var planTimeLabels: [UILabel]!
     var userPlans: [UserPlan] = []
-    
+    var userPlanIndex = 0
     
     // MARK:- Properties
     lazy var readerVC: QRCodeReaderViewController = {
@@ -59,13 +59,24 @@ extension AttendanceViewController {
             planViews[i].layer.shadowRadius = 10
             planViews[i].layer.shadowOpacity = 0.5
         }
-        
     }
     
-    func configureTapGesture(number: Int) {
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(showScanner))
-        planViews[number].addGestureRecognizer(gesture)
-        planViews[number].isUserInteractionEnabled = true
+    func configurePlanView() {
+        // 서버측에서 유저 보유플랜이 3개 이상인경우에 3으로 리턴하여 연산
+        let count = userPlans.count <= 3 ? userPlans.count : 3
+        for i in 0 ..< count {
+            planViews[i].backgroundColor = UIColor(named: checkPlanColor(type: userPlans[i].needAuthNum))
+            planNameLabels[i].text = userPlans[i].planName
+            planTimeLabels[i].text = formatiTimeString(timeString: userPlans[i].setTime)
+            configureTapGesture(index: i)
+        }
+    }
+    
+    func configureTapGesture(index: Int) {
+        let gesture = MyTapGesture(target: self, action: #selector(showScanner))
+        gesture.planIndex = index
+        planViews[index].addGestureRecognizer(gesture)
+        planViews[index].isUserInteractionEnabled = true
     }
     
 }
@@ -86,7 +97,7 @@ extension AttendanceViewController {
                     let json = try JSONDecoder().decode([UserPlan].self, from: jsonData)
                     self.userPlans = json
                     DispatchQueue.main.async {
-                        self.setPlanView()
+                        self.configurePlanView()
                     }
                 } catch(let err) {
                     print(err.localizedDescription)
@@ -98,17 +109,9 @@ extension AttendanceViewController {
         }
     }
     
-    func setPlanView() {
-        // 서버측에서 유저 보유플랜이 3개 이상인경우에 3으로 리턴하여 연산
-        let count = userPlans.count <= 3 ? userPlans.count : 3
-        for i in 0 ..< count {
-            planViews[i].backgroundColor = UIColor(named: checkPlanColor(type: userPlans[i].needAuthNum))
-            planNameLabels[i].text = userPlans[i].planName
-            let timeString = userPlans[i].setTime
-            let endIdx: String.Index = timeString.index(timeString.startIndex, offsetBy: 4)
-            planTimeLabels[i].text = String(timeString[...endIdx])
-            configureTapGesture(number: i)
-        }
+    func formatiTimeString(timeString: String) -> String {
+        let endIdx: String.Index = timeString.index(timeString.startIndex, offsetBy: 4)
+        return String(timeString[...endIdx])
     }
     
     func checkPlanColor(type: Int) -> String {
@@ -126,8 +129,9 @@ extension AttendanceViewController {
         }
     }
     
-    @objc func showScanner() {
+    @objc func showScanner(_ sender: MyTapGesture) {
         print("MainViewController - showScanner() called ")
+        userPlanIndex = sender.planIndex
         readerVC.delegate = self
         readerVC.completionBlock = { (result: QRCodeReaderResult?) in
             print("QRCodeScanner succeded in closure")
@@ -135,8 +139,8 @@ extension AttendanceViewController {
             print(result)
             let scannedUrlString = result.value
             print("scannedUrlString : \(scannedUrlString)")
+//            //스캔한 url
 //            guard let scannedUrl = URL(string: scannedUrlString) else { return }
-//            self.webView.load(URLRequest(url: scannedUrl))
         }
         readerVC.modalPresentationStyle = .formSheet
         present(readerVC, animated: true, completion: nil)
@@ -154,7 +158,9 @@ extension AttendanceViewController: QRCodeReaderViewControllerDelegate {
         dismiss(animated: true, completion: nil)
         let storyboard = UIStoryboard(name: "Attendance", bundle: Bundle.main)
         guard let attendanceCompletionViewController = storyboard.instantiateViewController(withIdentifier: "attendanceCompletionViewController") as? AttendanceCompletionViewController else { return }
-        attendanceCompletionViewController.url = result.value
+        attendanceCompletionViewController.authURL = result.value
+        attendanceCompletionViewController.userPlan = userPlans[userPlanIndex]
+        print("큐알인증완료 - 유저플랜인덱스 : \(userPlanIndex)")
         navigationController?.pushViewController(attendanceCompletionViewController, animated: true)
     }
     
