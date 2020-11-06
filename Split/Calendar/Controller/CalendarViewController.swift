@@ -100,6 +100,7 @@ extension CalendarViewController {
                 do {
                     let jsonData = try JSONSerialization.data(withJSONObject: res, options: .prettyPrinted)
                     let json = try JSONDecoder().decode([UserPlan].self, from: jsonData)
+                    
                     self.userPlans = json
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
