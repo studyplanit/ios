@@ -43,9 +43,14 @@ class CalendarViewController: UIViewController {
         configureTapBar()
         configureCalendar()
         configureTableView()
-        getUserPlan()
 //        configureBackgoroundView()
         print(userID!)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        getUserPlan()
     }
 
 }
