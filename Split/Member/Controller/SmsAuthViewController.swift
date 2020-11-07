@@ -136,7 +136,7 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
     }
 
     //MARK: 키보드 없애기
-    @IBAction func tabView(_ sender: UIGestureRecognizer) {
+    @IBAction func tapView(_ sender: UIGestureRecognizer) {
         self.view.endEditing(true)
     }
     

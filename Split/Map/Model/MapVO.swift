@@ -20,5 +20,6 @@ struct MapVO: Codable {
     var allVisit: Int
     var todayVisit: Int
     var cafeImage: String
-//    var menuList: null
+    var menuList: String
+    var phoneNumber: String
 }

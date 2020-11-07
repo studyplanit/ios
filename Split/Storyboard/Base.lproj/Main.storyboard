@@ -155,7 +155,7 @@
         <!--Split-->
         <scene sceneID="1TE-rj-0Vc">
             <objects>
-                <viewController id="2H4-0t-RqV" customClass="MapViewController" customModule="Split" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mapView" id="2H4-0t-RqV" customClass="MapViewController" customModule="Split" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WFq-m7-kcu" customClass="NMFNaverMapView">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="755"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -225,6 +225,9 @@
                                                                         <state key="normal">
                                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         </state>
+                                                                        <connections>
+                                                                            <action selector="planetMenuButtonClick:" destination="2H4-0t-RqV" eventType="touchUpInside" id="pUt-Nr-GsL"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -243,9 +246,13 @@
                                                     </stackView>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="zone" translatesAutoresizingMaskIntoConstraints="NO" id="p2D-zP-Yyx">
                                                         <rect key="frame" x="298" y="10" width="102" height="102"/>
+                                                        <gestureRecognizers/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="p2D-zP-Yyx" secondAttribute="height" multiplier="1:1" id="wNo-7v-FdN"/>
                                                         </constraints>
+                                                        <connections>
+                                                            <outletCollection property="gestureRecognizers" destination="UQT-D9-yfh" appends="YES" id="TCR-dy-NOU"/>
+                                                        </connections>
                                                     </imageView>
                                                 </subviews>
                                                 <constraints>
@@ -344,6 +351,7 @@
                     <connections>
                         <outlet property="locationView" destination="K0J-fp-y2g" id="65i-kZ-dWI"/>
                         <outlet property="planetAddressLabel" destination="r4a-DJ-OnH" id="FZM-7X-xfU"/>
+                        <outlet property="planetCallImageView" destination="j0a-93-gC0" id="yvM-lZ-7Qk"/>
                         <outlet property="planetCodeButton" destination="wVh-Zv-a6r" id="GuB-ec-IT8"/>
                         <outlet property="planetImageView" destination="p2D-zP-Yyx" id="bVd-ce-jZo"/>
                         <outlet property="planetMenuButton" destination="8em-FO-Lx0" id="3Ow-uR-rwA"/>
@@ -357,8 +365,45 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ig1-gF-DW3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="UQT-D9-yfh"/>
             </objects>
-            <point key="canvasLocation" x="3193" y="-1389"/>
+            <point key="canvasLocation" x="3192.0560747663549" y="-1389.2008639308856"/>
+        </scene>
+        <!--Map Pop Up View Controller-->
+        <scene sceneID="MQq-UE-Vrh">
+            <objects>
+                <viewController storyboardIdentifier="mapPopUpView" id="sf4-FF-wl5" customClass="MapPopUpViewController" customModule="Split" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zPy-61-1K3">
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ib-KP-wCf">
+                                <rect key="frame" x="0.0" y="44" width="428" height="848"/>
+                                <gestureRecognizers/>
+                            </view>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s1Z-iz-Fdq">
+                                <rect key="frame" x="0.0" y="249" width="428" height="428"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="u3b-b8-9C2"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="4Ib-KP-wCf" firstAttribute="top" secondItem="u3b-b8-9C2" secondAttribute="top" id="20N-lO-48t"/>
+                            <constraint firstItem="u3b-b8-9C2" firstAttribute="trailing" secondItem="4Ib-KP-wCf" secondAttribute="trailing" id="60g-Fp-jkd"/>
+                            <constraint firstItem="4Ib-KP-wCf" firstAttribute="leading" secondItem="u3b-b8-9C2" secondAttribute="leading" id="Grr-Kw-Iar"/>
+                            <constraint firstItem="u3b-b8-9C2" firstAttribute="bottom" secondItem="4Ib-KP-wCf" secondAttribute="bottom" id="qE0-8i-kz8"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="popOuterView" destination="4Ib-KP-wCf" id="c0e-Vs-8RL"/>
+                        <outlet property="popUpView" destination="s1Z-iz-Fdq" id="zOl-PZ-qbE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Sli-0T-Lp3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3965.8878504672894" y="-1389.2008639308856"/>
         </scene>
         <!--스터디-->
         <scene sceneID="E5E-Pa-L9z">
@@ -720,12 +765,12 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yeg-jg-QTA" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="Km2-iF-lP2"/>
-                <tapGestureRecognizer id="qFH-Uj-LWw">
+                <tapGestureRecognizer id="Km2-iF-lP2">
                     <connections>
-                        <action selector="tabView:" destination="JMl-EG-aLD" id="I1r-8z-DiY"/>
+                        <action selector="tapView:" destination="JMl-EG-aLD" id="Z7b-BQ-5du"/>
                     </connections>
                 </tapGestureRecognizer>
+                <tapGestureRecognizer id="qFH-Uj-LWw"/>
             </objects>
             <point key="canvasLocation" x="-1136.9158878504672" y="39.524838012958966"/>
         </scene>

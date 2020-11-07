@@ -33,7 +33,6 @@ class HomeViewController: UIViewController {
         mainImageView.isUserInteractionEnabled = true
         mainImageView.addGestureRecognizer(imageViewTapGestureRecognizer)
         imageViewTapGestureRecognizer.addTarget(self, action: #selector(tapImageView))
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

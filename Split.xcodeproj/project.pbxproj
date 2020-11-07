@@ -54,6 +54,7 @@
 		FD47C95D2550EFE1001D9252 /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD47C95C2550EFE1001D9252 /* PrivacyViewController.swift */; };
 		FD47C9622550F008001D9252 /* TermsAndUseViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD47C9612550F008001D9252 /* TermsAndUseViewViewController.swift */; };
 		FD47C9712552794B001D9252 /* MapVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD47C9702552794B001D9252 /* MapVO.swift */; };
+		FD758E9C2556C3E400E2E2BB /* MapPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD758E9B2556C3E400E2E2BB /* MapPopUpViewController.swift */; };
 		FD80D3D125371239002D73B3 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD80D3D025371239002D73B3 /* JoinViewController.swift */; };
 		FDE91C95254D1B9C00BAB8B0 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE91C94254D1B9C00BAB8B0 /* Common.swift */; };
 		FDE91CDF254D62CA00BAB8B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDE91CDE254D62CA00BAB8B0 /* Assets.xcassets */; };
@@ -139,6 +140,7 @@
 		FD47C95C2550EFE1001D9252 /* PrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyViewController.swift; sourceTree = "<group>"; };
 		FD47C9612550F008001D9252 /* TermsAndUseViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndUseViewViewController.swift; sourceTree = "<group>"; };
 		FD47C9702552794B001D9252 /* MapVO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVO.swift; sourceTree = "<group>"; };
+		FD758E9B2556C3E400E2E2BB /* MapPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPopUpViewController.swift; sourceTree = "<group>"; };
 		FD80D3D025371239002D73B3 /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
 		FDE91C94254D1B9C00BAB8B0 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		FDE91CDE254D62CA00BAB8B0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -508,6 +510,7 @@
 			isa = PBXGroup;
 			children = (
 				FD2F4D33253DDE8D000A3944 /* MapViewController.swift */,
+				FD758E9B2556C3E400E2E2BB /* MapPopUpViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -780,6 +783,7 @@
 				8DD85DE2254AA218006430C4 /* PlanModel.swift in Sources */,
 				8D5D7042254A911C00618A27 /* CalendarTableViewCell.swift in Sources */,
 				8D115983254C788A00241BE6 /* AttendanceViewController.swift in Sources */,
+				FD758E9C2556C3E400E2E2BB /* MapPopUpViewController.swift in Sources */,
 				FD0125D22537090B00AD92E8 /* SmsAuthViewController.swift in Sources */,
 				8D3AC58C2549BDBF0059F950 /* EventContentTableViewCell.swift in Sources */,
 				8D3AC5852549BDB00059F950 /* EventBannerTableViewCell.swift in Sources */,
