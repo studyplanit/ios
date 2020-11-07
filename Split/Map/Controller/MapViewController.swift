@@ -15,6 +15,7 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
     @IBOutlet weak var locationView: NMFLocationButton!
     @IBOutlet weak var splitInfoView: UIView!
     @IBOutlet weak var planetNameLabel: UILabel!
+    @IBOutlet weak var planetImageView: UIImageView!
     @IBOutlet weak var planetAddressLabel: UILabel!
     @IBOutlet weak var planetTimeLabel: UILabel!
     @IBOutlet weak var planetMenuButton: UIButton!
@@ -73,8 +74,8 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        let URL = Common().baseURL+"/split/get.do"
-        let alamo = AF.request(URL, method: .get).validate(statusCode: 200..<300)
+        let url = Common().baseURL+"/split/get.do"
+        let alamo = AF.request(url, method: .get).validate(statusCode: 200..<300)
         
         alamo.response { response in
             switch response.result {
@@ -128,6 +129,8 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
                             self.beforeMarker = marker
                             marker.captionColor = Common().purple
                             marker.captionHaloColor = .white
+                            
+                            //팝업 뷰 셋팅
                             self.planetCodeButton.setTitle("   행성 \(map.planetCode)   ", for: .normal)
                             self.planetTotalVisitButton.setTitle("   누적방문자 \(map.allVisit)명   ", for: .normal)
                             self.planetNameLabel.text = map.planetName
@@ -135,12 +138,18 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
                             self.planetTimeLabel.text = "\(map.startTime) ~ \(map.endTime) \(map.holiday) 정기휴무"
                             self.splitInfoView.isHidden = false
                             self.splitMapView.mapView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 170, right: 0)
-//                            let url = URL(string: "http://verona-api.municipiumstaging.it/system/images/image/image/22/app_1920_1280_4.jpg")
-//                            let data = Data(contentsOf: url!)
-//                            let url = URL(string: "\(Common().baseURL)\(map.cafeImage)")
-//                            let url = URL
-//                            let data = Data(contentsOf: url!)
-//                            self.planetImageView.image = UIImage(data: data)
+                            
+                            //비동기 방식으로 이미지 로드(이미지만 로드속도 느리게 됨)
+                            DispatchQueue.global().async { [weak self] in
+                                let url = URL(string: "\(Common().baseURL)/\(map.cafeImage)")
+                                if let data = try? Data(contentsOf: url!) {
+                                    if let image = UIImage(data: data) {
+                                        DispatchQueue.main.async {
+                                            self!.planetImageView.image = image
+                                        }
+                                    }
+                                }
+                            }
                             return true
                         }
                     }
@@ -165,4 +174,3 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
         self.splitMapView.mapView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
 }
-

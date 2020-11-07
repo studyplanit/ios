@@ -17,6 +17,14 @@ class Common {
     let lightGray = UIColor(displayP3Red: 178/255, green: 178/255, blue: 178/255, alpha: 1)
     let coralBlue = UIColor(displayP3Red: 79/255, green: 162/255, blue: 220/255, alpha: 1)
     
+    //에러 alert
+    func errorAlert() -> UIAlertController{
+        let alert = UIAlertController(title: "에러", message: "서버 접속에 실패했습니다.", preferredStyle: .alert)
+        let action = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alert.addAction(action)
+        return alert
+    }
+    
     //koPubDotumBole 반응형 폰트 지정
     let koPubDotumBold22 = UIFont(name:"KoPubDotumBold", size: UIScreen.main.bounds.size.width * 0.075)!
     let koPubDotumBold20 = UIFont(name:"KoPubDotumBold", size: UIScreen.main.bounds.size.width * 0.065)!

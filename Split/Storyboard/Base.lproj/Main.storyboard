@@ -345,7 +345,7 @@
                         <outlet property="locationView" destination="K0J-fp-y2g" id="65i-kZ-dWI"/>
                         <outlet property="planetAddressLabel" destination="r4a-DJ-OnH" id="FZM-7X-xfU"/>
                         <outlet property="planetCodeButton" destination="wVh-Zv-a6r" id="GuB-ec-IT8"/>
-                        <outlet property="planetImageView" destination="p2D-zP-Yyx" id="xpb-c1-fuc"/>
+                        <outlet property="planetImageView" destination="p2D-zP-Yyx" id="bVd-ce-jZo"/>
                         <outlet property="planetMenuButton" destination="8em-FO-Lx0" id="3Ow-uR-rwA"/>
                         <outlet property="planetNameLabel" destination="g3m-L6-1NO" id="DSE-Pu-EOF"/>
                         <outlet property="planetRatingLabel" destination="esn-jz-mC8" id="21R-HD-YwE"/>
@@ -358,7 +358,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ig1-gF-DW3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3117.7570093457944" y="-1388.5529157667388"/>
+            <point key="canvasLocation" x="3193" y="-1389"/>
         </scene>
         <!--스터디-->
         <scene sceneID="E5E-Pa-L9z">

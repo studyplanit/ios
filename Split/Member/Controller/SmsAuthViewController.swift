@@ -178,32 +178,37 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
     
     //MARK:- 전송버튼 누른 후
     @IBAction func sendSMSButtonClick(_ sender: UIButton) {
-        //프로퍼티 상태 변경
-        sendSMSButton.setTitle("재전송 5:00", for: .normal)
-        phoneNumber = phoneTextField.text!
-        authNumberTextField.isHidden = false
-        nextButton.isHidden = false
-        authNumberTextField.text = ""
-        authCheckLabel.isHidden = true
-        //팝업 띄우기
-        UIView.animate(withDuration: 0.5) {
-            self.popUpView.transform = CGAffineTransform(translationX: 0, y: 100)
-        }
-        //타이머 시작
-        timeLeft = 300
-        timer?.invalidate()
-        timer = nil
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(onTimerUpdate), userInfo: nil, repeats: true)
-        
         //sms인증 get url보내기
-        let headers: HTTPHeaders = ["pNum": phoneNumber]
+        self.phoneNumber = self.phoneTextField.text!
+        let headers: HTTPHeaders = ["pNum": self.phoneNumber]
         let URL = Common().baseURL+"/sms/receive.do"
         let alamo = AF.request(URL, method: .post, headers: headers).validate(statusCode: 200..<300)
-        
         alamo.responseDecodable(of: Auth.self) { (response) in
-            guard let auth = response.value else { return }
-            self.authNumber = Int(auth.authNumber)!
+            guard let auth = response.value else {
+                self.present(Common().errorAlert(), animated: false, completion: nil)
+                return
+            }
+            guard let responseAuthNumber = Int(auth.authNumber) else {
+                return
+            }
+            self.authNumber = responseAuthNumber
             self.memberId = auth.id
+            
+            //프로퍼티 상태 변경
+            self.sendSMSButton.setTitle("재전송 5:00", for: .normal)
+            self.authNumberTextField.isHidden = false
+            self.nextButton.isHidden = false
+            self.authNumberTextField.text = ""
+            self.authCheckLabel.isHidden = true
+            //팝업 띄우기
+            UIView.animate(withDuration: 0.5) {
+                self.popUpView.transform = CGAffineTransform(translationX: 0, y: 100)
+            }
+            //타이머 시작
+            self.timeLeft = 300
+            self.timer?.invalidate()
+            self.timer = nil
+            self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.onTimerUpdate), userInfo: nil, repeats: true)
         }
     }
     

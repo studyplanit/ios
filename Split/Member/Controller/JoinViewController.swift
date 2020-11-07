@@ -64,8 +64,7 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
         }else {
             if self.nickTextField.text!.range(of: "^[a-zA-Z가-힣0-9]*$", options: .regularExpression) != nil {
                 let URL = Common().baseURL+"/member/check.nick"
-                let headers: HTTPHeaders = ["nick": self.nickTextField.text!]
-                let alamo = AF.request(URL, method: .post, headers: headers).validate(statusCode: 200..<300)
+                let alamo = AF.request(URL, method: .post, parameters: ["nick": self.nickTextField.text!]).validate(statusCode: 200..<300)
     
                 alamo.responseString { response in
                     switch response.result {
@@ -81,6 +80,7 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
                         }
                     case .failure(let error):
                         print(error)
+                        return
                     }
                 }
             } else {
@@ -92,30 +92,22 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
 
     //MARK:- 완료버튼 누른 후
     @IBAction func nextButtonClick(_ sender: UIButton) {
-        
-        let URL = Common().baseURL+"/member/insert.do"
-        let headers: HTTPHeaders = ["pNum": MemberVO.shared.phone!, "nick": self.nickTextField.text!]
-        let alamo = AF.request(URL, method: .post, headers: headers).validate(statusCode: 200..<300)
-
-        struct Join : Decodable {
-            let mId : Int
-            let message : String
+        struct Join: Decodable {
+            let mId: Int
+            let message: String
         }
-        
+        let URL = Common().baseURL+"/member/insert.do"
+        let headers: HTTPHeaders = ["Content-Type": "application/x-www-form-urlencoded", "pNum": MemberVO.shared.phone!]
+        let alamo = AF.request(URL, method: .post, parameters: ["nick": self.nickTextField.text!], headers: headers).validate(statusCode: 200..<300)
         alamo.responseDecodable(of: Join.self) { (response) in
-            guard let join = response.value else { return }
+            guard let join = response.value else {
+                self.present(Common().errorAlert(), animated: false, completion: nil)
+                return
+            }
             UserDefaults.standard.set(join.mId, forKey: "id")
             //메인페이지로 이동
             let nextView = self.storyboard?.instantiateViewController(withIdentifier: "tabBarController")
             self.navigationController?.pushViewController(nextView!, animated: false)
         }
-        
-//        alamo.responseDecodable(of: MemberVO.self) { (response) in
-//            guard let member = response.value else { return }
-//            UserDefaults.standard.set(member.id, forKey: "id")
-//            //메인페이지로 이동
-//            let nextView = self.storyboard?.instantiateViewController(withIdentifier: "tabBarController")
-//            self.navigationController?.pushViewController(nextView!, animated: false)
-//        }
     }
 }
