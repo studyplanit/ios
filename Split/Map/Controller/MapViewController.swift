@@ -111,7 +111,7 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
                         marker.height = 50
                         marker.iconPerspectiveEnabled = true
                         marker.captionAligns = [NMFAlignType.center]
-                        marker.captionText = "\n\(map.allVisit)"
+                        marker.captionText = "\n\(map.todayVisit)"
                         marker.captionColor = .white
                         marker.captionHaloColor = Common().purple
                         marker.captionTextSize = 18
@@ -135,9 +135,14 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
                             self.planetTimeLabel.text = "\(map.startTime) ~ \(map.endTime) \(map.holiday) 정기휴무"
                             self.splitInfoView.isHidden = false
                             self.splitMapView.mapView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 170, right: 0)
+//                            let url = URL(string: "http://verona-api.municipiumstaging.it/system/images/image/image/22/app_1920_1280_4.jpg")
+//                            let data = Data(contentsOf: url!)
+//                            let url = URL(string: "\(Common().baseURL)\(map.cafeImage)")
+//                            let url = URL
+//                            let data = Data(contentsOf: url!)
+//                            self.planetImageView.image = UIImage(data: data)
                             return true
                         }
-                        marker.iconImage = NMFOverlayImage(name: "map_marker_purple")
                     }
                 } catch {
                     print("json_decoder_error")
