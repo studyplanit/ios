@@ -20,9 +20,14 @@ struct PlanAPIConstant {
     /* 회원별 플랜 */
     static let userPlanURL = baseURL + "/member/getMy.do"
     
+    /* 회원별 플랜 삭제 */
+    static let userPlanDeleteURL = baseURL + "/plan/delete.do"
+    
     /* QR 인증 */
     static let qrAuthURL = baseURL + "/plan/qr.auth"
     
     /* 스플릿존 정보 */
     static let splitZoneInfoURL = baseURL + "/split/get/detail"
+    
+    
 }

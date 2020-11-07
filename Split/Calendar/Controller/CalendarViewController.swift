@@ -109,6 +109,7 @@ extension CalendarViewController {
                     self.userPlans = json
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
+                        self.PlanDates = [[],[],[]]
                         self.setUserPlanDates(userPlans: self.userPlans)
                         self.calendar.reloadData()
                     }
@@ -118,6 +119,23 @@ extension CalendarViewController {
                 // 실패
             case .failure(let err):
                 print(err.localizedDescription)
+            }
+        }
+    }
+    
+    private func deleteUserPlan(planID: Int) {
+        // HTTP Request
+        let headers: HTTPHeaders = [
+            "plan_log_id": "\(planID)"
+        ]
+        AF.request(PlanAPIConstant.userPlanDeleteURL, method: .post, headers: headers).responseJSON { (response) in
+            switch response.result {
+                // 성공
+            case .success(let res):
+                print("성공: \(res)")
+                // 실패
+            case .failure(let err):
+                print("실패: \(err.localizedDescription)")
             }
         }
     }
@@ -135,7 +153,7 @@ extension CalendarViewController {
         }
     }
     
-    func deletePlan() {
+    func deletePlan(planID: Int) {
         let alert = UIAlertController(
             title: "",
             message: "플랜을 삭제하시겠습니까?",
@@ -143,7 +161,9 @@ extension CalendarViewController {
         let okAction = UIAlertAction(
             title: "확인",
             style: .default) { (action : UIAlertAction) in
+            self.deleteUserPlan(planID: planID)
             self.completeAlert()
+            self.getUserPlan()
         }
         let cancelAction = UIAlertAction(
             title: "취소",
@@ -206,7 +226,6 @@ extension CalendarViewController {
                 date = date + 86400
             }
         }
-//        print("PlanDates: \(PlanDates)")
     }
     
 }
@@ -371,6 +390,8 @@ extension CalendarViewController: UITableViewDataSource {
         let planColor = checkPlanColor(type: userPlans[indexPath.row].needAuthNum)
         cell.planColorBarView.backgroundColor = UIColor(named: planColor)
         cell.dayLabelView.backgroundColor = UIColor(named: planColor)
+        // 셀 태그에 플랜로그아이디 삽입
+        cell.tag = userPlans[indexPath.row].planLogID
         return cell
     }
     
@@ -382,8 +403,9 @@ extension CalendarViewController: UITableViewDataSource {
     // 테이블뷰가 편집모드일때 동작을 정의하는 메서드
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            print("셀 삭제")
-            deletePlan()
+            guard let planLogID = tableView.cellForRow(at: indexPath)?.tag else { return }
+            print("셀 삭제 플랜로그아이디 : \(planLogID)")
+            deletePlan(planID: planLogID)
         }
     }
     
