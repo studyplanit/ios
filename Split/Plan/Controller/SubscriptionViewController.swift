@@ -25,6 +25,9 @@ class SubscriptionViewController: UIViewController {
         return formatter
     }()
     
+    var startDate = ""
+    var endDate = ""
+    
     var arrayOfEvent1 : [String] = [
         "2020-11-14",
         "2020-11-15",
@@ -183,7 +186,10 @@ extension SubscriptionViewController: FSCalendarDelegate {
             startTemp += 86400
             calendar.select(startTemp)
         }
-        print("날짜 선택 \(dateFormatter.string(from: date))")
+        startDate = dateFormatter.string(from: startTemp)
+        endDate = dateFormatter.string(from: endTemp)
+        print("날짜 선택 - 선택한 날짜 : \(dateFormatter.string(from: date))")
+        print("날짜 선택 - 시작날짜: \(startDate), 끝날짜: \(endDate)")
     }
     
     // 특정 날짜 선택 해제시 이벤트

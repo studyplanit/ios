@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class AttendanceCompletionViewController: UIViewController {
     
@@ -30,6 +31,8 @@ class AttendanceCompletionViewController: UIViewController {
         configureNavigationBar()
         configureButton()
         print(authURL)
+        print("스플릿존 ID : \(getSplitZoneID(url: authURL))")
+        print("userPlan: \(userPlan!)")
     }
 
 }
@@ -99,12 +102,41 @@ extension AttendanceCompletionViewController {
         }
     }
     
+    private func postQRAuth() {
+        guard let userPlan = userPlan else { return }
+        
+        let splitZoneID = getSplitZoneID(url: authURL)
+        let planID = userPlan.planLogID
+        
+        let headers: HTTPHeaders = [
+            "plan_log_id": "\(planID)",
+            "planet_id": "\(splitZoneID)"
+        ]
+        let parameters = ["planet_id" : Int(splitZoneID)]
+        AF.request(PlanAPIConstant.qrAuthURL, method: .post, parameters: parameters, headers: headers).responseJSON { (response) in
+            switch response.result {
+                // 성공
+            case .success(let res):
+                print("성공: \(res)")
+                // 실패
+            case .failure(let err):
+                print("실패: \(err.localizedDescription)")
+            }
+        }
+    }
+    
+    func getSplitZoneID(url: String) -> String {
+        let endIndex = url.index(url.endIndex, offsetBy: -1)
+        return String(url[endIndex...])
+    }
+    
 }
 
 //MARK:- Methods
 extension AttendanceCompletionViewController {
     
     @objc func completeButton() {
+        postQRAuth()
         let alert = UIAlertController(
             title: "",
             message: "인증이 완료되었습니다.",
