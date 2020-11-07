@@ -22,4 +22,7 @@ struct PlanAPIConstant {
     
     /* QR 인증 */
     static let qrAuthURL = baseURL + "/plan/qr.auth"
+    
+    /* 스플릿존 정보 */
+    static let splitZoneInfoURL = baseURL + "/split/get/detail"
 }

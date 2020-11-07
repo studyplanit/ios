@@ -32,11 +32,17 @@ class AttendanceViewController: UIViewController {
         return QRCodeReaderViewController(builder: builder)
     }()
 
+    // MARK:- View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureTapBar()
         configureUI()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
         getUserPlan()
     }
     
@@ -67,7 +73,7 @@ extension AttendanceViewController {
         for i in 0 ..< count {
             planViews[i].backgroundColor = UIColor(named: checkPlanColor(type: userPlans[i].needAuthNum))
             planNameLabels[i].text = userPlans[i].planName
-            planTimeLabels[i].text = formatiTimeString(timeString: userPlans[i].setTime)
+            planTimeLabels[i].text = userPlans[i].setTime
             configureTapGesture(index: i)
         }
     }
@@ -109,10 +115,11 @@ extension AttendanceViewController {
         }
     }
     
-    func formatiTimeString(timeString: String) -> String {
-        let endIdx: String.Index = timeString.index(timeString.startIndex, offsetBy: 4)
-        return String(timeString[...endIdx])
-    }
+//    // 시, 분 만 표시하기
+//    func formatiTimeString(timeString: String) -> String {
+//        let endIdx: String.Index = timeString.index(timeString.startIndex, offsetBy: 4)
+//        return String(timeString[...endIdx])
+//    }
     
     func checkPlanColor(type: Int) -> String {
         switch type {

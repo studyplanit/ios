@@ -195,8 +195,8 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="스플릿존명" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zYr-OF-E0j">
-                                        <rect key="frame" x="142" y="20" width="130" height="36"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="스플릿존 이름" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zYr-OF-E0j">
+                                        <rect key="frame" x="126" y="30" width="162.5" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -206,8 +206,8 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="4i5-pk-viu"/>
                                     <constraint firstItem="zYr-OF-E0j" firstAttribute="centerX" secondItem="bC2-cV-Lcc" secondAttribute="centerX" id="LjN-kD-XbF"/>
-                                    <constraint firstItem="QPH-jB-SgO" firstAttribute="top" secondItem="zYr-OF-E0j" secondAttribute="bottom" constant="20" id="OWY-XA-WWW"/>
-                                    <constraint firstItem="zYr-OF-E0j" firstAttribute="top" secondItem="bC2-cV-Lcc" secondAttribute="top" constant="20" id="UXQ-K0-hHa"/>
+                                    <constraint firstItem="QPH-jB-SgO" firstAttribute="top" secondItem="zYr-OF-E0j" secondAttribute="bottom" constant="10" id="OWY-XA-WWW"/>
+                                    <constraint firstItem="zYr-OF-E0j" firstAttribute="top" secondItem="bC2-cV-Lcc" secondAttribute="top" constant="30" id="UXQ-K0-hHa"/>
                                     <constraint firstItem="QPH-jB-SgO" firstAttribute="centerX" secondItem="bC2-cV-Lcc" secondAttribute="centerX" id="VNF-0b-pox"/>
                                 </constraints>
                             </view>
@@ -299,6 +299,8 @@
                         <outlet property="planNameLabel" destination="5C5-cH-Nca" id="S4M-32-BNx"/>
                         <outlet property="planView" destination="TXI-43-XRB" id="7Cp-II-Yhn"/>
                         <outlet property="sayingLabelView" destination="LcY-2x-KA9" id="j34-ng-0gc"/>
+                        <outlet property="splitZoneCodeLabel" destination="QPH-jB-SgO" id="Phn-gM-r4I"/>
+                        <outlet property="splitZoneNameLabel" destination="zYr-OF-E0j" id="7pI-9Z-pBJ"/>
                         <outlet property="timeLabel" destination="GdE-Ey-cL7" id="eii-Za-JPv"/>
                     </connections>
                 </viewController>

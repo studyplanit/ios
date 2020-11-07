@@ -18,7 +18,10 @@ class AttendanceCompletionViewController: UIViewController {
     @IBOutlet weak var sayingLabelView: UIView!
     @IBOutlet weak var completionButton: UIButton!
     @IBOutlet weak var urlLabel: UILabel!
+    @IBOutlet weak var splitZoneNameLabel: UILabel!
+    @IBOutlet weak var splitZoneCodeLabel: UILabel!
     
+    var splitZoneInfo: SplitZone?
     var userPlan: UserPlan?
     let userID = UserDefaults.standard.string(forKey: "id")
     var authURL = ""
@@ -30,9 +33,16 @@ class AttendanceCompletionViewController: UIViewController {
         configureUI()
         configureNavigationBar()
         configureButton()
+        getSplitZone()
         print(authURL)
         print("스플릿존 ID : \(getSplitZoneID(url: authURL))")
         print("userPlan: \(userPlan!)")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        configureSplitZoneInfoView()
     }
 
 }
@@ -40,6 +50,7 @@ class AttendanceCompletionViewController: UIViewController {
 //MARK:- Configure
 extension AttendanceCompletionViewController {
     
+    // 전체 UI
     func configureUI() {
         guard let userPlan = userPlan else { return }
         // 기본 UI
@@ -54,16 +65,18 @@ extension AttendanceCompletionViewController {
         configureShadowUI(completionButton)
         // 인증한 플랜 컨텐츠
         planNameLabel.text = userPlan.planName
-        timeLabel.text = formatiTimeString(timeString: String(userPlan.setTime))
+        timeLabel.text = userPlan.setTime
         dayLabel.text = "\(userPlan.nowAuthNum + 1)일째 인증되었습니다"
         
     }
     
-    func formatiTimeString(timeString: String) -> String {
-        let endIdx: String.Index = timeString.index(timeString.startIndex, offsetBy: 4)
-        return String(timeString[...endIdx])
-    }
+//    // 시, 분 만 표시하기
+//    func formatiTimeString(timeString: String) -> String {
+//        let endIdx: String.Index = timeString.index(timeString.startIndex, offsetBy: 4)
+//        return String(timeString[...endIdx])
+//    }
     
+    // 그림자 추가
     func configureShadowUI(_ view: UIView) {
         view.layer.masksToBounds = false
         view.layer.shadowColor = UIColor.black.cgColor
@@ -72,14 +85,24 @@ extension AttendanceCompletionViewController {
         view.layer.shadowOpacity = 0.5
     }
     
+    // 네비게이션바
     func configureNavigationBar() {
 //        urlLabel.text = url
         navigationItem.title = "QR"
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "KoPubDotumBold", size: 20)!]
     }
     
+    // 완료 버튼
     func configureButton() {
         completionButton.addTarget(self, action: #selector(completeButton), for: .touchUpInside)
+    }
+    
+    // 스플릿존 이름, 뷰
+    func configureSplitZoneInfoView() {
+        guard let splitZone = splitZoneInfo else { return }
+        print("configureSplitZoneInfoView() called - splitZone: \(splitZone)")
+        splitZoneNameLabel.text = splitZone.name
+        splitZoneCodeLabel.text = splitZone.code
     }
     
 }
@@ -128,6 +151,28 @@ extension AttendanceCompletionViewController {
     func getSplitZoneID(url: String) -> String {
         let endIndex = url.index(url.endIndex, offsetBy: -1)
         return String(url[endIndex...])
+    }
+    
+    private func getSplitZone() {
+//        let splitZoneID = getSplitZoneID(url: authURL)
+        let parameters = ["planet_id" : 1]
+        
+        AF.request(PlanAPIConstant.splitZoneInfoURL, parameters: parameters).responseJSON { (response) in
+            switch response.result {
+                // 성공
+            case .success(let res):
+                do {
+                    let jsonData = try JSONSerialization.data(withJSONObject: res, options: .prettyPrinted)
+                    let json = try JSONDecoder().decode(SplitZone.self, from: jsonData)
+                    self.splitZoneInfo = json
+                } catch(let err) {
+                    print(err.localizedDescription)
+                }
+                // 실패
+            case .failure(let err):
+                print(err.localizedDescription)
+            }
+        }
     }
     
 }
