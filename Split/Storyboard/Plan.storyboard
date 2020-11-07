@@ -87,8 +87,8 @@
                                     <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="30" style="wheels" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HWX-nV-9qi">
                                         <rect key="frame" x="60" y="0.0" width="165.5" height="89.5"/>
                                         <color key="tintColor" red="0.2156862745" green="0.2784313725" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
-                                        <date key="date" timeIntervalSinceReferenceDate="626270400.05710995">
-                                            <!--2020-11-05 12:00:00 +0000-->
+                                        <date key="date" timeIntervalSinceReferenceDate="626227200.05710995">
+                                            <!--2020-11-05 00:00:00 +0000-->
                                         </date>
                                         <locale key="locale" localeIdentifier="ko"/>
                                     </datePicker>

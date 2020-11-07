@@ -91,8 +91,8 @@ extension SubscriptionViewController {
     // 날짜를 올바르게 선택하고 확인버튼 클릭시 alert
     func ShowCorrectAlert() {
         let alert = UIAlertController(
-            title: "",
-            message: "해당 시간과 날짜로 플랜을 신청하시겠습니까?",
+            title: "꼼꼼히 확인해주세요!",
+            message: "선택하신 시간과 날짜로 플랜을 신청하시겠습니까?",
             preferredStyle: .alert)
         let okAction = UIAlertAction(
             title: "확인",
@@ -111,7 +111,7 @@ extension SubscriptionViewController {
     func ShowIncorrectAlert() {
         let alert = UIAlertController(
             title: "",
-            message: "플랜 날짜를 선택해주세요.",
+            message: "날짜와 시간을 선택해주세요.",
             preferredStyle: .alert)
         let okAction = UIAlertAction(
             title: "확인",
