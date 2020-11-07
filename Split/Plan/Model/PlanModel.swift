@@ -12,6 +12,8 @@ struct PlanList: Codable {
     let id: Int
     let name, type: String
     let need: Int
+    let imgPath: String?
+    let accNumber: Int
 }
 
 // 유저가 플랜 등록하기 POST Response

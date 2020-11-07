@@ -13,6 +13,11 @@ class ChallengeViewController: UIViewController {
     // MARK:- Properties
     @IBOutlet weak var tableView: UITableView!
     var plans: [PlanList] = []
+    let numberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        return formatter
+    }()
     
     // MARK:- View Life Cycle
     override func viewDidLoad() {
@@ -81,6 +86,20 @@ extension ChallengeViewController {
         }
     }
     
+    func prohibitAlert() {
+        let alert = UIAlertController(
+            title: "",
+            message: "테스트 기간에는 이용할 수 없는 플랜입니다.",
+            preferredStyle: .alert)
+        let okAction = UIAlertAction(
+            title: "확인",
+            style: .default){ (action : UIAlertAction) in
+            self.navigationController?.popViewController(animated: true)
+        }
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
 }
 
 // MARK:- Table View DataSource
@@ -119,6 +138,7 @@ extension ChallengeViewController: UITableViewDataSource {
             cell.planTitleLabel.text = plans[indexPath.row].name
             let medalName = setMedalImage(type: plans[indexPath.row].need)
             cell.medalImageView.image = UIImage(named: medalName)
+            cell.userNumberLabel.text = numberFormatter.string(from: NSNumber(value: plans[indexPath.row].need))! + " 명"
             return cell
         default:
             return UITableViewCell()
@@ -143,11 +163,26 @@ extension ChallengeViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let subscriptionViewController = storyboard?.instantiateViewController(withIdentifier: "subscriptionViewController") as? SubscriptionViewController else {
+        switch indexPath.section {
+        case 0:
+            return
+        case 1:
+            switch indexPath.row {
+            case 0, 1:
+                guard let subscriptionViewController = storyboard?.instantiateViewController(withIdentifier: "subscriptionViewController") as? SubscriptionViewController else {
+                    return
+                }
+                subscriptionViewController.plan = plans[indexPath.row]
+                navigationController?.pushViewController(subscriptionViewController, animated: true)
+            case 2, 3:
+                return prohibitAlert()
+            default:
+                return
+            }
+        default:
             return
         }
-        subscriptionViewController.plan = plans[indexPath.row]
-        navigationController?.pushViewController(subscriptionViewController, animated: true)
+        
     }
     
 }

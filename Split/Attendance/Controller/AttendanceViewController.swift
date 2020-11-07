@@ -70,7 +70,7 @@ extension AttendanceViewController {
     
     private func getUserPlan() {
         let headers: HTTPHeaders = [
-            "memberId": "1",
+            "memberId": "2",
         ]
         AF.request(CalendarAPIConstant.userPlanURL, headers: headers).responseJSON { (response) in
             switch response.result {
@@ -98,7 +98,9 @@ extension AttendanceViewController {
         let count = userPlans.count <= 3 ? userPlans.count : 3
         for i in 0 ..< count {
             planNameLabels[i].text = userPlans[i].planName
-            planTimeLabels[i].text = userPlans[i].setTime
+            let timeString = userPlans[i].setTime
+            let endIdx: String.Index = timeString.index(timeString.startIndex, offsetBy: 4)
+            planTimeLabels[i].text = String(timeString[...endIdx])
         }
     }
     
