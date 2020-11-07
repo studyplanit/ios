@@ -18,7 +18,7 @@ class CalendarViewController: UIViewController {
     
     let userID = UserDefaults.standard.string(forKey: "id")
     var userPlans: [UserPlan] = []
-    var PlanDates: [[String]] = []
+    var PlanDates: [[String]] = [[],[],[]]
     let aDay = 86400
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -44,7 +44,7 @@ class CalendarViewController: UIViewController {
         configureCalendar()
         configureTableView()
 //        configureBackgoroundView()
-        print(userID!)
+        print("유저아이디 : \(userID!)")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -109,6 +109,8 @@ extension CalendarViewController {
                     self.userPlans = json
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
+                        self.setUserPlanDates(userPlans: self.userPlans)
+                        self.calendar.reloadData()
                     }
                 } catch(let err) {
                     print(err.localizedDescription)
@@ -191,19 +193,21 @@ extension CalendarViewController {
         }
     }
     
-//    // 플랜 날짜 리스트 만들기
-//    func setPlanDates() {
-//        for i in 0 ..< userPlans.count {
-//            let startDateString = userPlans[i].startDate
-//            let startDate = dateFormatter.date(from: startDateString)
-//            let term = userPlans[i].needAuthNum
-//            for j in 1...term {
-//                let temp = j
-//                let date = startDate! + (86400 * temp)
-//                PlanDates[i] += []
-//            }
-//        }
-//    }
+    // 플랜 날짜 리스트 만들기
+    func setUserPlanDates(userPlans: [UserPlan]) {
+        print("setUserPlanDates() called")
+//        guard let userPlans = userPlans else { return }
+        for i in 0 ..< userPlans.count {
+            let startDateString = userPlans[i].startDate
+            guard let startDate = dateFormatter.date(from: startDateString) else { return }
+            var date = startDate
+            for _ in 0..<userPlans[i].needAuthNum {
+                PlanDates[i].append(dateFormatter.string(from: date))
+                date = date + 86400
+            }
+        }
+//        print("PlanDates: \(PlanDates)")
+    }
     
 }
 
@@ -214,13 +218,25 @@ extension CalendarViewController: FSCalendarDataSource {
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
 //        guard let eventDate = dateFormatter.date(from: "2020-10-29") else { return 0 }
         let strDate = dateFormatter.string(from:date)
-        if arrayOfEvent1.contains(strDate) && arrayOfEvent2.contains(strDate) {
-             return 2
-        } else if arrayOfEvent1.contains(strDate) {
-             return 1
-        } else if arrayOfEvent2.contains(strDate) {
-             return 1
-         }
+        let dates1 = PlanDates[0]
+        let dates2 = PlanDates[1]
+        let dates3 = PlanDates[2]
+        
+        if dates1.contains(strDate) && dates2.contains(strDate) && dates3.contains(strDate) {
+            return 3
+        } else if dates1.contains(strDate) && dates2.contains(strDate)  {
+            return 2
+        } else if dates2.contains(strDate) && dates3.contains(strDate) {
+            return 2
+        } else if dates1.contains(strDate) && dates3.contains(strDate) {
+            return 2
+        } else if dates1.contains(strDate) {
+            return 1
+        } else if dates2.contains(strDate) {
+            return 1
+        } else if dates3.contains(strDate) {
+            return 1
+        }
         return 0
     }
     
@@ -279,12 +295,23 @@ extension CalendarViewController: FSCalendarDelegateAppearance {
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventDefaultColorsFor date: Date) -> [UIColor]? {
         
         let strDate = dateFormatter.string(from: date)
-
-        if arrayOfEvent1.contains(strDate) && arrayOfEvent2.contains(strDate) {
+        let dates1 = PlanDates[0]
+        let dates2 = PlanDates[1]
+        let dates3 = PlanDates[2]
+        
+        if dates1.contains(strDate) && dates2.contains(strDate) && dates3.contains(strDate) {
+            return [UIColor.red ,UIColor.blue, UIColor.green]
+        } else if dates1.contains(strDate) && dates2.contains(strDate)  {
             return [UIColor.red ,UIColor.blue]
-        } else if arrayOfEvent1.contains(strDate) {
-            return [UIColor.red]
-        } else if arrayOfEvent2.contains(strDate) {
+        } else if dates2.contains(strDate) && dates3.contains(strDate) {
+            return [UIColor.red ,UIColor.blue]
+        } else if dates1.contains(strDate) && dates3.contains(strDate) {
+            return [UIColor.red ,UIColor.blue]
+        } else if dates1.contains(strDate) {
+            return [UIColor.blue]
+        } else if dates2.contains(strDate) {
+            return [UIColor.blue]
+        } else if dates3.contains(strDate) {
             return [UIColor.blue]
         }
         return [UIColor.clear]
@@ -293,12 +320,23 @@ extension CalendarViewController: FSCalendarDelegateAppearance {
     // 점 선택 색상
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventSelectionColorsFor date: Date) -> [UIColor]? {
         let strDate = dateFormatter.string(from: date)
+        let dates1 = PlanDates[0]
+        let dates2 = PlanDates[1]
+        let dates3 = PlanDates[2]
 
-        if arrayOfEvent1.contains(strDate) && arrayOfEvent2.contains(strDate) {
+        if dates1.contains(strDate) && dates2.contains(strDate) && dates3.contains(strDate) {
+            return [UIColor.red ,UIColor.blue, UIColor.green]
+        } else if dates1.contains(strDate) && dates2.contains(strDate)  {
             return [UIColor.red ,UIColor.blue]
-        } else if arrayOfEvent1.contains(strDate) {
-            return [UIColor.red]
-        } else if arrayOfEvent2.contains(strDate) {
+        } else if dates2.contains(strDate) && dates3.contains(strDate) {
+            return [UIColor.red ,UIColor.blue]
+        } else if dates1.contains(strDate) && dates3.contains(strDate) {
+            return [UIColor.red ,UIColor.blue]
+        } else if dates1.contains(strDate) {
+            return [UIColor.blue]
+        } else if dates2.contains(strDate) {
+            return [UIColor.blue]
+        } else if dates3.contains(strDate) {
             return [UIColor.blue]
         }
         return [UIColor.clear]
