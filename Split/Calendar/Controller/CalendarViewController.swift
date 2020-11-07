@@ -91,7 +91,7 @@ extension CalendarViewController {
     
     private func getUserPlan() {
         let headers: HTTPHeaders = [
-            "memberId": "1",
+            "memberId": "2",
         ]
         AF.request(CalendarAPIConstant.userPlanURL, headers: headers).responseJSON { (response) in
             switch response.result {
@@ -100,6 +100,7 @@ extension CalendarViewController {
                 do {
                     let jsonData = try JSONSerialization.data(withJSONObject: res, options: .prettyPrinted)
                     let json = try JSONDecoder().decode([UserPlan].self, from: jsonData)
+                    
                     self.userPlans = json
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
@@ -309,13 +310,21 @@ extension CalendarViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "calendarTableViewCell", for: indexPath) as? CalendarTableViewCell else { return UITableViewCell() }
+        // 플랜이름
         cell.planTitleLabel.text = userPlans[indexPath.row].planName
-        cell.timeLabel.text = userPlans[indexPath.row].setTime
+        // 플랜시간
+        let timeString = userPlans[indexPath.row].setTime
+        let endIdx: String.Index = timeString.index(timeString.startIndex, offsetBy: 4)
+        cell.timeLabel.text = String(timeString[...endIdx])
+        // 플랜 인증 횟수
         cell.dayLabel.text = "\(userPlans[indexPath.row].nowAuthNum) 일째"
+        // 플랜 성공 여부
         let status = checkPlanProgress(status: userPlans[indexPath.row].planProgress)
         cell.successLabel.text = status
+        // 플랜 성공 여부 뷰 색상
         let statusColor = checkSuccessColor(status: userPlans[indexPath.row].planProgress)
         cell.successLabelView.backgroundColor = statusColor
+        // 플랜 뷰 색상
         let planColor = checkPlanColor(type: userPlans[indexPath.row].needAuthNum)
         cell.planColorBarView.backgroundColor = UIColor(named: planColor)
         cell.dayLabelView.backgroundColor = UIColor(named: planColor)
