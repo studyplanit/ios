@@ -16,6 +16,9 @@ class SubscriptionViewController: UIViewController {
     @IBOutlet weak var planTitleView: UIView!
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var timePicker: UIDatePicker!
+    
+    var userPlans: [UserPlan] = []
+    var PlanDates: [[String]] = [[],[],[]]
     var plan: PlanList?
     let userID = UserDefaults.standard.string(forKey: "id")
     let dateFormatter: DateFormatter = {
@@ -24,20 +27,8 @@ class SubscriptionViewController: UIViewController {
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter
     }()
-    
     var startDate = ""
     var endDate = ""
-    
-    var arrayOfEvent1 : [String] = [
-        "2020-11-14",
-        "2020-11-15",
-        "2020-11-16",
-        "2020-11-17",
-        "2020-11-18",
-        "2020-11-19",
-        "2020-11-20"
-    ]
-    var arrayOfEvent2 : [String] = ["2020-11-14", "2020-11-16", "2020-11-17"]
 
     // MARK:- View Life Cycle
     override func viewDidLoad() {
@@ -47,6 +38,12 @@ class SubscriptionViewController: UIViewController {
         configureNavigationBar()
         configureCalendar()
         print(userID!)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        getUserPlan()
     }
 
 }
@@ -87,6 +84,49 @@ extension SubscriptionViewController {
 
 // MARK:- Methods
 extension SubscriptionViewController {
+    
+    private func getUserPlan() {
+        let headers: HTTPHeaders = [
+            "memberId": "2",
+        ]
+        AF.request(CalendarAPIConstant.userPlanURL, headers: headers).responseJSON { (response) in
+            switch response.result {
+                // 성공
+            case .success(let res):
+                do {
+                    let jsonData = try JSONSerialization.data(withJSONObject: res, options: .prettyPrinted)
+                    let json = try JSONDecoder().decode([UserPlan].self, from: jsonData)
+                    
+                    self.userPlans = json
+                    DispatchQueue.main.async {
+//                        self.tableView.reloadData()
+                        self.PlanDates = [[],[],[]]
+                        self.setUserPlanDates(userPlans: self.userPlans)
+                        self.calendar.reloadData()
+                    }
+                } catch(let err) {
+                    print(err.localizedDescription)
+                }
+                // 실패
+            case .failure(let err):
+                print(err.localizedDescription)
+            }
+        }
+    }
+    
+    // 플랜 날짜 리스트 만들기
+    func setUserPlanDates(userPlans: [UserPlan]) {
+        for i in 0 ..< userPlans.count {
+            let startDateString = userPlans[i].startDate
+            guard let startDate = dateFormatter.date(from: startDateString) else { return }
+            var date = startDate
+            for _ in 0..<userPlans[i].needAuthNum {
+                PlanDates[i].append(dateFormatter.string(from: date))
+                date = date + 86400
+            }
+        }
+        print("setUserPlanDates() called - PlanDates: \(PlanDates)")
+    }
     
     // 날짜를 올바르게 선택하고 확인버튼 클릭시 alert
     func ShowCorrectAlert() {
@@ -174,17 +214,28 @@ extension SubscriptionViewController {
 // MARK:- FSCalendar DataSource
 extension SubscriptionViewController: FSCalendarDataSource {
     
-    // 특정 날짜 점 표시
+    /// 특정 날짜 점 표시
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-//        guard let eventDate = dateFormatter.date(from: "2020-10-29") else { return 0 }
         let strDate = dateFormatter.string(from:date)
-        if arrayOfEvent1.contains(strDate) && arrayOfEvent2.contains(strDate) {
-             return 2
-        } else if arrayOfEvent1.contains(strDate) {
-             return 1
-        } else if arrayOfEvent2.contains(strDate) {
-             return 1
-         }
+        let dates1 = PlanDates[0]
+        let dates2 = PlanDates[1]
+        let dates3 = PlanDates[2]
+        
+        if dates1.contains(strDate) && dates2.contains(strDate) && dates3.contains(strDate) {
+            return 3
+        } else if dates1.contains(strDate) && dates2.contains(strDate)  {
+            return 2
+        } else if dates2.contains(strDate) && dates3.contains(strDate) {
+            return 2
+        } else if dates1.contains(strDate) && dates3.contains(strDate) {
+            return 2
+        } else if dates1.contains(strDate) {
+            return 1
+        } else if dates2.contains(strDate) {
+            return 1
+        } else if dates3.contains(strDate) {
+            return 1
+        }
         return 0
     }
     
@@ -258,12 +309,23 @@ extension SubscriptionViewController: FSCalendarDelegateAppearance {
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventDefaultColorsFor date: Date) -> [UIColor]? {
         
         let strDate = dateFormatter.string(from: date)
-
-        if arrayOfEvent1.contains(strDate) && arrayOfEvent2.contains(strDate) {
+        let dates1 = PlanDates[0]
+        let dates2 = PlanDates[1]
+        let dates3 = PlanDates[2]
+        
+        if dates1.contains(strDate) && dates2.contains(strDate) && dates3.contains(strDate) {
+            return [UIColor.red ,UIColor.blue, UIColor.green]
+        } else if dates1.contains(strDate) && dates2.contains(strDate)  {
             return [UIColor.red ,UIColor.blue]
-        } else if arrayOfEvent1.contains(strDate) {
-            return [UIColor.red]
-        } else if arrayOfEvent2.contains(strDate) {
+        } else if dates2.contains(strDate) && dates3.contains(strDate) {
+            return [UIColor.red ,UIColor.blue]
+        } else if dates1.contains(strDate) && dates3.contains(strDate) {
+            return [UIColor.red ,UIColor.blue]
+        } else if dates1.contains(strDate) {
+            return [UIColor.blue]
+        } else if dates2.contains(strDate) {
+            return [UIColor.blue]
+        } else if dates3.contains(strDate) {
             return [UIColor.blue]
         }
         return [UIColor.clear]
@@ -272,12 +334,23 @@ extension SubscriptionViewController: FSCalendarDelegateAppearance {
     // 점 선택 색상
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventSelectionColorsFor date: Date) -> [UIColor]? {
         let strDate = dateFormatter.string(from: date)
+        let dates1 = PlanDates[0]
+        let dates2 = PlanDates[1]
+        let dates3 = PlanDates[2]
 
-        if arrayOfEvent1.contains(strDate) && arrayOfEvent2.contains(strDate) {
+        if dates1.contains(strDate) && dates2.contains(strDate) && dates3.contains(strDate) {
+            return [UIColor.red ,UIColor.blue, UIColor.green]
+        } else if dates1.contains(strDate) && dates2.contains(strDate)  {
             return [UIColor.red ,UIColor.blue]
-        } else if arrayOfEvent1.contains(strDate) {
-            return [UIColor.red]
-        } else if arrayOfEvent2.contains(strDate) {
+        } else if dates2.contains(strDate) && dates3.contains(strDate) {
+            return [UIColor.red ,UIColor.blue]
+        } else if dates1.contains(strDate) && dates3.contains(strDate) {
+            return [UIColor.red ,UIColor.blue]
+        } else if dates1.contains(strDate) {
+            return [UIColor.blue]
+        } else if dates2.contains(strDate) {
+            return [UIColor.blue]
+        } else if dates3.contains(strDate) {
             return [UIColor.blue]
         }
         return [UIColor.clear]
