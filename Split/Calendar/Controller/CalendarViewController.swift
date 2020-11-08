@@ -18,7 +18,7 @@ class CalendarViewController: UIViewController {
     
     let userID = UserDefaults.standard.string(forKey: "id")
     var userPlans: [UserPlan] = []
-    var PlanDates: [[String]] = []
+    var PlanDates: [[String]] = [[],[],[]]
     let aDay = 86400
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -43,9 +43,14 @@ class CalendarViewController: UIViewController {
         configureTapBar()
         configureCalendar()
         configureTableView()
-        getUserPlan()
 //        configureBackgoroundView()
-        print(userID!)
+        print("유저아이디 : \(userID!)")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        getUserPlan()
     }
 
 }
@@ -104,6 +109,9 @@ extension CalendarViewController {
                     self.userPlans = json
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
+                        self.PlanDates = [[],[],[]]
+                        self.setUserPlanDates(userPlans: self.userPlans)
+                        self.calendar.reloadData()
                     }
                 } catch(let err) {
                     print(err.localizedDescription)
@@ -111,6 +119,23 @@ extension CalendarViewController {
                 // 실패
             case .failure(let err):
                 print(err.localizedDescription)
+            }
+        }
+    }
+    
+    private func deleteUserPlan(planID: Int) {
+        // HTTP Request
+        let headers: HTTPHeaders = [
+            "plan_log_id": "\(planID)"
+        ]
+        AF.request(PlanAPIConstant.userPlanDeleteURL, method: .post, headers: headers).responseJSON { (response) in
+            switch response.result {
+                // 성공
+            case .success(let res):
+                print("성공: \(res)")
+                // 실패
+            case .failure(let err):
+                print("실패: \(err.localizedDescription)")
             }
         }
     }
@@ -128,7 +153,7 @@ extension CalendarViewController {
         }
     }
     
-    func deletePlan() {
+    func deletePlan(planID: Int) {
         let alert = UIAlertController(
             title: "",
             message: "플랜을 삭제하시겠습니까?",
@@ -136,7 +161,9 @@ extension CalendarViewController {
         let okAction = UIAlertAction(
             title: "확인",
             style: .default) { (action : UIAlertAction) in
+            self.deleteUserPlan(planID: planID)
             self.completeAlert()
+            self.getUserPlan()
         }
         let cancelAction = UIAlertAction(
             title: "취소",
@@ -186,19 +213,20 @@ extension CalendarViewController {
         }
     }
     
-//    // 플랜 날짜 리스트 만들기
-//    func setPlanDates() {
-//        for i in 0 ..< userPlans.count {
-//            let startDateString = userPlans[i].startDate
-//            let startDate = dateFormatter.date(from: startDateString)
-//            let term = userPlans[i].needAuthNum
-//            for j in 1...term {
-//                let temp = j
-//                let date = startDate! + (86400 * temp)
-//                PlanDates[i] += []
-//            }
-//        }
-//    }
+    // 플랜 날짜 리스트 만들기
+    func setUserPlanDates(userPlans: [UserPlan]) {
+        print("setUserPlanDates() called")
+//        guard let userPlans = userPlans else { return }
+        for i in 0 ..< userPlans.count {
+            let startDateString = userPlans[i].startDate
+            guard let startDate = dateFormatter.date(from: startDateString) else { return }
+            var date = startDate
+            for _ in 0..<userPlans[i].needAuthNum {
+                PlanDates[i].append(dateFormatter.string(from: date))
+                date = date + 86400
+            }
+        }
+    }
     
 }
 
@@ -209,13 +237,25 @@ extension CalendarViewController: FSCalendarDataSource {
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
 //        guard let eventDate = dateFormatter.date(from: "2020-10-29") else { return 0 }
         let strDate = dateFormatter.string(from:date)
-        if arrayOfEvent1.contains(strDate) && arrayOfEvent2.contains(strDate) {
-             return 2
-        } else if arrayOfEvent1.contains(strDate) {
-             return 1
-        } else if arrayOfEvent2.contains(strDate) {
-             return 1
-         }
+        let dates1 = PlanDates[0]
+        let dates2 = PlanDates[1]
+        let dates3 = PlanDates[2]
+        
+        if dates1.contains(strDate) && dates2.contains(strDate) && dates3.contains(strDate) {
+            return 3
+        } else if dates1.contains(strDate) && dates2.contains(strDate)  {
+            return 2
+        } else if dates2.contains(strDate) && dates3.contains(strDate) {
+            return 2
+        } else if dates1.contains(strDate) && dates3.contains(strDate) {
+            return 2
+        } else if dates1.contains(strDate) {
+            return 1
+        } else if dates2.contains(strDate) {
+            return 1
+        } else if dates3.contains(strDate) {
+            return 1
+        }
         return 0
     }
     
@@ -274,12 +314,23 @@ extension CalendarViewController: FSCalendarDelegateAppearance {
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventDefaultColorsFor date: Date) -> [UIColor]? {
         
         let strDate = dateFormatter.string(from: date)
-
-        if arrayOfEvent1.contains(strDate) && arrayOfEvent2.contains(strDate) {
+        let dates1 = PlanDates[0]
+        let dates2 = PlanDates[1]
+        let dates3 = PlanDates[2]
+        
+        if dates1.contains(strDate) && dates2.contains(strDate) && dates3.contains(strDate) {
+            return [UIColor.red ,UIColor.blue, UIColor.green]
+        } else if dates1.contains(strDate) && dates2.contains(strDate)  {
             return [UIColor.red ,UIColor.blue]
-        } else if arrayOfEvent1.contains(strDate) {
-            return [UIColor.red]
-        } else if arrayOfEvent2.contains(strDate) {
+        } else if dates2.contains(strDate) && dates3.contains(strDate) {
+            return [UIColor.red ,UIColor.blue]
+        } else if dates1.contains(strDate) && dates3.contains(strDate) {
+            return [UIColor.red ,UIColor.blue]
+        } else if dates1.contains(strDate) {
+            return [UIColor.blue]
+        } else if dates2.contains(strDate) {
+            return [UIColor.blue]
+        } else if dates3.contains(strDate) {
             return [UIColor.blue]
         }
         return [UIColor.clear]
@@ -288,12 +339,23 @@ extension CalendarViewController: FSCalendarDelegateAppearance {
     // 점 선택 색상
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventSelectionColorsFor date: Date) -> [UIColor]? {
         let strDate = dateFormatter.string(from: date)
+        let dates1 = PlanDates[0]
+        let dates2 = PlanDates[1]
+        let dates3 = PlanDates[2]
 
-        if arrayOfEvent1.contains(strDate) && arrayOfEvent2.contains(strDate) {
+        if dates1.contains(strDate) && dates2.contains(strDate) && dates3.contains(strDate) {
+            return [UIColor.red ,UIColor.blue, UIColor.green]
+        } else if dates1.contains(strDate) && dates2.contains(strDate)  {
             return [UIColor.red ,UIColor.blue]
-        } else if arrayOfEvent1.contains(strDate) {
-            return [UIColor.red]
-        } else if arrayOfEvent2.contains(strDate) {
+        } else if dates2.contains(strDate) && dates3.contains(strDate) {
+            return [UIColor.red ,UIColor.blue]
+        } else if dates1.contains(strDate) && dates3.contains(strDate) {
+            return [UIColor.red ,UIColor.blue]
+        } else if dates1.contains(strDate) {
+            return [UIColor.blue]
+        } else if dates2.contains(strDate) {
+            return [UIColor.blue]
+        } else if dates3.contains(strDate) {
             return [UIColor.blue]
         }
         return [UIColor.clear]
@@ -328,6 +390,8 @@ extension CalendarViewController: UITableViewDataSource {
         let planColor = checkPlanColor(type: userPlans[indexPath.row].needAuthNum)
         cell.planColorBarView.backgroundColor = UIColor(named: planColor)
         cell.dayLabelView.backgroundColor = UIColor(named: planColor)
+        // 셀 태그에 플랜로그아이디 삽입
+        cell.tag = userPlans[indexPath.row].planLogID
         return cell
     }
     
@@ -339,8 +403,9 @@ extension CalendarViewController: UITableViewDataSource {
     // 테이블뷰가 편집모드일때 동작을 정의하는 메서드
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            print("셀 삭제")
-            deletePlan()
+            guard let planLogID = tableView.cellForRow(at: indexPath)?.tag else { return }
+            print("셀 삭제 플랜로그아이디 : \(planLogID)")
+            deletePlan(planID: planLogID)
         }
     }
     

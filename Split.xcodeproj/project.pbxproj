@@ -37,6 +37,7 @@
 		8D5D7042254A911C00618A27 /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5D7040254A911C00618A27 /* CalendarTableViewCell.swift */; };
 		8D5D7043254A911C00618A27 /* CalendarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D5D7041254A911C00618A27 /* CalendarTableViewCell.xib */; };
 		8D5F7897254C77B8001773B7 /* Attendance.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D5F7895254C77B8001773B7 /* Attendance.storyboard */; };
+		8D9E599F255590AE0091CE28 /* AttendanceTapGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9E599E255590AE0091CE28 /* AttendanceTapGesture.swift */; };
 		8DCFAFCD25540A2F003E181E /* PlanAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCFAFCC25540A2F003E181E /* PlanAPI.swift */; };
 		8DCFAFD8255414EF003E181E /* CalendarAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCFAFD7255414EF003E181E /* CalendarAPI.swift */; };
 		8DCFAFDF25541C73003E181E /* AttendanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCFAFDE25541C73003E181E /* AttendanceModel.swift */; };
@@ -116,6 +117,7 @@
 		8D5D7040254A911C00618A27 /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
 		8D5D7041254A911C00618A27 /* CalendarTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarTableViewCell.xib; sourceTree = "<group>"; };
 		8D5F7896254C77B8001773B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Split/Storyboard/Base.lproj/Attendance.storyboard; sourceTree = "<group>"; };
+		8D9E599E255590AE0091CE28 /* AttendanceTapGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceTapGesture.swift; sourceTree = "<group>"; };
 		8DCFAFCC25540A2F003E181E /* PlanAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanAPI.swift; sourceTree = "<group>"; };
 		8DCFAFD7255414EF003E181E /* CalendarAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAPI.swift; sourceTree = "<group>"; };
 		8DCFAFDE25541C73003E181E /* AttendanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceModel.swift; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 		8D4D6AD1254B0F1E0082DD07 /* Attendance */ = {
 			isa = PBXGroup;
 			children = (
+				8D9E599D255590930091CE28 /* Custom */,
 				8DCFAFDC25541C49003E181E /* Model */,
 				8DCFAFDD25541C53003E181E /* API */,
 				8D4D6AD2254B0F310082DD07 /* Controller */,
@@ -366,6 +369,14 @@
 				8D5D7041254A911C00618A27 /* CalendarTableViewCell.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		8D9E599D255590930091CE28 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				8D9E599E255590AE0091CE28 /* AttendanceTapGesture.swift */,
+			);
+			path = Custom;
 			sourceTree = "<group>";
 		};
 		8DB587D925497F470039F3C3 /* Controller */ = {
@@ -797,6 +808,7 @@
 				8DE705D02548AC5200768ACB /* PlanViewController.swift in Sources */,
 				8DCFAFD8255414EF003E181E /* CalendarAPI.swift in Sources */,
 				FD0125DA2537093A00AD92E8 /* MemberVO.swift in Sources */,
+				8D9E599F255590AE0091CE28 /* AttendanceTapGesture.swift in Sources */,
 				FD2F4D222538CCE1000A3944 /* HomeViewController.swift in Sources */,
 				8D3AC56325499F680059F950 /* ChallengeViewController.swift in Sources */,
 				8DCFAFDF25541C73003E181E /* AttendanceModel.swift in Sources */,
