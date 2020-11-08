@@ -92,8 +92,8 @@
                                         </date>
                                         <locale key="locale" localeIdentifier="ko"/>
                                     </datePicker>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.up.arrow.down" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="6mN-aO-fm2">
-                                        <rect key="frame" x="240.5" y="1" width="16.5" height="87.5"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.up.chevron.down" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="6mN-aO-fm2">
+                                        <rect key="frame" x="240.5" y="1.5" width="16.5" height="86.5"/>
                                         <color key="tintColor" red="0.2156862745" green="0.2784313725" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
                                     </imageView>
                                 </subviews>
@@ -222,7 +222,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrow.up.arrow.down" catalog="system" width="128" height="98"/>
+        <image name="chevron.up.chevron.down" catalog="system" width="128" height="128"/>
         <image name="clock.fill" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

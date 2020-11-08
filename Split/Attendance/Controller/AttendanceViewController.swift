@@ -46,6 +46,12 @@ class AttendanceViewController: UIViewController {
         getUserPlan()
     }
     
+//    override func viewDidDisappear(_ animated: Bool) {
+//        super.viewDidDisappear(animated)
+//        
+//        navigationController?.popViewController(animated: true)
+//    }
+    
 }
 
 // MARK:- Configure

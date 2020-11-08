@@ -17,6 +17,7 @@ class AttendanceCompletionViewController: UIViewController {
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var sayingLabelView: UIView!
     @IBOutlet weak var completionButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var urlLabel: UILabel!
     @IBOutlet weak var splitZoneNameLabel: UILabel!
     @IBOutlet weak var splitZoneCodeLabel: UILabel!
@@ -44,7 +45,14 @@ class AttendanceCompletionViewController: UIViewController {
         
         configureSplitZoneInfoView()
     }
-
+    
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        // 해당 페이지를 벗어나서 플랜을 삭제할 경우를 대비
+        navigationController?.popToRootViewController(animated: true)
+    }
 }
 
 //MARK:- Configure
@@ -59,10 +67,12 @@ extension AttendanceCompletionViewController {
         sayingLabelView.layer.cornerRadius = 10
         sayingLabelView.layer.borderWidth = 3
         completionButton.layer.cornerRadius = 0.5 * completionButton.bounds.size.height
+        cancelButton.layer.cornerRadius = 0.5 * cancelButton.bounds.size.height
         // 그림자
         configureShadowUI(planView)
         configureShadowUI(sayingLabelView)
         configureShadowUI(completionButton)
+        configureShadowUI(cancelButton)
         // 인증한 플랜 컨텐츠
         planNameLabel.text = userPlan.planName
         timeLabel.text = userPlan.setTime
@@ -90,11 +100,13 @@ extension AttendanceCompletionViewController {
 //        urlLabel.text = url
         navigationItem.title = "QR"
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "KoPubDotumBold", size: 20)!]
+        navigationItem.hidesBackButton = true
     }
     
-    // 완료 버튼
+    // 버튼
     func configureButton() {
         completionButton.addTarget(self, action: #selector(completeButton), for: .touchUpInside)
+        cancelButton.addTarget(self, action: #selector(touchUpCancelButton), for: .touchUpInside)
     }
     
     // 스플릿존 이름, 뷰
@@ -185,6 +197,20 @@ extension AttendanceCompletionViewController {
         let alert = UIAlertController(
             title: "",
             message: "인증이 완료되었습니다.",
+            preferredStyle: .alert)
+        let okAction = UIAlertAction(
+            title: "확인",
+            style: .default){ (action : UIAlertAction) in
+            self.navigationController?.popViewController(animated: true)
+        }
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func touchUpCancelButton() {
+        let alert = UIAlertController(
+            title: "",
+            message: "인증을 취소하시겠습니까?",
             preferredStyle: .alert)
         let okAction = UIAlertAction(
             title: "확인",
