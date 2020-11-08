@@ -47,7 +47,7 @@ class CalendarViewController: UIViewController {
 
 }
 
-// MARK:- Configure
+// MARK:- Configure UI
 extension CalendarViewController {
     
     func configureTapBar() {
@@ -83,7 +83,7 @@ extension CalendarViewController {
     
 }
 
-// MARK:- Methods
+// MARK:- API
 extension CalendarViewController {
     
     private func getUserPlan() {
@@ -147,37 +147,10 @@ extension CalendarViewController {
         }
     }
     
-    func deletePlan(planID: Int) {
-        let alert = UIAlertController(
-            title: "",
-            message: "정말로 플랜신청 내역을 삭제하시겠습니까?",
-            preferredStyle: .alert)
-        let okAction = UIAlertAction(
-            title: "확인",
-            style: .default) { (action : UIAlertAction) in
-            self.deleteUserPlan(planID: planID)
-            self.completeAlert()
-            self.getUserPlan()
-        }
-        let cancelAction = UIAlertAction(
-            title: "취소",
-            style: .cancel)
-        alert.addAction(okAction)
-        alert.addAction(cancelAction)
-        present(alert, animated: true, completion: nil)
-    }
-    
-    func completeAlert() {
-        let alert = UIAlertController(
-            title: "",
-            message: "플랜이 삭제되었습니다.",
-            preferredStyle: .alert)
-        let okAction = UIAlertAction(
-            title: "확인",
-            style: .default)
-        alert.addAction(okAction)
-        present(alert, animated: true, completion: nil)
-    }
+}
+
+// MARK:- Methods
+extension CalendarViewController {
     
     func checkPlanColor(type: Int) -> String {
         switch type {
@@ -237,6 +210,43 @@ extension CalendarViewController {
     func deselectDate() {
         guard let date = selectDate else { return }
         calendar.deselect(date)
+    }
+    
+}
+
+// MARK:- Alert
+extension CalendarViewController {
+    
+    func completeAlert() {
+        let alert = UIAlertController(
+            title: "",
+            message: "플랜이 삭제되었습니다.",
+            preferredStyle: .alert)
+        let okAction = UIAlertAction(
+            title: "확인",
+            style: .default)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func deletePlanAlert(planID: Int) {
+        let alert = UIAlertController(
+            title: "",
+            message: "정말로 플랜신청 내역을 삭제하시겠습니까?",
+            preferredStyle: .alert)
+        let okAction = UIAlertAction(
+            title: "확인",
+            style: .default) { (action : UIAlertAction) in
+            self.deleteUserPlan(planID: planID)
+            self.completeAlert()
+            self.getUserPlan()
+        }
+        let cancelAction = UIAlertAction(
+            title: "취소",
+            style: .cancel)
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
     }
     
 }
@@ -418,7 +428,7 @@ extension CalendarViewController: UITableViewDataSource {
         if editingStyle == .delete {
             guard let planLogID = tableView.cellForRow(at: indexPath)?.tag else { return }
             print("셀 삭제 플랜로그아이디 : \(planLogID)")
-            deletePlan(planID: planLogID)
+            deletePlanAlert(planID: planLogID)
             deselectDate()
         }
     }

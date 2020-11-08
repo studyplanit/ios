@@ -95,7 +95,7 @@ extension SubscriptionViewController {
     
 }
 
-// MARK:- Methods
+// MARK:- API
 extension SubscriptionViewController {
     
     private func getUserPlan() {
@@ -127,6 +127,36 @@ extension SubscriptionViewController {
         }
     }
     
+    private func postPlan(planID: String,
+                          startDate: String,
+                          endDate: String,
+                          setTime: String) {
+
+        let headers: HTTPHeaders = [
+            "member_id": "2",
+            "plan_id": planID,
+            "startDate": startDate,
+            "endDate": endDate,
+            "setTime": setTime
+        ]
+        
+        AF.request(PlanAPIConstant.planInsertURL, method: .post, headers: headers).responseJSON { (response) in
+            switch response.result {
+                // 성공
+            case .success(let res):
+                print(res)
+                // 실패
+            case .failure(let err):
+                print(err.localizedDescription)
+            }
+        }
+    }
+    
+}
+
+// MARK:- Methods
+extension SubscriptionViewController {
+    
     // 플랜 날짜 리스트 만들기
     func setUserPlanDates(userPlans: [UserPlan]) {
         for i in 0 ..< userPlans.count {
@@ -139,6 +169,31 @@ extension SubscriptionViewController {
             }
         }
         print("setUserPlanDates() called - PlanDates: \(PlanDates)")
+    }
+    
+    // 타임피커 값변경시 플랜시간 변수 설정
+    @objc func setPlanTime (_ sender: UIDatePicker) {
+        planTime = timeFormatter.string(from: sender.date)
+        print("설정한 시간 : \(planTime)")
+    }
+    
+}
+
+// MARK:- Alert
+extension SubscriptionViewController {
+    
+    func completeAlert() {
+        let alert = UIAlertController(
+            title: "",
+            message: "플랜 신청이 완료되었습니다.",
+            preferredStyle: .alert)
+        let okAction = UIAlertAction(
+            title: "확인",
+            style: .default){ (action : UIAlertAction) in
+            self.navigationController?.popViewController(animated: true)
+        }
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
     }
     
     // 날짜를 올바르게 선택하고 확인버튼 클릭시 alert
@@ -175,45 +230,6 @@ extension SubscriptionViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    func completeAlert() {
-        let alert = UIAlertController(
-            title: "",
-            message: "플랜 신청이 완료되었습니다.",
-            preferredStyle: .alert)
-        let okAction = UIAlertAction(
-            title: "확인",
-            style: .default){ (action : UIAlertAction) in
-            self.navigationController?.popViewController(animated: true)
-        }
-        alert.addAction(okAction)
-        present(alert, animated: true, completion: nil)
-    }
-    
-    private func postPlan(planID: String,
-                          startDate: String,
-                          endDate: String,
-                          setTime: String) {
-
-        let headers: HTTPHeaders = [
-            "member_id": "2",
-            "plan_id": planID,
-            "startDate": startDate,
-            "endDate": endDate,
-            "setTime": setTime
-        ]
-        
-        AF.request(PlanAPIConstant.planInsertURL, method: .post, headers: headers).responseJSON { (response) in
-            switch response.result {
-                // 성공
-            case .success(let res):
-                print(res)
-                // 실패
-            case .failure(let err):
-                print(err.localizedDescription)
-            }
-        }
-    }
-    
     // 날짜를 선택했는지 확인후 Alert
     @objc func checkDateFormAndShowAlert() {
         if startDate != "" && endDate != "" {
@@ -221,12 +237,6 @@ extension SubscriptionViewController {
         } else {
             ShowIncorrectAlert()
         }
-    }
-    
-    // 타임피커 값변경시 플랜시간 변수 설정
-    @objc func setPlanTime (_ sender: UIDatePicker) {
-        planTime = timeFormatter.string(from: sender.date)
-        print("설정한 시간 : \(planTime)")
     }
     
 }

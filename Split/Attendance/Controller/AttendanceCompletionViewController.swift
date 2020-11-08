@@ -55,7 +55,7 @@ class AttendanceCompletionViewController: UIViewController {
     }
 }
 
-//MARK:- Configure
+//MARK:- Configure UI
 extension AttendanceCompletionViewController {
     
     // 전체 UI
@@ -119,23 +119,8 @@ extension AttendanceCompletionViewController {
     
 }
 
-//MARK:- Methods
+//MARK:- API
 extension AttendanceCompletionViewController {
-    
-    func checkPlanColor(type: Int) -> String {
-        switch type {
-        case 1:
-            return "Color_1day"
-        case 7:
-            return "Color_7days"
-        case 15:
-            return "Color_15days"
-        case 30:
-            return "Color_30days"
-        default:
-            return "Color_1days"
-        }
-    }
     
     private func postQRAuth() {
         guard let userPlan = userPlan else { return }
@@ -158,11 +143,6 @@ extension AttendanceCompletionViewController {
                 print("실패: \(err.localizedDescription)")
             }
         }
-    }
-    
-    func getSplitZoneID(url: String) -> String {
-        let endIndex = url.index(url.endIndex, offsetBy: -1)
-        return String(url[endIndex...])
     }
     
     private func getSplitZone() {
@@ -192,6 +172,26 @@ extension AttendanceCompletionViewController {
 //MARK:- Methods
 extension AttendanceCompletionViewController {
     
+    func checkPlanColor(type: Int) -> String {
+        switch type {
+        case 1:
+            return "Color_1day"
+        case 7:
+            return "Color_7days"
+        case 15:
+            return "Color_15days"
+        case 30:
+            return "Color_30days"
+        default:
+            return "Color_1days"
+        }
+    }
+    
+    func getSplitZoneID(url: String) -> String {
+        let endIndex = url.index(url.endIndex, offsetBy: -1)
+        return String(url[endIndex...])
+    }
+    
     @objc func completeButton() {
         postQRAuth()
         let alert = UIAlertController(
@@ -220,5 +220,5 @@ extension AttendanceCompletionViewController {
         alert.addAction(okAction)
         present(alert, animated: true, completion: nil)
     }
-
+    
 }

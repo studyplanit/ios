@@ -54,7 +54,7 @@ class AttendanceViewController: UIViewController {
     
 }
 
-// MARK:- Configure
+// MARK:- Configure UI
 extension AttendanceViewController {
     
     func configureTapBar() {
@@ -103,7 +103,7 @@ extension AttendanceViewController {
     
 }
 
-// MARK:- Methods
+// MARK:- API
 extension AttendanceViewController {
     
     private func getUserPlan() {
@@ -131,6 +131,11 @@ extension AttendanceViewController {
         }
     }
     
+}
+
+// MARK:- Methods
+extension AttendanceViewController {
+
 //    // 시, 분 만 표시하기
 //    func formatiTimeString(timeString: String) -> String {
 //        let endIdx: String.Index = timeString.index(timeString.startIndex, offsetBy: 4)

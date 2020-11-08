@@ -28,7 +28,6 @@ class PlanViewController: UIViewController {
     }()
     
     
-    
     // MARK:- View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,6 +94,5 @@ extension PlanViewController {
             addView(asChildViewController: eventViewController)
         }
     }
-    
     
 }

@@ -37,7 +37,7 @@ class ChallengeViewController: UIViewController {
     
 }
 
-// MARK:- Configure
+// MARK:- Configure UI
 extension ChallengeViewController {
     
     func configureTableView() {
@@ -68,7 +68,7 @@ extension ChallengeViewController {
     
 }
 
-// MARK:- Methods
+// MARK:- API
 extension ChallengeViewController {
     
     private func getUserPlan() {
@@ -120,6 +120,11 @@ extension ChallengeViewController {
         }
     }
     
+}
+
+// MARK:- Alert
+extension ChallengeViewController {
+    
     // 테스트 기간용 알림
     func prohibitAlert() {
         let alert = UIAlertController(
@@ -133,6 +138,7 @@ extension ChallengeViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    // 보유플랜 3개 이상시 금지
     func prohibitMorePlanAlert() {
         let alert = UIAlertController(
             title: "",
