@@ -135,7 +135,8 @@ extension ChallengeViewController: UITableViewDataSource {
                     for: indexPath) as? ChallengeContentTableViewCell else {
                 return UITableViewCell()
             }
-            cell.planTitleLabel.text = plans[indexPath.row].name
+//            cell.planTitleLabel.text = plans[indexPath.row].name
+            cell.planDateLabel.text = "\(plans[indexPath.row].need)일"
             let medalName = setMedalImage(type: plans[indexPath.row].need)
             cell.medalImageView.image = UIImage(named: medalName)
             cell.userNumberLabel.text = numberFormatter.string(from: NSNumber(value: plans[indexPath.row].need))! + " 명"
