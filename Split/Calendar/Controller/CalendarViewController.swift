@@ -336,50 +336,59 @@ extension CalendarViewController: FSCalendarDelegateAppearance {
     // 점 기본 색상
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventDefaultColorsFor date: Date) -> [UIColor]? {
         
+        guard let blue = UIColor(named: "Color_1day"),
+              let yellow = UIColor(named: "Color_7days"),
+              let red = UIColor(named: "Color_30days") else { return [UIColor()] }
+        
         let strDate = dateFormatter.string(from: date)
         let dates1 = PlanDates[0]
         let dates2 = PlanDates[1]
         let dates3 = PlanDates[2]
         
         if dates1.contains(strDate) && dates2.contains(strDate) && dates3.contains(strDate) {
-            return [UIColor.red ,UIColor.blue, UIColor.green]
+            return [blue, yellow, red]
         } else if dates1.contains(strDate) && dates2.contains(strDate)  {
-            return [UIColor.red ,UIColor.blue]
+            return [blue ,yellow]
         } else if dates2.contains(strDate) && dates3.contains(strDate) {
-            return [UIColor.red ,UIColor.blue]
+            return [blue ,yellow]
         } else if dates1.contains(strDate) && dates3.contains(strDate) {
-            return [UIColor.red ,UIColor.blue]
+            return [blue ,yellow]
         } else if dates1.contains(strDate) {
-            return [UIColor.blue]
+            return [blue]
         } else if dates2.contains(strDate) {
-            return [UIColor.blue]
+            return [blue]
         } else if dates3.contains(strDate) {
-            return [UIColor.blue]
+            return [blue]
         }
         return [UIColor.clear]
     }
     
     // 점 선택 색상
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventSelectionColorsFor date: Date) -> [UIColor]? {
+        
+        guard let blue = UIColor(named: "Color_1day"),
+              let yellow = UIColor(named: "Color_7days"),
+              let red = UIColor(named: "Color_30days") else { return [UIColor()] }
+        
         let strDate = dateFormatter.string(from: date)
         let dates1 = PlanDates[0]
         let dates2 = PlanDates[1]
         let dates3 = PlanDates[2]
-
+        
         if dates1.contains(strDate) && dates2.contains(strDate) && dates3.contains(strDate) {
-            return [UIColor.red ,UIColor.blue, UIColor.green]
+            return [blue, yellow, red]
         } else if dates1.contains(strDate) && dates2.contains(strDate)  {
-            return [UIColor.red ,UIColor.blue]
+            return [blue ,yellow]
         } else if dates2.contains(strDate) && dates3.contains(strDate) {
-            return [UIColor.red ,UIColor.blue]
+            return [blue ,yellow]
         } else if dates1.contains(strDate) && dates3.contains(strDate) {
-            return [UIColor.red ,UIColor.blue]
+            return [blue ,yellow]
         } else if dates1.contains(strDate) {
-            return [UIColor.blue]
+            return [blue]
         } else if dates2.contains(strDate) {
-            return [UIColor.blue]
+            return [blue]
         } else if dates3.contains(strDate) {
-            return [UIColor.blue]
+            return [blue]
         }
         return [UIColor.clear]
     }
