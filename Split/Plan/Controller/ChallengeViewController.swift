@@ -19,12 +19,20 @@ class ChallengeViewController: UIViewController {
         return formatter
     }()
     
+    var userPlans: [UserPlan] = []
+    
     // MARK:- View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureTableView()
         getPlanList()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        getUserPlan()
     }
     
 }
@@ -63,6 +71,32 @@ extension ChallengeViewController {
 // MARK:- Methods
 extension ChallengeViewController {
     
+    private func getUserPlan() {
+        let headers: HTTPHeaders = [
+            "memberId": "2",
+        ]
+        AF.request(CalendarAPIConstant.userPlanURL, headers: headers).responseJSON { (response) in
+            switch response.result {
+                // 성공
+            case .success(let res):
+                do {
+                    let jsonData = try JSONSerialization.data(withJSONObject: res, options: .prettyPrinted)
+                    let json = try JSONDecoder().decode([UserPlan].self, from: jsonData)
+                    
+                    self.userPlans = json
+                    DispatchQueue.main.async {
+                        print(self.userPlans.count)
+                    }
+                } catch(let err) {
+                    print(err.localizedDescription)
+                }
+                // 실패
+            case .failure(let err):
+                print(err.localizedDescription)
+            }
+        }
+    }
+    
     private func getPlanList() {
         AF.request(PlanAPIConstant.planListURL).responseJSON { (response) in
             switch response.result {
@@ -86,6 +120,7 @@ extension ChallengeViewController {
         }
     }
     
+    // 테스트 기간용 알림
     func prohibitAlert() {
         let alert = UIAlertController(
             title: "",
@@ -93,9 +128,19 @@ extension ChallengeViewController {
             preferredStyle: .alert)
         let okAction = UIAlertAction(
             title: "확인",
-            style: .default){ (action : UIAlertAction) in
-            self.navigationController?.popViewController(animated: true)
-        }
+            style: .default)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func prohibitMorePlanAlert() {
+        let alert = UIAlertController(
+            title: "",
+            message: "플랜은 최대 3개까지만 신청 가능합니다.",
+            preferredStyle: .alert)
+        let okAction = UIAlertAction(
+            title: "확인",
+            style: .default)
         alert.addAction(okAction)
         present(alert, animated: true, completion: nil)
     }
@@ -170,11 +215,15 @@ extension ChallengeViewController: UITableViewDelegate {
         case 1:
             switch indexPath.row {
             case 0, 1:
-                guard let subscriptionViewController = storyboard?.instantiateViewController(withIdentifier: "subscriptionViewController") as? SubscriptionViewController else {
-                    return
+                if userPlans.count < 3 {
+                    guard let subscriptionViewController = storyboard?.instantiateViewController(withIdentifier: "subscriptionViewController") as? SubscriptionViewController else {
+                        return
+                    }
+                    subscriptionViewController.plan = plans[indexPath.row]
+                    navigationController?.pushViewController(subscriptionViewController, animated: true)
+                } else {
+                    return prohibitMorePlanAlert()
                 }
-                subscriptionViewController.plan = plans[indexPath.row]
-                navigationController?.pushViewController(subscriptionViewController, animated: true)
             case 2, 3:
                 return prohibitAlert()
             default:
