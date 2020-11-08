@@ -13,3 +13,7 @@ struct QRAuthentication: Codable {
     let message: String
 }
 
+// 스플릿존 아이디로 스플릿존 정보 GET
+struct SplitZone: Codable {
+    let name, code: String
+}

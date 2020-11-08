@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -50,20 +51,20 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ucq-pV-pB2">
                                                 <rect key="frame" x="0.0" y="0.0" width="250" height="100"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="플랜명" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fiQ-nB-3eA">
-                                                        <rect key="frame" x="99" y="20" width="52" height="24"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fiQ-nB-3eA">
+                                                        <rect key="frame" x="125" y="20" width="0.0" height="0.0"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="시간" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rd7-4F-bWu">
-                                                        <rect key="frame" x="103.5" y="55" width="43.5" height="30"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rd7-4F-bWu">
+                                                        <rect key="frame" x="125" y="85" width="0.0" height="0.0"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" red="0.8666666666666667" green="0.64313725490196072" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="fiQ-nB-3eA" firstAttribute="top" secondItem="Ucq-pV-pB2" secondAttribute="top" constant="20" id="BAn-Zm-LkW"/>
                                                     <constraint firstItem="rd7-4F-bWu" firstAttribute="centerX" secondItem="Ucq-pV-pB2" secondAttribute="centerX" id="b5R-ad-6se"/>
@@ -74,20 +75,20 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="duu-J7-7S8">
                                                 <rect key="frame" x="0.0" y="133" width="250" height="100"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="플랜명" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DD0-Zd-vcf">
-                                                        <rect key="frame" x="99" y="20" width="52" height="24"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DD0-Zd-vcf">
+                                                        <rect key="frame" x="125" y="20" width="0.0" height="0.0"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="시간" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cgg-Ys-pra">
-                                                        <rect key="frame" x="103.5" y="55" width="43.5" height="30"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cgg-Ys-pra">
+                                                        <rect key="frame" x="125" y="85" width="0.0" height="0.0"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" red="0.6705882352941176" green="0.3529411764705882" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="bottom" secondItem="Cgg-Ys-pra" secondAttribute="bottom" constant="15" id="Dru-UJ-MCQ"/>
                                                     <constraint firstItem="DD0-Zd-vcf" firstAttribute="top" secondItem="duu-J7-7S8" secondAttribute="top" constant="20" id="MQF-Is-S2r"/>
@@ -98,20 +99,20 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mMe-Ah-7Fh">
                                                 <rect key="frame" x="0.0" y="266" width="250" height="100"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="플랜명" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g4b-Fs-v2k">
-                                                        <rect key="frame" x="99" y="20" width="52" height="24"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g4b-Fs-v2k">
+                                                        <rect key="frame" x="125" y="20" width="0.0" height="0.0"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="시간" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwF-76-U56">
-                                                        <rect key="frame" x="103.5" y="55" width="43.5" height="30"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwF-76-U56">
+                                                        <rect key="frame" x="125" y="85" width="0.0" height="0.0"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemIndigoColor"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="bottom" secondItem="hwF-76-U56" secondAttribute="bottom" constant="15" id="C70-hb-LGM"/>
                                                     <constraint firstItem="hwF-76-U56" firstAttribute="centerX" secondItem="mMe-Ah-7Fh" secondAttribute="centerX" id="LQW-Xm-4CT"/>
@@ -176,7 +177,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zuz-FK-4IA">
                                 <rect key="frame" x="80" y="762" width="254" height="50"/>
-                                <color key="backgroundColor" red="0.8666666666666667" green="0.64313725490196072" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" name="Color_DarkNavy"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="jfK-sA-mlp"/>
                                 </constraints>
@@ -194,8 +195,8 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="스플릿존명" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zYr-OF-E0j">
-                                        <rect key="frame" x="142" y="20" width="130" height="36"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="스플릿존 이름" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zYr-OF-E0j">
+                                        <rect key="frame" x="126" y="30" width="162.5" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -205,8 +206,8 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="4i5-pk-viu"/>
                                     <constraint firstItem="zYr-OF-E0j" firstAttribute="centerX" secondItem="bC2-cV-Lcc" secondAttribute="centerX" id="LjN-kD-XbF"/>
-                                    <constraint firstItem="QPH-jB-SgO" firstAttribute="top" secondItem="zYr-OF-E0j" secondAttribute="bottom" constant="20" id="OWY-XA-WWW"/>
-                                    <constraint firstItem="zYr-OF-E0j" firstAttribute="top" secondItem="bC2-cV-Lcc" secondAttribute="top" constant="20" id="UXQ-K0-hHa"/>
+                                    <constraint firstItem="QPH-jB-SgO" firstAttribute="top" secondItem="zYr-OF-E0j" secondAttribute="bottom" constant="10" id="OWY-XA-WWW"/>
+                                    <constraint firstItem="zYr-OF-E0j" firstAttribute="top" secondItem="bC2-cV-Lcc" secondAttribute="top" constant="30" id="UXQ-K0-hHa"/>
                                     <constraint firstItem="QPH-jB-SgO" firstAttribute="centerX" secondItem="bC2-cV-Lcc" secondAttribute="centerX" id="VNF-0b-pox"/>
                                 </constraints>
                             </view>
@@ -294,8 +295,13 @@
                     </view>
                     <connections>
                         <outlet property="completionButton" destination="zuz-FK-4IA" id="9a4-zp-308"/>
+                        <outlet property="dayLabel" destination="JEK-6U-mGA" id="W31-ep-1jN"/>
+                        <outlet property="planNameLabel" destination="5C5-cH-Nca" id="S4M-32-BNx"/>
                         <outlet property="planView" destination="TXI-43-XRB" id="7Cp-II-Yhn"/>
                         <outlet property="sayingLabelView" destination="LcY-2x-KA9" id="j34-ng-0gc"/>
+                        <outlet property="splitZoneCodeLabel" destination="QPH-jB-SgO" id="Phn-gM-r4I"/>
+                        <outlet property="splitZoneNameLabel" destination="zYr-OF-E0j" id="7pI-9Z-pBJ"/>
+                        <outlet property="timeLabel" destination="GdE-Ey-cL7" id="eii-Za-JPv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0yK-Uq-zY8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -304,11 +310,11 @@
         </scene>
     </scenes>
     <resources>
+        <namedColor name="Color_DarkNavy">
+            <color red="0.21600000560283661" green="0.27799999713897705" blue="0.31000000238418579" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemIndigoColor">
-            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

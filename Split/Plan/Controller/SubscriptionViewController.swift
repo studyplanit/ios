@@ -25,6 +25,9 @@ class SubscriptionViewController: UIViewController {
         return formatter
     }()
     
+    var startDate = ""
+    var endDate = ""
+    
     var arrayOfEvent1 : [String] = [
         "2020-11-14",
         "2020-11-15",
@@ -75,7 +78,7 @@ extension SubscriptionViewController {
     }
     
     func configureNavigationBar() {
-        let button = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(touchUpCompleteButton))
+        let button = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(checkDateFormAndShowAlert))
         navigationItem.rightBarButtonItem = button
         navigationItem.title = "플랜"
     }
@@ -85,10 +88,11 @@ extension SubscriptionViewController {
 // MARK:- Methods
 extension SubscriptionViewController {
     
-    @objc func touchUpCompleteButton() {
+    // 날짜를 올바르게 선택하고 확인버튼 클릭시 alert
+    func ShowCorrectAlert() {
         let alert = UIAlertController(
-            title: "",
-            message: "해당 시간과 날짜로 플랜을 신청하시겠습니까?",
+            title: "꼼꼼히 확인해주세요!",
+            message: "선택하신 시간과 날짜로 플랜을 신청하시겠습니까?",
             preferredStyle: .alert)
         let okAction = UIAlertAction(
             title: "확인",
@@ -100,6 +104,19 @@ extension SubscriptionViewController {
             style: .cancel)
         alert.addAction(okAction)
         alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    // 날짜를 올바르게 선택하지않고 확인버튼 클릭시 alert
+    func ShowIncorrectAlert() {
+        let alert = UIAlertController(
+            title: "",
+            message: "날짜와 시간을 선택해주세요.",
+            preferredStyle: .alert)
+        let okAction = UIAlertAction(
+            title: "확인",
+            style: .default)
+        alert.addAction(okAction)
         present(alert, animated: true, completion: nil)
     }
     
@@ -143,6 +160,15 @@ extension SubscriptionViewController {
         }
     }
     
+    // 날짜를 선택했는지 확인후 Alert
+    @objc func checkDateFormAndShowAlert() {
+        if startDate != "" && endDate != "" {
+            ShowCorrectAlert()
+        } else {
+            ShowIncorrectAlert()
+        }
+    }
+    
 }
 
 // MARK:- FSCalendar DataSource
@@ -183,7 +209,10 @@ extension SubscriptionViewController: FSCalendarDelegate {
             startTemp += 86400
             calendar.select(startTemp)
         }
-        print("날짜 선택 \(dateFormatter.string(from: date))")
+        startDate = dateFormatter.string(from: calendar.selectedDates[0])
+        endDate = dateFormatter.string(from: endTemp)
+        print("날짜 선택 - 선택한 날짜 : \(dateFormatter.string(from: date))")
+        print("날짜 선택 - 시작날짜: \(startDate), 끝날짜: \(endDate)")
     }
     
     // 특정 날짜 선택 해제시 이벤트
@@ -192,6 +221,9 @@ extension SubscriptionViewController: FSCalendarDelegate {
         for _ in 0 ..< calendar.selectedDates.count {
             calendar.deselect(calendar.selectedDates[0])
         }
+        startDate = ""
+        endDate = ""
+        print("날짜 선택 해제 - 시작날짜: \(startDate), 끝날짜: \(endDate)")
     }
     
     // 오늘 포함 이전 날짜 선택 불가
