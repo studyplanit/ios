@@ -27,8 +27,15 @@ class SubscriptionViewController: UIViewController {
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter
     }()
+    let timeFormatter: DateFormatter = {
+        let formatter: DateFormatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.dateFormat = "HH:mm"
+        return formatter
+    }()
     var startDate = ""
     var endDate = ""
+    var planTime = ""
 
     // MARK:- View Life Cycle
     override func viewDidLoad() {
@@ -37,7 +44,9 @@ class SubscriptionViewController: UIViewController {
         configureUI()
         configureNavigationBar()
         configureCalendar()
-        print(userID!)
+        configureTimePicker()
+        print("유저아이디 : \(userID!)")
+        print("선택한 플랜: \(plan!)")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -78,6 +87,10 @@ extension SubscriptionViewController {
         let button = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(checkDateFormAndShowAlert))
         navigationItem.rightBarButtonItem = button
         navigationItem.title = "플랜"
+    }
+    
+    func configureTimePicker() {
+        timePicker.addTarget(self, action: #selector(setPlanTime(_:)), for: .valueChanged)
     }
     
 }
@@ -138,6 +151,8 @@ extension SubscriptionViewController {
             title: "확인",
             style: .default){ (action : UIAlertAction) in
             self.completeAlert()
+            guard let planID = self.plan?.id else { return }
+            self.postPlan(planID: String(planID), startDate: self.startDate, endDate: self.endDate, setTime: self.planTime)
         }
         let cancelAction = UIAlertAction(
             title: "취소",
@@ -174,18 +189,17 @@ extension SubscriptionViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    private func postPlan(userID: String,
-                          planID: String,
-                          startDate: Date,
-                          endDate: Date,
-                          setTime: Date) {
+    private func postPlan(planID: String,
+                          startDate: String,
+                          endDate: String,
+                          setTime: String) {
 
         let headers: HTTPHeaders = [
-            "member_id": userID,
+            "member_id": "2",
             "plan_id": planID,
-            "startDate": "\(startDate)",
-            "endDate": "\(endDate)",
-            "setTime": "\(setTime)"
+            "startDate": startDate,
+            "endDate": endDate,
+            "setTime": setTime
         ]
         
         AF.request(PlanAPIConstant.planInsertURL, method: .post, headers: headers).responseJSON { (response) in
@@ -207,6 +221,12 @@ extension SubscriptionViewController {
         } else {
             ShowIncorrectAlert()
         }
+    }
+    
+    // 타임피커 값변경시 플랜시간 변수 설정
+    @objc func setPlanTime (_ sender: UIDatePicker) {
+        planTime = timeFormatter.string(from: sender.date)
+        print("설정한 시간 : \(planTime)")
     }
     
 }
