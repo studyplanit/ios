@@ -419,6 +419,7 @@ extension CalendarViewController: UITableViewDataSource {
             guard let planLogID = tableView.cellForRow(at: indexPath)?.tag else { return }
             print("셀 삭제 플랜로그아이디 : \(planLogID)")
             deletePlan(planID: planLogID)
+            deselectDate()
         }
     }
     
