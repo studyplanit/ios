@@ -154,8 +154,8 @@ extension AttendanceCompletionViewController {
     }
     
     private func getSplitZone() {
-//        let splitZoneID = getSplitZoneID(url: authURL)
-        let parameters = ["planet_id" : 1]
+        let splitZoneID = getSplitZoneID(url: authURL)
+        let parameters = ["planet_id" : splitZoneID]
         
         AF.request(PlanAPIConstant.splitZoneInfoURL, parameters: parameters).responseJSON { (response) in
             switch response.result {
