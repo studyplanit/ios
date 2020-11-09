@@ -20,6 +20,7 @@ class SubscriptionViewController: UIViewController {
     var userPlans: [UserTotalPlan] = []
     var PlanDates: [[String]] = []
     var plan: PlanList?
+    var responsePlanRegistration: ResponsePlanRegistration?
     let userID = UserDefaults.standard.string(forKey: "id")
     let dateFormatter: DateFormatter = {
         let formatter: DateFormatter = DateFormatter()
@@ -145,6 +146,44 @@ extension SubscriptionViewController {
                 // 성공
             case .success(let res):
                 print(res)
+                do {
+                    // 반환값을 Data 타입으로 변환
+                    let jsonData = try JSONSerialization.data(withJSONObject: res, options: .prettyPrinted)
+                    
+                    let json = try JSONDecoder().decode(ResponsePlanRegistration.self, from: jsonData)
+                    // dataSource에 변환한 값을 대입
+                    self.responsePlanRegistration = json
+                    // 메인 큐를 이용하여 tableView 리로딩
+                    guard let response = self.responsePlanRegistration?.planLogID else { return }
+                    print("postPlan - \(response)")
+                    switch response {
+                    case 1:
+                        print("postPlan - 1")
+                        DispatchQueue.main.async {
+                            self.showSuccessAPIAlert()
+                        }
+                    case -1:
+                        print("postPlan - -1")
+                        DispatchQueue.main.async {
+                            self.showAPIFailureAlert1()
+                        }
+                    case -2:
+                        print("postPlan - -2")
+                        DispatchQueue.main.async {
+                            self.showAPIFailureAlert2()
+                        }
+                    case -500:
+                        print("postPlan -500")
+                        DispatchQueue.main.async {
+                            self.showAPIFailureAlert3()
+                        }
+                    default:
+                        return
+                    }
+                    
+                } catch(let err) {
+                    print(err.localizedDescription)
+                }
                 // 실패
             case .failure(let err):
                 print(err.localizedDescription)
@@ -207,7 +246,6 @@ extension SubscriptionViewController {
         let okAction = UIAlertAction(
             title: "확인",
             style: .default){ (action : UIAlertAction) in
-            self.completeAlert()
             guard let planID = self.plan?.id else { return }
             self.postPlan(planID: String(planID), startDate: self.startDate, endDate: self.endDate, setTime: self.planTime)
         }
@@ -241,6 +279,55 @@ extension SubscriptionViewController {
         }
     }
     
+    func showSuccessAPIAlert() {
+        let alert = UIAlertController(
+            title: "",
+            message: "등록 성공",
+            preferredStyle: .alert)
+        let okAction = UIAlertAction(
+            title: "확인",
+            style: .default){ (action : UIAlertAction) in
+            self.navigationController?.popToRootViewController(animated: true)
+        }
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func showAPIFailureAlert1() {
+        let alert = UIAlertController(
+            title: "등록실패1",
+            message: "선택 기간중 플랜이 3개 이상인 날짜가 존재합니다.",
+            preferredStyle: .alert)
+        let okAction = UIAlertAction(
+            title: "확인",
+            style: .default)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func showAPIFailureAlert2() {
+        let alert = UIAlertController(
+            title: "등록실패2",
+            message: "선택 기간중 2시간이내의 중복 플랜이 존재합니다.",
+            preferredStyle: .alert)
+        let okAction = UIAlertAction(
+            title: "확인",
+            style: .default)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func showAPIFailureAlert3() {
+        let alert = UIAlertController(
+            title: "등록실패3",
+            message: "서버 오류입니다.",
+            preferredStyle: .alert)
+        let okAction = UIAlertAction(
+            title: "확인",
+            style: .default)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
 }
 
 // MARK:- FSCalendar DataSource
@@ -300,9 +387,9 @@ extension SubscriptionViewController: FSCalendarDelegate {
     // 오늘 포함 이전 날짜 선택 불가
     func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
         
-        let curDate = Date()
+        let today = Date()
         
-        if date < curDate {
+        if date < today {
             return false
         } else {
             return true
