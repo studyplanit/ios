@@ -46,9 +46,15 @@ class AttendanceViewController: UIViewController {
         getUserPlan()
     }
     
+//    override func viewDidDisappear(_ animated: Bool) {
+//        super.viewDidDisappear(animated)
+//        
+//        navigationController?.popViewController(animated: true)
+//    }
+    
 }
 
-// MARK:- Configure
+// MARK:- Configure UI
 extension AttendanceViewController {
     
     func configureTapBar() {
@@ -68,6 +74,7 @@ extension AttendanceViewController {
     }
     
     func configurePlanView() {
+        resetPlanView()
         // 서버측에서 유저 보유플랜이 3개 이상인경우에 3으로 리턴하여 연산
         let count = userPlans.count <= 3 ? userPlans.count : 3
         for i in 0 ..< count {
@@ -75,6 +82,15 @@ extension AttendanceViewController {
             planNameLabels[i].text = userPlans[i].planName
             planTimeLabels[i].text = userPlans[i].setTime
             configureTapGesture(index: i)
+        }
+    }
+    
+    func resetPlanView() {
+        for i in 0...2 {
+            planViews[i].backgroundColor = .lightGray
+            planNameLabels[i].text = ""
+            planTimeLabels[i].text = ""
+            planViews[i].isUserInteractionEnabled = false
         }
     }
     
@@ -87,7 +103,7 @@ extension AttendanceViewController {
     
 }
 
-// MARK:- Methods
+// MARK:- API
 extension AttendanceViewController {
     
     private func getUserPlan() {
@@ -115,6 +131,11 @@ extension AttendanceViewController {
         }
     }
     
+}
+
+// MARK:- Methods
+extension AttendanceViewController {
+
 //    // 시, 분 만 표시하기
 //    func formatiTimeString(timeString: String) -> String {
 //        let endIdx: String.Index = timeString.index(timeString.startIndex, offsetBy: 4)

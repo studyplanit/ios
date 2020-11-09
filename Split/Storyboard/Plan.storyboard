@@ -71,29 +71,29 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="537.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="57I-ww-MdZ">
-                                <rect key="frame" x="86" y="591.5" width="242" height="89.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="57I-ww-MdZ">
+                                <rect key="frame" x="78.5" y="591.5" width="257" height="89.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clock.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="YW0-Si-RNf">
                                         <rect key="frame" x="0.0" y="0.5" width="20" height="88.5"/>
                                         <color key="tintColor" red="0.2156862745" green="0.2784313725" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Am-u7-pPc">
-                                        <rect key="frame" x="20" y="0.0" width="40" height="89.5"/>
+                                        <rect key="frame" x="25" y="0.0" width="40" height="89.5"/>
                                         <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="30" style="wheels" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HWX-nV-9qi">
-                                        <rect key="frame" x="60" y="0.0" width="165.5" height="89.5"/>
+                                        <rect key="frame" x="70" y="0.0" width="165.5" height="89.5"/>
                                         <color key="tintColor" red="0.2156862745" green="0.2784313725" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
-                                        <date key="date" timeIntervalSinceReferenceDate="626227200.05710995">
-                                            <!--2020-11-05 00:00:00 +0000-->
+                                        <date key="date" timeIntervalSinceReferenceDate="626194800.05710995">
+                                            <!--2020-11-04 15:00:00 +0000-->
                                         </date>
                                         <locale key="locale" localeIdentifier="ko"/>
                                     </datePicker>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.up.arrow.down" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="6mN-aO-fm2">
-                                        <rect key="frame" x="225.5" y="1" width="16.5" height="87.5"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.up.chevron.down" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="6mN-aO-fm2">
+                                        <rect key="frame" x="240.5" y="1.5" width="16.5" height="86.5"/>
                                         <color key="tintColor" red="0.2156862745" green="0.2784313725" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
                                     </imageView>
                                 </subviews>
@@ -119,14 +119,14 @@
                                     <constraint firstItem="b9i-m2-Bsr" firstAttribute="centerY" secondItem="dzP-q7-hJD" secondAttribute="centerY" id="Xb3-IJ-KTK"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="시간과 날짜를 선택하세요" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v69-ZX-OCq">
-                                <rect key="frame" x="120.5" y="711" width="173" height="19"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="시간과 날짜를 선택해주세요." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v69-ZX-OCq">
+                                <rect key="frame" x="110.5" y="711" width="193" height="19"/>
                                 <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="출석 인증은 2시간당 1개의 인증만 가능합니다" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Efl-0u-Rjn">
-                                <rect key="frame" x="51.5" y="750" width="311" height="19"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="플랜은 하루 최대 3개까지만 신청 가능합니다." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Efl-0u-Rjn">
+                                <rect key="frame" x="54" y="750" width="306.5" height="19"/>
                                 <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -222,7 +222,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrow.up.arrow.down" catalog="system" width="128" height="98"/>
+        <image name="chevron.up.chevron.down" catalog="system" width="128" height="128"/>
         <image name="clock.fill" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
