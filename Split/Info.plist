@@ -30,8 +30,14 @@
 	<string>사용중에만 위치정보를 이용합니다.</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>GmarketSansMedium.otf</string>
+		<string>Maplestory OTF Light.otf</string>
+		<string>Maplestory OTF Bold.otf</string>
+		<string>KoPubDotumLight.ttf</string>
+		<string>KoPubDotumMedium.ttf</string>
 		<string>KoPubDotumBold.ttf</string>
+		<string>GmarketSansLight.otf</string>
+		<string>GmarketSansBold.otf</string>
+		<string>GmarketSansMedium.otf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

@@ -12,10 +12,11 @@ class Common {
     //서버 URL
     let baseURL = "http://211.222.234.14:8898"
     //색상 set
-    let lightpurple = UIColor(displayP3Red: 122/255, green: 113/255, blue: 230/255, alpha: 1)
-    let purple = UIColor(displayP3Red: 171/255, green: 90/255, blue: 234/255, alpha: 1)
+    let tapPurple = UIColor(displayP3Red: 111/255, green: 67/255, blue: 233/255, alpha: 1)
+    let purple = UIColor(displayP3Red: 86/255, green: 57/255, blue: 163/255, alpha: 1)
+    let darkgray = UIColor(displayP3Red: 44/255, green: 44/255, blue: 44/255, alpha: 1)
     let lightGray = UIColor(displayP3Red: 178/255, green: 178/255, blue: 178/255, alpha: 1)
-    let coralBlue = UIColor(displayP3Red: 79/255, green: 162/255, blue: 220/255, alpha: 1)
+    let coralblue = UIColor(displayP3Red: 19/255, green: 129/255, blue: 199/255, alpha: 1)
     
     //에러 alert
     func errorAlert() -> UIAlertController{
@@ -25,20 +26,26 @@ class Common {
         return alert
     }
     
-    //koPubDotumBole 반응형 폰트 지정
-    let koPubDotumBold22 = UIFont(name:"KoPubDotumBold", size: UIScreen.main.bounds.size.width * 0.075)!
-    let koPubDotumBold20 = UIFont(name:"KoPubDotumBold", size: UIScreen.main.bounds.size.width * 0.065)!
-    let koPubDotumBold18 = UIFont(name:"KoPubDotumBold", size: UIScreen.main.bounds.size.width * 0.055)!
-    let koPubDotumBold16 = UIFont(name:"KoPubDotumBold", size: UIScreen.main.bounds.size.width * 0.045)!
-    let koPubDotumBold14 = UIFont(name:"KoPubDotumBold", size: UIScreen.main.bounds.size.width * 0.035)!
-    let koPubDotumBold12 = UIFont(name:"KoPubDotumBold", size: UIScreen.main.bounds.size.width * 0.025)!
-    
-    //GmarketSansMedium 반응형 폰트 지정
-    let GmarketSansMedium22 = UIFont(name:"GmarketSansMedium", size: UIScreen.main.bounds.size.width * 0.075)!
-    let GmarketSansMedium20 = UIFont(name:"GmarketSansMedium", size: UIScreen.main.bounds.size.width * 0.065)!
-    let GmarketSansMedium18 = UIFont(name:"GmarketSansMedium", size: UIScreen.main.bounds.size.width * 0.055)!
-    let GmarketSansMedium16 = UIFont(name:"GmarketSansMedium", size: UIScreen.main.bounds.size.width * 0.045)!
-    let GmarketSansMedium14 = UIFont(name:"GmarketSansMedium", size: UIScreen.main.bounds.size.width * 0.035)!
-    let GmarketSansMedium12 = UIFont(name:"GmarketSansMedium", size: UIScreen.main.bounds.size.width * 0.025)!
+    //반응형 폰트 함수
+    func fontStyle(name: String, size: Float) -> UIFont {
+        var responsiveSize: CGFloat
+        switch size {
+        case 22:
+            responsiveSize = UIScreen.main.bounds.size.width * 0.075
+        case 20:
+            responsiveSize = UIScreen.main.bounds.size.width * 0.065
+        case 18:
+            responsiveSize = UIScreen.main.bounds.size.width * 0.055
+        case 16:
+            responsiveSize = UIScreen.main.bounds.size.width * 0.045
+        case 14:
+            responsiveSize = UIScreen.main.bounds.size.width * 0.035
+        case 12:
+            responsiveSize = UIScreen.main.bounds.size.width * 0.025
+        default:
+            responsiveSize = UIScreen.main.bounds.size.width * 0.01
+        }
+        return UIFont(name: name, size: responsiveSize)!
+    }
 }
 

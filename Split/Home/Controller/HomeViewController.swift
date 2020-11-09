@@ -17,7 +17,7 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(UserDefaults.standard.string(forKey: "id"))
+        print(UserDefaults.standard.string(forKey: "id") as Any)
 
         //타이틀 이미지넣기
         let image = UIImageView(image: UIImage(named: "nav_split"))
@@ -25,7 +25,7 @@ class HomeViewController: UIViewController {
         navigationItem.titleView = image
         
         //오늘 다녀간 회원 반응형 텍스트
-        todaySplitLabel.font = Common().GmarketSansMedium22
+        todaySplitLabel.font = Common().fontStyle(name: "GmarketSansMedium", size: 22)
         
         // main image tap gesture
         let imageViewTapGestureRecognizer = UITapGestureRecognizer()

@@ -52,24 +52,24 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
         self.view.bringSubviewToFront(splitInfoView)
         splitInfoView.isHidden = true
         splitMapView.mapView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        planetNameLabel.font = Common().koPubDotumBold18
-        planetAddressLabel.font = Common().koPubDotumBold14
-        planetTimeLabel.font = Common().koPubDotumBold14
+        planetNameLabel.font = Common().fontStyle(name: "KoPubDotumBold", size: 18)
+        planetAddressLabel.font = Common().fontStyle(name: "KoPubDotumBold", size: 14)
+        planetTimeLabel.font = Common().fontStyle(name: "KoPubDotumBold", size: 14)
         planetMenuButton.setTitle("   메뉴판 이미지로 보기   ", for: .normal)
         planetReviewButton.setTitle("   리뷰 준비중   ", for: .normal)
-        planetMenuButton.titleLabel!.font = Common().koPubDotumBold14
+        planetMenuButton.titleLabel!.font = Common().fontStyle(name: "KoPubDotumBold", size: 14)
         planetMenuButton.backgroundColor = Common().purple
         planetMenuButton.layer.cornerRadius = 12
-        planetReviewButton.titleLabel!.font = Common().koPubDotumBold14
+        planetReviewButton.titleLabel!.font = Common().fontStyle(name: "KoPubDotumBold", size: 14)
         planetReviewButton.backgroundColor = Common().purple
         planetReviewButton.layer.cornerRadius = 12
-        planetRatingLabel.font = Common().koPubDotumBold14
-        planetCodeButton.titleLabel!.font = Common().koPubDotumBold14
+        planetRatingLabel.font = Common().fontStyle(name: "KoPubDotumBold", size: 14)
+        planetCodeButton.titleLabel!.font = Common().fontStyle(name: "KoPubDotumBold", size: 14)
         planetCodeButton.layer.cornerRadius = 12
-        planetCodeButton.backgroundColor = Common().coralBlue
-        planetTotalVisitButton.titleLabel!.font = Common().koPubDotumBold14
+        planetCodeButton.backgroundColor = Common().coralblue
+        planetTotalVisitButton.titleLabel!.font = Common().fontStyle(name: "KoPubDotumBold", size: 14)
         planetTotalVisitButton.layer.cornerRadius = 12
-        planetTotalVisitButton.backgroundColor = Common().coralBlue
+        planetTotalVisitButton.backgroundColor = Common().coralblue
         
         //네이버지도 초기화하기
         locationView.mapView = splitMapView.mapView;

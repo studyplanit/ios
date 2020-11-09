@@ -489,7 +489,7 @@
             </objects>
             <point key="canvasLocation" x="1474" y="1471"/>
         </scene>
-        <!--My-->
+        <!--마이플릿-->
         <scene sceneID="Ich-nI-u2G">
             <objects>
                 <viewController id="Us8-42-wLD" customClass="SettingViewController" customModule="Split" customModuleProvider="target" sceneMemberID="viewController">
@@ -559,7 +559,7 @@
                             <constraint firstItem="hpe-lX-Vig" firstAttribute="centerX" secondItem="sBq-Mx-ctW" secondAttribute="centerX" id="Haa-WJ-X9k"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="My" id="Bfm-Fw-SLl">
+                    <navigationItem key="navigationItem" title="마이플릿" id="Bfm-Fw-SLl">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="cart.fill" catalog="system" id="cX6-Xq-p5B">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -683,20 +683,21 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="6B9-BV-lmh"/>
                                         </constraints>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="인증번호가 틀렸습니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MZ6-yZ-Keg">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="인증번호가 틀렸습니다." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MZ6-yZ-Keg">
                                         <rect key="frame" x="0.0" y="222" width="348" height="13.333333333333343"/>
                                         <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="12"/>
-                                        <color key="textColor" systemColor="systemPinkColor"/>
+                                        <color key="textColor" red="0.85882352941176465" green="0.21568627450980393" blue="0.10196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이용약관 및 개인정보동의" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kck-u8-AOs">
                                         <rect key="frame" x="0.0" y="248.33333333333329" width="348" height="15.666666666666657"/>
                                         <gestureRecognizers/>
                                         <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="14"/>
-                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" red="0.69803921568627447" green="0.69803921568627447" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="Km2-iF-lP2" appends="YES" id="enn-uE-0RX"/>
@@ -708,7 +709,9 @@
                                             <constraint firstAttribute="height" constant="40" id="iRo-IU-Wqh"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="16"/>
-                                        <state key="normal" title="확인"/>
+                                        <state key="normal" title="확인">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="nextButtonClick:" destination="JMl-EG-aLD" eventType="touchUpInside" id="epe-5Z-6R8"/>
                                         </connections>
@@ -899,7 +902,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Jq4-v6-k9i">
-                                <rect key="frame" x="40" y="314" width="348" height="182.33333333333337"/>
+                                <rect key="frame" x="40" y="314" width="348" height="181.66666666666663"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="닉네임" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OVE-mR-dNd">
                                         <rect key="frame" x="0.0" y="0.0" width="348" height="50"/>
@@ -918,19 +921,21 @@
                                         <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="16"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="사용하실 닉네임을 2~8자로 설정해주세요" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XCG-fp-wav">
-                                        <rect key="frame" x="0.0" y="114" width="348" height="16.333333333333343"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="사용하실 닉네임을 2~8자로 설정해주세요" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XCG-fp-wav">
+                                        <rect key="frame" x="0.0" y="114" width="348" height="15.666666666666657"/>
                                         <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="14"/>
-                                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" red="0.69803921568627447" green="0.69803921568627447" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eZO-7B-vVI">
-                                        <rect key="frame" x="0.0" y="142.33333333333331" width="348" height="40"/>
+                                        <rect key="frame" x="0.0" y="141.66666666666669" width="348" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="pjC-op-KyM"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="16"/>
-                                        <state key="normal" title="완료"/>
+                                        <state key="normal" title="완료">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="nextButtonClick:" destination="SsV-H0-DOx" eventType="touchUpInside" id="QTZ-mx-dNR"/>
                                         </connections>
@@ -1048,9 +1053,6 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemPinkColor">
-            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

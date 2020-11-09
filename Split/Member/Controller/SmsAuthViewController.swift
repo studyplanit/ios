@@ -57,7 +57,7 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: 버튼 활성화 함수
     func buttonEnableStyle(button: UIButton){
-        button.backgroundColor = Common().lightpurple
+        button.backgroundColor = Common().purple
         button.setTitleColor(.white, for: .normal)
         button.isEnabled = true
         button.layer.cornerRadius = 5
@@ -95,13 +95,13 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
         popUpView.backgroundColor = UIColor(displayP3Red: 0/255, green: 0/255, blue: 0/255, alpha: 0.9)
         
         //반응형 폰트
-        titleLabel.font = Common().koPubDotumBold16
-        phoneTextField.font = Common().koPubDotumBold16
-        authNumberTextField.font = Common().koPubDotumBold16
-        sendSMSButton.titleLabel!.font = Common().koPubDotumBold16
-        nextButton.titleLabel!.font = Common().koPubDotumBold16
-        agreementLabel.font = Common().koPubDotumBold14
-        authCheckLabel.font = Common().koPubDotumBold12
+        titleLabel.font = Common().fontStyle(name: "KoPubDotumBold", size: 16)
+        phoneTextField.font = Common().fontStyle(name: "KoPubDotumBold", size: 16)
+        authNumberTextField.font = Common().fontStyle(name: "KoPubDotumBold", size: 16)
+        sendSMSButton.titleLabel!.font = Common().fontStyle(name: "KoPubDotumBold", size: 16)
+        nextButton.titleLabel!.font = Common().fontStyle(name: "KoPubDotumBold", size: 16)
+        agreementLabel.font = Common().fontStyle(name: "KoPubDotumBold", size: 14)
+        authCheckLabel.font = Common().fontStyle(name: "KoPubDotumBold", size: 12)
         
         //이용약관 및 개인정보 동의 label
         let underlineAttriString = NSMutableAttributedString(string: agreementLabel.text!)

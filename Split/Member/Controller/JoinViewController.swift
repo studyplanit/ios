@@ -23,7 +23,7 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: 버튼 활성화 함수
     func buttonEnableStyle(button: UIButton){
-        button.backgroundColor = Common().lightpurple
+        button.backgroundColor = Common().purple
         button.setTitleColor(.white, for: .normal)
         button.isEnabled = true
         button.layer.cornerRadius = 5
@@ -44,10 +44,10 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
         
         buttonDisableStyle(button: nextButton)
         //반응형 폰트
-        titleLabel.font = Common().koPubDotumBold16
-        nickTextField.font = Common().koPubDotumBold16
-        nickCheckLabel.font = Common().koPubDotumBold14
-        nextButton.titleLabel!.font = Common().koPubDotumBold16
+        titleLabel.font = Common().fontStyle(name: "KoPubDotumBold", size: 16)
+        nickTextField.font = Common().fontStyle(name: "KoPubDotumBold", size: 16)
+        nickCheckLabel.font = Common().fontStyle(name: "KoPubDotumBold", size: 14)
+        nextButton.titleLabel!.font = Common().fontStyle(name: "KoPubDotumBold", size: 16)
     }
     
     //MARK: 입력값 유효성 검사

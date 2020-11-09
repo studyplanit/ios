@@ -14,6 +14,8 @@ class SettingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationItem.title = "마이플릿"
     }
     
     @IBAction func logOutButtonClick(_ sender: UIButton) {
