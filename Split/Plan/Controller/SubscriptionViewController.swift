@@ -18,7 +18,7 @@ class SubscriptionViewController: UIViewController {
     @IBOutlet weak var timePicker: UIDatePicker!
     
     var userPlans: [UserPlan] = []
-    var PlanDates: [[String]] = [[],[],[]]
+    var PlanDates: [[String]] = []
     var plan: PlanList?
     let userID = UserDefaults.standard.string(forKey: "id")
     let dateFormatter: DateFormatter = {
@@ -159,7 +159,9 @@ extension SubscriptionViewController {
     
     // 플랜 날짜 리스트 만들기
     func setUserPlanDates(userPlans: [UserPlan]) {
-        for i in 0 ..< userPlans.count {
+        let count = userPlans.count
+        for i in 0 ..< count {
+            PlanDates.append([])
             let startDateString = userPlans[i].startDate
             guard let startDate = dateFormatter.date(from: startDateString) else { return }
             var date = startDate
@@ -244,29 +246,17 @@ extension SubscriptionViewController {
 // MARK:- FSCalendar DataSource
 extension SubscriptionViewController: FSCalendarDataSource {
     
-    /// 특정 날짜 점 표시
+    // 특정 날짜 점 표시
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+
         let strDate = dateFormatter.string(from:date)
-        let dates1 = PlanDates[0]
-        let dates2 = PlanDates[1]
-        let dates3 = PlanDates[2]
-        
-        if dates1.contains(strDate) && dates2.contains(strDate) && dates3.contains(strDate) {
-            return 3
-        } else if dates1.contains(strDate) && dates2.contains(strDate)  {
-            return 2
-        } else if dates2.contains(strDate) && dates3.contains(strDate) {
-            return 2
-        } else if dates1.contains(strDate) && dates3.contains(strDate) {
-            return 2
-        } else if dates1.contains(strDate) {
-            return 1
-        } else if dates2.contains(strDate) {
-            return 1
-        } else if dates3.contains(strDate) {
-            return 1
+        var dotCount = 0
+        for i in 0 ..< PlanDates.count {
+            if PlanDates[i].contains(strDate) {
+                dotCount += 1
+            }
         }
-        return 0
+        return dotCount
     }
     
 }
@@ -338,52 +328,59 @@ extension SubscriptionViewController: FSCalendarDelegateAppearance {
     // 점 기본 색상
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventDefaultColorsFor date: Date) -> [UIColor]? {
         
-        let strDate = dateFormatter.string(from: date)
-        let dates1 = PlanDates[0]
-        let dates2 = PlanDates[1]
-        let dates3 = PlanDates[2]
+        guard let blue = UIColor(named: "Color_1day"),
+              let yellow = UIColor(named: "Color_7days"),
+              let red = UIColor(named: "Color_30days") else { return [UIColor()] }
         
-        if dates1.contains(strDate) && dates2.contains(strDate) && dates3.contains(strDate) {
-            return [UIColor.red ,UIColor.blue, UIColor.green]
-        } else if dates1.contains(strDate) && dates2.contains(strDate)  {
-            return [UIColor.red ,UIColor.blue]
-        } else if dates2.contains(strDate) && dates3.contains(strDate) {
-            return [UIColor.red ,UIColor.blue]
-        } else if dates1.contains(strDate) && dates3.contains(strDate) {
-            return [UIColor.red ,UIColor.blue]
-        } else if dates1.contains(strDate) {
-            return [UIColor.blue]
-        } else if dates2.contains(strDate) {
-            return [UIColor.blue]
-        } else if dates3.contains(strDate) {
-            return [UIColor.blue]
+        let strDate = dateFormatter.string(from:date)
+        var dotCount = 0
+        for i in 0 ..< PlanDates.count {
+            if PlanDates[i].contains(strDate) {
+                dotCount += 1
+            }
         }
-        return [UIColor.clear]
+        
+        switch dotCount {
+        case 3:
+            return [blue, yellow, red]
+        case 2:
+            return [blue ,yellow]
+        case 1:
+            return [blue]
+        case 0:
+            return [.clear]
+        default:
+            return [.clear]
+        }
     }
     
     // 점 선택 색상
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventSelectionColorsFor date: Date) -> [UIColor]? {
-        let strDate = dateFormatter.string(from: date)
-        let dates1 = PlanDates[0]
-        let dates2 = PlanDates[1]
-        let dates3 = PlanDates[2]
-
-        if dates1.contains(strDate) && dates2.contains(strDate) && dates3.contains(strDate) {
-            return [UIColor.red ,UIColor.blue, UIColor.green]
-        } else if dates1.contains(strDate) && dates2.contains(strDate)  {
-            return [UIColor.red ,UIColor.blue]
-        } else if dates2.contains(strDate) && dates3.contains(strDate) {
-            return [UIColor.red ,UIColor.blue]
-        } else if dates1.contains(strDate) && dates3.contains(strDate) {
-            return [UIColor.red ,UIColor.blue]
-        } else if dates1.contains(strDate) {
-            return [UIColor.blue]
-        } else if dates2.contains(strDate) {
-            return [UIColor.blue]
-        } else if dates3.contains(strDate) {
-            return [UIColor.blue]
+        
+        guard let blue = UIColor(named: "Color_1day"),
+              let yellow = UIColor(named: "Color_7days"),
+              let red = UIColor(named: "Color_30days") else { return [UIColor()] }
+        
+        let strDate = dateFormatter.string(from:date)
+        var dotCount = 0
+        for i in 0 ..< PlanDates.count {
+            if PlanDates[i].contains(strDate) {
+                dotCount += 1
+            }
         }
-        return [UIColor.clear]
+        
+        switch dotCount {
+        case 3:
+            return [blue, yellow, red]
+        case 2:
+            return [blue ,yellow]
+        case 1:
+            return [blue]
+        case 0:
+            return [.clear]
+        default:
+            return [.clear]
+        }
     }
     
 }

@@ -221,15 +221,11 @@ extension ChallengeViewController: UITableViewDelegate {
         case 1:
             switch indexPath.row {
             case 0, 1:
-                if userPlans.count < 3 {
-                    guard let subscriptionViewController = storyboard?.instantiateViewController(withIdentifier: "subscriptionViewController") as? SubscriptionViewController else {
-                        return
-                    }
-                    subscriptionViewController.plan = plans[indexPath.row]
-                    navigationController?.pushViewController(subscriptionViewController, animated: true)
-                } else {
-                    return prohibitMorePlanAlert()
+                guard let subscriptionViewController = storyboard?.instantiateViewController(withIdentifier: "subscriptionViewController") as? SubscriptionViewController else {
+                    return
                 }
+                subscriptionViewController.plan = plans[indexPath.row]
+                navigationController?.pushViewController(subscriptionViewController, animated: true)
             case 2, 3:
                 return prohibitAlert()
             default:

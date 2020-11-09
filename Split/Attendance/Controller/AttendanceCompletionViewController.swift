@@ -105,7 +105,7 @@ extension AttendanceCompletionViewController {
     
     // 버튼
     func configureButton() {
-        completionButton.addTarget(self, action: #selector(completeButton), for: .touchUpInside)
+        completionButton.addTarget(self, action: #selector(touchUpCompletionButton), for: .touchUpInside)
         cancelButton.addTarget(self, action: #selector(touchUpCancelButton), for: .touchUpInside)
     }
     
@@ -192,7 +192,7 @@ extension AttendanceCompletionViewController {
         return String(url[endIndex...])
     }
     
-    @objc func completeButton() {
+    @objc func touchUpCompletionButton() {
         postQRAuth()
         let alert = UIAlertController(
             title: "",
@@ -201,7 +201,7 @@ extension AttendanceCompletionViewController {
         let okAction = UIAlertAction(
             title: "확인",
             style: .default){ (action : UIAlertAction) in
-            self.navigationController?.popViewController(animated: true)
+            self.navigationController?.popToRootViewController(animated: true)
         }
         alert.addAction(okAction)
         present(alert, animated: true, completion: nil)
@@ -215,10 +215,18 @@ extension AttendanceCompletionViewController {
         let okAction = UIAlertAction(
             title: "확인",
             style: .default){ (action : UIAlertAction) in
-            self.navigationController?.popViewController(animated: true)
+            self.navigationController?.popToRootViewController(animated: true)
         }
+        let cancelAction = UIAlertAction(
+            title: "취소",
+            style: .cancel)
         alert.addAction(okAction)
+        alert.addAction(cancelAction)
         present(alert, animated: true, completion: nil)
     }
+    
+//    func completeAlert() {
+//
+//    }
     
 }
