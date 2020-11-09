@@ -206,7 +206,7 @@ extension ChallengeViewController: UITableViewDelegate {
         let screenWidth = UIScreen.main.bounds.size.width
         switch indexPath.section {
         case 0:
-            return screenWidth * 1/4
+            return screenWidth * 165/750
         case 1:
             return UITableView.automaticDimension
         default:
