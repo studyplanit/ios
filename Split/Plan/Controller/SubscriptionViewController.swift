@@ -296,7 +296,7 @@ extension SubscriptionViewController {
     func showAPIFailureAlert1() {
         let alert = UIAlertController(
             title: "등록실패1",
-            message: "선택 기간중 플랜이 3개 이상인 날짜가 존재합니다.",
+            message: "2시간 이내에 인증해야 하는 플랜이 존재합니다.",
             preferredStyle: .alert)
         let okAction = UIAlertAction(
             title: "확인",
@@ -308,7 +308,7 @@ extension SubscriptionViewController {
     func showAPIFailureAlert2() {
         let alert = UIAlertController(
             title: "등록실패2",
-            message: "선택 기간중 2시간이내의 중복 플랜이 존재합니다.",
+            message: "설정하신 기간 중 3개의 플랜을 가지고 있는 날짜가 존재합니다.",
             preferredStyle: .alert)
         let okAction = UIAlertAction(
             title: "확인",
@@ -320,7 +320,7 @@ extension SubscriptionViewController {
     func showAPIFailureAlert3() {
         let alert = UIAlertController(
             title: "등록실패3",
-            message: "서버 오류입니다.",
+            message: "서버 오류입니다. 잠시후에 재시도 해주세요.",
             preferredStyle: .alert)
         let okAction = UIAlertAction(
             title: "확인",

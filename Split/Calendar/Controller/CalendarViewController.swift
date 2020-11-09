@@ -107,8 +107,7 @@ extension CalendarViewController {
                     
                     self.userPlans = json
                     DispatchQueue.main.async {
-//                        self.tableView.reloadData()
-//                        self.PlanDates = [[],[],[]]
+                        self.PlanDates = [] // 꼭 플랜목록을 초기화해야지 새로운 데이터를 갱신해서 보여줄수 있다.
                         self.setUserPlanDates(userPlans: self.userPlans)
                         self.calendar.reloadData()
                         self.setUserDailyPlan(date: Date())
