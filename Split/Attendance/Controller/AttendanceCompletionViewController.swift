@@ -21,7 +21,8 @@ class AttendanceCompletionViewController: UIViewController {
     @IBOutlet weak var splitZoneNameLabel: UILabel!
     @IBOutlet weak var splitZoneCodeLabel: UILabel!
     
-    var splitZoneInfo: SplitZone?
+    var splitZoneName = ""
+    var splitZoneCode = ""
     var userTodayPlan: UserTodayPlan?
     let userID = UserDefaults.standard.string(forKey: "id")
     var authURL = ""
@@ -33,9 +34,7 @@ class AttendanceCompletionViewController: UIViewController {
         configureUI()
         configureNavigationBar()
         configureButton()
-        getSplitZone()
         print(authURL)
-        print("스플릿존 ID : \(getSplitZoneID(url: authURL))")
         print("userPlan: \(userTodayPlan!)")
     }
     
@@ -107,61 +106,15 @@ extension AttendanceCompletionViewController {
     
     // 스플릿존 이름, 뷰
     func configureSplitZoneInfoView() {
-        guard let splitZone = splitZoneInfo else { return }
-        print("configureSplitZoneInfoView() called - splitZone: \(splitZone)")
-        splitZoneNameLabel.text = splitZone.name
-        splitZoneCodeLabel.text = splitZone.code
+        print("configureSplitZoneInfoView() called - splitZoneName:\(splitZoneName), splitZoneCode:\(splitZoneCode)")
+        splitZoneNameLabel.text = splitZoneName
+        splitZoneCodeLabel.text = splitZoneCode
     }
     
 }
 
 //MARK:- API
 extension AttendanceCompletionViewController {
-    
-//    private func postQRAuth() {
-//        guard let userPlan = userTodayPlan else { return }
-//        
-//        let splitZoneID = getSplitZoneID(url: authURL)
-//        let planID = userPlan.planLogID
-//        
-//        let headers: HTTPHeaders = [
-//            "plan_log_id": "\(planID)",
-//            "planet_id": "\(splitZoneID)"
-//        ]
-//        let parameters = ["planet_id" : Int(splitZoneID)]
-//        AF.request(PlanAPIConstant.qrAuthURL, method: .post, parameters: parameters, headers: headers).responseJSON { (response) in
-//            switch response.result {
-//                // 성공
-//            case .success(let res):
-//                print("성공: \(res)")
-//                // 실패
-//            case .failure(let err):
-//                print("실패: \(err.localizedDescription)")
-//            }
-//        }
-//    }
-    
-    private func getSplitZone() {
-        let splitZoneID = getSplitZoneID(url: authURL)
-        let parameters = ["planet_id" : splitZoneID]
-        
-        AF.request(PlanAPIConstant.splitZoneInfoURL, parameters: parameters).responseJSON { (response) in
-            switch response.result {
-                // 성공
-            case .success(let res):
-                do {
-                    let jsonData = try JSONSerialization.data(withJSONObject: res, options: .prettyPrinted)
-                    let json = try JSONDecoder().decode(SplitZone.self, from: jsonData)
-                    self.splitZoneInfo = json
-                } catch(let err) {
-                    print(err.localizedDescription)
-                }
-                // 실패
-            case .failure(let err):
-                print(err.localizedDescription)
-            }
-        }
-    }
     
 }
 
@@ -183,11 +136,6 @@ extension AttendanceCompletionViewController {
         }
     }
     
-    func getSplitZoneID(url: String) -> String {
-        let endIndex = url.index(url.endIndex, offsetBy: -1)
-        return String(url[endIndex...])
-    }
-    
     @objc func touchUpCompletionButton() {
 //        postQRAuth()
         let alert = UIAlertController(
@@ -202,24 +150,7 @@ extension AttendanceCompletionViewController {
         alert.addAction(okAction)
         present(alert, animated: true, completion: nil)
     }
-    
-    @objc func touchUpCancelButton() {
-        let alert = UIAlertController(
-            title: "",
-            message: "인증을 취소하시겠습니까?",
-            preferredStyle: .alert)
-        let okAction = UIAlertAction(
-            title: "확인",
-            style: .default){ (action : UIAlertAction) in
-            self.navigationController?.popToRootViewController(animated: true)
-        }
-        let cancelAction = UIAlertAction(
-            title: "취소",
-            style: .cancel)
-        alert.addAction(okAction)
-        alert.addAction(cancelAction)
-        present(alert, animated: true, completion: nil)
-    }
+
     
 //    func completeAlert() {
 //

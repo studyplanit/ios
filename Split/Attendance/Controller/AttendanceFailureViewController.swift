@@ -18,24 +18,42 @@ class AttendanceFailureViewController: UIViewController {
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var retryButton: UIButton!
+    
+    var splitZoneName = ""
+    var splitZoneCode = ""
     var errorString = ""
+    var userPlan: UserTodayPlan?
     
     // MARK:- View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        configureUI()
+        configureNavigationBar()
+        configureRetryButton()
+        confgirueSplitZoneView()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         contentLabel.text = errorString
+        configurePlanView()
     }
 
 }
 
 //MARK:- Configure UI
 extension AttendanceFailureViewController {
+    
+    // 네비게이션바
+    func configureNavigationBar() {
+//        urlLabel.text = url
+        navigationItem.title = "QR"
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "KoPubDotumBold", size: 20)!]
+        navigationItem.hidesBackButton = true
+    }
     
     // 전체 UI
     func configureUI() {
@@ -47,7 +65,7 @@ extension AttendanceFailureViewController {
         retryButton.layer.cornerRadius = 0.5 * retryButton.bounds.size.height
         // 그림자
         configureShadowUI(planView)
-        configureShadowUI(contentView)
+//        configureShadowUI(contentView)
         configureShadowUI(retryButton)
         // 인증한 플랜 컨텐츠
 //        planNameLabel.text = userPlan.planName
@@ -63,13 +81,21 @@ extension AttendanceFailureViewController {
         view.layer.shadowOpacity = 0.5
     }
     
-    // 네비게이션바
-    func configureNavigationBar() {
-//        urlLabel.text = url
-        navigationItem.title = "QR"
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "KoPubDotumBold", size: 20)!]
-        navigationItem.hidesBackButton = true
+    func confgirueSplitZoneView() {
+        splitZoneNameLabel.text = splitZoneName
+        splitZoneCodeLabel.text = splitZoneCode
     }
+    
+    func configurePlanView() {
+        guard let plan = userPlan else { return }
+        planNameLabel.text = plan.planName
+        timeLabel.text = plan.setTime
+    }
+    
+    func configureRetryButton() {
+        retryButton.addTarget(self, action: #selector(touchUpRetryButton), for: .touchUpInside)
+    }
+
     
 }
 
@@ -89,6 +115,10 @@ extension AttendanceFailureViewController {
         default:
             return "Color_1days"
         }
+    }
+    
+    @objc func touchUpRetryButton() {
+        navigationController?.popViewController(animated: true)
     }
     
 }
