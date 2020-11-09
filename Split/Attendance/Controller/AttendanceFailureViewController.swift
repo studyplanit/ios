@@ -36,10 +36,11 @@ class AttendanceFailureViewController: UIViewController {
         configureRetryButton()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         
-        
+        // 해당 페이지를 벗어나서 플랜을 삭제할 경우를 대비
+        navigationController?.popToRootViewController(animated: true)
     }
 
 }
@@ -58,18 +59,16 @@ extension AttendanceFailureViewController {
     // 전체 UI
     func configureUI() {
         // 기본 UI
+        guard let userPlan = userPlan else { return }
         planView.layer.cornerRadius = 10
-//        planView.backgroundColor = UIColor(named: checkPlanColor(type: userPlan.needAuthNum))
+        planView.backgroundColor = UIColor(named: checkPlanColor(type: userPlan.needAuthNum))
         contentView.layer.cornerRadius = 10
         contentView.layer.borderWidth = 3
         retryButton.layer.cornerRadius = 0.5 * retryButton.bounds.size.height
         // 그림자
         configureShadowUI(planView)
-//        configureShadowUI(contentView)
+        configureShadowUI(contentView)
         configureShadowUI(retryButton)
-        // 인증한 플랜 컨텐츠
-//        planNameLabel.text = userPlan.planName
-//        timeLabel.text = userPlan.setTime
     }
     
     // 그림자 추가

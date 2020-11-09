@@ -17,6 +17,7 @@ class AttendanceViewController: UIViewController {
     @IBOutlet var planNameLabels: [UILabel]!
     @IBOutlet var planTimeLabels: [UILabel]!
     
+    let userID = UserDefaults.standard.string(forKey: "id")
     var userTodayPlans: [UserTodayPlan] = []
     var userPlan: UserTodayPlan?
     var userPlanID = 0

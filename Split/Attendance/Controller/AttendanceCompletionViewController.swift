@@ -24,7 +24,6 @@ class AttendanceCompletionViewController: UIViewController {
     var splitZoneName = ""
     var splitZoneCode = ""
     var userPlan: UserTodayPlan?
-    let userID = UserDefaults.standard.string(forKey: "id")
     
     // MARK:- View Life Cycle
     override func viewDidLoad() {
@@ -36,13 +35,6 @@ class AttendanceCompletionViewController: UIViewController {
         configurePlanView()
         configureButton()
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        
-    }
-    
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -65,8 +57,9 @@ extension AttendanceCompletionViewController {
     // 전체 UI
     func configureUI() {
         // 기본 UI
+        guard let userPlan = userPlan else { return }
         planView.layer.cornerRadius = 10
-//        planView.backgroundColor = UIColor(named: checkPlanColor(type: userPlan.needAuthNum))
+        planView.backgroundColor = UIColor(named: checkPlanColor(type: userPlan.needAuthNum))
         sayingLabelView.layer.cornerRadius = 10
         sayingLabelView.layer.borderWidth = 3
         completionButton.layer.cornerRadius = 0.5 * completionButton.bounds.size.height
@@ -99,13 +92,10 @@ extension AttendanceCompletionViewController {
         dayLabel.text = "\(plan.nowAuthNum + 1)일째 인증되었습니다"
     }
     
-    
     // 버튼
     func configureButton() {
         completionButton.addTarget(self, action: #selector(touchUpCompletionButton), for: .touchUpInside)
     }
-    
-    
     
 }
 
