@@ -158,6 +158,11 @@ extension AttendanceViewController {
                         DispatchQueue.main.async {
                             self.setCompletionView(data: json)
                         }
+                    case -200:
+                        print("인증실패 - -200")
+                        DispatchQueue.main.async {
+                            self.setFailureView(data: json)
+                        }
                     case -300:
                         print("인증실패 - -300")
                         DispatchQueue.main.async {

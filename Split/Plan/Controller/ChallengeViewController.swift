@@ -220,14 +220,14 @@ extension ChallengeViewController: UITableViewDelegate {
             return
         case 1:
             switch indexPath.row {
-            case 0, 1:
+            case 0, 1, 2, 3:
                 guard let subscriptionViewController = storyboard?.instantiateViewController(withIdentifier: "subscriptionViewController") as? SubscriptionViewController else {
                     return
                 }
                 subscriptionViewController.plan = plans[indexPath.row]
                 navigationController?.pushViewController(subscriptionViewController, animated: true)
-            case 2, 3:
-                return prohibitAlert()
+//            case 2, 3:
+//                return prohibitAlert()
             default:
                 return
             }

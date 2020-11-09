@@ -43,7 +43,7 @@ class CalendarViewController: UIViewController {
         
         getUserPlan()
         deselectDate()
-        
+        print("주말라벨: \(calendar.calendarWeekdayView.weekdayLabels)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,8 +75,10 @@ extension CalendarViewController {
         calendar.appearance.headerTitleColor = .white
         calendar.appearance.headerTitleFont = UIFont(name: "KoPubDotumBold", size: 20)
         calendar.appearance.weekdayTextColor = .black
-        calendar.appearance.todayColor = #colorLiteral(red: 0.2156862745, green: 0.2784313725, blue: 0.3098039216, alpha: 1)
+        calendar.appearance.todayColor = #colorLiteral(red: 0.4231369495, green: 0.4790414572, blue: 0.5047338009, alpha: 1)
         calendar.appearance.selectionColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
+        calendar.calendarWeekdayView.weekdayLabels[0].textColor = .red // 일요일
+        calendar.calendarWeekdayView.weekdayLabels[6].textColor = .red // 토요일
     }
     
     func configureTableView() {
@@ -299,38 +301,23 @@ extension CalendarViewController: FSCalendarDelegate {
 //        print(dateFormatter.string(from: date))
 //    }
     
-    // 스와이프
-    func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
-        print("페이지 넘김")
-    }
-    
-    // 특정 날짜를 선택되지 않게 하기
-    func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
-        guard let excludeDate = dateFormatter.date(from: "2020-11-25") else { return true }
-        
-        if date.compare(excludeDate) == .orderedSame {
-            return false
-        } else {
-            return true
-        }
-    }
-    
 }
 
 // MARK:- FS Calendar Delegate Appearance
 extension CalendarViewController: FSCalendarDelegateAppearance {
     
-    // 특정 날짜 색 바꾸기
-    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
-        guard let eventDate = dateFormatter.date(from: "2020-11-25") else { return nil }
-        
-        if date.compare(eventDate) == .orderedSame {
-            return .red
-        } else {
-            return nil
-        }
-    }
-    
+//    // 특정 날짜 색 바꾸기
+//    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
+//
+//        print(calendar.calendarWeekdayView.weekdayLabels)
+//
+////        if calendar.calendarWeekdayView.weekdayLabels.contains(date){
+////            return UIColor.red
+////        } else {
+////            return UIColor.black
+////        }
+//    }
+//
     // 점 기본 색상
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventDefaultColorsFor date: Date) -> [UIColor]? {
         
