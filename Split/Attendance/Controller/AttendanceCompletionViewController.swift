@@ -128,18 +128,7 @@ extension AttendanceCompletionViewController {
     }
     
     @objc func touchUpCompletionButton() {
-        let alert = UIAlertController(
-            title: "",
-            message: "인증이 완료되었습니다.",
-            preferredStyle: .alert)
-        let okAction = UIAlertAction(
-            title: "확인",
-            style: .default){ (action : UIAlertAction) in
-            self.navigationController?.popToRootViewController(animated: true)
-        }
-        alert.addAction(okAction)
-        present(alert, animated: true, completion: nil)
+        navigationController?.popToRootViewController(animated: true)
     }
-
 
 }
