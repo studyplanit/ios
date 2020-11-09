@@ -17,7 +17,7 @@ class SubscriptionViewController: UIViewController {
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var timePicker: UIDatePicker!
     
-    var userPlans: [UserPlan] = []
+    var userPlans: [UserTotalPlan] = []
     var PlanDates: [[String]] = []
     var plan: PlanList?
     let userID = UserDefaults.standard.string(forKey: "id")
@@ -102,13 +102,13 @@ extension SubscriptionViewController {
         let headers: HTTPHeaders = [
             "memberId": "2",
         ]
-        AF.request(CalendarAPIConstant.userPlanURL, headers: headers).responseJSON { (response) in
+        AF.request(CalendarAPIConstant.userTotalPlanURL, headers: headers).responseJSON { (response) in
             switch response.result {
                 // 성공
             case .success(let res):
                 do {
                     let jsonData = try JSONSerialization.data(withJSONObject: res, options: .prettyPrinted)
-                    let json = try JSONDecoder().decode([UserPlan].self, from: jsonData)
+                    let json = try JSONDecoder().decode([UserTotalPlan].self, from: jsonData)
                     
                     self.userPlans = json
                     DispatchQueue.main.async {
@@ -158,7 +158,7 @@ extension SubscriptionViewController {
 extension SubscriptionViewController {
     
     // 플랜 날짜 리스트 만들기
-    func setUserPlanDates(userPlans: [UserPlan]) {
+    func setUserPlanDates(userPlans: [UserTotalPlan]) {
         let count = userPlans.count
         for i in 0 ..< count {
             PlanDates.append([])

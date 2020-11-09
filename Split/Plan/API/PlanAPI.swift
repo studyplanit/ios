@@ -16,8 +16,11 @@ struct PlanAPIConstant {
     /* 플랜 등록 */
     static let planInsertURL = baseURL + "/plan/insert.do"
     
-    /* 회원별 플랜 */
-    static let userPlanURL = baseURL + "/member/getMy.do"
+    /* 유저별 전체 플랜 */
+    static let userTotalPlanURL = baseURL + "/member/getMy.do"
+    
+    /* 유저별 오늘 플랜 */
+    static let userTodayPlanURL = baseURL + "/member/getMy.group"
     
     /* 회원별 플랜 삭제 */
     static let userPlanDeleteURL = baseURL + "/plan/delete.do"

@@ -19,7 +19,7 @@ class ChallengeViewController: UIViewController {
         return formatter
     }()
     
-    var userPlans: [UserPlan] = []
+    var userPlans: [UserTotalPlan] = []
     
     // MARK:- View Life Cycle
     override func viewDidLoad() {
@@ -75,13 +75,13 @@ extension ChallengeViewController {
         let headers: HTTPHeaders = [
             "memberId": "2",
         ]
-        AF.request(CalendarAPIConstant.userPlanURL, headers: headers).responseJSON { (response) in
+        AF.request(CalendarAPIConstant.userTotalPlanURL, headers: headers).responseJSON { (response) in
             switch response.result {
                 // 성공
             case .success(let res):
                 do {
                     let jsonData = try JSONSerialization.data(withJSONObject: res, options: .prettyPrinted)
-                    let json = try JSONDecoder().decode([UserPlan].self, from: jsonData)
+                    let json = try JSONDecoder().decode([UserTotalPlan].self, from: jsonData)
                     
                     self.userPlans = json
                     DispatchQueue.main.async {

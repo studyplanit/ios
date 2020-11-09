@@ -17,8 +17,8 @@ class CalendarViewController: UIViewController {
     @IBOutlet weak var backgoroundView: UIView!
     
     let userID = UserDefaults.standard.string(forKey: "id")
-    var userPlans: [UserPlan] = []
-    var userDailyPlan: [UserPlan] = []
+    var userPlans: [UserTotalPlan] = []
+    var userDailyPlan: [UserTotalPlan] = []
     var PlanDates: [[String]] = []
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -97,13 +97,13 @@ extension CalendarViewController {
         let headers: HTTPHeaders = [
             "memberId": "2",
         ]
-        AF.request(CalendarAPIConstant.userPlanURL, headers: headers).responseJSON { (response) in
+        AF.request(CalendarAPIConstant.userTotalPlanURL, headers: headers).responseJSON { (response) in
             switch response.result {
                 // 성공
             case .success(let res):
                 do {
                     let jsonData = try JSONSerialization.data(withJSONObject: res, options: .prettyPrinted)
-                    let json = try JSONDecoder().decode([UserPlan].self, from: jsonData)
+                    let json = try JSONDecoder().decode([UserTotalPlan].self, from: jsonData)
                     
                     self.userPlans = json
                     DispatchQueue.main.async {
@@ -189,7 +189,7 @@ extension CalendarViewController {
     }
     
     // 플랜 날짜 리스트 만들기
-    func setUserPlanDates(userPlans: [UserPlan]) {
+    func setUserPlanDates(userPlans: [UserTotalPlan]) {
         let count = userPlans.count
         for i in 0 ..< count {
             PlanDates.append([])

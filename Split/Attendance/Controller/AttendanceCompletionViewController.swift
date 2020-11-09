@@ -23,7 +23,7 @@ class AttendanceCompletionViewController: UIViewController {
     @IBOutlet weak var splitZoneCodeLabel: UILabel!
     
     var splitZoneInfo: SplitZone?
-    var userPlan: UserPlan?
+    var userTodayPlan: UserTodayPlan?
     let userID = UserDefaults.standard.string(forKey: "id")
     var authURL = ""
     
@@ -37,7 +37,7 @@ class AttendanceCompletionViewController: UIViewController {
         getSplitZone()
         print(authURL)
         print("스플릿존 ID : \(getSplitZoneID(url: authURL))")
-        print("userPlan: \(userPlan!)")
+        print("userPlan: \(userTodayPlan!)")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -60,7 +60,7 @@ extension AttendanceCompletionViewController {
     
     // 전체 UI
     func configureUI() {
-        guard let userPlan = userPlan else { return }
+        guard let userPlan = userTodayPlan else { return }
         // 기본 UI
         planView.layer.cornerRadius = 10
         planView.backgroundColor = UIColor(named: checkPlanColor(type: userPlan.needAuthNum))
@@ -123,7 +123,7 @@ extension AttendanceCompletionViewController {
 extension AttendanceCompletionViewController {
     
     private func postQRAuth() {
-        guard let userPlan = userPlan else { return }
+        guard let userPlan = userTodayPlan else { return }
         
         let splitZoneID = getSplitZoneID(url: authURL)
         let planID = userPlan.planLogID

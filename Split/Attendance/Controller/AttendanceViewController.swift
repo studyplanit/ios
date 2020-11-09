@@ -16,7 +16,7 @@ class AttendanceViewController: UIViewController {
     @IBOutlet var planViews: [UIView]!
     @IBOutlet var planNameLabels: [UILabel]!
     @IBOutlet var planTimeLabels: [UILabel]!
-    var userPlans: [UserPlan] = []
+    var userTodayPlans: [UserTodayPlan] = []
     var userPlanIndex = 0
     
     // MARK:- Properties
@@ -43,7 +43,7 @@ class AttendanceViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        getUserPlan()
+        getUserTodayPlan()
     }
     
 //    override func viewDidDisappear(_ animated: Bool) {
@@ -76,11 +76,11 @@ extension AttendanceViewController {
     func configurePlanView() {
         resetPlanView()
         // 서버측에서 유저 보유플랜이 3개 이상인경우에 3으로 리턴하여 연산
-        let count = userPlans.count <= 3 ? userPlans.count : 3
+        let count = userTodayPlans.count <= 3 ? userTodayPlans.count : 3
         for i in 0 ..< count {
-            planViews[i].backgroundColor = UIColor(named: checkPlanColor(type: userPlans[i].needAuthNum))
-            planNameLabels[i].text = userPlans[i].planName
-            planTimeLabels[i].text = userPlans[i].setTime
+            planViews[i].backgroundColor = UIColor(named: checkPlanColor(type: userTodayPlans[i].needAuthNum))
+            planNameLabels[i].text = userTodayPlans[i].planName
+            planTimeLabels[i].text = userTodayPlans[i].setTime
             configureTapGesture(index: i)
         }
     }
@@ -106,18 +106,18 @@ extension AttendanceViewController {
 // MARK:- API
 extension AttendanceViewController {
     
-    private func getUserPlan() {
+    private func getUserTodayPlan() {
         let headers: HTTPHeaders = [
             "memberId": "2",
         ]
-        AF.request(CalendarAPIConstant.userPlanURL, headers: headers).responseJSON { (response) in
+        AF.request(CalendarAPIConstant.userTodayPlanURL, headers: headers).responseJSON { (response) in
             switch response.result {
                 // 성공
             case .success(let res):
                 do {
                     let jsonData = try JSONSerialization.data(withJSONObject: res, options: .prettyPrinted)
-                    let json = try JSONDecoder().decode([UserPlan].self, from: jsonData)
-                    self.userPlans = json
+                    let json = try JSONDecoder().decode([UserTodayPlan].self, from: jsonData)
+                    self.userTodayPlans = json
                     DispatchQueue.main.async {
                         self.configurePlanView()
                     }
@@ -187,7 +187,7 @@ extension AttendanceViewController: QRCodeReaderViewControllerDelegate {
         let storyboard = UIStoryboard(name: "Attendance", bundle: Bundle.main)
         guard let attendanceCompletionViewController = storyboard.instantiateViewController(withIdentifier: "attendanceCompletionViewController") as? AttendanceCompletionViewController else { return }
         attendanceCompletionViewController.authURL = result.value
-        attendanceCompletionViewController.userPlan = userPlans[userPlanIndex]
+        attendanceCompletionViewController.userTodayPlan = userTodayPlans[userPlanIndex]
         print("큐알인증완료 - 유저플랜인덱스 : \(userPlanIndex)")
         navigationController?.pushViewController(attendanceCompletionViewController, animated: true)
     }
