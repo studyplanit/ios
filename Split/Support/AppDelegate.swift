@@ -17,8 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UINavigationBar.appearance().barStyle = .black
         UINavigationBar.appearance().tintColor = .white
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Maplestory OTF Bold", size: 30) as Any]
+        
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Maplestory OTF Bold", size: 10) as Any], for: .normal)
         UITabBar.appearance().unselectedItemTintColor = . white
-        UITabBar.appearance().tintColor = Common().purple
+        UITabBar.appearance().tintColor = Common().tapPurple
         return true
     }
 

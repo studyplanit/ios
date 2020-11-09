@@ -21,7 +21,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NMFClientId</key>
-	<string>1zjkoqkopd</string>
+	<string>tvllvstqov</string>
 	<key>NSCameraUsageDescription</key>
 	<string>QR코드 인식을 위해 카메라 사용을 허용해주세요.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
@@ -30,8 +30,14 @@
 	<string>사용중에만 위치정보를 이용합니다.</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>GmarketSansMedium.otf</string>
+		<string>Maplestory OTF Light.otf</string>
+		<string>Maplestory OTF Bold.otf</string>
+		<string>KoPubDotumLight.ttf</string>
+		<string>KoPubDotumMedium.ttf</string>
 		<string>KoPubDotumBold.ttf</string>
+		<string>GmarketSansLight.otf</string>
+		<string>GmarketSansBold.otf</string>
+		<string>GmarketSansMedium.otf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

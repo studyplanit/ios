@@ -56,7 +56,14 @@
 		FD47C95D2550EFE1001D9252 /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD47C95C2550EFE1001D9252 /* PrivacyViewController.swift */; };
 		FD47C9622550F008001D9252 /* TermsAndUseViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD47C9612550F008001D9252 /* TermsAndUseViewViewController.swift */; };
 		FD47C9712552794B001D9252 /* MapVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD47C9702552794B001D9252 /* MapVO.swift */; };
+		FD758E9C2556C3E400E2E2BB /* MapPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD758E9B2556C3E400E2E2BB /* MapPopUpViewController.swift */; };
 		FD80D3D125371239002D73B3 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD80D3D025371239002D73B3 /* JoinViewController.swift */; };
+		FDB8B9B6255983DF008BCDCD /* GmarketSansBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FDB8B9B4255983DF008BCDCD /* GmarketSansBold.otf */; };
+		FDB8B9B7255983DF008BCDCD /* GmarketSansLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = FDB8B9B5255983DF008BCDCD /* GmarketSansLight.otf */; };
+		FDB8B9BD255983F7008BCDCD /* Maplestory OTF Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = FDB8B9BB255983F7008BCDCD /* Maplestory OTF Light.otf */; };
+		FDB8B9BE255983F7008BCDCD /* Maplestory OTF Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FDB8B9BC255983F7008BCDCD /* Maplestory OTF Bold.otf */; };
+		FDB8B9C425598409008BCDCD /* KoPubDotumMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FDB8B9C225598409008BCDCD /* KoPubDotumMedium.ttf */; };
+		FDB8B9C525598409008BCDCD /* KoPubDotumLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FDB8B9C325598409008BCDCD /* KoPubDotumLight.ttf */; };
 		FDE91C95254D1B9C00BAB8B0 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE91C94254D1B9C00BAB8B0 /* Common.swift */; };
 		FDE91CDF254D62CA00BAB8B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDE91CDE254D62CA00BAB8B0 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -143,7 +150,14 @@
 		FD47C95C2550EFE1001D9252 /* PrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyViewController.swift; sourceTree = "<group>"; };
 		FD47C9612550F008001D9252 /* TermsAndUseViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndUseViewViewController.swift; sourceTree = "<group>"; };
 		FD47C9702552794B001D9252 /* MapVO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVO.swift; sourceTree = "<group>"; };
+		FD758E9B2556C3E400E2E2BB /* MapPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPopUpViewController.swift; sourceTree = "<group>"; };
 		FD80D3D025371239002D73B3 /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
+		FDB8B9B4255983DF008BCDCD /* GmarketSansBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansBold.otf; sourceTree = "<group>"; };
+		FDB8B9B5255983DF008BCDCD /* GmarketSansLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansLight.otf; sourceTree = "<group>"; };
+		FDB8B9BB255983F7008BCDCD /* Maplestory OTF Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Maplestory OTF Light.otf"; sourceTree = "<group>"; };
+		FDB8B9BC255983F7008BCDCD /* Maplestory OTF Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Maplestory OTF Bold.otf"; sourceTree = "<group>"; };
+		FDB8B9C225598409008BCDCD /* KoPubDotumMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KoPubDotumMedium.ttf; sourceTree = "<group>"; };
+		FDB8B9C325598409008BCDCD /* KoPubDotumLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KoPubDotumLight.ttf; sourceTree = "<group>"; };
 		FDE91C94254D1B9C00BAB8B0 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		FDE91CDE254D62CA00BAB8B0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -413,8 +427,14 @@
 		8DBF800A2548A33F00989AD0 /* Font */ = {
 			isa = PBXGroup;
 			children = (
-				8D1A4B822548AEB4007366D7 /* GmarketSansMedium.otf */,
 				8D1A4B7D2548AEA6007366D7 /* KoPubDotumBold.ttf */,
+				FDB8B9C225598409008BCDCD /* KoPubDotumMedium.ttf */,
+				FDB8B9C325598409008BCDCD /* KoPubDotumLight.ttf */,
+				FDB8B9B4255983DF008BCDCD /* GmarketSansBold.otf */,
+				8D1A4B822548AEB4007366D7 /* GmarketSansMedium.otf */,
+				FDB8B9B5255983DF008BCDCD /* GmarketSansLight.otf */,
+				FDB8B9BC255983F7008BCDCD /* Maplestory OTF Bold.otf */,
+				FDB8B9BB255983F7008BCDCD /* Maplestory OTF Light.otf */,
 			);
 			path = Font;
 			sourceTree = "<group>";
@@ -522,6 +542,7 @@
 			isa = PBXGroup;
 			children = (
 				FD2F4D33253DDE8D000A3944 /* MapViewController.swift */,
+				FD758E9B2556C3E400E2E2BB /* MapPopUpViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -643,19 +664,25 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDB8B9BD255983F7008BCDCD /* Maplestory OTF Light.otf in Resources */,
 				8D320E1A2548A7A80041D193 /* Study.storyboard in Resources */,
 				8D0E5877252F735D0011C102 /* LaunchScreen.storyboard in Resources */,
 				8D5F7897254C77B8001773B7 /* Attendance.storyboard in Resources */,
 				8D1A4B7E2548AEA6007366D7 /* KoPubDotumBold.ttf in Resources */,
 				FDE91CDF254D62CA00BAB8B0 /* Assets.xcassets in Resources */,
 				8D4D6AE9254B26620082DD07 /* InfoPlist.strings in Resources */,
+				FDB8B9C425598409008BCDCD /* KoPubDotumMedium.ttf in Resources */,
 				8D3AC5702549A6940059F950 /* ChallengeBannerTableViewCell.xib in Resources */,
 				8D3AC57A2549A6AD0059F950 /* ChallengeContentTableViewCell.xib in Resources */,
 				8D3AC58D2549BDBF0059F950 /* EventContentTableViewCell.xib in Resources */,
+				FDB8B9BE255983F7008BCDCD /* Maplestory OTF Bold.otf in Resources */,
 				8D5D7043254A911C00618A27 /* CalendarTableViewCell.xib in Resources */,
 				8D320E0D2548A74B0041D193 /* Plan.storyboard in Resources */,
+				FDB8B9B7255983DF008BCDCD /* GmarketSansLight.otf in Resources */,
+				FDB8B9B6255983DF008BCDCD /* GmarketSansBold.otf in Resources */,
 				8D1A4B832548AEB4007366D7 /* GmarketSansMedium.otf in Resources */,
 				8D3AC5862549BDB00059F950 /* EventBannerTableViewCell.xib in Resources */,
+				FDB8B9C525598409008BCDCD /* KoPubDotumLight.ttf in Resources */,
 				8D0E5872252F735B0011C102 /* Main.storyboard in Resources */,
 				8D320E152548A77A0041D193 /* Calendar.storyboard in Resources */,
 			);
@@ -794,6 +821,7 @@
 				8DD85DE2254AA218006430C4 /* PlanModel.swift in Sources */,
 				8D5D7042254A911C00618A27 /* CalendarTableViewCell.swift in Sources */,
 				8D115983254C788A00241BE6 /* AttendanceViewController.swift in Sources */,
+				FD758E9C2556C3E400E2E2BB /* MapPopUpViewController.swift in Sources */,
 				FD0125D22537090B00AD92E8 /* SmsAuthViewController.swift in Sources */,
 				8D3AC58C2549BDBF0059F950 /* EventContentTableViewCell.swift in Sources */,
 				8D3AC5852549BDB00059F950 /* EventBannerTableViewCell.swift in Sources */,
@@ -1016,7 +1044,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K8BMPHTXSP;
+				DEVELOPMENT_TEAM = 7JCB3TJ6U7;
 				INFOPLIST_FILE = Split/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1039,7 +1067,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K8BMPHTXSP;
+				DEVELOPMENT_TEAM = 7JCB3TJ6U7;
 				INFOPLIST_FILE = Split/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (

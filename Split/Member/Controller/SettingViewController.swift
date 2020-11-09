@@ -14,11 +14,13 @@ class SettingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationItem.title = "마이플릿"
     }
     
     @IBAction func logOutButtonClick(_ sender: UIButton) {
         UserDefaults.standard.removeObject(forKey: "id")
-        print("logout")
         //로그인 페이지로 이동
+//        navigationController?.popToRootViewController(animated: false)
     }
 }
