@@ -10,24 +10,24 @@ import UIKit
 class MapPopUpViewController: UIViewController {
 
     @IBOutlet weak var popUpView: UIImageView!
-    @IBOutlet weak var popOuterView: UIView!
+    @IBOutlet weak var cancelImageView: UIImageView!
     
     static var popUpImageURL: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor(displayP3Red: 0, green: 0, blue: 0, alpha: 0.3)
+        self.view.backgroundColor = UIColor(displayP3Red: 0, green: 0, blue: 0, alpha: 1)
         
         let pinch = UIPinchGestureRecognizer(target: self, action: #selector(self.pinchImageView(_:)))
         self.popUpView.addGestureRecognizer(pinch)
         let pan = UIPanGestureRecognizer(target: self, action: #selector(self.panImageView(_:)))
         self.popUpView.addGestureRecognizer(pan)
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapPopOuterView(_:)))
-        self.popOuterView.addGestureRecognizer(tap)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapCancelImageView(_:)))
+        self.cancelImageView.addGestureRecognizer(tap)
         
         guard let url = URL(string: "\(Common().baseURL)/\(MapPopUpViewController.popUpImageURL!)") else {
-            print("error")
+            self.present(Common().errorAlert(), animated: false, completion: nil)
             return
         }
         if let data = try? Data(contentsOf: url) {
@@ -54,7 +54,8 @@ class MapPopUpViewController: UIViewController {
     }
     
     //MARK: 이미지 뷰어 화면 끄기
-    @objc func tapPopOuterView(_ pinch: UITapGestureRecognizer) {
+    @objc func tapCancelImageView(_ tap: UITapGestureRecognizer) {
+        print("aa")
         self.dismiss(animated: false, completion: nil)
     }
 }

@@ -30,11 +30,6 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
     var timer: Timer?
     var timeLeft = 300
     
-    struct Auth : Decodable {
-        let authNumber : String
-        let id : Int
-    }
-    
     //MARK: 타이머 함수
     @objc func onTimerUpdate() {
         timeLeft = timeLeft - 1
@@ -79,6 +74,7 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
     //MARK: 초기화
     override func viewDidLoad() {
         super.viewDidLoad()
+        //이용약관동의 잠시만 꺼놓기!! ********************** 나중에 수정 필요!!!!
         agreementLabel.isHidden = true
         
         //자동로그인 구현
@@ -121,6 +117,7 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
         tapLabelGestureRecognizer.addTarget(self, action: #selector(tapLabel))
     }
     
+    //라벨의 부분만 tap하는 함수 선언
     @objc func tapLabel() {
         let text = (agreementLabel.text)!
         let termsRange = (text as NSString).range(of: "이용약관")
@@ -135,7 +132,7 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
         }
     }
 
-    //MARK: 키보드 없애기
+    //MARK: 화면 터치 시 키보드 없애기
     @IBAction func tapView(_ sender: UIGestureRecognizer) {
         self.view.endEditing(true)
     }
@@ -159,8 +156,8 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    //MARK: 핸드폰번호 입력 유효성 검사
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
         //최대 11문자만 입력가능하도록 설정
         guard let textFieldText = textField.text, let rangeOfTextToReplce = Range(range, in: textFieldText) else {
             return false
@@ -173,7 +170,6 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
         let characterSet = CharacterSet(charactersIn: string)
         
         return count <= 11 && allowedCharacters.isSuperset(of: characterSet)
-        
     }
     
     //MARK:- 전송버튼 누른 후
@@ -183,6 +179,12 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
         let headers: HTTPHeaders = ["pNum": self.phoneNumber]
         let URL = Common().baseURL+"/sms/receive.do"
         let alamo = AF.request(URL, method: .post, headers: headers).validate(statusCode: 200..<300)
+        
+        struct Auth : Decodable {
+            let authNumber : String
+            let id : Int
+        }
+        
         alamo.responseDecodable(of: Auth.self) { (response) in
             guard let auth = response.value else {
                 self.present(Common().errorAlert(), animated: false, completion: nil)
@@ -200,10 +202,12 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
             self.nextButton.isHidden = false
             self.authNumberTextField.text = ""
             self.authCheckLabel.isHidden = true
+            
             //팝업 띄우기
             UIView.animate(withDuration: 0.5) {
                 self.popUpView.transform = CGAffineTransform(translationX: 0, y: 100)
             }
+            
             //타이머 시작
             self.timeLeft = 300
             self.timer?.invalidate()
@@ -215,6 +219,7 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
     //MARK:- 확인 버튼 눌렀을 때
     @IBAction func nextButtonClick(_ sender: UIButton) {
         if authNumberTextField.text == String(authNumber) {
+            //인증번호가 맞았을 경우
             if timeLeft == 0 {
                 authCheckLabel.isHidden = false
                 authCheckLabel.text = "인증번호 입력시간이 초과되었습니다."
@@ -231,7 +236,7 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
                 self.navigationController?.pushViewController(nextView!, animated: false)
             }
         } else {
-            //인증번호 입력횟수
+            //인증번호가 틀렸을 경ㅇ
             authCheckLabel.isHidden = false
             if authCount >= 5 {
                 authNumber = 135792468
@@ -248,6 +253,7 @@ class SmsAuthViewController: UIViewController, UITextFieldDelegate {
     }
 }
 
+//라벨의 부분만 tap이벤트를 적용하기위한 UITapGestureRecognizer 기능 확장 코드
 extension UITapGestureRecognizer {
 
     func didTapAttributedTextInLabel(label: UILabel, inRange targetRange: NSRange) -> Bool {
@@ -270,15 +276,10 @@ extension UITapGestureRecognizer {
         // Find the tapped character location and compare it to the specified range
         let locationOfTouchInLabel = self.location(in: label)
         let textBoundingBox = layoutManager.usedRect(for: textContainer)
-        //let textContainerOffset = CGPointMake((labelSize.width - textBoundingBox.size.width) * 0.5 - textBoundingBox.origin.x,
-                                              //(labelSize.height - textBoundingBox.size.height) * 0.5 - textBoundingBox.origin.y);
         let textContainerOffset = CGPoint(x: (labelSize.width - textBoundingBox.size.width) * 0.5 - textBoundingBox.origin.x, y: (labelSize.height - textBoundingBox.size.height) * 0.5 - textBoundingBox.origin.y)
-
-        //let locationOfTouchInTextContainer = CGPointMake(locationOfTouchInLabel.x - textContainerOffset.x,
-                                                        // locationOfTouchInLabel.y - textContainerOffset.y);
         let locationOfTouchInTextContainer = CGPoint(x: locationOfTouchInLabel.x - textContainerOffset.x, y: locationOfTouchInLabel.y - textContainerOffset.y)
         let indexOfCharacter = layoutManager.characterIndex(for: locationOfTouchInTextContainer, in: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
+        
         return NSLocationInRange(indexOfCharacter, targetRange)
     }
-
 }

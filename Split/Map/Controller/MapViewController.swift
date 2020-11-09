@@ -153,21 +153,20 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
                             self.planetTotalVisitButton.setTitle("   누적방문자 \(map.allVisit)명   ", for: .normal)
                             self.planetNameLabel.text = map.planetName
                             self.planetAddressLabel.text = map.address
-                            self.planetTimeLabel.text = "\(map.startTime) ~ \(map.endTime) \(map.holiday) 정기휴무"
+                            self.planetTimeLabel.text = "\(map.startTime) ~ \(map.endTime) 정기휴무 \(map.holiday)"
                             self.splitInfoView.isHidden = false
                             self.splitMapView.mapView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 170, right: 0)
-                            self.planetImageURL = map.cafeImage
+                            self.planetImageURL = map.cafeInImage
                             self.planetMenuImageURL = map.menuList
                             self.planetCallNumber = map.phoneNumber
                             
                             //동기 방식으로 이미지 로드(마커 클릭 속도가 느림)
-                            let url = URL(string: "\(Common().baseURL)/\(map.cafeImage)")
+                            let url = URL(string: "\(Common().baseURL)/\(map.cafeInImage)")
                             if let data = try? Data(contentsOf: url!) {
                                 if let image = UIImage(data: data) {
                                     self.planetImageView.image = image
                                 }
                             }
-                            
                             //비동기 방식으로 이미지 로드(이미지만 로드 속도만 느림)
 //                            DispatchQueue.global().async { [weak self] in
 //                                let url = URL(string: "\(Common().baseURL)/\(map.cafeImage)")
@@ -179,8 +178,6 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
 //                                    }
 //                                }
 //                            }
-                            
-                            
                             return true
                         }
                     }

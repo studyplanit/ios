@@ -16,6 +16,7 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var nickTextField: UITextField!
     @IBOutlet weak var nickCheckLabel: UILabel!
     @IBOutlet weak var nextButton: UIButton!
+    
     var nickCheck = false
     var phone = ""
     var isMemberCheck = ""
@@ -47,11 +48,6 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
         nickTextField.font = Common().koPubDotumBold16
         nickCheckLabel.font = Common().koPubDotumBold14
         nextButton.titleLabel!.font = Common().koPubDotumBold16
-    }
-    
-    //MARK: status bar 색상 지정하기
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .darkContent
     }
     
     //MARK: 입력값 유효성 검사
