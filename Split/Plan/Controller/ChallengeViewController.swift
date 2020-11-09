@@ -19,6 +19,8 @@ class ChallengeViewController: UIViewController {
         return formatter
     }()
     
+    var userPlans: [UserPlan] = []
+    
     // MARK:- View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,9 +29,15 @@ class ChallengeViewController: UIViewController {
         getPlanList()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        getUserPlan()
+    }
+    
 }
 
-// MARK:- Configure
+// MARK:- Configure UI
 extension ChallengeViewController {
     
     func configureTableView() {
@@ -60,8 +68,34 @@ extension ChallengeViewController {
     
 }
 
-// MARK:- Methods
+// MARK:- API
 extension ChallengeViewController {
+    
+    private func getUserPlan() {
+        let headers: HTTPHeaders = [
+            "memberId": "2",
+        ]
+        AF.request(CalendarAPIConstant.userPlanURL, headers: headers).responseJSON { (response) in
+            switch response.result {
+                // 성공
+            case .success(let res):
+                do {
+                    let jsonData = try JSONSerialization.data(withJSONObject: res, options: .prettyPrinted)
+                    let json = try JSONDecoder().decode([UserPlan].self, from: jsonData)
+                    
+                    self.userPlans = json
+                    DispatchQueue.main.async {
+                        print(self.userPlans.count)
+                    }
+                } catch(let err) {
+                    print(err.localizedDescription)
+                }
+                // 실패
+            case .failure(let err):
+                print(err.localizedDescription)
+            }
+        }
+    }
     
     private func getPlanList() {
         AF.request(PlanAPIConstant.planListURL).responseJSON { (response) in
@@ -86,6 +120,12 @@ extension ChallengeViewController {
         }
     }
     
+}
+
+// MARK:- Alert
+extension ChallengeViewController {
+    
+    // 테스트 기간용 알림
     func prohibitAlert() {
         let alert = UIAlertController(
             title: "",
@@ -93,9 +133,20 @@ extension ChallengeViewController {
             preferredStyle: .alert)
         let okAction = UIAlertAction(
             title: "확인",
-            style: .default){ (action : UIAlertAction) in
-            self.navigationController?.popViewController(animated: true)
-        }
+            style: .default)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    // 보유플랜 3개 이상시 금지
+    func prohibitMorePlanAlert() {
+        let alert = UIAlertController(
+            title: "",
+            message: "플랜은 최대 3개까지만 신청 가능합니다.",
+            preferredStyle: .alert)
+        let okAction = UIAlertAction(
+            title: "확인",
+            style: .default)
         alert.addAction(okAction)
         present(alert, animated: true, completion: nil)
     }
@@ -135,7 +186,8 @@ extension ChallengeViewController: UITableViewDataSource {
                     for: indexPath) as? ChallengeContentTableViewCell else {
                 return UITableViewCell()
             }
-            cell.planTitleLabel.text = plans[indexPath.row].name
+//            cell.planTitleLabel.text = plans[indexPath.row].name
+            cell.planDateLabel.text = "\(plans[indexPath.row].need)일"
             let medalName = setMedalImage(type: plans[indexPath.row].need)
             cell.medalImageView.image = UIImage(named: medalName)
             cell.userNumberLabel.text = numberFormatter.string(from: NSNumber(value: plans[indexPath.row].need))! + " 명"
@@ -169,11 +221,15 @@ extension ChallengeViewController: UITableViewDelegate {
         case 1:
             switch indexPath.row {
             case 0, 1:
-                guard let subscriptionViewController = storyboard?.instantiateViewController(withIdentifier: "subscriptionViewController") as? SubscriptionViewController else {
-                    return
+                if userPlans.count < 3 {
+                    guard let subscriptionViewController = storyboard?.instantiateViewController(withIdentifier: "subscriptionViewController") as? SubscriptionViewController else {
+                        return
+                    }
+                    subscriptionViewController.plan = plans[indexPath.row]
+                    navigationController?.pushViewController(subscriptionViewController, animated: true)
+                } else {
+                    return prohibitMorePlanAlert()
                 }
-                subscriptionViewController.plan = plans[indexPath.row]
-                navigationController?.pushViewController(subscriptionViewController, animated: true)
             case 2, 3:
                 return prohibitAlert()
             default:

@@ -37,6 +37,7 @@
 		8D5D7042254A911C00618A27 /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5D7040254A911C00618A27 /* CalendarTableViewCell.swift */; };
 		8D5D7043254A911C00618A27 /* CalendarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D5D7041254A911C00618A27 /* CalendarTableViewCell.xib */; };
 		8D5F7897254C77B8001773B7 /* Attendance.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D5F7895254C77B8001773B7 /* Attendance.storyboard */; };
+		8D6B0B8725581B7E00AA032F /* UserPlanList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6B0B8625581B7E00AA032F /* UserPlanList.swift */; };
 		8D9E599F255590AE0091CE28 /* AttendanceTapGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9E599E255590AE0091CE28 /* AttendanceTapGesture.swift */; };
 		8DCFAFCD25540A2F003E181E /* PlanAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCFAFCC25540A2F003E181E /* PlanAPI.swift */; };
 		8DCFAFD8255414EF003E181E /* CalendarAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCFAFD7255414EF003E181E /* CalendarAPI.swift */; };
@@ -117,6 +118,7 @@
 		8D5D7040254A911C00618A27 /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
 		8D5D7041254A911C00618A27 /* CalendarTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarTableViewCell.xib; sourceTree = "<group>"; };
 		8D5F7896254C77B8001773B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Split/Storyboard/Base.lproj/Attendance.storyboard; sourceTree = "<group>"; };
+		8D6B0B8625581B7E00AA032F /* UserPlanList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPlanList.swift; sourceTree = "<group>"; };
 		8D9E599E255590AE0091CE28 /* AttendanceTapGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceTapGesture.swift; sourceTree = "<group>"; };
 		8DCFAFCC25540A2F003E181E /* PlanAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanAPI.swift; sourceTree = "<group>"; };
 		8DCFAFD7255414EF003E181E /* CalendarAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAPI.swift; sourceTree = "<group>"; };
@@ -458,6 +460,7 @@
 			isa = PBXGroup;
 			children = (
 				8DD85DDC254A9B33006430C4 /* CalendarModel.swift */,
+				8D6B0B8625581B7E00AA032F /* UserPlanList.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -801,6 +804,7 @@
 				FD47C9622550F008001D9252 /* TermsAndUseViewViewController.swift in Sources */,
 				FD47C9712552794B001D9252 /* MapVO.swift in Sources */,
 				8D3AC5792549A6AD0059F950 /* ChallengeContentTableViewCell.swift in Sources */,
+				8D6B0B8725581B7E00AA032F /* UserPlanList.swift in Sources */,
 				FDE91C95254D1B9C00BAB8B0 /* Common.swift in Sources */,
 				FD47C95D2550EFE1001D9252 /* PrivacyViewController.swift in Sources */,
 				8D3AC56F2549A6940059F950 /* ChallengeBannerTableViewCell.swift in Sources */,

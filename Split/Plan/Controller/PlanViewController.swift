@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class PlanViewController: UIViewController {
     
@@ -25,6 +26,7 @@ class PlanViewController: UIViewController {
         self.addView(asChildViewController: viewController)
         return viewController
     }()
+    
     
     // MARK:- View Life Cycle
     override func viewDidLoad() {
@@ -92,6 +94,5 @@ extension PlanViewController {
             addView(asChildViewController: eventViewController)
         }
     }
-    
     
 }
