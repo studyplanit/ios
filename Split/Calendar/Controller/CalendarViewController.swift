@@ -59,7 +59,6 @@ extension CalendarViewController {
     
     func configureTapBar() {
         navigationItem.title = "캘린더"
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "KoPubDotumBold", size: 20)!]
     }
     
     func configureCalendar() {
