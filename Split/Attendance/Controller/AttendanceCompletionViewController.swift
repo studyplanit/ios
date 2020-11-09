@@ -17,7 +17,6 @@ class AttendanceCompletionViewController: UIViewController {
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var sayingLabelView: UIView!
     @IBOutlet weak var completionButton: UIButton!
-    @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var urlLabel: UILabel!
     @IBOutlet weak var splitZoneNameLabel: UILabel!
     @IBOutlet weak var splitZoneCodeLabel: UILabel!
@@ -67,12 +66,10 @@ extension AttendanceCompletionViewController {
         sayingLabelView.layer.cornerRadius = 10
         sayingLabelView.layer.borderWidth = 3
         completionButton.layer.cornerRadius = 0.5 * completionButton.bounds.size.height
-        cancelButton.layer.cornerRadius = 0.5 * cancelButton.bounds.size.height
         // 그림자
         configureShadowUI(planView)
         configureShadowUI(sayingLabelView)
         configureShadowUI(completionButton)
-        configureShadowUI(cancelButton)
         // 인증한 플랜 컨텐츠
         planNameLabel.text = userPlan.planName
         timeLabel.text = userPlan.setTime
@@ -106,7 +103,6 @@ extension AttendanceCompletionViewController {
     // 버튼
     func configureButton() {
         completionButton.addTarget(self, action: #selector(touchUpCompletionButton), for: .touchUpInside)
-        cancelButton.addTarget(self, action: #selector(touchUpCancelButton), for: .touchUpInside)
     }
     
     // 스플릿존 이름, 뷰
@@ -122,28 +118,28 @@ extension AttendanceCompletionViewController {
 //MARK:- API
 extension AttendanceCompletionViewController {
     
-    private func postQRAuth() {
-        guard let userPlan = userTodayPlan else { return }
-        
-        let splitZoneID = getSplitZoneID(url: authURL)
-        let planID = userPlan.planLogID
-        
-        let headers: HTTPHeaders = [
-            "plan_log_id": "\(planID)",
-            "planet_id": "\(splitZoneID)"
-        ]
-        let parameters = ["planet_id" : Int(splitZoneID)]
-        AF.request(PlanAPIConstant.qrAuthURL, method: .post, parameters: parameters, headers: headers).responseJSON { (response) in
-            switch response.result {
-                // 성공
-            case .success(let res):
-                print("성공: \(res)")
-                // 실패
-            case .failure(let err):
-                print("실패: \(err.localizedDescription)")
-            }
-        }
-    }
+//    private func postQRAuth() {
+//        guard let userPlan = userTodayPlan else { return }
+//        
+//        let splitZoneID = getSplitZoneID(url: authURL)
+//        let planID = userPlan.planLogID
+//        
+//        let headers: HTTPHeaders = [
+//            "plan_log_id": "\(planID)",
+//            "planet_id": "\(splitZoneID)"
+//        ]
+//        let parameters = ["planet_id" : Int(splitZoneID)]
+//        AF.request(PlanAPIConstant.qrAuthURL, method: .post, parameters: parameters, headers: headers).responseJSON { (response) in
+//            switch response.result {
+//                // 성공
+//            case .success(let res):
+//                print("성공: \(res)")
+//                // 실패
+//            case .failure(let err):
+//                print("실패: \(err.localizedDescription)")
+//            }
+//        }
+//    }
     
     private func getSplitZone() {
         let splitZoneID = getSplitZoneID(url: authURL)
@@ -193,7 +189,7 @@ extension AttendanceCompletionViewController {
     }
     
     @objc func touchUpCompletionButton() {
-        postQRAuth()
+//        postQRAuth()
         let alert = UIAlertController(
             title: "",
             message: "인증이 완료되었습니다.",
