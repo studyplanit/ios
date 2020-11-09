@@ -216,6 +216,9 @@ extension AttendanceViewController {
         let storyboard = UIStoryboard(name: "Attendance", bundle: Bundle.main)
         guard let attendanceCompletionViewController = storyboard.instantiateViewController(withIdentifier: "attendanceCompletionViewController") as? AttendanceCompletionViewController else { return }
         
+        attendanceCompletionViewController.splitZoneName = data.name
+        attendanceCompletionViewController.splitZoneCode = data.code
+        attendanceCompletionViewController.userPlan = userPlan
         self.navigationController?.pushViewController(attendanceCompletionViewController, animated: true)
     }
     

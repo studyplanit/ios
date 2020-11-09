@@ -227,18 +227,7 @@ extension CalendarViewController {
 // MARK:- Alert
 extension CalendarViewController {
     
-    func completeAlert() {
-        let alert = UIAlertController(
-            title: "",
-            message: "플랜이 삭제되었습니다.",
-            preferredStyle: .alert)
-        let okAction = UIAlertAction(
-            title: "확인",
-            style: .default)
-        alert.addAction(okAction)
-        present(alert, animated: true, completion: nil)
-    }
-    
+    // 플랜 삭제
     func deletePlanAlert(planID: Int) {
         let alert = UIAlertController(
             title: "",
@@ -256,6 +245,19 @@ extension CalendarViewController {
             style: .cancel)
         alert.addAction(okAction)
         alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    // 플랜 삭제 완료
+    func completeAlert() {
+        let alert = UIAlertController(
+            title: "",
+            message: "플랜이 삭제되었습니다.",
+            preferredStyle: .alert)
+        let okAction = UIAlertAction(
+            title: "확인",
+            style: .default)
+        alert.addAction(okAction)
         present(alert, animated: true, completion: nil)
     }
     

@@ -30,16 +30,16 @@ class AttendanceFailureViewController: UIViewController {
         
         configureUI()
         configureNavigationBar()
-        configureRetryButton()
         confgirueSplitZoneView()
-        
+        configurePlanView()
+        configureErrorLabel()
+        configureRetryButton()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        contentLabel.text = errorString
-        configurePlanView()
+        
     }
 
 }
@@ -90,6 +90,10 @@ extension AttendanceFailureViewController {
         guard let plan = userPlan else { return }
         planNameLabel.text = plan.planName
         timeLabel.text = plan.setTime
+    }
+    
+    func configureErrorLabel() {
+        contentLabel.text = errorString
     }
     
     func configureRetryButton() {

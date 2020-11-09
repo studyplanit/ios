@@ -23,9 +23,8 @@ class AttendanceCompletionViewController: UIViewController {
     
     var splitZoneName = ""
     var splitZoneCode = ""
-    var userTodayPlan: UserTodayPlan?
+    var userPlan: UserTodayPlan?
     let userID = UserDefaults.standard.string(forKey: "id")
-    var authURL = ""
     
     // MARK:- View Life Cycle
     override func viewDidLoad() {
@@ -33,15 +32,15 @@ class AttendanceCompletionViewController: UIViewController {
         
         configureUI()
         configureNavigationBar()
+        configureSplitZoneView()
+        configurePlanView()
         configureButton()
-        print(authURL)
-        print("userPlan: \(userTodayPlan!)")
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        configureSplitZoneInfoView()
+        
     }
     
     
@@ -56,12 +55,18 @@ class AttendanceCompletionViewController: UIViewController {
 //MARK:- Configure UI
 extension AttendanceCompletionViewController {
     
+    // 네비게이션바
+    func configureNavigationBar() {
+        navigationItem.title = "QR"
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "KoPubDotumBold", size: 20)!]
+        navigationItem.hidesBackButton = true
+    }
+    
     // 전체 UI
     func configureUI() {
-        guard let userPlan = userTodayPlan else { return }
         // 기본 UI
         planView.layer.cornerRadius = 10
-        planView.backgroundColor = UIColor(named: checkPlanColor(type: userPlan.needAuthNum))
+//        planView.backgroundColor = UIColor(named: checkPlanColor(type: userPlan.needAuthNum))
         sayingLabelView.layer.cornerRadius = 10
         sayingLabelView.layer.borderWidth = 3
         completionButton.layer.cornerRadius = 0.5 * completionButton.bounds.size.height
@@ -69,18 +74,7 @@ extension AttendanceCompletionViewController {
         configureShadowUI(planView)
         configureShadowUI(sayingLabelView)
         configureShadowUI(completionButton)
-        // 인증한 플랜 컨텐츠
-        planNameLabel.text = userPlan.planName
-        timeLabel.text = userPlan.setTime
-        dayLabel.text = "\(userPlan.nowAuthNum + 1)일째 인증되었습니다"
-        
     }
-    
-//    // 시, 분 만 표시하기
-//    func formatiTimeString(timeString: String) -> String {
-//        let endIdx: String.Index = timeString.index(timeString.startIndex, offsetBy: 4)
-//        return String(timeString[...endIdx])
-//    }
     
     // 그림자 추가
     func configureShadowUI(_ view: UIView) {
@@ -91,30 +85,27 @@ extension AttendanceCompletionViewController {
         view.layer.shadowOpacity = 0.5
     }
     
-    // 네비게이션바
-    func configureNavigationBar() {
-//        urlLabel.text = url
-        navigationItem.title = "QR"
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "KoPubDotumBold", size: 20)!]
-        navigationItem.hidesBackButton = true
+    // 스플릿존 이름, 뷰
+    func configureSplitZoneView() {
+        print("configureSplitZoneInfoView() called - splitZoneName:\(splitZoneName), splitZoneCode:\(splitZoneCode)")
+        splitZoneNameLabel.text = splitZoneName
+        splitZoneCodeLabel.text = splitZoneCode
     }
+    
+    func configurePlanView() {
+        guard let plan = userPlan else { return }
+        planNameLabel.text = plan.planName
+        timeLabel.text = plan.setTime
+        dayLabel.text = "\(plan.nowAuthNum + 1)일째 인증되었습니다"
+    }
+    
     
     // 버튼
     func configureButton() {
         completionButton.addTarget(self, action: #selector(touchUpCompletionButton), for: .touchUpInside)
     }
     
-    // 스플릿존 이름, 뷰
-    func configureSplitZoneInfoView() {
-        print("configureSplitZoneInfoView() called - splitZoneName:\(splitZoneName), splitZoneCode:\(splitZoneCode)")
-        splitZoneNameLabel.text = splitZoneName
-        splitZoneCodeLabel.text = splitZoneCode
-    }
     
-}
-
-//MARK:- API
-extension AttendanceCompletionViewController {
     
 }
 
@@ -137,7 +128,6 @@ extension AttendanceCompletionViewController {
     }
     
     @objc func touchUpCompletionButton() {
-//        postQRAuth()
         let alert = UIAlertController(
             title: "",
             message: "인증이 완료되었습니다.",
@@ -151,9 +141,5 @@ extension AttendanceCompletionViewController {
         present(alert, animated: true, completion: nil)
     }
 
-    
-//    func completeAlert() {
-//
-//    }
-    
+
 }
