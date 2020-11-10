@@ -14,6 +14,7 @@ struct MapVO: Codable {
     var address: String
     var startTime: String
     var endTime: String
+    var notify: String
     var holiday: String
     var lat: Double
     var lng: Double
