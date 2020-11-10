@@ -298,16 +298,9 @@ extension CalendarViewController: FSCalendarDelegate {
         print("날짜 선택")
         print(dateFormatter.string(from: date))
         setUserDailyPlan(date: date)
-//        SelectedDate.shared.date = dateFormatter.string(from: date)
         tableView.reloadData()
         selectDate = date
     }
-    
-    // 날짜 선택 해제
-//    func calendar(_ calendar: FSCalendar, didDeselect date: Date, at monthPosition: FSCalendarMonthPosition) {
-//        print("날짜 선택 해제")
-//        print(dateFormatter.string(from: date))
-//    }
     
 }
 
@@ -373,12 +366,10 @@ extension CalendarViewController: UITableViewDataSource {
         return cell
     }
     
-    // 편집모드로 들어가 테이블뷰 행을 삭제 가능하도록 하는 메서드
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
 
-    // 테이블뷰가 편집모드일때 동작을 정의하는 메서드
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             guard let planLogID = tableView.cellForRow(at: indexPath)?.tag else { return }

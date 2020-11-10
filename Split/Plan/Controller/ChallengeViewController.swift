@@ -105,7 +105,6 @@ extension ChallengeViewController {
                 do {
                     let jsonData = try JSONSerialization.data(withJSONObject: res, options: .prettyPrinted)
                     let json = try JSONDecoder().decode([PlanList].self, from: jsonData)
-                    // dataSource에 변환한 값을 대입
                     self.plans = json
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
