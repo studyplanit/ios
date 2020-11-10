@@ -18,6 +18,9 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
     @IBOutlet weak var planetImageView: UIImageView!
     @IBOutlet weak var planetAddressLabel: UILabel!
     @IBOutlet weak var planetTimeLabel: UILabel!
+    @IBOutlet weak var planetNotifyLabel: UILabel!
+    @IBOutlet weak var planetHolidayImageView: UIImageView!
+    @IBOutlet weak var planetHolidayLabel: UILabel!
     @IBOutlet weak var planetMenuButton: UIButton!
     @IBOutlet weak var planetReviewButton: UIButton!
     @IBOutlet weak var planetRatingLabel: UILabel!
@@ -38,6 +41,8 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
     override func viewDidLoad() {
         super.viewDidLoad()
         splitMapView.mapView.touchDelegate = self
+        navigationItem.title = "SPLIT ZONE"
+
         //탭 이벤트 지정
         planetImageView.isUserInteractionEnabled = true
         planetImageView.addGestureRecognizer(tapPlanetImageViewGestureRecognizer)
@@ -46,7 +51,7 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
         planetCallImageView.isUserInteractionEnabled = true
         planetCallImageView.addGestureRecognizer(tapPlanetCallImageViewGestureRecognizer)
         tapPlanetCallImageViewGestureRecognizer.addTarget(self, action: #selector(planetCallImageViewTap))
-        
+
         //하위 뷰 셋팅하기
         self.view.bringSubviewToFront(locationView)
         self.view.bringSubviewToFront(splitInfoView)
@@ -59,16 +64,16 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
         planetReviewButton.setTitle("   리뷰 준비중   ", for: .normal)
         planetMenuButton.titleLabel!.font = Common().fontStyle(name: "KoPubDotumBold", size: 14)
         planetMenuButton.backgroundColor = Common().purple
-        planetMenuButton.layer.cornerRadius = 12
+        planetMenuButton.layer.cornerRadius = 20
         planetReviewButton.titleLabel!.font = Common().fontStyle(name: "KoPubDotumBold", size: 14)
         planetReviewButton.backgroundColor = Common().purple
-        planetReviewButton.layer.cornerRadius = 12
+        planetReviewButton.layer.cornerRadius = 20
         planetRatingLabel.font = Common().fontStyle(name: "KoPubDotumBold", size: 14)
         planetCodeButton.titleLabel!.font = Common().fontStyle(name: "KoPubDotumBold", size: 14)
-        planetCodeButton.layer.cornerRadius = 12
+        planetCodeButton.layer.cornerRadius = 15
         planetCodeButton.backgroundColor = Common().coralblue
         planetTotalVisitButton.titleLabel!.font = Common().fontStyle(name: "KoPubDotumBold", size: 14)
-        planetTotalVisitButton.layer.cornerRadius = 12
+        planetTotalVisitButton.layer.cornerRadius = 15
         planetTotalVisitButton.backgroundColor = Common().coralblue
         
         //네이버지도 초기화하기
@@ -149,13 +154,21 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
                             marker.captionHaloColor = .white
                             
                             //팝업 뷰 셋팅
-                            self.planetCodeButton.setTitle("   행성 \(map.planetCode)   ", for: .normal)
-                            self.planetTotalVisitButton.setTitle("   누적방문자 \(map.allVisit)명   ", for: .normal)
-                            self.planetNameLabel.text = map.planetName
-                            self.planetAddressLabel.text = map.address
-                            self.planetTimeLabel.text = "\(map.startTime) ~ \(map.endTime) 정기휴무 \(map.holiday)"
+                            self.planetCodeButton.setTitle("  행성 \(map.planetCode)  ", for: .normal)
+                            self.planetTotalVisitButton.setTitle("  누적방문자 \(map.allVisit)명  ", for: .normal)
+                            self.planetNameLabel.attributedText = NSAttributedString(string: map.planetName, attributes: [NSAttributedString.Key.kern: -1])
+                            self.planetAddressLabel.attributedText = NSAttributedString(string: map.address, attributes: [NSAttributedString.Key.kern: -1])
+                            self.planetTimeLabel.text = "\(map.startTime) ~ \(map.endTime)"
+                            self.planetNotifyLabel.text = map.notify
+                            if map.holiday != "없음" {
+                                self.planetHolidayLabel.text = map.holiday
+                                self.planetHolidayImageView.isHidden = false
+                            } else {
+                                self.planetHolidayLabel.text = ""
+                                self.planetHolidayImageView.isHidden = true
+                            }
                             self.splitInfoView.isHidden = false
-                            self.splitMapView.mapView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 170, right: 0)
+                            self.splitMapView.mapView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 210, right: 0)
                             self.planetImageURL = map.cafeInImage
                             self.planetMenuImageURL = map.menuList
                             self.planetCallNumber = map.phoneNumber

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "plan.png",
+      "filename" : "tab_plan.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "plan@2x.png",
+      "filename" : "tab_plan@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "plan@3x.png",
+      "filename" : "tab_plan@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
