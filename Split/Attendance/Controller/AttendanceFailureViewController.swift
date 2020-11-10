@@ -50,9 +50,7 @@ extension AttendanceFailureViewController {
     
     // 네비게이션바
     func configureNavigationBar() {
-//        urlLabel.text = url
         navigationItem.title = "QR"
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "KoPubDotumBold", size: 20)!]
         navigationItem.hidesBackButton = true
     }
     

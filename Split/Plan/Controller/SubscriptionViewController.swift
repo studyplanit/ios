@@ -17,8 +17,9 @@ class SubscriptionViewController: UIViewController {
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var timePicker: UIDatePicker!
     
+    private let indicatorView = UIActivityIndicatorView()
     var userPlans: [UserTotalPlan] = []
-    var PlanDates: [[String]] = []
+    var planDates: [[String]] = []
     var plan: PlanList?
     var responsePlanRegistration: ResponsePlanRegistration?
     let userID = UserDefaults.standard.string(forKey: "id")
@@ -36,7 +37,7 @@ class SubscriptionViewController: UIViewController {
     }()
     var startDate = ""
     var endDate = ""
-    var planTime = ""
+    var planTime = "00:00"
 
     // MARK:- View Life Cycle
     override func viewDidLoad() {
@@ -102,6 +103,7 @@ extension SubscriptionViewController {
 extension SubscriptionViewController {
     
     private func getUserPlan() {
+        showIndicator()
         let headers: HTTPHeaders = [
             "memberId": "2",
         ]
@@ -116,16 +118,23 @@ extension SubscriptionViewController {
                     self.userPlans = json
                     DispatchQueue.main.async {
 //                        self.tableView.reloadData()
-                        self.PlanDates = [[],[],[]]
+                        self.planDates = [[],[],[]]
                         self.setUserPlanDates(userPlans: self.userPlans)
                         self.calendar.reloadData()
+                        self.indicatorView.stopAnimating()
                     }
                 } catch(let err) {
                     print(err.localizedDescription)
+                    DispatchQueue.main.async {
+                        self.indicatorView.stopAnimating()
+                    }
                 }
                 // 실패
             case .failure(let err):
                 print(err.localizedDescription)
+                DispatchQueue.main.async {
+                    self.indicatorView.stopAnimating()
+                }
             }
         }
     }
@@ -134,7 +143,7 @@ extension SubscriptionViewController {
                           startDate: String,
                           endDate: String,
                           setTime: String) {
-
+        showIndicator()
         let headers: HTTPHeaders = [
             "member_id": "2",
             "plan_id": planID,
@@ -163,21 +172,31 @@ extension SubscriptionViewController {
                         print("postPlan - 1")
                         DispatchQueue.main.async {
                             self.showSuccessAPIAlert()
+                            self.indicatorView.stopAnimating()
                         }
                     case -1:
                         print("postPlan - -1")
                         DispatchQueue.main.async {
-                            self.showAPIFailureAlert1()
+                            self.showAPIFailureAlert(data: json)
+                            self.indicatorView.stopAnimating()
                         }
                     case -2:
                         print("postPlan - -2")
                         DispatchQueue.main.async {
-                            self.showAPIFailureAlert2()
+                            self.showAPIFailureAlert(data: json)
+                            self.indicatorView.stopAnimating()
+                        }
+                    case -100:
+                        print("postPlan - -100")
+                        DispatchQueue.main.async {
+                            self.showAPIFailureAlert(data: json)
+                            self.indicatorView.stopAnimating()
                         }
                     case -500:
                         print("postPlan -500")
                         DispatchQueue.main.async {
-                            self.showAPIFailureAlert3()
+                            self.showAPIFailureAlert(data: json)
+                            self.indicatorView.stopAnimating()
                         }
                     default:
                         return
@@ -185,10 +204,16 @@ extension SubscriptionViewController {
                     
                 } catch(let err) {
                     print(err.localizedDescription)
+                    DispatchQueue.main.async {
+                        self.indicatorView.stopAnimating()
+                    }
                 }
                 // 실패
             case .failure(let err):
                 print(err.localizedDescription)
+                DispatchQueue.main.async {
+                    self.indicatorView.stopAnimating()
+                }
             }
         }
     }
@@ -198,26 +223,54 @@ extension SubscriptionViewController {
 // MARK:- Methods
 extension SubscriptionViewController {
     
+    func checkPlanColor(type: Int) -> UIColor {
+        guard let blue = UIColor(named: "Color_1day"),
+              let yellow = UIColor(named: "Color_7days"),
+              let green = UIColor(named: "Color_15days"),
+              let red = UIColor(named: "Color_30days") else { return UIColor() }
+        
+        switch type {
+        case 1:
+            return blue
+        case 7:
+            return yellow
+        case 15:
+            return green
+        case 30:
+            return red
+        default:
+            return blue
+        }
+    }
+    
     // 플랜 날짜 리스트 만들기
     func setUserPlanDates(userPlans: [UserTotalPlan]) {
         let count = userPlans.count
         for i in 0 ..< count {
-            PlanDates.append([])
+            planDates.append([])
             let startDateString = userPlans[i].startDate
             guard let startDate = dateFormatter.date(from: startDateString) else { return }
             var date = startDate
             for _ in 0..<userPlans[i].needAuthNum {
-                PlanDates[i].append(dateFormatter.string(from: date))
+                planDates[i].append(dateFormatter.string(from: date))
                 date = date + 86400
             }
         }
-        print("setUserPlanDates() called - PlanDates: \(PlanDates)")
+        print("setUserPlanDates() called - PlanDates: \(planDates)")
     }
     
     // 타임피커 값변경시 플랜시간 변수 설정
     @objc func setPlanTime (_ sender: UIDatePicker) {
         planTime = timeFormatter.string(from: sender.date)
         print("설정한 시간 : \(planTime)")
+    }
+    
+    func showIndicator() {
+        view.addSubview(indicatorView)
+        indicatorView.translatesAutoresizingMaskIntoConstraints = false
+        indicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        indicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        indicatorView.startAnimating()
     }
     
 }
@@ -281,6 +334,7 @@ extension SubscriptionViewController {
         }
     }
     
+    // 등록 성공시 알림
     func showSuccessAPIAlert() {
         let alert = UIAlertController(
             title: "",
@@ -295,10 +349,11 @@ extension SubscriptionViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    func showAPIFailureAlert1() {
+    // 등록 실패시 알림
+    func showAPIFailureAlert(data: ResponsePlanRegistration) {
         let alert = UIAlertController(
-            title: "등록실패1",
-            message: "2시간 이내에 인증해야 하는 플랜이 존재합니다.",
+            title: "등록실패",
+            message: data.message,
             preferredStyle: .alert)
         let okAction = UIAlertAction(
             title: "확인",
@@ -307,29 +362,6 @@ extension SubscriptionViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    func showAPIFailureAlert2() {
-        let alert = UIAlertController(
-            title: "등록실패2",
-            message: "설정하신 기간 중 3개의 플랜을 가지고 있는 날짜가 존재합니다.",
-            preferredStyle: .alert)
-        let okAction = UIAlertAction(
-            title: "확인",
-            style: .default)
-        alert.addAction(okAction)
-        present(alert, animated: true, completion: nil)
-    }
-    
-    func showAPIFailureAlert3() {
-        let alert = UIAlertController(
-            title: "등록실패3",
-            message: "서버 오류입니다. 잠시후에 재시도 해주세요.",
-            preferredStyle: .alert)
-        let okAction = UIAlertAction(
-            title: "확인",
-            style: .default)
-        alert.addAction(okAction)
-        present(alert, animated: true, completion: nil)
-    }
 }
 
 // MARK:- FSCalendar DataSource
@@ -340,8 +372,8 @@ extension SubscriptionViewController: FSCalendarDataSource {
 
         let strDate = dateFormatter.string(from:date)
         var dotCount = 0
-        for i in 0 ..< PlanDates.count {
-            if PlanDates[i].contains(strDate) {
+        for i in 0 ..< planDates.count {
+            if planDates[i].contains(strDate) {
                 dotCount += 1
             }
         }
@@ -406,59 +438,27 @@ extension SubscriptionViewController: FSCalendarDelegateAppearance {
     // 점 기본 색상
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventDefaultColorsFor date: Date) -> [UIColor]? {
         
-        guard let blue = UIColor(named: "Color_1day"),
-              let yellow = UIColor(named: "Color_7days"),
-              let red = UIColor(named: "Color_30days") else { return [UIColor()] }
-        
-        let strDate = dateFormatter.string(from:date)
-        var dotCount = 0
-        for i in 0 ..< PlanDates.count {
-            if PlanDates[i].contains(strDate) {
-                dotCount += 1
+        var colors: [UIColor] = []
+        let strDate = dateFormatter.string(from: date)
+        for i in 0 ..< planDates.count {
+            if planDates[i].contains(strDate) {
+                colors.append(checkPlanColor(type: planDates[i].count))
             }
         }
-        
-        switch dotCount {
-        case 3:
-            return [blue, yellow, red]
-        case 2:
-            return [blue ,yellow]
-        case 1:
-            return [blue]
-        case 0:
-            return [.clear]
-        default:
-            return [.clear]
-        }
+        return colors
     }
     
     // 점 선택 색상
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventSelectionColorsFor date: Date) -> [UIColor]? {
         
-        guard let blue = UIColor(named: "Color_1day"),
-              let yellow = UIColor(named: "Color_7days"),
-              let red = UIColor(named: "Color_30days") else { return [UIColor()] }
-        
-        let strDate = dateFormatter.string(from:date)
-        var dotCount = 0
-        for i in 0 ..< PlanDates.count {
-            if PlanDates[i].contains(strDate) {
-                dotCount += 1
+        var colors: [UIColor] = []
+        let strDate = dateFormatter.string(from: date)
+        for i in 0 ..< planDates.count {
+            if planDates[i].contains(strDate) {
+                colors.append(checkPlanColor(type: planDates[i].count))
             }
         }
-        
-        switch dotCount {
-        case 3:
-            return [blue, yellow, red]
-        case 2:
-            return [blue ,yellow]
-        case 1:
-            return [blue]
-        case 0:
-            return [.clear]
-        default:
-            return [.clear]
-        }
+        return colors
     }
     
 }

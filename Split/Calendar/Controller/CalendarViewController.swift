@@ -16,16 +16,16 @@ class CalendarViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var backgoroundView: UIView!
     
+    private let indicatorView = UIActivityIndicatorView()
     let userID = UserDefaults.standard.string(forKey: "id")
     var userPlans: [UserTotalPlan] = []
     var userDailyPlan: [UserTotalPlan] = []
-    var PlanDates: [[String]] = []
+    var planDates: [[String]] = []
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter
     }()
-    var selectDate: Date?
     
     // MARK:- View Life Cycle
     override func viewDidLoad() {
@@ -34,22 +34,20 @@ class CalendarViewController: UIViewController {
         configureTapBar()
         configureCalendar()
         configureTableView()
-//        configureBackgoroundView()
         print("유저아이디 : \(userID!)")
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        getUserPlan()
-        deselectDate()
-        print("주말라벨: \(calendar.calendarWeekdayView.weekdayLabels)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        getUserPlan()
+        setSelectDate()
         print("viewWillApear - 유저플랜 갯수 : \(userPlans.count)")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
     }
 
 }
@@ -79,6 +77,7 @@ extension CalendarViewController {
         calendar.appearance.selectionColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
         calendar.calendarWeekdayView.weekdayLabels[0].textColor = .red // 일요일
         calendar.calendarWeekdayView.weekdayLabels[6].textColor = .red // 토요일
+        calendar.select(Date())
     }
     
     func configureTableView() {
@@ -89,12 +88,21 @@ extension CalendarViewController {
             forCellReuseIdentifier: "calendarTableViewCell")
     }
     
+    func showIndicator() {
+        view.addSubview(indicatorView)
+        indicatorView.translatesAutoresizingMaskIntoConstraints = false
+        indicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        indicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        indicatorView.startAnimating()
+    }
+    
 }
 
 // MARK:- API
 extension CalendarViewController {
     
     private func getUserPlan() {
+        showIndicator()
         let headers: HTTPHeaders = [
             "memberId": "2",
         ]
@@ -108,25 +116,31 @@ extension CalendarViewController {
                     
                     self.userPlans = json
                     DispatchQueue.main.async {
-                        self.PlanDates = [] // 꼭 플랜목록을 초기화해야지 새로운 데이터를 갱신해서 보여줄수 있다.
                         self.setUserPlanDates(userPlans: self.userPlans)
                         self.calendar.reloadData()
                         self.setUserDailyPlan(date: Date())
                         self.tableView.reloadData()
+                        self.indicatorView.stopAnimating()
                         print("유저플랜 갯수 : \(self.userPlans.count)")
                     }
                 } catch(let err) {
                     print(err.localizedDescription)
+                    DispatchQueue.main.async {
+                        self.indicatorView.stopAnimating()
+                    }
                 }
                 // 실패
             case .failure(let err):
                 print(err.localizedDescription)
+                DispatchQueue.main.async {
+                    self.indicatorView.stopAnimating()
+                }
             }
         }
     }
     
     private func deleteUserPlan(planID: Int) {
-        // HTTP Request
+        showIndicator()
         let headers: HTTPHeaders = [
             "plan_log_id": "\(planID)"
         ]
@@ -135,9 +149,15 @@ extension CalendarViewController {
                 // 성공
             case .success(let res):
                 print("성공: \(res)")
+                DispatchQueue.main.async {
+                    self.indicatorView.stopAnimating()
+                }
                 // 실패
             case .failure(let err):
                 print("실패: \(err.localizedDescription)")
+                DispatchQueue.main.async {
+                    self.indicatorView.stopAnimating()
+                }
             }
         }
     }
@@ -147,18 +167,23 @@ extension CalendarViewController {
 // MARK:- Methods
 extension CalendarViewController {
     
-    func checkPlanColor(type: Int) -> String {
+    func checkPlanColor(type: Int) -> UIColor {
+        guard let blue = UIColor(named: "Color_1day"),
+              let yellow = UIColor(named: "Color_7days"),
+              let green = UIColor(named: "Color_15days"),
+              let red = UIColor(named: "Color_30days") else { return UIColor() }
+        
         switch type {
         case 1:
-            return "Color_1day"
+            return blue
         case 7:
-            return "Color_7days"
+            return yellow
         case 15:
-            return "Color_15days"
+            return green
         case 30:
-            return "Color_30days"
+            return red
         default:
-            return "Color_1days"
+            return blue
         }
     }
     
@@ -190,19 +215,21 @@ extension CalendarViewController {
     
     // 플랜 날짜 리스트 만들기
     func setUserPlanDates(userPlans: [UserTotalPlan]) {
+        planDates = [] // 꼭 플랜목록을 초기화해야지 새로운 데이터를 갱신해서 보여줄수 있다.
         let count = userPlans.count
         for i in 0 ..< count {
-            PlanDates.append([])
+            planDates.append([])
             let startDateString = userPlans[i].startDate
             guard let startDate = dateFormatter.date(from: startDateString) else { return }
             var date = startDate
             for _ in 0..<userPlans[i].needAuthNum {
-                PlanDates[i].append(dateFormatter.string(from: date))
+                planDates[i].append(dateFormatter.string(from: date))
                 date = date + 86400
             }
         }
-        print("setUserPlanDates() called - PlanDates: \(PlanDates)")
+        print("setUserPlanDates() called - PlanDates: \(planDates)")
     }
+
     
     // 날짜 선택시 임시 유저플랜 array 세팅
     func setUserDailyPlan(date: Date) {
@@ -210,17 +237,16 @@ extension CalendarViewController {
         userDailyPlan = []
         let date = dateFormatter.string(from: date)
         for i in 0 ..< userPlans.count {
-            if PlanDates[i].contains(date) {
+            if planDates[i].contains(date) {
                 userDailyPlan.append(userPlans[i])
             }
         }
-        print(PlanDates)
+        print(planDates)
     }
     
-    // 화면 나갔다오면 선택된 날짜 표시 해제하기
-    func deselectDate() {
-        guard let date = selectDate else { return }
-        calendar.deselect(date)
+    // 화면 나갔다오거나 삭제 이후에 선택된 날짜 표시 해제하고 오늘날짜로 선택하기
+    func setSelectDate() {
+        calendar.select(Date())
     }
     
 }
@@ -239,7 +265,6 @@ extension CalendarViewController {
             style: .default) { (action : UIAlertAction) in
             self.deleteUserPlan(planID: planID)
             self.completeAlert()
-            self.getUserPlan()
         }
         let cancelAction = UIAlertAction(
             title: "취소",
@@ -257,7 +282,12 @@ extension CalendarViewController {
             preferredStyle: .alert)
         let okAction = UIAlertAction(
             title: "확인",
-            style: .default)
+            style: .default){ (action : UIAlertAction) in
+            self.getUserPlan()
+            self.tableView.reloadData()
+            self.calendar.reloadData()
+            self.setSelectDate()
+        }
         alert.addAction(okAction)
         present(alert, animated: true, completion: nil)
     }
@@ -272,8 +302,8 @@ extension CalendarViewController: FSCalendarDataSource {
 
         let strDate = dateFormatter.string(from:date)
         var dotCount = 0
-        for i in 0 ..< PlanDates.count {
-            if PlanDates[i].contains(strDate) {
+        for i in 0 ..< planDates.count {
+            if planDates[i].contains(strDate) {
                 dotCount += 1
             }
         }
@@ -290,92 +320,39 @@ extension CalendarViewController: FSCalendarDelegate {
         print("날짜 선택")
         print(dateFormatter.string(from: date))
         setUserDailyPlan(date: date)
-//        SelectedDate.shared.date = dateFormatter.string(from: date)
         tableView.reloadData()
-        selectDate = date
+//        selectDate = date
     }
-    
-    // 날짜 선택 해제
-//    func calendar(_ calendar: FSCalendar, didDeselect date: Date, at monthPosition: FSCalendarMonthPosition) {
-//        print("날짜 선택 해제")
-//        print(dateFormatter.string(from: date))
-//    }
     
 }
 
 // MARK:- FS Calendar Delegate Appearance
 extension CalendarViewController: FSCalendarDelegateAppearance {
     
-//    // 특정 날짜 색 바꾸기
-//    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
-//
-//        print(calendar.calendarWeekdayView.weekdayLabels)
-//
-////        if calendar.calendarWeekdayView.weekdayLabels.contains(date){
-////            return UIColor.red
-////        } else {
-////            return UIColor.black
-////        }
-//    }
-//
     // 점 기본 색상
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventDefaultColorsFor date: Date) -> [UIColor]? {
         
-        guard let blue = UIColor(named: "Color_1day"),
-              let yellow = UIColor(named: "Color_7days"),
-              let red = UIColor(named: "Color_30days") else { return [UIColor()] }
-        
-        let strDate = dateFormatter.string(from:date)
-        var dotCount = 0
-        for i in 0 ..< PlanDates.count {
-            if PlanDates[i].contains(strDate) {
-                dotCount += 1
+        var colors: [UIColor] = []
+        let strDate = dateFormatter.string(from: date)
+        for i in 0 ..< planDates.count {
+            if planDates[i].contains(strDate) {
+                colors.append(checkPlanColor(type: planDates[i].count))
             }
         }
-        
-        switch dotCount {
-        case 3:
-            return [blue, yellow, red]
-        case 2:
-            return [blue ,yellow]
-        case 1:
-            return [blue]
-        case 0:
-            return [.clear]
-        default:
-            return [.clear]
-        }
-        
+        return colors
     }
     
     // 점 선택 색상
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventSelectionColorsFor date: Date) -> [UIColor]? {
         
-        guard let blue = UIColor(named: "Color_1day"),
-              let yellow = UIColor(named: "Color_7days"),
-              let red = UIColor(named: "Color_30days") else { return [UIColor()] }
-        
+        var colors: [UIColor] = []
         let strDate = dateFormatter.string(from: date)
-        var dotCount = 0
-        for i in 0 ..< PlanDates.count {
-            if PlanDates[i].contains(strDate) {
-                dotCount += 1
+        for i in 0 ..< planDates.count {
+            if planDates[i].contains(strDate) {
+                colors.append(checkPlanColor(type: planDates[i].count))
             }
         }
-        
-        switch dotCount {
-        case 3:
-            return [blue, yellow, red]
-        case 2:
-            return [blue ,yellow]
-        case 1:
-            return [blue]
-        case 0:
-            return [.clear]
-        default:
-            return [.clear]
-        }
-        
+        return colors
     }
     
 }
@@ -404,26 +381,22 @@ extension CalendarViewController: UITableViewDataSource {
         let statusColor = checkSuccessColor(status: userDailyPlan[indexPath.row].planProgress)
         cell.successLabelView.backgroundColor = statusColor
         // 플랜 뷰 색상
-        let planColor = checkPlanColor(type: userDailyPlan[indexPath.row].needAuthNum)
-        cell.planColorBarView.backgroundColor = UIColor(named: planColor)
-        cell.dayLabelView.backgroundColor = UIColor(named: planColor)
+        cell.planColorBarView.backgroundColor = checkPlanColor(type: userDailyPlan[indexPath.row].needAuthNum)
+        cell.dayLabelView.backgroundColor = checkPlanColor(type: userDailyPlan[indexPath.row].needAuthNum)
         // 셀 태그에 플랜로그아이디 삽입
         cell.tag = userDailyPlan[indexPath.row].planLogID
         return cell
     }
     
-    // 편집모드로 들어가 테이블뷰 행을 삭제 가능하도록 하는 메서드
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
 
-    // 테이블뷰가 편집모드일때 동작을 정의하는 메서드
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             guard let planLogID = tableView.cellForRow(at: indexPath)?.tag else { return }
             print("셀 삭제 플랜로그아이디 : \(planLogID)")
             deletePlanAlert(planID: planLogID)
-            deselectDate()
         }
     }
     
