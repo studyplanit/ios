@@ -16,6 +16,8 @@ class SubscriptionViewController: UIViewController {
     @IBOutlet weak var planTitleView: UIView!
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var timePicker: UIDatePicker!
+    @IBOutlet weak var contentLabel: UILabel!
+    @IBOutlet weak var completionButton: UIButton!
     
     private let indicatorView = UIActivityIndicatorView()
     var userPlans: [UserTotalPlan] = []
@@ -67,6 +69,9 @@ extension SubscriptionViewController {
         planTitleLabel.textColor = .white
         planTitleView.backgroundColor = #colorLiteral(red: 0.8666666667, green: 0.6431372549, blue: 0.1647058824, alpha: 1)
         planTitleView.layer.cornerRadius = 0.5 * planTitleView.bounds.size.height
+        completionButton.layer.cornerRadius = 0.5 * completionButton.bounds.size.height
+        completionButton.addTarget(self, action: #selector(touchUpCompletionButton), for: .touchUpInside)
+        completionButton.isHidden = true
     }
     
     func configureCalendar() {
@@ -88,8 +93,6 @@ extension SubscriptionViewController {
     }
     
     func configureNavigationBar() {
-        let button = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(checkDateFormAndShowAlert))
-        navigationItem.rightBarButtonItem = button
         navigationItem.title = "PLAN"
     }
     
@@ -273,6 +276,23 @@ extension SubscriptionViewController {
         indicatorView.startAnimating()
     }
     
+    func enableCompletionButton() {
+        completionButton.isHidden = false
+        completionButton.isUserInteractionEnabled = true
+        contentLabel.alpha = 0
+    }
+    
+    func disableCompletionButton() {
+        completionButton.isHidden = true
+        completionButton.isUserInteractionEnabled = false
+        contentLabel.alpha = 1
+    }
+    
+    @objc func touchUpCompletionButton() {
+        print("touchUpCompletionButton() called")
+        ShowCorrectAlert()
+    }
+    
 }
 
 // MARK:- Alert
@@ -387,6 +407,7 @@ extension SubscriptionViewController: FSCalendarDelegate {
     
     // 특정 날짜 선택시 이벤트
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        enableCompletionButton()
         if calendar.selectedDates.count > 1 {
             for _ in 0 ..< calendar.selectedDates.count - 1 {
                 calendar.deselect(calendar.selectedDates[0])
@@ -409,6 +430,7 @@ extension SubscriptionViewController: FSCalendarDelegate {
     
     // 특정 날짜 선택 해제시 이벤트
     func calendar(_ calendar: FSCalendar, didDeselect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        disableCompletionButton()
         print("날짜 선택 해제 \(dateFormatter.string(from: date))")
         for _ in 0 ..< calendar.selectedDates.count {
             calendar.deselect(calendar.selectedDates[0])

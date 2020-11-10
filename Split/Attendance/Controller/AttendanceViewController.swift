@@ -115,24 +115,24 @@ extension AttendanceViewController {
     }
     
     // 시간차를 구해서 뷰 상태 활성화 결정해주기
-    func checAndDisalbePlanView(index: Int) {
-        let calendar = Calendar.current
-        let now = calendar.dateComponents([.year, .month, .day], from: Date())
-        guard let time = timeFormatter.date(from: userTodayPlans[index].setTime) else { return }
-        var date = calendar.dateComponents([.year, .month, .day], from: time)
-        date.year = now.year
-        date.month = now.month
-        date.day = now.day
-        let planDate = calendar.date(from: date)
-        print("checAndDisalbePlanView() called - 나우: \(now.hour)")
-        print("checAndDisalbePlanView() called - 데이트: \(date)")
-        print("checAndDisalbePlanView() called - 타임: \(time)")
-        print("checAndDisalbePlanView() called - 데이트: \(planDate)")
-        if time.timeIntervalSince(Date()) > 60 * 60 * 2 {
-            planViews[index].isUserInteractionEnabled = false
-            planViews[index].alpha = 0.2
-        }
-    }
+//    func checAndDisalbePlanView(index: Int) {
+//        let calendar = Calendar.current
+//        let now = calendar.dateComponents([.year, .month, .day], from: Date())
+//        guard let time = timeFormatter.date(from: userTodayPlans[index].setTime) else { return }
+//        var date = calendar.dateComponents([.year, .month, .day], from: time)
+//        date.year = now.year
+//        date.month = now.month
+//        date.day = now.day
+//        let planDate = calendar.date(from: date)
+//        print("checAndDisalbePlanView() called - 나우: \(now.hour)")
+//        print("checAndDisalbePlanView() called - 데이트: \(date)")
+//        print("checAndDisalbePlanView() called - 타임: \(time)")
+//        print("checAndDisalbePlanView() called - 데이트: \(planDate)")
+//        if time.timeIntervalSince(Date()) > 60 * 60 * 2 {
+//            planViews[index].isUserInteractionEnabled = false
+//            planViews[index].alpha = 0.2
+//        }
+//    }
     
 }
 
