@@ -36,7 +36,7 @@ class SubscriptionViewController: UIViewController {
     }()
     var startDate = ""
     var endDate = ""
-    var planTime = ""
+    var planTime = "00:00"
 
     // MARK:- View Life Cycle
     override func viewDidLoad() {
@@ -167,17 +167,22 @@ extension SubscriptionViewController {
                     case -1:
                         print("postPlan - -1")
                         DispatchQueue.main.async {
-                            self.showAPIFailureAlert1()
+                            self.showAPIFailureAlert(data: json)
                         }
                     case -2:
                         print("postPlan - -2")
                         DispatchQueue.main.async {
-                            self.showAPIFailureAlert2()
+                            self.showAPIFailureAlert(data: json)
+                        }
+                    case -100:
+                        print("postPlan - -100")
+                        DispatchQueue.main.async {
+                            self.showAPIFailureAlert(data: json)
                         }
                     case -500:
                         print("postPlan -500")
                         DispatchQueue.main.async {
-                            self.showAPIFailureAlert3()
+                            self.showAPIFailureAlert(data: json)
                         }
                     default:
                         return
@@ -281,6 +286,7 @@ extension SubscriptionViewController {
         }
     }
     
+    // 등록 성공시 알림
     func showSuccessAPIAlert() {
         let alert = UIAlertController(
             title: "",
@@ -295,10 +301,11 @@ extension SubscriptionViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    func showAPIFailureAlert1() {
+    // 등록 실패시 알림
+    func showAPIFailureAlert(data: ResponsePlanRegistration) {
         let alert = UIAlertController(
-            title: "등록실패1",
-            message: "2시간 이내에 인증해야 하는 플랜이 존재합니다.",
+            title: "등록실패",
+            message: data.message,
             preferredStyle: .alert)
         let okAction = UIAlertAction(
             title: "확인",
@@ -307,29 +314,6 @@ extension SubscriptionViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    func showAPIFailureAlert2() {
-        let alert = UIAlertController(
-            title: "등록실패2",
-            message: "설정하신 기간 중 3개의 플랜을 가지고 있는 날짜가 존재합니다.",
-            preferredStyle: .alert)
-        let okAction = UIAlertAction(
-            title: "확인",
-            style: .default)
-        alert.addAction(okAction)
-        present(alert, animated: true, completion: nil)
-    }
-    
-    func showAPIFailureAlert3() {
-        let alert = UIAlertController(
-            title: "등록실패3",
-            message: "서버 오류입니다. 잠시후에 재시도 해주세요.",
-            preferredStyle: .alert)
-        let okAction = UIAlertAction(
-            title: "확인",
-            style: .default)
-        alert.addAction(okAction)
-        present(alert, animated: true, completion: nil)
-    }
 }
 
 // MARK:- FSCalendar DataSource

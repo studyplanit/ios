@@ -19,7 +19,13 @@ class CalendarViewController: UIViewController {
     let userID = UserDefaults.standard.string(forKey: "id")
     var userPlans: [UserTotalPlan] = []
     var userDailyPlan: [UserTotalPlan] = []
-    var PlanDates: [[String]] = []
+    var planDates: [[String]] = []
+    var planColors = [
+        UIColor(named: "Color_1day"),
+        UIColor(named: "Color_7days"),
+        UIColor(named: "Color_15days"),
+        UIColor(named: "Color_30days")
+    ]
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -79,6 +85,7 @@ extension CalendarViewController {
         calendar.appearance.selectionColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
         calendar.calendarWeekdayView.weekdayLabels[0].textColor = .red // 일요일
         calendar.calendarWeekdayView.weekdayLabels[6].textColor = .red // 토요일
+        calendar.select(Date())
     }
     
     func configureTableView() {
@@ -108,7 +115,7 @@ extension CalendarViewController {
                     
                     self.userPlans = json
                     DispatchQueue.main.async {
-                        self.PlanDates = [] // 꼭 플랜목록을 초기화해야지 새로운 데이터를 갱신해서 보여줄수 있다.
+//                        self.planDates = [] // 꼭 플랜목록을 초기화해야지 새로운 데이터를 갱신해서 보여줄수 있다.
                         self.setUserPlanDates(userPlans: self.userPlans)
                         self.calendar.reloadData()
                         self.setUserDailyPlan(date: Date())
@@ -190,18 +197,45 @@ extension CalendarViewController {
     
     // 플랜 날짜 리스트 만들기
     func setUserPlanDates(userPlans: [UserTotalPlan]) {
+        planDates = [] // 꼭 플랜목록을 초기화해야지 새로운 데이터를 갱신해서 보여줄수 있다.
         let count = userPlans.count
         for i in 0 ..< count {
-            PlanDates.append([])
+            planDates.append([])
             let startDateString = userPlans[i].startDate
             guard let startDate = dateFormatter.date(from: startDateString) else { return }
             var date = startDate
             for _ in 0..<userPlans[i].needAuthNum {
-                PlanDates[i].append(dateFormatter.string(from: date))
+                planDates[i].append(dateFormatter.string(from: date))
                 date = date + 86400
             }
         }
-        print("setUserPlanDates() called - PlanDates: \(PlanDates)")
+        print("setUserPlanDates() called - PlanDates: \(planDates)")
+    }
+    
+    // 날짜별 컬러세팅을 위한 플랜 컬러셋 만들기
+    func setUserPlanColor(userPlans: [UserTotalPlan]) {
+        planColors = []
+        guard let blue = UIColor(named: "Color_1day"),
+              let yellow = UIColor(named: "Color_7days"),
+              let green = UIColor(named: "Color_15days"),
+              let red = UIColor(named: "Color_30days") else { return }
+        let count = userPlans.count
+        for i in 0 ..< count {
+            let day = userPlans[i].needAuthNum
+            switch day {
+            case 1:
+                planColors.append(blue)
+            case 7:
+                planColors.append(yellow)
+            case 15:
+                planColors.append(green)
+            case 30:
+                planColors.append(red)
+            default:
+                return
+            }
+        }
+        print("setUserPlanColor() called - planColors:\(planColors) ")
     }
     
     // 날짜 선택시 임시 유저플랜 array 세팅
@@ -210,11 +244,11 @@ extension CalendarViewController {
         userDailyPlan = []
         let date = dateFormatter.string(from: date)
         for i in 0 ..< userPlans.count {
-            if PlanDates[i].contains(date) {
+            if planDates[i].contains(date) {
                 userDailyPlan.append(userPlans[i])
             }
         }
-        print(PlanDates)
+        print(planDates)
     }
     
     // 화면 나갔다오면 선택된 날짜 표시 해제하기
@@ -239,7 +273,6 @@ extension CalendarViewController {
             style: .default) { (action : UIAlertAction) in
             self.deleteUserPlan(planID: planID)
             self.completeAlert()
-            self.getUserPlan()
         }
         let cancelAction = UIAlertAction(
             title: "취소",
@@ -257,7 +290,12 @@ extension CalendarViewController {
             preferredStyle: .alert)
         let okAction = UIAlertAction(
             title: "확인",
-            style: .default)
+            style: .default){ (action : UIAlertAction) in
+            self.getUserPlan()
+            self.tableView.reloadData()
+            self.calendar.reloadData()
+            self.calendar.select(Date())
+        }
         alert.addAction(okAction)
         present(alert, animated: true, completion: nil)
     }
@@ -272,8 +310,8 @@ extension CalendarViewController: FSCalendarDataSource {
 
         let strDate = dateFormatter.string(from:date)
         var dotCount = 0
-        for i in 0 ..< PlanDates.count {
-            if PlanDates[i].contains(strDate) {
+        for i in 0 ..< planDates.count {
+            if planDates[i].contains(strDate) {
                 dotCount += 1
             }
         }
@@ -324,27 +362,29 @@ extension CalendarViewController: FSCalendarDelegateAppearance {
         guard let blue = UIColor(named: "Color_1day"),
               let yellow = UIColor(named: "Color_7days"),
               let red = UIColor(named: "Color_30days") else { return [UIColor()] }
+
+//        let strDate = dateFormatter.string(from:date)
+//        var dotCount = 0
+//        for i in 0 ..< planDates.count {
+//            if planDates[i].contains(strDate) {
+//                dotCount += 1
+//            }
+//        }
+//
+//        switch dotCount {
+//        case 3:
+//            return [blue, yellow, red]
+//        case 2:
+//            return [blue ,yellow]
+//        case 1:
+//            return [blue]
+//        case 0:
+//            return [.clear]
+//        default:
+//            return [.clear]
+//        }
         
-        let strDate = dateFormatter.string(from:date)
-        var dotCount = 0
-        for i in 0 ..< PlanDates.count {
-            if PlanDates[i].contains(strDate) {
-                dotCount += 1
-            }
-        }
-        
-        switch dotCount {
-        case 3:
-            return [blue, yellow, red]
-        case 2:
-            return [blue ,yellow]
-        case 1:
-            return [blue]
-        case 0:
-            return [.clear]
-        default:
-            return [.clear]
-        }
+        return [blue, yellow, red]
         
     }
     
@@ -357,8 +397,8 @@ extension CalendarViewController: FSCalendarDelegateAppearance {
         
         let strDate = dateFormatter.string(from: date)
         var dotCount = 0
-        for i in 0 ..< PlanDates.count {
-            if PlanDates[i].contains(strDate) {
+        for i in 0 ..< planDates.count {
+            if planDates[i].contains(strDate) {
                 dotCount += 1
             }
         }
