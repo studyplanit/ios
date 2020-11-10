@@ -19,20 +19,17 @@ class ChallengeViewController: UIViewController {
         return formatter
     }()
     
-    var userPlans: [UserTotalPlan] = []
-    
     // MARK:- View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureTableView()
-        getPlanList()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        getUserPlan()
+        getPlanList()
     }
     
 }
@@ -51,7 +48,7 @@ extension ChallengeViewController {
             forCellReuseIdentifier: "challengeContentTableViewCell")
     }
     
-    func setMedalImage(type: Int) -> String {
+    func configureMedalImage(type: Int) -> String {
         switch type {
         case 1:
             return "noneMedal"
@@ -71,32 +68,6 @@ extension ChallengeViewController {
 // MARK:- API
 extension ChallengeViewController {
     
-    private func getUserPlan() {
-        let headers: HTTPHeaders = [
-            "memberId": "2",
-        ]
-        AF.request(CalendarAPIConstant.userTotalPlanURL, headers: headers).responseJSON { (response) in
-            switch response.result {
-                // 성공
-            case .success(let res):
-                do {
-                    let jsonData = try JSONSerialization.data(withJSONObject: res, options: .prettyPrinted)
-                    let json = try JSONDecoder().decode([UserTotalPlan].self, from: jsonData)
-                    
-                    self.userPlans = json
-                    DispatchQueue.main.async {
-                        print(self.userPlans.count)
-                    }
-                } catch(let err) {
-                    print(err.localizedDescription)
-                }
-                // 실패
-            case .failure(let err):
-                print(err.localizedDescription)
-            }
-        }
-    }
-    
     private func getPlanList() {
         AF.request(PlanAPIConstant.planListURL).responseJSON { (response) in
             switch response.result {
@@ -108,6 +79,7 @@ extension ChallengeViewController {
                     self.plans = json
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
+                        print("getPlanList()called - plans: \(self.plans)")
                     }
                 } catch(let err) {
                     print(err.localizedDescription)
@@ -129,19 +101,6 @@ extension ChallengeViewController {
         let alert = UIAlertController(
             title: "",
             message: "테스트 기간에는 이용할 수 없는 플랜입니다.",
-            preferredStyle: .alert)
-        let okAction = UIAlertAction(
-            title: "확인",
-            style: .default)
-        alert.addAction(okAction)
-        present(alert, animated: true, completion: nil)
-    }
-    
-    // 보유플랜 3개 이상시 금지
-    func prohibitMorePlanAlert() {
-        let alert = UIAlertController(
-            title: "",
-            message: "플랜은 최대 3개까지만 신청 가능합니다.",
             preferredStyle: .alert)
         let okAction = UIAlertAction(
             title: "확인",
@@ -187,9 +146,9 @@ extension ChallengeViewController: UITableViewDataSource {
             }
 //            cell.planTitleLabel.text = plans[indexPath.row].name
             cell.planDateLabel.text = "\(plans[indexPath.row].need)일"
-            let medalName = setMedalImage(type: plans[indexPath.row].need)
+            let medalName = configureMedalImage(type: plans[indexPath.row].need)
             cell.medalImageView.image = UIImage(named: medalName)
-            cell.userNumberLabel.text = numberFormatter.string(from: NSNumber(value: plans[indexPath.row].need))! + " 명"
+            cell.userNumberLabel.text = numberFormatter.string(from: NSNumber(value: plans[indexPath.row].accNumber))! + " 명"
             return cell
         default:
             return UITableViewCell()
