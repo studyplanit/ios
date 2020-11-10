@@ -23,6 +23,12 @@ class AttendanceViewController: UIViewController {
     var userPlan: UserTodayPlan?
     var userPlanID = 0
     var authURL = ""
+    let timeFormatter: DateFormatter = {
+        let formatter: DateFormatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.dateFormat = "HH:mm"
+        return formatter
+    }()
     
     // MARK:- Properties
     lazy var readerVC: QRCodeReaderViewController = {
@@ -80,6 +86,7 @@ extension AttendanceViewController {
             planNameLabels[i].text = userTodayPlans[i].planName
             planTimeLabels[i].text = userTodayPlans[i].setTime
             configureTapGesture(index: i)
+//            checAndDisalbePlanView(index: i)
         }
     }
     
@@ -105,6 +112,26 @@ extension AttendanceViewController {
         indicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         indicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         indicatorView.startAnimating()
+    }
+    
+    // 시간차를 구해서 뷰 상태 활성화 결정해주기
+    func checAndDisalbePlanView(index: Int) {
+        let calendar = Calendar.current
+        let now = calendar.dateComponents([.year, .month, .day], from: Date())
+        guard let time = timeFormatter.date(from: userTodayPlans[index].setTime) else { return }
+        var date = calendar.dateComponents([.year, .month, .day], from: time)
+        date.year = now.year
+        date.month = now.month
+        date.day = now.day
+        let planDate = calendar.date(from: date)
+        print("checAndDisalbePlanView() called - 나우: \(now.hour)")
+        print("checAndDisalbePlanView() called - 데이트: \(date)")
+        print("checAndDisalbePlanView() called - 타임: \(time)")
+        print("checAndDisalbePlanView() called - 데이트: \(planDate)")
+        if time.timeIntervalSince(Date()) > 60 * 60 * 2 {
+            planViews[index].isUserInteractionEnabled = false
+            planViews[index].alpha = 0.2
+        }
     }
     
 }

@@ -88,7 +88,7 @@ extension SubscriptionViewController {
     }
     
     func configureNavigationBar() {
-        let button = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(checkDateFormAndShowAlert))
+        let button = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(checkDateFormAndShowAlert))
         navigationItem.rightBarButtonItem = button
         navigationItem.title = "PLAN"
     }

@@ -31,7 +31,7 @@ class CalendarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureTapBar()
+        configureNavigationBar()
         configureCalendar()
         configureTableView()
         print("유저아이디 : \(userID!)")
@@ -55,7 +55,7 @@ class CalendarViewController: UIViewController {
 // MARK:- Configure UI
 extension CalendarViewController {
     
-    func configureTapBar() {
+    func configureNavigationBar() {
         navigationItem.title = "CALENDAR"
     }
     

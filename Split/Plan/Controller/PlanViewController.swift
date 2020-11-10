@@ -32,7 +32,7 @@ class PlanViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureTapBar()
+        configureNavigationBar()
         configureContentView()
     }
     
@@ -40,8 +40,10 @@ class PlanViewController: UIViewController {
 // MARK:- Configure
 extension PlanViewController {
     
-    func configureTapBar() {
+    func configureNavigationBar() {
         navigationItem.title = "PLAN"
+        let backButton = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        navigationItem.backBarButtonItem = backButton
     }
     
     func configureSegementedControl() {
@@ -50,7 +52,7 @@ extension PlanViewController {
         segmentedControl.insertSegment(withTitle: "이벤트", at: 1, animated: false)
         segmentedControl.addTarget(self, action: #selector(selectionDidChange(_:)), for: .valueChanged)
         segmentedControl.selectedSegmentIndex = 0
-        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "KoPubDotumBold", size: 16)!], for: .normal)
+        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "KoPubDotumMedium", size: 16)!], for: .normal)
     }
     
     func configureContentView() {
