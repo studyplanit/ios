@@ -57,7 +57,6 @@ extension AttendanceViewController {
     
     func configureTapBar() {
         navigationItem.title = "QR"
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "KoPubDotumBold", size: 20)!]
     }
     
     func configureUI() {
@@ -134,6 +133,8 @@ extension AttendanceViewController {
         
         let splitZoneID = getSplitZoneID(url: authURL)
         let planID = userPlanID
+        print("postQRAuth() called - splitZoneID: \(splitZoneID)")
+        print("postQRAuth() called - planID: \(planID)")
         
         let headers: HTTPHeaders = [
             "plan_log_id": "\(planID)",
@@ -188,6 +189,9 @@ extension AttendanceViewController {
             // 요청 실패
             case .failure(let err):
                 print("실패: \(err.localizedDescription)")
+                DispatchQueue.main.async {
+                    self.setAPIFailureView(error: err.localizedDescription)
+                }
             }
         }
     }
@@ -238,6 +242,16 @@ extension AttendanceViewController {
         attendanceFailureViewController.splitZoneCode = data.code
         attendanceFailureViewController.userPlan = userPlan
         attendanceFailureViewController.errorString = data.message
+        self.navigationController?.pushViewController(attendanceFailureViewController, animated: true)
+    }
+    
+    // 요청 실패
+    func setAPIFailureView(error: String) {
+        let storyboard = UIStoryboard(name: "Attendance", bundle: Bundle.main)
+        guard let attendanceFailureViewController = storyboard.instantiateViewController(withIdentifier: "attendanceFailureViewController") as? AttendanceFailureViewController else { return }
+        
+        attendanceFailureViewController.errorString = error
+        print("setAPIFailureView() called - ")
         self.navigationController?.pushViewController(attendanceFailureViewController, animated: true)
     }
 
