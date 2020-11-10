@@ -41,7 +41,7 @@ class PlanViewController: UIViewController {
 extension PlanViewController {
     
     func configureTapBar() {
-        navigationItem.title = "플랜"
+        navigationItem.title = "PLAN"
     }
     
     func configureSegementedControl() {

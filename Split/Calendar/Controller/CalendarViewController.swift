@@ -56,7 +56,7 @@ class CalendarViewController: UIViewController {
 extension CalendarViewController {
     
     func configureTapBar() {
-        navigationItem.title = "캘린더"
+        navigationItem.title = "CALENDAR"
     }
     
     func configureCalendar() {

@@ -90,7 +90,7 @@ extension SubscriptionViewController {
     func configureNavigationBar() {
         let button = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(checkDateFormAndShowAlert))
         navigationItem.rightBarButtonItem = button
-        navigationItem.title = "플랜"
+        navigationItem.title = "PLAN"
     }
     
     func configureTimePicker() {
