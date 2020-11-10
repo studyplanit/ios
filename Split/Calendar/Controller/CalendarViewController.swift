@@ -20,12 +20,6 @@ class CalendarViewController: UIViewController {
     var userPlans: [UserTotalPlan] = []
     var userDailyPlan: [UserTotalPlan] = []
     var planDates: [[String]] = []
-    var planColors = [
-        UIColor(named: "Color_1day"),
-        UIColor(named: "Color_7days"),
-        UIColor(named: "Color_15days"),
-        UIColor(named: "Color_30days")
-    ]
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -40,7 +34,6 @@ class CalendarViewController: UIViewController {
         configureTapBar()
         configureCalendar()
         configureTableView()
-//        configureBackgoroundView()
         print("유저아이디 : \(userID!)")
     }
     
@@ -49,7 +42,6 @@ class CalendarViewController: UIViewController {
         
         getUserPlan()
         deselectDate()
-        print("주말라벨: \(calendar.calendarWeekdayView.weekdayLabels)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -115,7 +107,6 @@ extension CalendarViewController {
                     
                     self.userPlans = json
                     DispatchQueue.main.async {
-//                        self.planDates = [] // 꼭 플랜목록을 초기화해야지 새로운 데이터를 갱신해서 보여줄수 있다.
                         self.setUserPlanDates(userPlans: self.userPlans)
                         self.calendar.reloadData()
                         self.setUserDailyPlan(date: Date())
@@ -133,7 +124,6 @@ extension CalendarViewController {
     }
     
     private func deleteUserPlan(planID: Int) {
-        // HTTP Request
         let headers: HTTPHeaders = [
             "plan_log_id": "\(planID)"
         ]
@@ -154,18 +144,23 @@ extension CalendarViewController {
 // MARK:- Methods
 extension CalendarViewController {
     
-    func checkPlanColor(type: Int) -> String {
+    func checkPlanColor(type: Int) -> UIColor {
+        guard let blue = UIColor(named: "Color_1day"),
+              let yellow = UIColor(named: "Color_7days"),
+              let green = UIColor(named: "Color_15days"),
+              let red = UIColor(named: "Color_30days") else { return UIColor() }
+        
         switch type {
         case 1:
-            return "Color_1day"
+            return blue
         case 7:
-            return "Color_7days"
+            return yellow
         case 15:
-            return "Color_15days"
+            return green
         case 30:
-            return "Color_30days"
+            return red
         default:
-            return "Color_1days"
+            return blue
         }
     }
     
@@ -211,32 +206,7 @@ extension CalendarViewController {
         }
         print("setUserPlanDates() called - PlanDates: \(planDates)")
     }
-    
-    // 날짜별 컬러세팅을 위한 플랜 컬러셋 만들기
-    func setUserPlanColor(userPlans: [UserTotalPlan]) {
-        planColors = []
-        guard let blue = UIColor(named: "Color_1day"),
-              let yellow = UIColor(named: "Color_7days"),
-              let green = UIColor(named: "Color_15days"),
-              let red = UIColor(named: "Color_30days") else { return }
-        let count = userPlans.count
-        for i in 0 ..< count {
-            let day = userPlans[i].needAuthNum
-            switch day {
-            case 1:
-                planColors.append(blue)
-            case 7:
-                planColors.append(yellow)
-            case 15:
-                planColors.append(green)
-            case 30:
-                planColors.append(red)
-            default:
-                return
-            }
-        }
-        print("setUserPlanColor() called - planColors:\(planColors) ")
-    }
+
     
     // 날짜 선택시 임시 유저플랜 array 세팅
     func setUserDailyPlan(date: Date) {
@@ -344,78 +314,30 @@ extension CalendarViewController: FSCalendarDelegate {
 // MARK:- FS Calendar Delegate Appearance
 extension CalendarViewController: FSCalendarDelegateAppearance {
     
-//    // 특정 날짜 색 바꾸기
-//    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
-//
-//        print(calendar.calendarWeekdayView.weekdayLabels)
-//
-////        if calendar.calendarWeekdayView.weekdayLabels.contains(date){
-////            return UIColor.red
-////        } else {
-////            return UIColor.black
-////        }
-//    }
-//
     // 점 기본 색상
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventDefaultColorsFor date: Date) -> [UIColor]? {
         
-        guard let blue = UIColor(named: "Color_1day"),
-              let yellow = UIColor(named: "Color_7days"),
-              let red = UIColor(named: "Color_30days") else { return [UIColor()] }
-
-//        let strDate = dateFormatter.string(from:date)
-//        var dotCount = 0
-//        for i in 0 ..< planDates.count {
-//            if planDates[i].contains(strDate) {
-//                dotCount += 1
-//            }
-//        }
-//
-//        switch dotCount {
-//        case 3:
-//            return [blue, yellow, red]
-//        case 2:
-//            return [blue ,yellow]
-//        case 1:
-//            return [blue]
-//        case 0:
-//            return [.clear]
-//        default:
-//            return [.clear]
-//        }
-        
-        return [blue, yellow, red]
-        
+        var colors: [UIColor] = []
+        let strDate = dateFormatter.string(from: date)
+        for i in 0 ..< planDates.count {
+            if planDates[i].contains(strDate) {
+                colors.append(checkPlanColor(type: planDates[i].count))
+            }
+        }
+        return colors
     }
     
     // 점 선택 색상
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventSelectionColorsFor date: Date) -> [UIColor]? {
         
-        guard let blue = UIColor(named: "Color_1day"),
-              let yellow = UIColor(named: "Color_7days"),
-              let red = UIColor(named: "Color_30days") else { return [UIColor()] }
-        
+        var colors: [UIColor] = []
         let strDate = dateFormatter.string(from: date)
-        var dotCount = 0
         for i in 0 ..< planDates.count {
             if planDates[i].contains(strDate) {
-                dotCount += 1
+                colors.append(checkPlanColor(type: planDates[i].count))
             }
         }
-        
-        switch dotCount {
-        case 3:
-            return [blue, yellow, red]
-        case 2:
-            return [blue ,yellow]
-        case 1:
-            return [blue]
-        case 0:
-            return [.clear]
-        default:
-            return [.clear]
-        }
-        
+        return colors
     }
     
 }
@@ -444,9 +366,8 @@ extension CalendarViewController: UITableViewDataSource {
         let statusColor = checkSuccessColor(status: userDailyPlan[indexPath.row].planProgress)
         cell.successLabelView.backgroundColor = statusColor
         // 플랜 뷰 색상
-        let planColor = checkPlanColor(type: userDailyPlan[indexPath.row].needAuthNum)
-        cell.planColorBarView.backgroundColor = UIColor(named: planColor)
-        cell.dayLabelView.backgroundColor = UIColor(named: planColor)
+        cell.planColorBarView.backgroundColor = checkPlanColor(type: userDailyPlan[indexPath.row].needAuthNum)
+        cell.dayLabelView.backgroundColor = checkPlanColor(type: userDailyPlan[indexPath.row].needAuthNum)
         // 셀 태그에 플랜로그아이디 삽입
         cell.tag = userDailyPlan[indexPath.row].planLogID
         return cell

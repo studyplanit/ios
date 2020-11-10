@@ -18,7 +18,7 @@ class SubscriptionViewController: UIViewController {
     @IBOutlet weak var timePicker: UIDatePicker!
     
     var userPlans: [UserTotalPlan] = []
-    var PlanDates: [[String]] = []
+    var planDates: [[String]] = []
     var plan: PlanList?
     var responsePlanRegistration: ResponsePlanRegistration?
     let userID = UserDefaults.standard.string(forKey: "id")
@@ -116,7 +116,7 @@ extension SubscriptionViewController {
                     self.userPlans = json
                     DispatchQueue.main.async {
 //                        self.tableView.reloadData()
-                        self.PlanDates = [[],[],[]]
+                        self.planDates = [[],[],[]]
                         self.setUserPlanDates(userPlans: self.userPlans)
                         self.calendar.reloadData()
                     }
@@ -203,20 +203,40 @@ extension SubscriptionViewController {
 // MARK:- Methods
 extension SubscriptionViewController {
     
+    func checkPlanColor(type: Int) -> UIColor {
+        guard let blue = UIColor(named: "Color_1day"),
+              let yellow = UIColor(named: "Color_7days"),
+              let green = UIColor(named: "Color_15days"),
+              let red = UIColor(named: "Color_30days") else { return UIColor() }
+        
+        switch type {
+        case 1:
+            return blue
+        case 7:
+            return yellow
+        case 15:
+            return green
+        case 30:
+            return red
+        default:
+            return blue
+        }
+    }
+    
     // 플랜 날짜 리스트 만들기
     func setUserPlanDates(userPlans: [UserTotalPlan]) {
         let count = userPlans.count
         for i in 0 ..< count {
-            PlanDates.append([])
+            planDates.append([])
             let startDateString = userPlans[i].startDate
             guard let startDate = dateFormatter.date(from: startDateString) else { return }
             var date = startDate
             for _ in 0..<userPlans[i].needAuthNum {
-                PlanDates[i].append(dateFormatter.string(from: date))
+                planDates[i].append(dateFormatter.string(from: date))
                 date = date + 86400
             }
         }
-        print("setUserPlanDates() called - PlanDates: \(PlanDates)")
+        print("setUserPlanDates() called - PlanDates: \(planDates)")
     }
     
     // 타임피커 값변경시 플랜시간 변수 설정
@@ -324,8 +344,8 @@ extension SubscriptionViewController: FSCalendarDataSource {
 
         let strDate = dateFormatter.string(from:date)
         var dotCount = 0
-        for i in 0 ..< PlanDates.count {
-            if PlanDates[i].contains(strDate) {
+        for i in 0 ..< planDates.count {
+            if planDates[i].contains(strDate) {
                 dotCount += 1
             }
         }
@@ -390,59 +410,27 @@ extension SubscriptionViewController: FSCalendarDelegateAppearance {
     // 점 기본 색상
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventDefaultColorsFor date: Date) -> [UIColor]? {
         
-        guard let blue = UIColor(named: "Color_1day"),
-              let yellow = UIColor(named: "Color_7days"),
-              let red = UIColor(named: "Color_30days") else { return [UIColor()] }
-        
-        let strDate = dateFormatter.string(from:date)
-        var dotCount = 0
-        for i in 0 ..< PlanDates.count {
-            if PlanDates[i].contains(strDate) {
-                dotCount += 1
+        var colors: [UIColor] = []
+        let strDate = dateFormatter.string(from: date)
+        for i in 0 ..< planDates.count {
+            if planDates[i].contains(strDate) {
+                colors.append(checkPlanColor(type: planDates[i].count))
             }
         }
-        
-        switch dotCount {
-        case 3:
-            return [blue, yellow, red]
-        case 2:
-            return [blue ,yellow]
-        case 1:
-            return [blue]
-        case 0:
-            return [.clear]
-        default:
-            return [.clear]
-        }
+        return colors
     }
     
     // 점 선택 색상
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventSelectionColorsFor date: Date) -> [UIColor]? {
         
-        guard let blue = UIColor(named: "Color_1day"),
-              let yellow = UIColor(named: "Color_7days"),
-              let red = UIColor(named: "Color_30days") else { return [UIColor()] }
-        
-        let strDate = dateFormatter.string(from:date)
-        var dotCount = 0
-        for i in 0 ..< PlanDates.count {
-            if PlanDates[i].contains(strDate) {
-                dotCount += 1
+        var colors: [UIColor] = []
+        let strDate = dateFormatter.string(from: date)
+        for i in 0 ..< planDates.count {
+            if planDates[i].contains(strDate) {
+                colors.append(checkPlanColor(type: planDates[i].count))
             }
         }
-        
-        switch dotCount {
-        case 3:
-            return [blue, yellow, red]
-        case 2:
-            return [blue ,yellow]
-        case 1:
-            return [blue]
-        case 0:
-            return [.clear]
-        default:
-            return [.clear]
-        }
+        return colors
     }
     
 }
