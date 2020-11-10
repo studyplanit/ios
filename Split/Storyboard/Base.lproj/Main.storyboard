@@ -48,7 +48,7 @@
                         <inset key="largeContentSizeImageInsets" minX="0.0" minY="1" maxX="0.0" maxY="0.0"/>
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="VoR-Jl-VaT">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VoR-Jl-VaT">
                         <rect key="frame" x="0.0" y="44" width="428" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.17254901960784313" green="0.17254901960784313" blue="0.17254901960784313" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -58,7 +58,6 @@
                         <textAttributes key="largeTitleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
-                        <imageReference key="backIndicatorImage" image="chevron.backward" catalog="system" symbolScale="default"/>
                     </navigationBar>
                     <connections>
                         <segue destination="5MP-sQ-B5O" kind="relationship" relationship="rootViewController" id="V1v-aH-LW9"/>
@@ -690,7 +689,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="asy-Pq-adF">
-                                <rect key="frame" x="40" y="174" width="348" height="317"/>
+                                <rect key="frame" x="40" y="173.99999999999997" width="348" height="318.33333333333326"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="로그인/가입" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGf-pO-Yft">
                                         <rect key="frame" x="0.0" y="0.0" width="348" height="50"/>
@@ -730,13 +729,13 @@
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="인증번호가 틀렸습니다." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MZ6-yZ-Keg">
-                                        <rect key="frame" x="0.0" y="222" width="348" height="13.333333333333343"/>
+                                        <rect key="frame" x="0.0" y="222" width="348" height="14"/>
                                         <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="12"/>
                                         <color key="textColor" red="0.85882352941176465" green="0.21568627450980393" blue="0.10196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이용약관 및 개인정보동의" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kck-u8-AOs">
-                                        <rect key="frame" x="0.0" y="248.33333333333329" width="348" height="15.666666666666657"/>
+                                        <rect key="frame" x="0.0" y="249.00000000000003" width="348" height="16.333333333333343"/>
                                         <gestureRecognizers/>
                                         <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="14"/>
                                         <color key="textColor" red="0.69803921568627447" green="0.69803921568627447" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -746,7 +745,7 @@
                                         </connections>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fEa-1W-1DD">
-                                        <rect key="frame" x="0.0" y="277" width="348" height="40"/>
+                                        <rect key="frame" x="0.0" y="278.33333333333331" width="348" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="iRo-IU-Wqh"/>
                                         </constraints>
@@ -770,7 +769,7 @@
                                 <rect key="frame" x="0.0" y="-100" width="428" height="100"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="인증번호가 문자로 전송됐습니다. (최대 20초 소요)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vz6-Ec-PxJ">
-                                        <rect key="frame" x="43.333333333333343" y="60" width="341.33333333333326" height="19"/>
+                                        <rect key="frame" x="46.333333333333343" y="60" width="335.66666666666663" height="20"/>
                                         <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -1077,7 +1076,7 @@
         <image name="chevron.backward" catalog="system" width="96" height="128"/>
         <image name="gearshape.fill" catalog="system" width="128" height="121"/>
         <image name="home_bg" width="278.33334350585938" height="603.66668701171875"/>
-        <image name="logo_purple" width="596.66668701171875" height="233.33332824707031"/>
+        <image name="logo_purple" width="134.33332824707031" height="39.333332061767578"/>
         <image name="map_bookmark" width="36.666667938232422" height="41.333332061767578"/>
         <image name="map_call" width="33.333332061767578" height="33.333332061767578"/>
         <image name="map_holiday" width="16.666666030883789" height="16.666666030883789"/>

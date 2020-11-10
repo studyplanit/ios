@@ -78,7 +78,6 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
         
         //네이버지도 초기화하기
         locationView.mapView = splitMapView.mapView;
-        splitMapView.mapView.positionMode = .direction
         splitMapView.mapView.moveCamera(NMFCameraUpdate(position: DEFAULT_CAMERA_POSITION))
         splitMapView.showLocationButton = false
         splitMapView.showScaleBar = false
@@ -131,10 +130,14 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
                         marker.height = 50
                         marker.iconPerspectiveEnabled = true
                         marker.captionAligns = [NMFAlignType.center]
-                        marker.captionText = "\n\(map.todayVisit)"
+                        if map.todayVisit == 0 {
+                            marker.captionText = "\nS"
+                        } else {
+                            marker.captionText = "\n\(map.todayVisit)"
+                        }
                         marker.captionColor = .white
                         marker.captionHaloColor = Common().purple
-                        marker.captionTextSize = 18
+                        marker.captionTextSize = 20
                         marker.subCaptionText = "\n\(map.planetName)"
                         marker.mapView = self.splitMapView.mapView
                         //마커 클릭했을때 실행

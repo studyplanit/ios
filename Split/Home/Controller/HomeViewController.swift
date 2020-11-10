@@ -21,6 +21,7 @@ class HomeViewController: UIViewController {
 
         //타이틀 이미지넣기
         let image = UIImageView(image: UIImage(named: "nav_split"))
+        image.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
         image.contentMode = UIView.ContentMode.scaleAspectFit
         navigationItem.titleView = image
         
