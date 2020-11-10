@@ -16,8 +16,12 @@ class AttendanceViewController: UIViewController {
     @IBOutlet var planViews: [UIView]!
     @IBOutlet var planNameLabels: [UILabel]!
     @IBOutlet var planTimeLabels: [UILabel]!
-    var userPlans: [UserPlan] = []
-    var userPlanIndex = 0
+    
+    let userID = UserDefaults.standard.string(forKey: "id")
+    var userTodayPlans: [UserTodayPlan] = []
+    var userPlan: UserTodayPlan?
+    var userPlanID = 0
+    var authURL = ""
     
     // MARK:- Properties
     lazy var readerVC: QRCodeReaderViewController = {
@@ -43,14 +47,8 @@ class AttendanceViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        getUserPlan()
+        getUserTodayPlan()
     }
-    
-//    override func viewDidDisappear(_ animated: Bool) {
-//        super.viewDidDisappear(animated)
-//        
-//        navigationController?.popViewController(animated: true)
-//    }
     
 }
 
@@ -76,11 +74,11 @@ extension AttendanceViewController {
     func configurePlanView() {
         resetPlanView()
         // 서버측에서 유저 보유플랜이 3개 이상인경우에 3으로 리턴하여 연산
-        let count = userPlans.count <= 3 ? userPlans.count : 3
+        let count = userTodayPlans.count <= 3 ? userTodayPlans.count : 3
         for i in 0 ..< count {
-            planViews[i].backgroundColor = UIColor(named: checkPlanColor(type: userPlans[i].needAuthNum))
-            planNameLabels[i].text = userPlans[i].planName
-            planTimeLabels[i].text = userPlans[i].setTime
+            planViews[i].backgroundColor = UIColor(named: checkPlanColor(type: userTodayPlans[i].needAuthNum))
+            planNameLabels[i].text = userTodayPlans[i].planName
+            planTimeLabels[i].text = userTodayPlans[i].setTime
             configureTapGesture(index: i)
         }
     }
@@ -106,18 +104,19 @@ extension AttendanceViewController {
 // MARK:- API
 extension AttendanceViewController {
     
-    private func getUserPlan() {
+    // 유저별 오늘 플랜 불러오기
+    private func getUserTodayPlan() {
         let headers: HTTPHeaders = [
             "memberId": "2",
         ]
-        AF.request(CalendarAPIConstant.userPlanURL, headers: headers).responseJSON { (response) in
+        AF.request(CalendarAPIConstant.userTodayPlanURL, headers: headers).responseJSON { (response) in
             switch response.result {
                 // 성공
             case .success(let res):
                 do {
                     let jsonData = try JSONSerialization.data(withJSONObject: res, options: .prettyPrinted)
-                    let json = try JSONDecoder().decode([UserPlan].self, from: jsonData)
-                    self.userPlans = json
+                    let json = try JSONDecoder().decode([UserTodayPlan].self, from: jsonData)
+                    self.userTodayPlans = json
                     DispatchQueue.main.async {
                         self.configurePlanView()
                     }
@@ -131,16 +130,72 @@ extension AttendanceViewController {
         }
     }
     
+    private func postQRAuth() {
+        
+        let splitZoneID = getSplitZoneID(url: authURL)
+        let planID = userPlanID
+        
+        let headers: HTTPHeaders = [
+            "plan_log_id": "\(planID)",
+            "planet_id": "\(splitZoneID)"
+        ]
+        AF.request(authURL, method: .post, headers: headers).responseJSON { (response) in
+            switch response.result {
+            
+            // 요청 성공
+            case .success(let res):
+                print("성공: \(res)")
+                do {
+                    // 반환값을 Data 타입으로 변환
+                    let jsonData = try JSONSerialization.data(withJSONObject: res, options: .prettyPrinted)
+                    let json = try JSONDecoder().decode(QRAuthResponse.self, from: jsonData)
+                    
+                    let reponse = json.authenticate
+                    
+                    switch reponse {
+                    case 1:
+                        print("인증성공 - 1")
+                        DispatchQueue.main.async {
+                            self.setCompletionView(data: json)
+                        }
+                    case -200:
+                        print("인증실패 - -200")
+                        DispatchQueue.main.async {
+                            self.setFailureView(data: json)
+                        }
+                    case -300:
+                        print("인증실패 - -300")
+                        DispatchQueue.main.async {
+                            self.setFailureView(data: json)
+                        }
+                    case -400:
+                        print("인증실패 - -400")
+                        DispatchQueue.main.async {
+                            self.setFailureView(data: json)
+                        }
+                    case -500:
+                        print("인증실패 - -500")
+                        DispatchQueue.main.async {
+                            self.setFailureView(data: json)
+                        }
+                    default:
+                        return
+                    }
+                    
+                } catch(let err) {
+                    print("json에러: \(err.localizedDescription)")
+                }
+            // 요청 실패
+            case .failure(let err):
+                print("실패: \(err.localizedDescription)")
+            }
+        }
+    }
+    
 }
 
 // MARK:- Methods
 extension AttendanceViewController {
-
-//    // 시, 분 만 표시하기
-//    func formatiTimeString(timeString: String) -> String {
-//        let endIdx: String.Index = timeString.index(timeString.startIndex, offsetBy: 4)
-//        return String(timeString[...endIdx])
-//    }
     
     func checkPlanColor(type: Int) -> String {
         switch type {
@@ -157,9 +212,44 @@ extension AttendanceViewController {
         }
     }
     
+    func getSplitZoneID(url: String) -> String {
+        let endIndex = url.index(url.endIndex, offsetBy: -1)
+        return String(url[endIndex...])
+    }
+    
+    // QR 인증요청 성공시 AttendanceCompletionViewController 세팅
+    func setCompletionView(data: QRAuthResponse) {
+        let storyboard = UIStoryboard(name: "Attendance", bundle: Bundle.main)
+        guard let attendanceCompletionViewController = storyboard.instantiateViewController(withIdentifier: "attendanceCompletionViewController") as? AttendanceCompletionViewController else { return }
+        
+        attendanceCompletionViewController.splitZoneName = data.name
+        attendanceCompletionViewController.splitZoneCode = data.code
+        attendanceCompletionViewController.userPlan = userPlan
+        self.navigationController?.pushViewController(attendanceCompletionViewController, animated: true)
+    }
+    
+    // QR 인증요청 실패시 AttendanceFailureViewController 세팅
+    func setFailureView(data: QRAuthResponse) {
+        let storyboard = UIStoryboard(name: "Attendance", bundle: Bundle.main)
+        guard let attendanceFailureViewController = storyboard.instantiateViewController(withIdentifier: "attendanceFailureViewController") as? AttendanceFailureViewController else { return }
+        
+        print("setFailureView() called - splitZoneName: \(data)")
+        attendanceFailureViewController.splitZoneName = data.name
+        attendanceFailureViewController.splitZoneCode = data.code
+        attendanceFailureViewController.userPlan = userPlan
+        attendanceFailureViewController.errorString = data.message
+        self.navigationController?.pushViewController(attendanceFailureViewController, animated: true)
+    }
+
+}
+
+// MARK:- QR Scanner Methods
+extension AttendanceViewController {
+    
     @objc func showScanner(_ sender: MyTapGesture) {
         print("MainViewController - showScanner() called ")
-        userPlanIndex = sender.planIndex
+        userPlan = userTodayPlans[sender.planIndex]
+        userPlanID = userTodayPlans[sender.planIndex].planLogID
         readerVC.delegate = self
         readerVC.completionBlock = { (result: QRCodeReaderResult?) in
             print("QRCodeScanner succeded in closure")
@@ -167,13 +257,11 @@ extension AttendanceViewController {
             print(result)
             let scannedUrlString = result.value
             print("scannedUrlString : \(scannedUrlString)")
-//            //스캔한 url
-//            guard let scannedUrl = URL(string: scannedUrlString) else { return }
         }
         readerVC.modalPresentationStyle = .formSheet
         present(readerVC, animated: true, completion: nil)
     }
-
+    
 }
 
 // MARK:- QR Code Reader View Controller Delegate
@@ -184,12 +272,10 @@ extension AttendanceViewController: QRCodeReaderViewControllerDelegate {
         print("QRCodeScanner succeded in delegate")
         reader.stopScanning()
         dismiss(animated: true, completion: nil)
-        let storyboard = UIStoryboard(name: "Attendance", bundle: Bundle.main)
-        guard let attendanceCompletionViewController = storyboard.instantiateViewController(withIdentifier: "attendanceCompletionViewController") as? AttendanceCompletionViewController else { return }
-        attendanceCompletionViewController.authURL = result.value
-        attendanceCompletionViewController.userPlan = userPlans[userPlanIndex]
-        print("큐알인증완료 - 유저플랜인덱스 : \(userPlanIndex)")
-        navigationController?.pushViewController(attendanceCompletionViewController, animated: true)
+        
+        authURL = result.value
+        postQRAuth()
+        print("큐알인증완료 - url : \(authURL)")
     }
     
     // QR코드 리더가 취소 됬을때 정의

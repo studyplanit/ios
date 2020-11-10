@@ -17,9 +17,9 @@ class CalendarViewController: UIViewController {
     @IBOutlet weak var backgoroundView: UIView!
     
     let userID = UserDefaults.standard.string(forKey: "id")
-    var userPlans: [UserPlan] = []
-    var userDailyPlan: [UserPlan] = []
-    var PlanDates: [[String]] = [[],[],[]]
+    var userPlans: [UserTotalPlan] = []
+    var userDailyPlan: [UserTotalPlan] = []
+    var PlanDates: [[String]] = []
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -43,6 +43,13 @@ class CalendarViewController: UIViewController {
         
         getUserPlan()
         deselectDate()
+        print("주말라벨: \(calendar.calendarWeekdayView.weekdayLabels)")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        print("viewWillApear - 유저플랜 갯수 : \(userPlans.count)")
     }
 
 }
@@ -52,7 +59,6 @@ extension CalendarViewController {
     
     func configureTapBar() {
         navigationItem.title = "캘린더"
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "KoPubDotumBold", size: 20)!]
     }
     
     func configureCalendar() {
@@ -69,8 +75,10 @@ extension CalendarViewController {
         calendar.appearance.headerTitleColor = .white
         calendar.appearance.headerTitleFont = UIFont(name: "KoPubDotumBold", size: 20)
         calendar.appearance.weekdayTextColor = .black
-        calendar.appearance.todayColor = #colorLiteral(red: 0.2156862745, green: 0.2784313725, blue: 0.3098039216, alpha: 1)
+        calendar.appearance.todayColor = #colorLiteral(red: 0.2156862745, green: 0.2784313725, blue: 0.3098039216, alpha: 1).withAlphaComponent(0.7)
         calendar.appearance.selectionColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
+        calendar.calendarWeekdayView.weekdayLabels[0].textColor = .red // 일요일
+        calendar.calendarWeekdayView.weekdayLabels[6].textColor = .red // 토요일
     }
     
     func configureTableView() {
@@ -90,22 +98,22 @@ extension CalendarViewController {
         let headers: HTTPHeaders = [
             "memberId": "2",
         ]
-        AF.request(CalendarAPIConstant.userPlanURL, headers: headers).responseJSON { (response) in
+        AF.request(CalendarAPIConstant.userTotalPlanURL, headers: headers).responseJSON { (response) in
             switch response.result {
                 // 성공
             case .success(let res):
                 do {
                     let jsonData = try JSONSerialization.data(withJSONObject: res, options: .prettyPrinted)
-                    let json = try JSONDecoder().decode([UserPlan].self, from: jsonData)
+                    let json = try JSONDecoder().decode([UserTotalPlan].self, from: jsonData)
                     
                     self.userPlans = json
                     DispatchQueue.main.async {
-//                        self.tableView.reloadData()
-                        self.PlanDates = [[],[],[]]
+                        self.PlanDates = [] // 꼭 플랜목록을 초기화해야지 새로운 데이터를 갱신해서 보여줄수 있다.
                         self.setUserPlanDates(userPlans: self.userPlans)
                         self.calendar.reloadData()
                         self.setUserDailyPlan(date: Date())
                         self.tableView.reloadData()
+                        print("유저플랜 갯수 : \(self.userPlans.count)")
                     }
                 } catch(let err) {
                     print(err.localizedDescription)
@@ -131,19 +139,6 @@ extension CalendarViewController {
             case .failure(let err):
                 print("실패: \(err.localizedDescription)")
             }
-        }
-    }
-    
-    func checkPlanProgress(status: String) -> String {
-        switch status {
-        case "SUCCESS":
-            return "성공"
-        case "FAIL":
-            return "실패"
-        case "ONGOING":
-            return "진행"
-        default:
-            return "진행"
         }
     }
     
@@ -180,9 +175,24 @@ extension CalendarViewController {
         }
     }
     
+    func checkPlanProgress(status: String) -> String {
+        switch status {
+        case "SUCCESS":
+            return "성공"
+        case "FAIL":
+            return "실패"
+        case "ONGOING":
+            return "진행"
+        default:
+            return "진행"
+        }
+    }
+    
     // 플랜 날짜 리스트 만들기
-    func setUserPlanDates(userPlans: [UserPlan]) {
-        for i in 0 ..< userPlans.count {
+    func setUserPlanDates(userPlans: [UserTotalPlan]) {
+        let count = userPlans.count
+        for i in 0 ..< count {
+            PlanDates.append([])
             let startDateString = userPlans[i].startDate
             guard let startDate = dateFormatter.date(from: startDateString) else { return }
             var date = startDate
@@ -204,6 +214,7 @@ extension CalendarViewController {
                 userDailyPlan.append(userPlans[i])
             }
         }
+        print(PlanDates)
     }
     
     // 화면 나갔다오면 선택된 날짜 표시 해제하기
@@ -217,18 +228,7 @@ extension CalendarViewController {
 // MARK:- Alert
 extension CalendarViewController {
     
-    func completeAlert() {
-        let alert = UIAlertController(
-            title: "",
-            message: "플랜이 삭제되었습니다.",
-            preferredStyle: .alert)
-        let okAction = UIAlertAction(
-            title: "확인",
-            style: .default)
-        alert.addAction(okAction)
-        present(alert, animated: true, completion: nil)
-    }
-    
+    // 플랜 삭제
     func deletePlanAlert(planID: Int) {
         let alert = UIAlertController(
             title: "",
@@ -249,35 +249,35 @@ extension CalendarViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    // 플랜 삭제 완료
+    func completeAlert() {
+        let alert = UIAlertController(
+            title: "",
+            message: "플랜이 삭제되었습니다.",
+            preferredStyle: .alert)
+        let okAction = UIAlertAction(
+            title: "확인",
+            style: .default)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
 }
 
 // MARK:- FS Calendar DataSource
 extension CalendarViewController: FSCalendarDataSource {
     
-    /// 특정 날짜 점 표시
+    // 특정 날짜 점 표시
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-//        guard let eventDate = dateFormatter.date(from: "2020-10-29") else { return 0 }
+
         let strDate = dateFormatter.string(from:date)
-        let dates1 = PlanDates[0]
-        let dates2 = PlanDates[1]
-        let dates3 = PlanDates[2]
-        
-        if dates1.contains(strDate) && dates2.contains(strDate) && dates3.contains(strDate) {
-            return 3
-        } else if dates1.contains(strDate) && dates2.contains(strDate)  {
-            return 2
-        } else if dates2.contains(strDate) && dates3.contains(strDate) {
-            return 2
-        } else if dates1.contains(strDate) && dates3.contains(strDate) {
-            return 2
-        } else if dates1.contains(strDate) {
-            return 1
-        } else if dates2.contains(strDate) {
-            return 1
-        } else if dates3.contains(strDate) {
-            return 1
+        var dotCount = 0
+        for i in 0 ..< PlanDates.count {
+            if PlanDates[i].contains(strDate) {
+                dotCount += 1
+            }
         }
-        return 0
+        return dotCount
     }
     
 }
@@ -301,38 +301,23 @@ extension CalendarViewController: FSCalendarDelegate {
 //        print(dateFormatter.string(from: date))
 //    }
     
-    // 스와이프
-    func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
-        print("페이지 넘김")
-    }
-    
-    // 특정 날짜를 선택되지 않게 하기
-    func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
-        guard let excludeDate = dateFormatter.date(from: "2020-11-25") else { return true }
-        
-        if date.compare(excludeDate) == .orderedSame {
-            return false
-        } else {
-            return true
-        }
-    }
-    
 }
 
 // MARK:- FS Calendar Delegate Appearance
 extension CalendarViewController: FSCalendarDelegateAppearance {
     
-    // 특정 날짜 색 바꾸기
-    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
-        guard let eventDate = dateFormatter.date(from: "2020-11-25") else { return nil }
-        
-        if date.compare(eventDate) == .orderedSame {
-            return .red
-        } else {
-            return nil
-        }
-    }
-    
+//    // 특정 날짜 색 바꾸기
+//    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
+//
+//        print(calendar.calendarWeekdayView.weekdayLabels)
+//
+////        if calendar.calendarWeekdayView.weekdayLabels.contains(date){
+////            return UIColor.red
+////        } else {
+////            return UIColor.black
+////        }
+//    }
+//
     // 점 기본 색상
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventDefaultColorsFor date: Date) -> [UIColor]? {
         
@@ -340,27 +325,27 @@ extension CalendarViewController: FSCalendarDelegateAppearance {
               let yellow = UIColor(named: "Color_7days"),
               let red = UIColor(named: "Color_30days") else { return [UIColor()] }
         
-        let strDate = dateFormatter.string(from: date)
-        let dates1 = PlanDates[0]
-        let dates2 = PlanDates[1]
-        let dates3 = PlanDates[2]
-        
-        if dates1.contains(strDate) && dates2.contains(strDate) && dates3.contains(strDate) {
-            return [blue, yellow, red]
-        } else if dates1.contains(strDate) && dates2.contains(strDate)  {
-            return [blue ,yellow]
-        } else if dates2.contains(strDate) && dates3.contains(strDate) {
-            return [blue ,yellow]
-        } else if dates1.contains(strDate) && dates3.contains(strDate) {
-            return [blue ,yellow]
-        } else if dates1.contains(strDate) {
-            return [blue]
-        } else if dates2.contains(strDate) {
-            return [blue]
-        } else if dates3.contains(strDate) {
-            return [blue]
+        let strDate = dateFormatter.string(from:date)
+        var dotCount = 0
+        for i in 0 ..< PlanDates.count {
+            if PlanDates[i].contains(strDate) {
+                dotCount += 1
+            }
         }
-        return [UIColor.clear]
+        
+        switch dotCount {
+        case 3:
+            return [blue, yellow, red]
+        case 2:
+            return [blue ,yellow]
+        case 1:
+            return [blue]
+        case 0:
+            return [.clear]
+        default:
+            return [.clear]
+        }
+        
     }
     
     // 점 선택 색상
@@ -371,26 +356,26 @@ extension CalendarViewController: FSCalendarDelegateAppearance {
               let red = UIColor(named: "Color_30days") else { return [UIColor()] }
         
         let strDate = dateFormatter.string(from: date)
-        let dates1 = PlanDates[0]
-        let dates2 = PlanDates[1]
-        let dates3 = PlanDates[2]
-        
-        if dates1.contains(strDate) && dates2.contains(strDate) && dates3.contains(strDate) {
-            return [blue, yellow, red]
-        } else if dates1.contains(strDate) && dates2.contains(strDate)  {
-            return [blue ,yellow]
-        } else if dates2.contains(strDate) && dates3.contains(strDate) {
-            return [blue ,yellow]
-        } else if dates1.contains(strDate) && dates3.contains(strDate) {
-            return [blue ,yellow]
-        } else if dates1.contains(strDate) {
-            return [blue]
-        } else if dates2.contains(strDate) {
-            return [blue]
-        } else if dates3.contains(strDate) {
-            return [blue]
+        var dotCount = 0
+        for i in 0 ..< PlanDates.count {
+            if PlanDates[i].contains(strDate) {
+                dotCount += 1
+            }
         }
-        return [UIColor.clear]
+        
+        switch dotCount {
+        case 3:
+            return [blue, yellow, red]
+        case 2:
+            return [blue ,yellow]
+        case 1:
+            return [blue]
+        case 0:
+            return [.clear]
+        default:
+            return [.clear]
+        }
+        
     }
     
 }

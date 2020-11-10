@@ -37,3 +37,14 @@ class SubscriptionPlan {
     var endDate: String?
     var setTime: String?
 }
+
+//
+struct ResponsePlanRegistration: Codable {
+    let planLogID: Int
+    let message: String
+
+    enum CodingKeys: String, CodingKey {
+        case planLogID = "planLogId"
+        case message
+    }
+}

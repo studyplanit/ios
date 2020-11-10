@@ -17,9 +17,10 @@ class SubscriptionViewController: UIViewController {
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var timePicker: UIDatePicker!
     
-    var userPlans: [UserPlan] = []
-    var PlanDates: [[String]] = [[],[],[]]
+    var userPlans: [UserTotalPlan] = []
+    var PlanDates: [[String]] = []
     var plan: PlanList?
+    var responsePlanRegistration: ResponsePlanRegistration?
     let userID = UserDefaults.standard.string(forKey: "id")
     let dateFormatter: DateFormatter = {
         let formatter: DateFormatter = DateFormatter()
@@ -78,8 +79,10 @@ extension SubscriptionViewController {
         calendar.appearance.headerTitleColor = .white
         calendar.appearance.headerTitleFont = UIFont(name: "KoPubDotumBold", size: 20)
         calendar.appearance.weekdayTextColor = .black
-        calendar.appearance.todayColor = #colorLiteral(red: 0.2156862745, green: 0.2784313725, blue: 0.3098039216, alpha: 1)
+        calendar.appearance.todayColor = #colorLiteral(red: 0.2156862745, green: 0.2784313725, blue: 0.3098039216, alpha: 1).withAlphaComponent(0.7)
         calendar.appearance.selectionColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
+        calendar.calendarWeekdayView.weekdayLabels[0].textColor = .red // 일요일
+        calendar.calendarWeekdayView.weekdayLabels[6].textColor = .red // 토요일
         
     }
     
@@ -102,13 +105,13 @@ extension SubscriptionViewController {
         let headers: HTTPHeaders = [
             "memberId": "2",
         ]
-        AF.request(CalendarAPIConstant.userPlanURL, headers: headers).responseJSON { (response) in
+        AF.request(CalendarAPIConstant.userTotalPlanURL, headers: headers).responseJSON { (response) in
             switch response.result {
                 // 성공
             case .success(let res):
                 do {
                     let jsonData = try JSONSerialization.data(withJSONObject: res, options: .prettyPrinted)
-                    let json = try JSONDecoder().decode([UserPlan].self, from: jsonData)
+                    let json = try JSONDecoder().decode([UserTotalPlan].self, from: jsonData)
                     
                     self.userPlans = json
                     DispatchQueue.main.async {
@@ -145,6 +148,44 @@ extension SubscriptionViewController {
                 // 성공
             case .success(let res):
                 print(res)
+                do {
+                    // 반환값을 Data 타입으로 변환
+                    let jsonData = try JSONSerialization.data(withJSONObject: res, options: .prettyPrinted)
+                    
+                    let json = try JSONDecoder().decode(ResponsePlanRegistration.self, from: jsonData)
+                    // dataSource에 변환한 값을 대입
+                    self.responsePlanRegistration = json
+                    // 메인 큐를 이용하여 tableView 리로딩
+                    guard let response = self.responsePlanRegistration?.planLogID else { return }
+                    print("postPlan - \(response)")
+                    switch response {
+                    case 1:
+                        print("postPlan - 1")
+                        DispatchQueue.main.async {
+                            self.showSuccessAPIAlert()
+                        }
+                    case -1:
+                        print("postPlan - -1")
+                        DispatchQueue.main.async {
+                            self.showAPIFailureAlert1()
+                        }
+                    case -2:
+                        print("postPlan - -2")
+                        DispatchQueue.main.async {
+                            self.showAPIFailureAlert2()
+                        }
+                    case -500:
+                        print("postPlan -500")
+                        DispatchQueue.main.async {
+                            self.showAPIFailureAlert3()
+                        }
+                    default:
+                        return
+                    }
+                    
+                } catch(let err) {
+                    print(err.localizedDescription)
+                }
                 // 실패
             case .failure(let err):
                 print(err.localizedDescription)
@@ -158,8 +199,10 @@ extension SubscriptionViewController {
 extension SubscriptionViewController {
     
     // 플랜 날짜 리스트 만들기
-    func setUserPlanDates(userPlans: [UserPlan]) {
-        for i in 0 ..< userPlans.count {
+    func setUserPlanDates(userPlans: [UserTotalPlan]) {
+        let count = userPlans.count
+        for i in 0 ..< count {
+            PlanDates.append([])
             let startDateString = userPlans[i].startDate
             guard let startDate = dateFormatter.date(from: startDateString) else { return }
             var date = startDate
@@ -205,7 +248,6 @@ extension SubscriptionViewController {
         let okAction = UIAlertAction(
             title: "확인",
             style: .default){ (action : UIAlertAction) in
-            self.completeAlert()
             guard let planID = self.plan?.id else { return }
             self.postPlan(planID: String(planID), startDate: self.startDate, endDate: self.endDate, setTime: self.planTime)
         }
@@ -239,34 +281,71 @@ extension SubscriptionViewController {
         }
     }
     
+    func showSuccessAPIAlert() {
+        let alert = UIAlertController(
+            title: "",
+            message: "등록 성공",
+            preferredStyle: .alert)
+        let okAction = UIAlertAction(
+            title: "확인",
+            style: .default){ (action : UIAlertAction) in
+            self.navigationController?.popToRootViewController(animated: true)
+        }
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func showAPIFailureAlert1() {
+        let alert = UIAlertController(
+            title: "등록실패1",
+            message: "2시간 이내에 인증해야 하는 플랜이 존재합니다.",
+            preferredStyle: .alert)
+        let okAction = UIAlertAction(
+            title: "확인",
+            style: .default)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func showAPIFailureAlert2() {
+        let alert = UIAlertController(
+            title: "등록실패2",
+            message: "설정하신 기간 중 3개의 플랜을 가지고 있는 날짜가 존재합니다.",
+            preferredStyle: .alert)
+        let okAction = UIAlertAction(
+            title: "확인",
+            style: .default)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func showAPIFailureAlert3() {
+        let alert = UIAlertController(
+            title: "등록실패3",
+            message: "서버 오류입니다. 잠시후에 재시도 해주세요.",
+            preferredStyle: .alert)
+        let okAction = UIAlertAction(
+            title: "확인",
+            style: .default)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
 }
 
 // MARK:- FSCalendar DataSource
 extension SubscriptionViewController: FSCalendarDataSource {
     
-    /// 특정 날짜 점 표시
+    // 특정 날짜 점 표시
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+
         let strDate = dateFormatter.string(from:date)
-        let dates1 = PlanDates[0]
-        let dates2 = PlanDates[1]
-        let dates3 = PlanDates[2]
-        
-        if dates1.contains(strDate) && dates2.contains(strDate) && dates3.contains(strDate) {
-            return 3
-        } else if dates1.contains(strDate) && dates2.contains(strDate)  {
-            return 2
-        } else if dates2.contains(strDate) && dates3.contains(strDate) {
-            return 2
-        } else if dates1.contains(strDate) && dates3.contains(strDate) {
-            return 2
-        } else if dates1.contains(strDate) {
-            return 1
-        } else if dates2.contains(strDate) {
-            return 1
-        } else if dates3.contains(strDate) {
-            return 1
+        var dotCount = 0
+        for i in 0 ..< PlanDates.count {
+            if PlanDates[i].contains(strDate) {
+                dotCount += 1
+            }
         }
-        return 0
+        return dotCount
     }
     
 }
@@ -308,82 +387,78 @@ extension SubscriptionViewController: FSCalendarDelegate {
     }
     
     // 오늘 포함 이전 날짜 선택 불가
-    func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
-        
-        let curDate = Date()
-        
-        if date < curDate {
-            return false
-        } else {
-            return true
-        }
-    }
+//    func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
+//        
+//        let today = Date()
+//
+//        if date < today {
+//            return false
+//        } else {
+//            return true
+//        }
+//    }
     
 }
 
 // MARK:- FSCalendar Delegate Appearance
 extension SubscriptionViewController: FSCalendarDelegateAppearance {
     
-    // 특정 날짜 색 바꾸기
-    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
-        guard let eventDate = dateFormatter.date(from: "2020-11-25") else { return nil }
-        
-        if date.compare(eventDate) == .orderedSame {
-            return .red
-        } else {
-            return nil
-        }
-    }
-    
     // 점 기본 색상
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventDefaultColorsFor date: Date) -> [UIColor]? {
         
-        let strDate = dateFormatter.string(from: date)
-        let dates1 = PlanDates[0]
-        let dates2 = PlanDates[1]
-        let dates3 = PlanDates[2]
+        guard let blue = UIColor(named: "Color_1day"),
+              let yellow = UIColor(named: "Color_7days"),
+              let red = UIColor(named: "Color_30days") else { return [UIColor()] }
         
-        if dates1.contains(strDate) && dates2.contains(strDate) && dates3.contains(strDate) {
-            return [UIColor.red ,UIColor.blue, UIColor.green]
-        } else if dates1.contains(strDate) && dates2.contains(strDate)  {
-            return [UIColor.red ,UIColor.blue]
-        } else if dates2.contains(strDate) && dates3.contains(strDate) {
-            return [UIColor.red ,UIColor.blue]
-        } else if dates1.contains(strDate) && dates3.contains(strDate) {
-            return [UIColor.red ,UIColor.blue]
-        } else if dates1.contains(strDate) {
-            return [UIColor.blue]
-        } else if dates2.contains(strDate) {
-            return [UIColor.blue]
-        } else if dates3.contains(strDate) {
-            return [UIColor.blue]
+        let strDate = dateFormatter.string(from:date)
+        var dotCount = 0
+        for i in 0 ..< PlanDates.count {
+            if PlanDates[i].contains(strDate) {
+                dotCount += 1
+            }
         }
-        return [UIColor.clear]
+        
+        switch dotCount {
+        case 3:
+            return [blue, yellow, red]
+        case 2:
+            return [blue ,yellow]
+        case 1:
+            return [blue]
+        case 0:
+            return [.clear]
+        default:
+            return [.clear]
+        }
     }
     
     // 점 선택 색상
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventSelectionColorsFor date: Date) -> [UIColor]? {
-        let strDate = dateFormatter.string(from: date)
-        let dates1 = PlanDates[0]
-        let dates2 = PlanDates[1]
-        let dates3 = PlanDates[2]
-
-        if dates1.contains(strDate) && dates2.contains(strDate) && dates3.contains(strDate) {
-            return [UIColor.red ,UIColor.blue, UIColor.green]
-        } else if dates1.contains(strDate) && dates2.contains(strDate)  {
-            return [UIColor.red ,UIColor.blue]
-        } else if dates2.contains(strDate) && dates3.contains(strDate) {
-            return [UIColor.red ,UIColor.blue]
-        } else if dates1.contains(strDate) && dates3.contains(strDate) {
-            return [UIColor.red ,UIColor.blue]
-        } else if dates1.contains(strDate) {
-            return [UIColor.blue]
-        } else if dates2.contains(strDate) {
-            return [UIColor.blue]
-        } else if dates3.contains(strDate) {
-            return [UIColor.blue]
+        
+        guard let blue = UIColor(named: "Color_1day"),
+              let yellow = UIColor(named: "Color_7days"),
+              let red = UIColor(named: "Color_30days") else { return [UIColor()] }
+        
+        let strDate = dateFormatter.string(from:date)
+        var dotCount = 0
+        for i in 0 ..< PlanDates.count {
+            if PlanDates[i].contains(strDate) {
+                dotCount += 1
+            }
         }
-        return [UIColor.clear]
+        
+        switch dotCount {
+        case 3:
+            return [blue, yellow, red]
+        case 2:
+            return [blue ,yellow]
+        case 1:
+            return [blue]
+        case 0:
+            return [.clear]
+        default:
+            return [.clear]
+        }
     }
     
 }

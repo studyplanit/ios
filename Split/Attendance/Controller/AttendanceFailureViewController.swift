@@ -1,28 +1,27 @@
 //
-//  AttendanceViewController.swift
+//  AttendanceFailureViewController.swift
 //  Split
 //
-//  Created by uno on 2020/10/29.
+//  Created by uno on 2020/11/09.
 //
 
 import UIKit
-import Alamofire
 
-class AttendanceCompletionViewController: UIViewController {
+class AttendanceFailureViewController: UIViewController {
     
-    //MARK:- Properties
+    // MARK:- Properties
+    @IBOutlet weak var splitZoneNameLabel: UILabel!
+    @IBOutlet weak var splitZoneCodeLabel: UILabel!
     @IBOutlet weak var planView: UIView!
     @IBOutlet weak var planNameLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var dayLabel: UILabel!
-    @IBOutlet weak var sayingLabelView: UIView!
-    @IBOutlet weak var completionButton: UIButton!
-    @IBOutlet weak var urlLabel: UILabel!
-    @IBOutlet weak var splitZoneNameLabel: UILabel!
-    @IBOutlet weak var splitZoneCodeLabel: UILabel!
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var contentLabel: UILabel!
+    @IBOutlet weak var retryButton: UIButton!
     
     var splitZoneName = ""
     var splitZoneCode = ""
+    var errorString = ""
     var userPlan: UserTodayPlan?
     
     // MARK:- View Life Cycle
@@ -31,9 +30,10 @@ class AttendanceCompletionViewController: UIViewController {
         
         configureUI()
         configureNavigationBar()
-        configureSplitZoneView()
+        confgirueSplitZoneView()
         configurePlanView()
-        configureButton()
+        configureErrorLabel()
+        configureRetryButton()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -42,13 +42,15 @@ class AttendanceCompletionViewController: UIViewController {
         // 해당 페이지를 벗어나서 플랜을 삭제할 경우를 대비
         navigationController?.popToRootViewController(animated: true)
     }
+
 }
 
 //MARK:- Configure UI
-extension AttendanceCompletionViewController {
+extension AttendanceFailureViewController {
     
     // 네비게이션바
     func configureNavigationBar() {
+//        urlLabel.text = url
         navigationItem.title = "QR"
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "KoPubDotumBold", size: 20)!]
         navigationItem.hidesBackButton = true
@@ -60,13 +62,13 @@ extension AttendanceCompletionViewController {
         guard let userPlan = userPlan else { return }
         planView.layer.cornerRadius = 10
         planView.backgroundColor = UIColor(named: checkPlanColor(type: userPlan.needAuthNum))
-        sayingLabelView.layer.cornerRadius = 10
-        sayingLabelView.layer.borderWidth = 3
-        completionButton.layer.cornerRadius = 0.5 * completionButton.bounds.size.height
+        contentView.layer.cornerRadius = 10
+        contentView.layer.borderWidth = 3
+        retryButton.layer.cornerRadius = 0.5 * retryButton.bounds.size.height
         // 그림자
         configureShadowUI(planView)
-        configureShadowUI(sayingLabelView)
-        configureShadowUI(completionButton)
+        configureShadowUI(contentView)
+        configureShadowUI(retryButton)
     }
     
     // 그림자 추가
@@ -78,9 +80,7 @@ extension AttendanceCompletionViewController {
         view.layer.shadowOpacity = 0.5
     }
     
-    // 스플릿존 이름, 뷰
-    func configureSplitZoneView() {
-        print("configureSplitZoneInfoView() called - splitZoneName:\(splitZoneName), splitZoneCode:\(splitZoneCode)")
+    func confgirueSplitZoneView() {
         splitZoneNameLabel.text = splitZoneName
         splitZoneCodeLabel.text = splitZoneCode
     }
@@ -89,18 +89,21 @@ extension AttendanceCompletionViewController {
         guard let plan = userPlan else { return }
         planNameLabel.text = plan.planName
         timeLabel.text = plan.setTime
-        dayLabel.text = "\(plan.nowAuthNum + 1)일째 인증되었습니다"
     }
     
-    // 버튼
-    func configureButton() {
-        completionButton.addTarget(self, action: #selector(touchUpCompletionButton), for: .touchUpInside)
+    func configureErrorLabel() {
+        contentLabel.text = errorString
     }
+    
+    func configureRetryButton() {
+        retryButton.addTarget(self, action: #selector(touchUpRetryButton), for: .touchUpInside)
+    }
+
     
 }
 
 //MARK:- Methods
-extension AttendanceCompletionViewController {
+extension AttendanceFailureViewController {
     
     func checkPlanColor(type: Int) -> String {
         switch type {
@@ -117,8 +120,8 @@ extension AttendanceCompletionViewController {
         }
     }
     
-    @objc func touchUpCompletionButton() {
-        navigationController?.popToRootViewController(animated: true)
+    @objc func touchUpRetryButton() {
+        navigationController?.popViewController(animated: true)
     }
-
+    
 }
