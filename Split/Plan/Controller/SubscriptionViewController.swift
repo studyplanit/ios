@@ -17,6 +17,7 @@ class SubscriptionViewController: UIViewController {
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var timePicker: UIDatePicker!
     
+    private let indicatorView = UIActivityIndicatorView()
     var userPlans: [UserTotalPlan] = []
     var planDates: [[String]] = []
     var plan: PlanList?
@@ -102,6 +103,7 @@ extension SubscriptionViewController {
 extension SubscriptionViewController {
     
     private func getUserPlan() {
+        showIndicator()
         let headers: HTTPHeaders = [
             "memberId": "2",
         ]
@@ -119,13 +121,20 @@ extension SubscriptionViewController {
                         self.planDates = [[],[],[]]
                         self.setUserPlanDates(userPlans: self.userPlans)
                         self.calendar.reloadData()
+                        self.indicatorView.stopAnimating()
                     }
                 } catch(let err) {
                     print(err.localizedDescription)
+                    DispatchQueue.main.async {
+                        self.indicatorView.stopAnimating()
+                    }
                 }
                 // 실패
             case .failure(let err):
                 print(err.localizedDescription)
+                DispatchQueue.main.async {
+                    self.indicatorView.stopAnimating()
+                }
             }
         }
     }
@@ -134,7 +143,7 @@ extension SubscriptionViewController {
                           startDate: String,
                           endDate: String,
                           setTime: String) {
-
+        showIndicator()
         let headers: HTTPHeaders = [
             "member_id": "2",
             "plan_id": planID,
@@ -163,26 +172,31 @@ extension SubscriptionViewController {
                         print("postPlan - 1")
                         DispatchQueue.main.async {
                             self.showSuccessAPIAlert()
+                            self.indicatorView.stopAnimating()
                         }
                     case -1:
                         print("postPlan - -1")
                         DispatchQueue.main.async {
                             self.showAPIFailureAlert(data: json)
+                            self.indicatorView.stopAnimating()
                         }
                     case -2:
                         print("postPlan - -2")
                         DispatchQueue.main.async {
                             self.showAPIFailureAlert(data: json)
+                            self.indicatorView.stopAnimating()
                         }
                     case -100:
                         print("postPlan - -100")
                         DispatchQueue.main.async {
                             self.showAPIFailureAlert(data: json)
+                            self.indicatorView.stopAnimating()
                         }
                     case -500:
                         print("postPlan -500")
                         DispatchQueue.main.async {
                             self.showAPIFailureAlert(data: json)
+                            self.indicatorView.stopAnimating()
                         }
                     default:
                         return
@@ -190,10 +204,16 @@ extension SubscriptionViewController {
                     
                 } catch(let err) {
                     print(err.localizedDescription)
+                    DispatchQueue.main.async {
+                        self.indicatorView.stopAnimating()
+                    }
                 }
                 // 실패
             case .failure(let err):
                 print(err.localizedDescription)
+                DispatchQueue.main.async {
+                    self.indicatorView.stopAnimating()
+                }
             }
         }
     }
@@ -243,6 +263,14 @@ extension SubscriptionViewController {
     @objc func setPlanTime (_ sender: UIDatePicker) {
         planTime = timeFormatter.string(from: sender.date)
         print("설정한 시간 : \(planTime)")
+    }
+    
+    func showIndicator() {
+        view.addSubview(indicatorView)
+        indicatorView.translatesAutoresizingMaskIntoConstraints = false
+        indicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        indicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        indicatorView.startAnimating()
     }
     
 }

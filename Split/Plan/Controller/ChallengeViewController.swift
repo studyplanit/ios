@@ -12,6 +12,7 @@ class ChallengeViewController: UIViewController {
     
     // MARK:- Properties
     @IBOutlet weak var tableView: UITableView!
+    private let indicatorView = UIActivityIndicatorView()
     var plans: [PlanList] = []
     let numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -63,12 +64,14 @@ extension ChallengeViewController {
         }
     }
     
+    
 }
 
 // MARK:- API
 extension ChallengeViewController {
     
     private func getPlanList() {
+        showIndicator()
         AF.request(PlanAPIConstant.planListURL).responseJSON { (response) in
             switch response.result {
                 // 성공
@@ -80,15 +83,35 @@ extension ChallengeViewController {
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                         print("getPlanList()called - plans: \(self.plans)")
+                        self.indicatorView.stopAnimating()
                     }
                 } catch(let err) {
                     print(err.localizedDescription)
+                    DispatchQueue.main.async {
+                        self.indicatorView.stopAnimating()
+                    }
                 }
                 // 실패
             case .failure(let err):
                 print(err.localizedDescription)
+                DispatchQueue.main.async {
+                    self.indicatorView.stopAnimating()
+                }
             }
         }
+    }
+    
+}
+
+// MARK:- Methods
+extension ChallengeViewController {
+    
+    func showIndicator() {
+        view.addSubview(indicatorView)
+        indicatorView.translatesAutoresizingMaskIntoConstraints = false
+        indicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        indicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        indicatorView.startAnimating()
     }
     
 }

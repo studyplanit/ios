@@ -17,6 +17,7 @@ class AttendanceViewController: UIViewController {
     @IBOutlet var planNameLabels: [UILabel]!
     @IBOutlet var planTimeLabels: [UILabel]!
     
+    private let indicatorView = UIActivityIndicatorView()
     let userID = UserDefaults.standard.string(forKey: "id")
     var userTodayPlans: [UserTodayPlan] = []
     var userPlan: UserTodayPlan?
@@ -98,6 +99,14 @@ extension AttendanceViewController {
         planViews[index].isUserInteractionEnabled = true
     }
     
+    func showIndicator() {
+        view.addSubview(indicatorView)
+        indicatorView.translatesAutoresizingMaskIntoConstraints = false
+        indicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        indicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        indicatorView.startAnimating()
+    }
+    
 }
 
 // MARK:- API
@@ -105,6 +114,7 @@ extension AttendanceViewController {
     
     // 유저별 오늘 플랜 불러오기
     private func getUserTodayPlan() {
+        showIndicator()
         let headers: HTTPHeaders = [
             "memberId": "2",
         ]
@@ -118,19 +128,25 @@ extension AttendanceViewController {
                     self.userTodayPlans = json
                     DispatchQueue.main.async {
                         self.configurePlanView()
+                        self.indicatorView.stopAnimating()
                     }
                 } catch(let err) {
                     print(err.localizedDescription)
+                    DispatchQueue.main.async {
+                        self.indicatorView.stopAnimating()
+                    }
                 }
                 // 실패
             case .failure(let err):
                 print(err.localizedDescription)
+                DispatchQueue.main.async {
+                    self.indicatorView.stopAnimating()
+                }
             }
         }
     }
     
     private func postQRAuth() {
-        
         let splitZoneID = getSplitZoneID(url: authURL)
         let planID = userPlanID
         print("postQRAuth() called - splitZoneID: \(splitZoneID)")

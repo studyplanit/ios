@@ -16,6 +16,7 @@ class CalendarViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var backgoroundView: UIView!
     
+    private let indicatorView = UIActivityIndicatorView()
     let userID = UserDefaults.standard.string(forKey: "id")
     var userPlans: [UserTotalPlan] = []
     var userDailyPlan: [UserTotalPlan] = []
@@ -25,7 +26,6 @@ class CalendarViewController: UIViewController {
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter
     }()
-    var selectDate: Date?
     
     // MARK:- View Life Cycle
     override func viewDidLoad() {
@@ -37,17 +37,17 @@ class CalendarViewController: UIViewController {
         print("유저아이디 : \(userID!)")
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        getUserPlan()
-        deselectDate()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        getUserPlan()
+        setSelectDate()
         print("viewWillApear - 유저플랜 갯수 : \(userPlans.count)")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
     }
 
 }
@@ -88,12 +88,21 @@ extension CalendarViewController {
             forCellReuseIdentifier: "calendarTableViewCell")
     }
     
+    func showIndicator() {
+        view.addSubview(indicatorView)
+        indicatorView.translatesAutoresizingMaskIntoConstraints = false
+        indicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        indicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        indicatorView.startAnimating()
+    }
+    
 }
 
 // MARK:- API
 extension CalendarViewController {
     
     private func getUserPlan() {
+        showIndicator()
         let headers: HTTPHeaders = [
             "memberId": "2",
         ]
@@ -111,19 +120,27 @@ extension CalendarViewController {
                         self.calendar.reloadData()
                         self.setUserDailyPlan(date: Date())
                         self.tableView.reloadData()
+                        self.indicatorView.stopAnimating()
                         print("유저플랜 갯수 : \(self.userPlans.count)")
                     }
                 } catch(let err) {
                     print(err.localizedDescription)
+                    DispatchQueue.main.async {
+                        self.indicatorView.stopAnimating()
+                    }
                 }
                 // 실패
             case .failure(let err):
                 print(err.localizedDescription)
+                DispatchQueue.main.async {
+                    self.indicatorView.stopAnimating()
+                }
             }
         }
     }
     
     private func deleteUserPlan(planID: Int) {
+        showIndicator()
         let headers: HTTPHeaders = [
             "plan_log_id": "\(planID)"
         ]
@@ -132,9 +149,15 @@ extension CalendarViewController {
                 // 성공
             case .success(let res):
                 print("성공: \(res)")
+                DispatchQueue.main.async {
+                    self.indicatorView.stopAnimating()
+                }
                 // 실패
             case .failure(let err):
                 print("실패: \(err.localizedDescription)")
+                DispatchQueue.main.async {
+                    self.indicatorView.stopAnimating()
+                }
             }
         }
     }
@@ -221,10 +244,9 @@ extension CalendarViewController {
         print(planDates)
     }
     
-    // 화면 나갔다오면 선택된 날짜 표시 해제하기
-    func deselectDate() {
-        guard let date = selectDate else { return }
-        calendar.deselect(date)
+    // 화면 나갔다오거나 삭제 이후에 선택된 날짜 표시 해제하고 오늘날짜로 선택하기
+    func setSelectDate() {
+        calendar.select(Date())
     }
     
 }
@@ -264,7 +286,7 @@ extension CalendarViewController {
             self.getUserPlan()
             self.tableView.reloadData()
             self.calendar.reloadData()
-            self.calendar.select(Date())
+            self.setSelectDate()
         }
         alert.addAction(okAction)
         present(alert, animated: true, completion: nil)
@@ -299,7 +321,7 @@ extension CalendarViewController: FSCalendarDelegate {
         print(dateFormatter.string(from: date))
         setUserDailyPlan(date: date)
         tableView.reloadData()
-        selectDate = date
+//        selectDate = date
     }
     
 }
@@ -375,7 +397,6 @@ extension CalendarViewController: UITableViewDataSource {
             guard let planLogID = tableView.cellForRow(at: indexPath)?.tag else { return }
             print("셀 삭제 플랜로그아이디 : \(planLogID)")
             deletePlanAlert(planID: planLogID)
-            deselectDate()
         }
     }
     
