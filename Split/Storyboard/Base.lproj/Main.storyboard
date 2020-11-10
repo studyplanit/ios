@@ -1038,7 +1038,7 @@
         <image name="logo_purple" width="596.66668701171875" height="233.33332824707031"/>
         <image name="map_bookmark" width="12" height="13.333333015441895"/>
         <image name="map_call" width="16" height="16"/>
-        <image name="map_star" width="17.333333969116211" height="16.666666030883789"/>
+        <image name="map_star" width="23" height="22.666666030883789"/>
         <image name="nav_map" width="28.666666030883789" height="30"/>
         <image name="nav_qr" width="28.333333969116211" height="27.666666030883789"/>
         <image name="sun.min.fill" catalog="system" width="128" height="121"/>

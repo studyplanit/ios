@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Maplestory OTF Bold", size: 10) as Any], for: .normal)
         UITabBar.appearance().unselectedItemTintColor = . white
         UITabBar.appearance().tintColor = Common().tapPurple
+        
         return true
     }
 
