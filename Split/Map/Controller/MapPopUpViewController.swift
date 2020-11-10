@@ -55,7 +55,6 @@ class MapPopUpViewController: UIViewController {
     
     //MARK: 이미지 뷰어 화면 끄기
     @objc func tapCancelImageView(_ tap: UITapGestureRecognizer) {
-        print("aa")
         self.dismiss(animated: false, completion: nil)
     }
 }
