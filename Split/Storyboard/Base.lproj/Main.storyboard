@@ -198,35 +198,35 @@
                                                                 <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="4" right="0.0"/>
                                                             </stackView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="인천광역시 미추홀구 용현동 187-13" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r4a-DJ-OnH">
-                                                                <rect key="frame" x="0.0" y="34" width="254" height="15.666666666666664"/>
+                                                                <rect key="frame" x="0.0" y="34" width="254" height="16.333333333333329"/>
                                                                 <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="14"/>
                                                                 <color key="textColor" red="0.69803921568627447" green="0.69803921568627447" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rro-a1-C6m">
-                                                                <rect key="frame" x="0.0" y="54.666666666666629" width="254" height="20"/>
+                                                                <rect key="frame" x="0.0" y="55.333333333333371" width="254" height="20"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11:00 ~ 21:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vWj-PU-zfF">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="87.666666666666671" height="15.666666666666666"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="86.333333333333329" height="16.333333333333332"/>
                                                                         <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="14"/>
                                                                         <color key="textColor" name="Color_Event"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="일 11:00 ~ 21:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N52-Xq-adY">
-                                                                        <rect key="frame" x="92.666666666666686" y="1" width="89" height="13.333333333333334"/>
+                                                                        <rect key="frame" x="91.333333333333314" y="1" width="87.666666666666686" height="14"/>
                                                                         <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="12"/>
                                                                         <color key="textColor" red="0.69803921568627447" green="0.69803921568627447" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map_marker_gray" translatesAutoresizingMaskIntoConstraints="NO" id="9Lw-0V-DoI">
-                                                                        <rect key="frame" x="189.66666666666666" y="0.0" width="15" height="15"/>
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map_holiday" translatesAutoresizingMaskIntoConstraints="NO" id="9Lw-0V-DoI">
+                                                                        <rect key="frame" x="187" y="0.0" width="15" height="15"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="15" id="0b4-Cv-LMF"/>
                                                                             <constraint firstAttribute="width" secondItem="9Lw-0V-DoI" secondAttribute="height" multiplier="1:1" id="yXp-d0-DaS"/>
                                                                         </constraints>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="월요일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3o4-ER-H7y">
-                                                                        <rect key="frame" x="207.66666666666666" y="0.0" width="36.666666666666657" height="15.666666666666666"/>
+                                                                        <rect key="frame" x="205" y="0.0" width="36.333333333333343" height="16.333333333333332"/>
                                                                         <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="14"/>
                                                                         <color key="textColor" red="0.69803921568627447" green="0.69803921568627447" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
@@ -246,7 +246,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yVy-41-4Q1">
-                                                                <rect key="frame" x="0.0" y="79.666666666666629" width="254" height="52.333333333333343"/>
+                                                                <rect key="frame" x="0.0" y="80.333333333333371" width="254" height="51.666666666666657"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8em-FO-Lx0">
                                                                         <rect key="frame" x="-10" y="5" width="150" height="40"/>
@@ -1079,8 +1079,8 @@
         <image name="home_bg" width="278.33334350585938" height="603.66668701171875"/>
         <image name="logo_purple" width="596.66668701171875" height="233.33332824707031"/>
         <image name="map_bookmark" width="36.666667938232422" height="41.333332061767578"/>
-        <image name="map_call" width="16" height="16"/>
-        <image name="map_marker_gray" width="30.333333969116211" height="35"/>
+        <image name="map_call" width="33.333332061767578" height="33.333332061767578"/>
+        <image name="map_holiday" width="16.666666030883789" height="16.666666030883789"/>
         <image name="map_star" width="23" height="22.666666030883789"/>
         <image name="nav_map" width="28.666666030883789" height="30"/>
         <image name="nav_qr" width="28.333333969116211" height="27.666666030883789"/>
