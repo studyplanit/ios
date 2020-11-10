@@ -19,7 +19,7 @@ class ChallengeViewController: UIViewController {
         return formatter
     }()
     
-    var userPlans: [UserPlan] = []
+    var userPlans: [UserTotalPlan] = []
     
     // MARK:- View Life Cycle
     override func viewDidLoad() {
@@ -75,13 +75,13 @@ extension ChallengeViewController {
         let headers: HTTPHeaders = [
             "memberId": "2",
         ]
-        AF.request(CalendarAPIConstant.userPlanURL, headers: headers).responseJSON { (response) in
+        AF.request(CalendarAPIConstant.userTotalPlanURL, headers: headers).responseJSON { (response) in
             switch response.result {
                 // 성공
             case .success(let res):
                 do {
                     let jsonData = try JSONSerialization.data(withJSONObject: res, options: .prettyPrinted)
-                    let json = try JSONDecoder().decode([UserPlan].self, from: jsonData)
+                    let json = try JSONDecoder().decode([UserTotalPlan].self, from: jsonData)
                     
                     self.userPlans = json
                     DispatchQueue.main.async {
@@ -206,7 +206,7 @@ extension ChallengeViewController: UITableViewDelegate {
         let screenWidth = UIScreen.main.bounds.size.width
         switch indexPath.section {
         case 0:
-            return screenWidth * 1/4
+            return screenWidth * 165/750
         case 1:
             return UITableView.automaticDimension
         default:
@@ -220,18 +220,14 @@ extension ChallengeViewController: UITableViewDelegate {
             return
         case 1:
             switch indexPath.row {
-            case 0, 1:
-                if userPlans.count < 3 {
-                    guard let subscriptionViewController = storyboard?.instantiateViewController(withIdentifier: "subscriptionViewController") as? SubscriptionViewController else {
-                        return
-                    }
-                    subscriptionViewController.plan = plans[indexPath.row]
-                    navigationController?.pushViewController(subscriptionViewController, animated: true)
-                } else {
-                    return prohibitMorePlanAlert()
+            case 0, 1, 2, 3:
+                guard let subscriptionViewController = storyboard?.instantiateViewController(withIdentifier: "subscriptionViewController") as? SubscriptionViewController else {
+                    return
                 }
-            case 2, 3:
-                return prohibitAlert()
+                subscriptionViewController.plan = plans[indexPath.row]
+                navigationController?.pushViewController(subscriptionViewController, animated: true)
+//            case 2, 3:
+//                return prohibitAlert()
             default:
                 return
             }

@@ -8,7 +8,6 @@
 import Foundation
 
 struct PlanAPIConstant {
-    // 전역 변수로 사용할 수 있게 APIConstants 선언하여 사용
     static let baseURL = "http://211.222.234.14:8898"
 
     /* 플랜 리스트 */
@@ -17,8 +16,11 @@ struct PlanAPIConstant {
     /* 플랜 등록 */
     static let planInsertURL = baseURL + "/plan/insert.do"
     
-    /* 회원별 플랜 */
-    static let userPlanURL = baseURL + "/member/getMy.do"
+    /* 유저별 전체 플랜 */
+    static let userTotalPlanURL = baseURL + "/member/getMy.do"
+    
+    /* 유저별 오늘 플랜 */
+    static let userTodayPlanURL = baseURL + "/member/getMy.group"
     
     /* 회원별 플랜 삭제 */
     static let userPlanDeleteURL = baseURL + "/plan/delete.do"
@@ -28,6 +30,4 @@ struct PlanAPIConstant {
     
     /* 스플릿존 정보 */
     static let splitZoneInfoURL = baseURL + "/split/get/detail"
-    
-    
 }
