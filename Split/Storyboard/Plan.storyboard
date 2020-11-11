@@ -73,11 +73,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tvx-gs-qTg" customClass="FSCalendar">
                                 <rect key="frame" x="0.0" y="44" width="414" height="537.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="titleWeekendColor">
-                                        <color key="value" systemColor="systemRedColor"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="57I-ww-MdZ">
                                 <rect key="frame" x="78.5" y="591.5" width="257" height="89.5"/>
@@ -132,7 +127,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5yd-HQ-yFW">
-                                <rect key="frame" x="62" y="701" width="290" height="40"/>
+                                <rect key="frame" x="124" y="701" width="166" height="40"/>
                                 <color key="backgroundColor" red="0.2156862745" green="0.2784313725" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="xUl-if-F1U"/>
@@ -147,9 +142,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="dzP-q7-hJD" firstAttribute="top" secondItem="5yd-HQ-yFW" secondAttribute="bottom" constant="40" id="1SA-ZP-KEh"/>
-                            <constraint firstItem="5yd-HQ-yFW" firstAttribute="width" secondItem="sUa-37-qGW" secondAttribute="width" multiplier="0.7" id="2np-Il-SQU"/>
+                            <constraint firstItem="5yd-HQ-yFW" firstAttribute="width" secondItem="sUa-37-qGW" secondAttribute="width" multiplier="0.4" id="2np-Il-SQU"/>
                             <constraint firstItem="Tvx-gs-qTg" firstAttribute="height" secondItem="sUa-37-qGW" secondAttribute="height" multiplier="0.6" id="46D-6C-L1L"/>
-                            <constraint firstItem="dzP-q7-hJD" firstAttribute="width" secondItem="5yd-HQ-yFW" secondAttribute="width" id="9zi-Uq-0SY"/>
+                            <constraint firstItem="dzP-q7-hJD" firstAttribute="width" secondItem="sUa-37-qGW" secondAttribute="width" multiplier="0.7" id="9zi-Uq-0SY"/>
                             <constraint firstItem="HWX-nV-9qi" firstAttribute="width" secondItem="sUa-37-qGW" secondAttribute="width" multiplier="0.4" id="BtO-Ap-nfJ"/>
                             <constraint firstItem="HWX-nV-9qi" firstAttribute="height" secondItem="sUa-37-qGW" secondAttribute="height" multiplier="0.1" id="PIx-6Q-Rae"/>
                             <constraint firstItem="57I-ww-MdZ" firstAttribute="centerX" secondItem="sUa-37-qGW" secondAttribute="centerX" id="PYH-TW-wsc"/>
@@ -245,9 +240,6 @@
         </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

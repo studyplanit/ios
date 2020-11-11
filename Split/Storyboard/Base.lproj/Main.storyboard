@@ -1081,7 +1081,7 @@
         <image name="map_bookmark" width="36.666667938232422" height="41.333332061767578"/>
         <image name="map_call" width="33.333332061767578" height="33.333332061767578"/>
         <image name="map_holiday" width="16.666666030883789" height="16.666666030883789"/>
-        <image name="map_star" width="23" height="22.666666030883789"/>
+        <image name="map_star" width="33.333332061767578" height="32"/>
         <image name="nav_map" width="28.666666030883789" height="30"/>
         <image name="nav_qr" width="28.333333969116211" height="27.666666030883789"/>
         <image name="sun.min.fill" catalog="system" width="128" height="121"/>

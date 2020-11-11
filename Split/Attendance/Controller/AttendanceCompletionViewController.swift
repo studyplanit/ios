@@ -64,7 +64,6 @@ extension AttendanceCompletionViewController {
         completionButton.layer.cornerRadius = 0.5 * completionButton.bounds.size.height
         // 그림자
         configureShadowUI(planView)
-        configureShadowUI(sayingLabelView)
         configureShadowUI(completionButton)
     }
     
@@ -81,7 +80,7 @@ extension AttendanceCompletionViewController {
     func configureSplitZoneView() {
         print("configureSplitZoneInfoView() called - splitZoneName:\(splitZoneName), splitZoneCode:\(splitZoneCode)")
         splitZoneNameLabel.text = splitZoneName
-        splitZoneCodeLabel.text = splitZoneCode
+        splitZoneCodeLabel.text = "(행성\(splitZoneCode))"
     }
     
     func configurePlanView() {

@@ -89,8 +89,8 @@ extension SubscriptionViewController {
         calendar.appearance.weekdayTextColor = .black
         calendar.appearance.todayColor = #colorLiteral(red: 0.2156862745, green: 0.2784313725, blue: 0.3098039216, alpha: 1).withAlphaComponent(0.7)
         calendar.appearance.selectionColor = checkPlanColor(type: Int(selectedPlan.need)).withAlphaComponent(0.6)
-        calendar.calendarWeekdayView.weekdayLabels[0].textColor = .red // 일요일
-        calendar.calendarWeekdayView.weekdayLabels[6].textColor = .red // 토요일
+//        calendar.calendarWeekdayView.weekdayLabels[0].textColor = .red // 일요일
+//        calendar.calendarWeekdayView.weekdayLabels[6].textColor = .red // 토요일
         
     }
     
@@ -109,8 +109,9 @@ extension SubscriptionViewController {
     
     private func getUserPlan() {
         showIndicator()
+        guard let userID = userID else { return }
         let headers: HTTPHeaders = [
-            "memberId": "2",
+            "memberId": String(userID),
         ]
         AF.request(CalendarAPIConstant.userTotalPlanURL, headers: headers).responseJSON { (response) in
             switch response.result {
@@ -149,8 +150,9 @@ extension SubscriptionViewController {
                           endDate: String,
                           setTime: String) {
         showIndicator()
+        guard let userID = userID else { return }
         let headers: HTTPHeaders = [
-            "member_id": "2",
+            "member_id": String(userID),
             "plan_id": planID,
             "startDate": startDate,
             "endDate": endDate,

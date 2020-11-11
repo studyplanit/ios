@@ -44,9 +44,9 @@ class AttendanceViewController: UIViewController {
     lazy var readerVC: QRCodeReaderViewController = {
         let builder = QRCodeReaderViewControllerBuilder {
             $0.reader = QRCodeReader(metadataObjectTypes: [.qr], captureDevicePosition: .back)
-            $0.showTorchButton        = false
+            $0.showTorchButton        = true
             $0.showSwitchCameraButton = false
-            $0.showCancelButton       = false
+            $0.showCancelButton       = true
             $0.showOverlayView        = true
             $0.rectOfInterest         = CGRect(x: 0.2, y: 0.2, width: 0.6, height: 0.6)
         }
@@ -172,8 +172,9 @@ extension AttendanceViewController {
     // 유저별 오늘 플랜 불러오기
     private func getUserTodayPlan() {
         showIndicator()
+        guard let userID = userID else { return }
         let headers: HTTPHeaders = [
-            "memberId": "2",
+            "memberId": String(userID),
         ]
         AF.request(CalendarAPIConstant.userTodayPlanURL, headers: headers).responseJSON { (response) in
             switch response.result {
