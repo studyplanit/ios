@@ -11,6 +11,9 @@
         <array key="KoPubDotumBold.ttf">
             <string>KoPubDotumBold</string>
         </array>
+        <array key="KoPubDotumMedium.ttf">
+            <string>KoPubDotumMedium</string>
+        </array>
     </customFonts>
     <scenes>
         <!--Plan View Controller-->
@@ -70,11 +73,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tvx-gs-qTg" customClass="FSCalendar">
                                 <rect key="frame" x="0.0" y="44" width="414" height="537.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="titleWeekendColor">
-                                        <color key="value" systemColor="systemRedColor"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="57I-ww-MdZ">
                                 <rect key="frame" x="78.5" y="591.5" width="257" height="89.5"/>
@@ -107,58 +105,66 @@
                                 </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dzP-q7-hJD">
-                                <rect key="frame" x="176.5" y="789" width="61.5" height="38"/>
+                                <rect key="frame" x="62" y="781" width="290" height="40"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b9i-m2-Bsr">
-                                        <rect key="frame" x="10" y="9.5" width="41" height="19"/>
-                                        <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b9i-m2-Bsr">
+                                        <rect key="frame" x="121" y="9" width="48" height="22"/>
+                                        <fontDescription key="fontDescription" name="KoPubDotumMedium" family="KoPubDotum Medium" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="b9i-m2-Bsr" secondAttribute="width" multiplier="1.5" id="0eN-PM-pzW"/>
-                                    <constraint firstItem="b9i-m2-Bsr" firstAttribute="centerX" secondItem="dzP-q7-hJD" secondAttribute="centerX" id="I9K-hz-quN"/>
-                                    <constraint firstAttribute="height" secondItem="b9i-m2-Bsr" secondAttribute="height" multiplier="2" id="Oj8-Yp-gei"/>
-                                    <constraint firstItem="b9i-m2-Bsr" firstAttribute="centerY" secondItem="dzP-q7-hJD" secondAttribute="centerY" id="Xb3-IJ-KTK"/>
+                                    <constraint firstItem="b9i-m2-Bsr" firstAttribute="centerX" secondItem="dzP-q7-hJD" secondAttribute="centerX" id="Rxs-wz-d8f"/>
+                                    <constraint firstItem="b9i-m2-Bsr" firstAttribute="centerY" secondItem="dzP-q7-hJD" secondAttribute="centerY" id="T0c-c0-ba4"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="시간과 날짜를 선택해주세요." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v69-ZX-OCq">
                                 <rect key="frame" x="110.5" y="711" width="193" height="19"/>
-                                <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="KoPubDotumMedium" family="KoPubDotum Medium" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="플랜은 하루 최대 3개까지만 신청 가능합니다." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Efl-0u-Rjn">
-                                <rect key="frame" x="54" y="750" width="306.5" height="19"/>
-                                <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5yd-HQ-yFW">
+                                <rect key="frame" x="124" y="701" width="166" height="40"/>
+                                <color key="backgroundColor" red="0.2156862745" green="0.2784313725" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="xUl-if-F1U"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="KoPubDotumMedium" family="KoPubDotum Medium" pointSize="17"/>
+                                <state key="normal" title="완료">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="KC1-4a-GoX"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="dzP-q7-hJD" firstAttribute="top" secondItem="5yd-HQ-yFW" secondAttribute="bottom" constant="40" id="1SA-ZP-KEh"/>
+                            <constraint firstItem="5yd-HQ-yFW" firstAttribute="width" secondItem="sUa-37-qGW" secondAttribute="width" multiplier="0.4" id="2np-Il-SQU"/>
                             <constraint firstItem="Tvx-gs-qTg" firstAttribute="height" secondItem="sUa-37-qGW" secondAttribute="height" multiplier="0.6" id="46D-6C-L1L"/>
-                            <constraint firstItem="v69-ZX-OCq" firstAttribute="top" secondItem="57I-ww-MdZ" secondAttribute="bottom" constant="30" id="6N3-M0-Tzz"/>
+                            <constraint firstItem="dzP-q7-hJD" firstAttribute="width" secondItem="sUa-37-qGW" secondAttribute="width" multiplier="0.7" id="9zi-Uq-0SY"/>
                             <constraint firstItem="HWX-nV-9qi" firstAttribute="width" secondItem="sUa-37-qGW" secondAttribute="width" multiplier="0.4" id="BtO-Ap-nfJ"/>
                             <constraint firstItem="HWX-nV-9qi" firstAttribute="height" secondItem="sUa-37-qGW" secondAttribute="height" multiplier="0.1" id="PIx-6Q-Rae"/>
                             <constraint firstItem="57I-ww-MdZ" firstAttribute="centerX" secondItem="sUa-37-qGW" secondAttribute="centerX" id="PYH-TW-wsc"/>
-                            <constraint firstItem="Efl-0u-Rjn" firstAttribute="top" secondItem="v69-ZX-OCq" secondAttribute="bottom" constant="20" id="QWv-Ee-xUL"/>
                             <constraint firstItem="Tvx-gs-qTg" firstAttribute="top" secondItem="KC1-4a-GoX" secondAttribute="top" id="Tkc-dP-SSd"/>
-                            <constraint firstItem="dzP-q7-hJD" firstAttribute="top" secondItem="Efl-0u-Rjn" secondAttribute="bottom" constant="20" id="W77-NK-fG6"/>
                             <constraint firstItem="6mN-aO-fm2" firstAttribute="width" secondItem="HWX-nV-9qi" secondAttribute="width" multiplier="0.1" id="cFb-df-xPv"/>
                             <constraint firstItem="Tvx-gs-qTg" firstAttribute="leading" secondItem="KC1-4a-GoX" secondAttribute="leading" id="cFy-Np-OBg"/>
+                            <constraint firstItem="5yd-HQ-yFW" firstAttribute="centerX" secondItem="sUa-37-qGW" secondAttribute="centerX" id="eDo-v6-gw0"/>
                             <constraint firstItem="57I-ww-MdZ" firstAttribute="top" secondItem="Tvx-gs-qTg" secondAttribute="bottom" constant="10" id="fCP-uL-Zx7"/>
-                            <constraint firstItem="v69-ZX-OCq" firstAttribute="centerX" secondItem="sUa-37-qGW" secondAttribute="centerX" id="nuz-40-OAR"/>
-                            <constraint firstItem="Efl-0u-Rjn" firstAttribute="centerX" secondItem="sUa-37-qGW" secondAttribute="centerX" id="q7d-4k-GCK"/>
-                            <constraint firstItem="dzP-q7-hJD" firstAttribute="centerX" secondItem="sUa-37-qGW" secondAttribute="centerX" id="yF8-jp-F06"/>
+                            <constraint firstItem="v69-ZX-OCq" firstAttribute="top" secondItem="57I-ww-MdZ" secondAttribute="bottom" constant="30" id="gYD-aT-pGN"/>
+                            <constraint firstItem="dzP-q7-hJD" firstAttribute="height" secondItem="5yd-HQ-yFW" secondAttribute="height" id="hgz-qN-fNA"/>
+                            <constraint firstItem="5yd-HQ-yFW" firstAttribute="top" secondItem="57I-ww-MdZ" secondAttribute="bottom" constant="20" id="kwT-9s-JTH"/>
+                            <constraint firstItem="v69-ZX-OCq" firstAttribute="centerX" secondItem="sUa-37-qGW" secondAttribute="centerX" id="rB7-hp-bri"/>
+                            <constraint firstItem="dzP-q7-hJD" firstAttribute="centerX" secondItem="sUa-37-qGW" secondAttribute="centerX" id="rw3-sx-ZCJ"/>
                             <constraint firstItem="Tvx-gs-qTg" firstAttribute="trailing" secondItem="KC1-4a-GoX" secondAttribute="trailing" id="zwr-gy-TQD"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="calendar" destination="Tvx-gs-qTg" id="HTz-l0-uVi"/>
+                        <outlet property="completionButton" destination="5yd-HQ-yFW" id="zct-k2-pDi"/>
+                        <outlet property="contentLabel" destination="v69-ZX-OCq" id="l2J-t8-Ybs"/>
                         <outlet property="planTitleLabel" destination="b9i-m2-Bsr" id="eKX-Al-Ml4"/>
                         <outlet property="planTitleView" destination="dzP-q7-hJD" id="buk-gI-luQ"/>
                         <outlet property="timePicker" destination="HWX-nV-9qi" id="iYd-Ad-2TD"/>
@@ -207,8 +213,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="재미있는 이벤트 플랜을 준비 중입니다." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zfp-3U-kOx">
-                                <rect key="frame" x="56.5" y="436" width="301.5" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <rect key="frame" x="76" y="438.5" width="262.5" height="19"/>
+                                <fontDescription key="fontDescription" name="KoPubDotumMedium" family="KoPubDotum Medium" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -234,9 +240,6 @@
         </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -16,6 +16,10 @@ class AttendanceViewController: UIViewController {
     @IBOutlet var planViews: [UIView]!
     @IBOutlet var planNameLabels: [UILabel]!
     @IBOutlet var planTimeLabels: [UILabel]!
+    @IBOutlet var planPeriodLabels: [UILabel]!
+    @IBOutlet var planAuthCountViews: [UIView]!
+    @IBOutlet var planAuthCountLabel: [UILabel]!
+    @IBOutlet var planNeedPercentLabel: [UILabel]!
     
     private let indicatorView = UIActivityIndicatorView()
     let userID = UserDefaults.standard.string(forKey: "id")
@@ -23,14 +27,26 @@ class AttendanceViewController: UIViewController {
     var userPlan: UserTodayPlan?
     var userPlanID = 0
     var authURL = ""
+    let timeFormatter: DateFormatter = {
+        let formatter: DateFormatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.dateFormat = "HH:mm"
+        return formatter
+    }()
+    let dateFormatter: DateFormatter = {
+        let formatter: DateFormatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.dateFormat = "yy.MM.dd"
+        return formatter
+    }()
     
     // MARK:- Properties
     lazy var readerVC: QRCodeReaderViewController = {
         let builder = QRCodeReaderViewControllerBuilder {
             $0.reader = QRCodeReader(metadataObjectTypes: [.qr], captureDevicePosition: .back)
-            $0.showTorchButton        = false
+            $0.showTorchButton        = true
             $0.showSwitchCameraButton = false
-            $0.showCancelButton       = false
+            $0.showCancelButton       = true
             $0.showOverlayView        = true
             $0.rectOfInterest         = CGRect(x: 0.2, y: 0.2, width: 0.6, height: 0.6)
         }
@@ -43,6 +59,7 @@ class AttendanceViewController: UIViewController {
         
         configureTapBar()
         configureUI()
+        resetPlanView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -68,6 +85,7 @@ extension AttendanceViewController {
             planViews[i].layer.shadowOffset = CGSize(width: 0, height: 10)
             planViews[i].layer.shadowRadius = 10
             planViews[i].layer.shadowOpacity = 0.5
+            planAuthCountViews[i].layer.cornerRadius = 0.5 * planAuthCountViews[i].bounds.size.height
         }
     }
     
@@ -79,7 +97,22 @@ extension AttendanceViewController {
             planViews[i].backgroundColor = UIColor(named: checkPlanColor(type: userTodayPlans[i].needAuthNum))
             planNameLabels[i].text = userTodayPlans[i].planName
             planTimeLabels[i].text = userTodayPlans[i].setTime
+            // 기간
+            guard let startDate = dateFormatter.date(from: userTodayPlans[i].startDate) else { return }
+            guard let endDate = dateFormatter.date(from: userTodayPlans[i].endDate) else { return }
+            let startDateString = dateFormatter.string(from: startDate)
+            let endDateString = dateFormatter.string(from: endDate)
+            planPeriodLabels[i].text = "\(startDateString) ~ \(endDateString)"
+            // 인증횟수
+            planAuthCountViews[i].isHidden = false
+            let needAuthNumber = userTodayPlans[i].needAuthNum
+            let nowAuthNumber = userTodayPlans[i].nowAuthNum
+            let resultNumber = Double(nowAuthNumber) / Double(needAuthNumber) * 100
+            planAuthCountLabel[i].text = "인증 \(userTodayPlans[i].nowAuthNum)회 (\(resultNumber)%)"
+            // 퍼센트
+            planNeedPercentLabel[i].text = checkPercent(need: userTodayPlans[i].needAuthNum)
             configureTapGesture(index: i)
+//            checAndDisalbePlanView(index: i)
         }
     }
     
@@ -89,6 +122,10 @@ extension AttendanceViewController {
             planNameLabels[i].text = ""
             planTimeLabels[i].text = ""
             planViews[i].isUserInteractionEnabled = false
+            planPeriodLabels[i].text = ""
+            planAuthCountViews[i].isHidden = true
+            planAuthCountLabel[i].text = ""
+            planNeedPercentLabel[i].text = ""
         }
     }
     
@@ -107,6 +144,26 @@ extension AttendanceViewController {
         indicatorView.startAnimating()
     }
     
+    // 시간차를 구해서 뷰 상태 활성화 결정해주기
+//    func checAndDisalbePlanView(index: Int) {
+//        let calendar = Calendar.current
+//        let now = calendar.dateComponents([.year, .month, .day], from: Date())
+//        guard let time = timeFormatter.date(from: userTodayPlans[index].setTime) else { return }
+//        var date = calendar.dateComponents([.year, .month, .day], from: time)
+//        date.year = now.year
+//        date.month = now.month
+//        date.day = now.day! + 1
+//        let planDate = calendar.date(from: date)
+//        print("checAndDisalbePlanView() called - 나우: \(now.hour)")
+//        print("checAndDisalbePlanView() called - 데이트: \(date)")
+//        print("checAndDisalbePlanView() called - 타임: \(time)")
+//        print("checAndDisalbePlanView() called - 데이트: \(planDate)")
+//        if time.timeIntervalSince(Date()) > 60 * 60 * 2 {
+//            planViews[index].isUserInteractionEnabled = false
+//            planViews[index].alpha = 0.2
+//        }
+//    }
+    
 }
 
 // MARK:- API
@@ -115,8 +172,9 @@ extension AttendanceViewController {
     // 유저별 오늘 플랜 불러오기
     private func getUserTodayPlan() {
         showIndicator()
+        guard let userID = userID else { return }
         let headers: HTTPHeaders = [
-            "memberId": "2",
+            "memberId": String(userID),
         ]
         AF.request(CalendarAPIConstant.userTodayPlanURL, headers: headers).responseJSON { (response) in
             switch response.result {
@@ -269,6 +327,17 @@ extension AttendanceViewController {
         attendanceFailureViewController.errorString = error
         print("setAPIFailureView() called - ")
         self.navigationController?.pushViewController(attendanceFailureViewController, animated: true)
+    }
+    
+    func checkPercent(need: Int) -> String {
+        switch need {
+        case 1:
+            return "100%"
+        case 7, 15, 30:
+            return "70%"
+        default:
+            return ""
+        }
     }
 
 }
