@@ -64,7 +64,6 @@ extension AttendanceCompletionViewController {
         completionButton.layer.cornerRadius = 0.5 * completionButton.bounds.size.height
         // 그림자
         configureShadowUI(planView)
-        configureShadowUI(completionButton)
     }
     
     // 그림자 추가

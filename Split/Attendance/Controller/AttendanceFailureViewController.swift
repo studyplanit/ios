@@ -65,7 +65,6 @@ extension AttendanceFailureViewController {
         retryButton.layer.cornerRadius = 0.5 * retryButton.bounds.size.height
         // 그림자
         configureShadowUI(planView)
-        configureShadowUI(retryButton)
     }
     
     // 그림자 추가
