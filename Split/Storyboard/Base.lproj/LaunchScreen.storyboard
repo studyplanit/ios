@@ -11,6 +11,9 @@
         <array key="KoPubDotumBold.ttf">
             <string>KoPubDotumBold</string>
         </array>
+        <array key="Maplestory OTF Bold.otf">
+            <string>MaplestoryOTFBold</string>
+        </array>
     </customFonts>
     <scenes>
         <!--View Controller-->
@@ -21,31 +24,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="BK3-Ad-jNt">
-                                <rect key="frame" x="50" y="389.66666666666669" width="328" height="146.66666666666669"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_white" translatesAutoresizingMaskIntoConstraints="NO" id="dAX-If-On7">
-                                        <rect key="frame" x="0.0" y="0.0" width="328" height="131.33333333333334"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="dAX-If-On7" secondAttribute="height" multiplier="2:0.8" id="p49-xK-Nnf"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="매일 새벽 12시부터 1시까지는 서버점검 시간입니다" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H5R-GO-AtK">
-                                        <rect key="frame" x="0.0" y="131.33333333333331" width="328" height="15.333333333333343"/>
-                                        <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="13"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="매일 새벽 12시부터 1시까지는 서버점검 시간입니다" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H5R-GO-AtK">
+                                <rect key="frame" x="81.666666666666657" y="867.66666666666663" width="264.66666666666674" height="14.333333333333371"/>
+                                <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="13"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="study with" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fIq-Fn-9jl">
+                                <rect key="frame" x="140.66666666666666" y="372" width="146.99999999999997" height="37.333333333333314"/>
+                                <fontDescription key="fontDescription" name="MaplestoryOTFBold" family="Maplestory OTF" pointSize="32"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_white" translatesAutoresizingMaskIntoConstraints="NO" id="dAX-If-On7">
+                                <rect key="frame" x="80" y="409.33333333333331" width="268" height="107.33333333333331"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="dAX-If-On7" secondAttribute="height" multiplier="2:0.8" id="p49-xK-Nnf"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="Color_Event"/>
                         <constraints>
-                            <constraint firstItem="BK3-Ad-jNt" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Xt7-A1-9YN"/>
-                            <constraint firstItem="BK3-Ad-jNt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="bPe-10-Kh2"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="BK3-Ad-jNt" secondAttribute="trailing" constant="50" id="chb-qk-KCJ"/>
-                            <constraint firstItem="BK3-Ad-jNt" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="gEW-Vv-byP"/>
+                            <constraint firstItem="dAX-If-On7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="80" id="2FD-zE-3VG"/>
+                            <constraint firstItem="dAX-If-On7" firstAttribute="top" secondItem="fIq-Fn-9jl" secondAttribute="bottom" id="81a-Xw-kd3"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dAX-If-On7" secondAttribute="trailing" constant="80" id="BkJ-1x-LVd"/>
+                            <constraint firstItem="H5R-GO-AtK" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Fzz-dQ-3j1"/>
+                            <constraint firstItem="fIq-Fn-9jl" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Idd-pe-fCf"/>
+                            <constraint firstItem="fIq-Fn-9jl" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="J5L-UV-xbR"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="H5R-GO-AtK" secondAttribute="bottom" constant="10" id="Zep-0P-KSZ"/>
+                            <constraint firstItem="dAX-If-On7" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="kue-f6-I9p"/>
+                            <constraint firstItem="dAX-If-On7" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="uF5-lh-kWv"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -55,7 +64,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="logo_white" width="134" height="39"/>
+        <image name="logo_white" width="134.33332824707031" height="39.333332061767578"/>
         <namedColor name="Color_Event">
             <color red="0.33700001239776611" green="0.22400000691413879" blue="0.63899999856948853" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -26,7 +26,7 @@ class HomeViewController: UIViewController {
         navigationItem.titleView = image
         
         //오늘 다녀간 회원 반응형 텍스트
-        todaySplitLabel.font = Common().fontStyle(name: "GmarketSansMedium", size: 22)
+        todaySplitLabel.font = Common().fontStyle(name: "GmarketSansBold", size: 22)
         
         // main image tap gesture
         let imageViewTapGestureRecognizer = UITapGestureRecognizer()
@@ -50,7 +50,7 @@ class HomeViewController: UIViewController {
             if home.allUsersToday == 0 {
                 self.todaySplitLabel.text = "오늘의 첫번째\n출첵커가 되어보세요"
             } else {
-                self.todaySplitLabel.text = "오늘도 \(home.allUsersToday)명이\n함께 공부하고있어요"
+                self.todaySplitLabel.text = "오늘도 \(home.allUsersToday)명이\n함께 공부하고 있어요"
             }
         }
     }
@@ -62,4 +62,3 @@ class HomeViewController: UIViewController {
         navigationController?.pushViewController(attendanceViewController, animated: true)
     }
 }
-

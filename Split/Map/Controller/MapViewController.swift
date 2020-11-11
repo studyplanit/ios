@@ -82,6 +82,8 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
         splitMapView.showLocationButton = false
         splitMapView.showScaleBar = false
         splitMapView.showZoomControls = false
+        splitMapView.mapView.minZoomLevel = 7.0
+        splitMapView.mapView.maxZoomLevel = 18.0
         
         //사용자의 현재 위치(위도,경도) 불러오기
         locationManager = CLLocationManager()
@@ -161,8 +163,8 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
                             self.planetTotalVisitButton.setTitle("  누적방문자 \(map.allVisit)명  ", for: .normal)
                             self.planetNameLabel.attributedText = NSAttributedString(string: map.planetName, attributes: [NSAttributedString.Key.kern: -1])
                             self.planetAddressLabel.attributedText = NSAttributedString(string: map.address, attributes: [NSAttributedString.Key.kern: -1])
-                            self.planetTimeLabel.text = "\(map.startTime) ~ \(map.endTime)"
-                            self.planetNotifyLabel.text = map.notify
+                            self.planetTimeLabel.attributedText = NSAttributedString(string: "\(map.startTime) ~ \(map.endTime) ", attributes: [NSAttributedString.Key.kern: -1])
+                            self.planetNotifyLabel.attributedText = NSAttributedString(string: "\(map.notify) ", attributes: [NSAttributedString.Key.kern: -1])
                             if map.holiday != "없음" {
                                 self.planetHolidayLabel.text = map.holiday
                                 self.planetHolidayImageView.isHidden = false
