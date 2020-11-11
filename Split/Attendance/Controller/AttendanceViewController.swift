@@ -19,6 +19,7 @@ class AttendanceViewController: UIViewController {
     @IBOutlet var planPeriodLabels: [UILabel]!
     @IBOutlet var planAuthCountViews: [UIView]!
     @IBOutlet var planAuthCountLabel: [UILabel]!
+    @IBOutlet var planNeedPercentLabel: [UILabel]!
     
     private let indicatorView = UIActivityIndicatorView()
     let userID = UserDefaults.standard.string(forKey: "id")
@@ -96,16 +97,20 @@ extension AttendanceViewController {
             planViews[i].backgroundColor = UIColor(named: checkPlanColor(type: userTodayPlans[i].needAuthNum))
             planNameLabels[i].text = userTodayPlans[i].planName
             planTimeLabels[i].text = userTodayPlans[i].setTime
+            // 기간
             guard let startDate = dateFormatter.date(from: userTodayPlans[i].startDate) else { return }
             guard let endDate = dateFormatter.date(from: userTodayPlans[i].endDate) else { return }
             let startDateString = dateFormatter.string(from: startDate)
             let endDateString = dateFormatter.string(from: endDate)
             planPeriodLabels[i].text = "\(startDateString) ~ \(endDateString)"
+            // 인증횟수
             planAuthCountViews[i].isHidden = false
             let needAuthNumber = userTodayPlans[i].needAuthNum
             let nowAuthNumber = userTodayPlans[i].nowAuthNum
             let resultNumber = Double(nowAuthNumber) / Double(needAuthNumber) * 100
             planAuthCountLabel[i].text = "인증 \(userTodayPlans[i].nowAuthNum)회 (\(resultNumber)%)"
+            // 퍼센트
+            planNeedPercentLabel[i].text = checkPercent(need: userTodayPlans[i].needAuthNum)
             configureTapGesture(index: i)
 //            checAndDisalbePlanView(index: i)
         }
@@ -120,6 +125,7 @@ extension AttendanceViewController {
             planPeriodLabels[i].text = ""
             planAuthCountViews[i].isHidden = true
             planAuthCountLabel[i].text = ""
+            planNeedPercentLabel[i].text = ""
         }
     }
     
@@ -320,6 +326,17 @@ extension AttendanceViewController {
         attendanceFailureViewController.errorString = error
         print("setAPIFailureView() called - ")
         self.navigationController?.pushViewController(attendanceFailureViewController, animated: true)
+    }
+    
+    func checkPercent(need: Int) -> String {
+        switch need {
+        case 1:
+            return "100%"
+        case 7, 15, 30:
+            return "70%"
+        default:
+            return ""
+        }
     }
 
 }
