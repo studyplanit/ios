@@ -16,6 +16,9 @@ class AttendanceViewController: UIViewController {
     @IBOutlet var planViews: [UIView]!
     @IBOutlet var planNameLabels: [UILabel]!
     @IBOutlet var planTimeLabels: [UILabel]!
+    @IBOutlet var planPeriodLabels: [UILabel]!
+    @IBOutlet var planAuthCountViews: [UIView]!
+    @IBOutlet var planAuthCountLabel: [UILabel]!
     
     private let indicatorView = UIActivityIndicatorView()
     let userID = UserDefaults.standard.string(forKey: "id")
@@ -27,6 +30,12 @@ class AttendanceViewController: UIViewController {
         let formatter: DateFormatter = DateFormatter()
         formatter.dateStyle = .medium
         formatter.dateFormat = "HH:mm"
+        return formatter
+    }()
+    let dateFormatter: DateFormatter = {
+        let formatter: DateFormatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.dateFormat = "yy.MM.dd"
         return formatter
     }()
     
@@ -49,6 +58,7 @@ class AttendanceViewController: UIViewController {
         
         configureTapBar()
         configureUI()
+        resetPlanView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -74,6 +84,7 @@ extension AttendanceViewController {
             planViews[i].layer.shadowOffset = CGSize(width: 0, height: 10)
             planViews[i].layer.shadowRadius = 10
             planViews[i].layer.shadowOpacity = 0.5
+            planAuthCountViews[i].layer.cornerRadius = 0.5 * planAuthCountViews[i].bounds.size.height
         }
     }
     
@@ -85,6 +96,16 @@ extension AttendanceViewController {
             planViews[i].backgroundColor = UIColor(named: checkPlanColor(type: userTodayPlans[i].needAuthNum))
             planNameLabels[i].text = userTodayPlans[i].planName
             planTimeLabels[i].text = userTodayPlans[i].setTime
+            guard let startDate = dateFormatter.date(from: userTodayPlans[i].startDate) else { return }
+            guard let endDate = dateFormatter.date(from: userTodayPlans[i].endDate) else { return }
+            let startDateString = dateFormatter.string(from: startDate)
+            let endDateString = dateFormatter.string(from: endDate)
+            planPeriodLabels[i].text = "\(startDateString) ~ \(endDateString)"
+            planAuthCountViews[i].isHidden = false
+            let needAuthNumber = userTodayPlans[i].needAuthNum
+            let nowAuthNumber = userTodayPlans[i].nowAuthNum
+            let resultNumber = Double(nowAuthNumber) / Double(needAuthNumber) * 100
+            planAuthCountLabel[i].text = "인증 \(userTodayPlans[i].nowAuthNum)회 (\(resultNumber)%)"
             configureTapGesture(index: i)
 //            checAndDisalbePlanView(index: i)
         }
@@ -96,6 +117,9 @@ extension AttendanceViewController {
             planNameLabels[i].text = ""
             planTimeLabels[i].text = ""
             planViews[i].isUserInteractionEnabled = false
+            planPeriodLabels[i].text = ""
+            planAuthCountViews[i].isHidden = true
+            planAuthCountLabel[i].text = ""
         }
     }
     
@@ -122,7 +146,7 @@ extension AttendanceViewController {
 //        var date = calendar.dateComponents([.year, .month, .day], from: time)
 //        date.year = now.year
 //        date.month = now.month
-//        date.day = now.day
+//        date.day = now.day! + 1
 //        let planDate = calendar.date(from: date)
 //        print("checAndDisalbePlanView() called - 나우: \(now.hour)")
 //        print("checAndDisalbePlanView() called - 데이트: \(date)")
