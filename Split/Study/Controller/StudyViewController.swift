@@ -20,7 +20,7 @@ class StudyViewController: UIViewController {
 extension StudyViewController {
     
     func configureTapBar() {
-        navigationItem.title = "스터디"
+        navigationItem.title = "STUDY"
     }
     
 }

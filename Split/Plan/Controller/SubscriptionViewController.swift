@@ -16,6 +16,8 @@ class SubscriptionViewController: UIViewController {
     @IBOutlet weak var planTitleView: UIView!
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var timePicker: UIDatePicker!
+    @IBOutlet weak var contentLabel: UILabel!
+    @IBOutlet weak var completionButton: UIButton!
     
     private let indicatorView = UIActivityIndicatorView()
     var userPlans: [UserTotalPlan] = []
@@ -63,13 +65,18 @@ class SubscriptionViewController: UIViewController {
 extension SubscriptionViewController {
     
     func configureUI() {
-        planTitleLabel.text = plan?.name
+        guard let selectedPlan = plan else { return }
+        planTitleLabel.text = selectedPlan.name
         planTitleLabel.textColor = .white
-        planTitleView.backgroundColor = #colorLiteral(red: 0.8666666667, green: 0.6431372549, blue: 0.1647058824, alpha: 1)
+        planTitleView.backgroundColor = checkPlanColor(type: Int(selectedPlan.need))
         planTitleView.layer.cornerRadius = 0.5 * planTitleView.bounds.size.height
+        completionButton.layer.cornerRadius = 0.5 * completionButton.bounds.size.height
+        completionButton.addTarget(self, action: #selector(touchUpCompletionButton), for: .touchUpInside)
+        completionButton.isHidden = true
     }
     
     func configureCalendar() {
+        guard let selectedPlan = plan else { return }
         calendar.dataSource = self
         calendar.delegate = self
         calendar.allowsMultipleSelection = true
@@ -81,16 +88,14 @@ extension SubscriptionViewController {
         calendar.appearance.headerTitleFont = UIFont(name: "KoPubDotumBold", size: 20)
         calendar.appearance.weekdayTextColor = .black
         calendar.appearance.todayColor = #colorLiteral(red: 0.2156862745, green: 0.2784313725, blue: 0.3098039216, alpha: 1).withAlphaComponent(0.7)
-        calendar.appearance.selectionColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
-        calendar.calendarWeekdayView.weekdayLabels[0].textColor = .red // 일요일
-        calendar.calendarWeekdayView.weekdayLabels[6].textColor = .red // 토요일
+        calendar.appearance.selectionColor = checkPlanColor(type: Int(selectedPlan.need)).withAlphaComponent(0.6)
+//        calendar.calendarWeekdayView.weekdayLabels[0].textColor = .red // 일요일
+//        calendar.calendarWeekdayView.weekdayLabels[6].textColor = .red // 토요일
         
     }
     
     func configureNavigationBar() {
-        let button = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(checkDateFormAndShowAlert))
-        navigationItem.rightBarButtonItem = button
-        navigationItem.title = "플랜"
+        navigationItem.title = "PLAN"
     }
     
     func configureTimePicker() {
@@ -104,8 +109,9 @@ extension SubscriptionViewController {
     
     private func getUserPlan() {
         showIndicator()
+        guard let userID = userID else { return }
         let headers: HTTPHeaders = [
-            "memberId": "2",
+            "memberId": String(userID),
         ]
         AF.request(CalendarAPIConstant.userTotalPlanURL, headers: headers).responseJSON { (response) in
             switch response.result {
@@ -144,8 +150,9 @@ extension SubscriptionViewController {
                           endDate: String,
                           setTime: String) {
         showIndicator()
+        guard let userID = userID else { return }
         let headers: HTTPHeaders = [
-            "member_id": "2",
+            "member_id": String(userID),
             "plan_id": planID,
             "startDate": startDate,
             "endDate": endDate,
@@ -273,6 +280,23 @@ extension SubscriptionViewController {
         indicatorView.startAnimating()
     }
     
+    func enableCompletionButton() {
+        completionButton.isHidden = false
+        completionButton.isUserInteractionEnabled = true
+        contentLabel.alpha = 0
+    }
+    
+    func disableCompletionButton() {
+        completionButton.isHidden = true
+        completionButton.isUserInteractionEnabled = false
+        contentLabel.alpha = 1
+    }
+    
+    @objc func touchUpCompletionButton() {
+        print("touchUpCompletionButton() called")
+        ShowCorrectAlert()
+    }
+    
 }
 
 // MARK:- Alert
@@ -387,6 +411,7 @@ extension SubscriptionViewController: FSCalendarDelegate {
     
     // 특정 날짜 선택시 이벤트
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        enableCompletionButton()
         if calendar.selectedDates.count > 1 {
             for _ in 0 ..< calendar.selectedDates.count - 1 {
                 calendar.deselect(calendar.selectedDates[0])
@@ -409,6 +434,7 @@ extension SubscriptionViewController: FSCalendarDelegate {
     
     // 특정 날짜 선택 해제시 이벤트
     func calendar(_ calendar: FSCalendar, didDeselect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        disableCompletionButton()
         print("날짜 선택 해제 \(dateFormatter.string(from: date))")
         for _ in 0 ..< calendar.selectedDates.count {
             calendar.deselect(calendar.selectedDates[0])

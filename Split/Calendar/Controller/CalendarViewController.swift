@@ -31,7 +31,7 @@ class CalendarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureTapBar()
+        configureNavigationBar()
         configureCalendar()
         configureTableView()
         print("유저아이디 : \(userID!)")
@@ -55,8 +55,8 @@ class CalendarViewController: UIViewController {
 // MARK:- Configure UI
 extension CalendarViewController {
     
-    func configureTapBar() {
-        navigationItem.title = "캘린더"
+    func configureNavigationBar() {
+        navigationItem.title = "CALENDAR"
     }
     
     func configureCalendar() {
@@ -73,10 +73,10 @@ extension CalendarViewController {
         calendar.appearance.headerTitleColor = .white
         calendar.appearance.headerTitleFont = UIFont(name: "KoPubDotumBold", size: 20)
         calendar.appearance.weekdayTextColor = .black
-        calendar.appearance.todayColor = #colorLiteral(red: 0.2156862745, green: 0.2784313725, blue: 0.3098039216, alpha: 1).withAlphaComponent(0.7)
-        calendar.appearance.selectionColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
-        calendar.calendarWeekdayView.weekdayLabels[0].textColor = .red // 일요일
-        calendar.calendarWeekdayView.weekdayLabels[6].textColor = .red // 토요일
+        calendar.appearance.todayColor = .lightGray
+        calendar.appearance.selectionColor = #colorLiteral(red: 0.2156862745, green: 0.2784313725, blue: 0.3098039216, alpha: 1).withAlphaComponent(0.7)
+//        calendar.calendarWeekdayView.weekdayLabels[0].textColor = .red // 일요일
+//        calendar.calendarWeekdayView.weekdayLabels[6].textColor = .red // 토요일
         calendar.select(Date())
     }
     
@@ -103,8 +103,9 @@ extension CalendarViewController {
     
     private func getUserPlan() {
         showIndicator()
+        guard let userID = userID else { return }
         let headers: HTTPHeaders = [
-            "memberId": "2",
+            "memberId": String(userID),
         ]
         AF.request(CalendarAPIConstant.userTotalPlanURL, headers: headers).responseJSON { (response) in
             switch response.result {
