@@ -78,11 +78,12 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
         
         //네이버지도 초기화하기
         locationView.mapView = splitMapView.mapView;
-        splitMapView.mapView.positionMode = .direction
         splitMapView.mapView.moveCamera(NMFCameraUpdate(position: DEFAULT_CAMERA_POSITION))
         splitMapView.showLocationButton = false
         splitMapView.showScaleBar = false
         splitMapView.showZoomControls = false
+        splitMapView.mapView.minZoomLevel = 5.0
+        splitMapView.mapView.maxZoomLevel = 18.0
         
         //사용자의 현재 위치(위도,경도) 불러오기
         locationManager = CLLocationManager()
@@ -131,10 +132,14 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
                         marker.height = 50
                         marker.iconPerspectiveEnabled = true
                         marker.captionAligns = [NMFAlignType.center]
-                        marker.captionText = "\n\(map.todayVisit)"
+                        if map.todayVisit == 0 {
+                            marker.captionText = "\nS"
+                        } else {
+                            marker.captionText = "\n\(map.todayVisit)"
+                        }
                         marker.captionColor = .white
                         marker.captionHaloColor = Common().purple
-                        marker.captionTextSize = 18
+                        marker.captionTextSize = 20
                         marker.subCaptionText = "\n\(map.planetName)"
                         marker.mapView = self.splitMapView.mapView
                         //마커 클릭했을때 실행
@@ -158,8 +163,8 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
                             self.planetTotalVisitButton.setTitle("  누적방문자 \(map.allVisit)명  ", for: .normal)
                             self.planetNameLabel.attributedText = NSAttributedString(string: map.planetName, attributes: [NSAttributedString.Key.kern: -1])
                             self.planetAddressLabel.attributedText = NSAttributedString(string: map.address, attributes: [NSAttributedString.Key.kern: -1])
-                            self.planetTimeLabel.text = "\(map.startTime) ~ \(map.endTime)"
-                            self.planetNotifyLabel.text = map.notify
+                            self.planetTimeLabel.attributedText = NSAttributedString(string: "\(map.startTime) ~ \(map.endTime) ", attributes: [NSAttributedString.Key.kern: -1])
+                            self.planetNotifyLabel.attributedText = NSAttributedString(string: "\(map.notify) ", attributes: [NSAttributedString.Key.kern: -1])
                             if map.holiday != "없음" {
                                 self.planetHolidayLabel.text = map.holiday
                                 self.planetHolidayImageView.isHidden = false
