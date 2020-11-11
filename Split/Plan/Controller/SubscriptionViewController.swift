@@ -65,9 +65,10 @@ class SubscriptionViewController: UIViewController {
 extension SubscriptionViewController {
     
     func configureUI() {
-        planTitleLabel.text = plan?.name
+        guard let selectedPlan = plan else { return }
+        planTitleLabel.text = selectedPlan.name
         planTitleLabel.textColor = .white
-        planTitleView.backgroundColor = #colorLiteral(red: 0.8666666667, green: 0.6431372549, blue: 0.1647058824, alpha: 1)
+        planTitleView.backgroundColor = checkPlanColor(type: Int(selectedPlan.need))
         planTitleView.layer.cornerRadius = 0.5 * planTitleView.bounds.size.height
         completionButton.layer.cornerRadius = 0.5 * completionButton.bounds.size.height
         completionButton.addTarget(self, action: #selector(touchUpCompletionButton), for: .touchUpInside)
@@ -75,6 +76,7 @@ extension SubscriptionViewController {
     }
     
     func configureCalendar() {
+        guard let selectedPlan = plan else { return }
         calendar.dataSource = self
         calendar.delegate = self
         calendar.allowsMultipleSelection = true
@@ -86,7 +88,7 @@ extension SubscriptionViewController {
         calendar.appearance.headerTitleFont = UIFont(name: "KoPubDotumBold", size: 20)
         calendar.appearance.weekdayTextColor = .black
         calendar.appearance.todayColor = #colorLiteral(red: 0.2156862745, green: 0.2784313725, blue: 0.3098039216, alpha: 1).withAlphaComponent(0.7)
-        calendar.appearance.selectionColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
+        calendar.appearance.selectionColor = checkPlanColor(type: Int(selectedPlan.need)).withAlphaComponent(0.6)
         calendar.calendarWeekdayView.weekdayLabels[0].textColor = .red // 일요일
         calendar.calendarWeekdayView.weekdayLabels[6].textColor = .red // 토요일
         
