@@ -82,7 +82,7 @@ class MapViewController: UIViewController, NMFMapViewTouchDelegate, CLLocationMa
         splitMapView.showLocationButton = false
         splitMapView.showScaleBar = false
         splitMapView.showZoomControls = false
-        splitMapView.mapView.minZoomLevel = 7.0
+        splitMapView.mapView.minZoomLevel = 5.0
         splitMapView.mapView.maxZoomLevel = 18.0
         
         //사용자의 현재 위치(위도,경도) 불러오기

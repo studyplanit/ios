@@ -65,6 +65,7 @@
 		FDB8B9BE255983F7008BCDCD /* Maplestory OTF Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FDB8B9BC255983F7008BCDCD /* Maplestory OTF Bold.otf */; };
 		FDB8B9C425598409008BCDCD /* KoPubDotumMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FDB8B9C225598409008BCDCD /* KoPubDotumMedium.ttf */; };
 		FDB8B9C525598409008BCDCD /* KoPubDotumLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FDB8B9C325598409008BCDCD /* KoPubDotumLight.ttf */; };
+		FDB8BA24255C0256008BCDCD /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB8BA23255C0256008BCDCD /* TabBarController.swift */; };
 		FDE91C95254D1B9C00BAB8B0 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE91C94254D1B9C00BAB8B0 /* Common.swift */; };
 		FDE91CDF254D62CA00BAB8B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDE91CDE254D62CA00BAB8B0 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -160,6 +161,7 @@
 		FDB8B9BC255983F7008BCDCD /* Maplestory OTF Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Maplestory OTF Bold.otf"; sourceTree = "<group>"; };
 		FDB8B9C225598409008BCDCD /* KoPubDotumMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KoPubDotumMedium.ttf; sourceTree = "<group>"; };
 		FDB8B9C325598409008BCDCD /* KoPubDotumLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KoPubDotumLight.ttf; sourceTree = "<group>"; };
+		FDB8BA23255C0256008BCDCD /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		FDE91C94254D1B9C00BAB8B0 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		FDE91CDE254D62CA00BAB8B0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -285,6 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				FD2F4D212538CCE1000A3944 /* HomeViewController.swift */,
+				FDB8BA23255C0256008BCDCD /* TabBarController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -835,6 +838,7 @@
 				8DE705C62548AC3200768ACB /* StudyViewController.swift in Sources */,
 				FD47C9622550F008001D9252 /* TermsAndUseViewViewController.swift in Sources */,
 				FD47C9712552794B001D9252 /* MapVO.swift in Sources */,
+				FDB8BA24255C0256008BCDCD /* TabBarController.swift in Sources */,
 				8D3AC5792549A6AD0059F950 /* ChallengeContentTableViewCell.swift in Sources */,
 				8D6B0B8725581B7E00AA032F /* UserPlanList.swift in Sources */,
 				FDE91C95254D1B9C00BAB8B0 /* Common.swift in Sources */,
