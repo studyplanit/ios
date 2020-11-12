@@ -109,7 +109,7 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b9i-m2-Bsr">
                                         <rect key="frame" x="121" y="9" width="48" height="22"/>
-                                        <fontDescription key="fontDescription" name="KoPubDotumMedium" family="KoPubDotum Medium" pointSize="20"/>
+                                        <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -132,7 +132,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="xUl-if-F1U"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="KoPubDotumMedium" family="KoPubDotum Medium" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="KoPubDotumBold" family="KoPubDotum Bold" pointSize="17"/>
                                 <state key="normal" title="완료">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>

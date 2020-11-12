@@ -15,7 +15,7 @@ class CalendarViewController: UIViewController {
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var backgoroundView: UIView!
-    
+    private let noPlanLabel = UILabel()
     private let indicatorView = UIActivityIndicatorView()
     let userID = UserDefaults.standard.string(forKey: "id")
     var userPlans: [UserTotalPlan] = []
@@ -34,6 +34,7 @@ class CalendarViewController: UIViewController {
         configureNavigationBar()
         configureCalendar()
         configureTableView()
+        configureNoPlanLabel()
         print("유저아이디 : \(userID!)")
     }
     
@@ -42,6 +43,7 @@ class CalendarViewController: UIViewController {
         
         getUserPlan()
         setSelectDate()
+        noPlanLabel.isHidden = true
         print("viewWillApear - 유저플랜 갯수 : \(userPlans.count)")
     }
     
@@ -73,7 +75,7 @@ extension CalendarViewController {
         calendar.appearance.headerTitleColor = .white
         calendar.appearance.headerTitleFont = UIFont(name: "KoPubDotumBold", size: 20)
         calendar.appearance.weekdayTextColor = .black
-        calendar.appearance.todayColor = .lightGray
+        calendar.appearance.todayColor = #colorLiteral(red: 0.337254902, green: 0.2235294118, blue: 0.6392156863, alpha: 1).withAlphaComponent(0.8)
         calendar.appearance.selectionColor = #colorLiteral(red: 0.2156862745, green: 0.2784313725, blue: 0.3098039216, alpha: 1).withAlphaComponent(0.7)
 //        calendar.calendarWeekdayView.weekdayLabels[0].textColor = .red // 일요일
 //        calendar.calendarWeekdayView.weekdayLabels[6].textColor = .red // 토요일
@@ -94,6 +96,19 @@ extension CalendarViewController {
         indicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         indicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         indicatorView.startAnimating()
+    }
+    
+    func configureNoPlanLabel() {
+        print("showNoPlanLabel() called")
+        noPlanLabel.text = "이벤트 없음"
+        noPlanLabel.textAlignment = .center
+        noPlanLabel.font = UIFont(name: "KoPubDotumMedium", size: 17)
+        noPlanLabel.textColor = .lightGray
+        noPlanLabel.translatesAutoresizingMaskIntoConstraints = false
+        tableView.addSubview(noPlanLabel)
+        noPlanLabel.centerXAnchor.constraint(equalTo: tableView.centerXAnchor).isActive = true
+        noPlanLabel.topAnchor.constraint(equalTo: tableView.topAnchor, constant: 30).isActive = true
+        noPlanLabel.isHidden = true
     }
     
 }
@@ -322,6 +337,11 @@ extension CalendarViewController: FSCalendarDelegate {
         print(dateFormatter.string(from: date))
         setUserDailyPlan(date: date)
         tableView.reloadData()
+        if userDailyPlan.count == 0 {
+            noPlanLabel.isHidden = false
+        } else {
+            noPlanLabel.isHidden = true
+        }
 //        selectDate = date
     }
     

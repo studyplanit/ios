@@ -87,7 +87,7 @@ extension SubscriptionViewController {
         calendar.appearance.headerTitleColor = .white
         calendar.appearance.headerTitleFont = UIFont(name: "KoPubDotumBold", size: 20)
         calendar.appearance.weekdayTextColor = .black
-        calendar.appearance.todayColor = #colorLiteral(red: 0.2156862745, green: 0.2784313725, blue: 0.3098039216, alpha: 1).withAlphaComponent(0.7)
+        calendar.appearance.todayColor = #colorLiteral(red: 0.337254902, green: 0.2235294118, blue: 0.6392156863, alpha: 1).withAlphaComponent(0.8)
         calendar.appearance.selectionColor = checkPlanColor(type: Int(selectedPlan.need)).withAlphaComponent(0.6)
 //        calendar.calendarWeekdayView.weekdayLabels[0].textColor = .red // 일요일
 //        calendar.calendarWeekdayView.weekdayLabels[6].textColor = .red // 토요일
