@@ -445,16 +445,16 @@ extension SubscriptionViewController: FSCalendarDelegate {
     }
     
     // 오늘 포함 이전 날짜 선택 불가
-//    func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
-//        
-//        let today = Date()
-//
-//        if date < today {
-//            return false
-//        } else {
-//            return true
-//        }
-//    }
+    func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
+        
+        let today = Date()
+
+        if date < today {
+            return false
+        } else {
+            return true
+        }
+    }
     
 }
 
