@@ -108,7 +108,7 @@ extension AttendanceViewController {
             let needAuthNumber = userTodayPlans[i].needAuthNum
             let nowAuthNumber = userTodayPlans[i].nowAuthNum
             let resultNumber = Double(nowAuthNumber) / Double(needAuthNumber) * 100
-            planAuthCountLabel[i].text = "인증 \(userTodayPlans[i].nowAuthNum)회 (\(resultNumber)%)"
+            planAuthCountLabel[i].text = "인증 \(userTodayPlans[i].nowAuthNum)회 (\(round(resultNumber))%)"
             // 퍼센트
             planNeedPercentLabel[i].text = checkPercent(need: userTodayPlans[i].needAuthNum)
             configureTapGesture(index: i)

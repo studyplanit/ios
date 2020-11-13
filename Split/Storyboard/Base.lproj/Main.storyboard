@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hsx-EL-Z4Y">
     <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -951,6 +952,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="8ln-64-z5V"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Jq4-v6-k9i" firstAttribute="leading" secondItem="8ln-64-z5V" secondAttribute="leading" constant="40" id="0GJ-4k-5Es"/>
                             <constraint firstItem="Jq4-v6-k9i" firstAttribute="top" secondItem="wPJ-KS-ffZ" secondAttribute="bottom" constant="30" id="35e-Eh-q1b"/>
@@ -958,6 +960,9 @@
                             <constraint firstItem="wPJ-KS-ffZ" firstAttribute="centerX" secondItem="nTo-C0-5N5" secondAttribute="centerX" id="nDb-AO-6Vs"/>
                             <constraint firstItem="8ln-64-z5V" firstAttribute="trailing" secondItem="Jq4-v6-k9i" secondAttribute="trailing" constant="40" id="tFs-QO-oaP"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="qMh-Ib-oVy" appends="YES" id="tvp-as-6dn"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="nextButton" destination="eZO-7B-vVI" id="EW6-7B-QSv"/>
@@ -967,6 +972,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hfc-7M-fKL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="qMh-Ib-oVy">
+                    <connections>
+                        <action selector="tapView:" destination="SsV-H0-DOx" id="qdv-8U-ieS"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-364" y="40"/>
         </scene>

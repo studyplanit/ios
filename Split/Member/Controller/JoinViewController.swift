@@ -50,6 +50,11 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
         nextButton.titleLabel!.font = Common().fontStyle(name: "KoPubDotumBold", size: 16)
     }
     
+    //MARK: 화면 터치 시 키보드 없애기
+    @IBAction func tapView(_ sender: UIGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+    
     //MARK: 입력값 유효성 검사
     func textFieldDidChangeSelection(_ textField: UITextField) {
         //핸드폰번호길이 유효성 검사
